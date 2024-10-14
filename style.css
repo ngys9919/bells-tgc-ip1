@@ -1,0 +1,30 @@
+#map {
+    /* 
+    The leaflet map is a canvas object.
+    Canvas allows you to draw shapes and circles and lines etc.
+    By default canvas does not have a height even if you draw
+    stuff inside, so that's why you must give it explict height.
+    */
+    height: 90vh;
+}
+
+#map-container {
+    position: relative;
+}
+
+#search-container {
+    position: absolute;
+    z-index: 500;
+    top: 10px;
+    left: 50px;
+    background-color: rgb(255 255 255 / 44%);
+    line-height: 24px;
+    padding: 10px;
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+#search-results {
+
+
+}
