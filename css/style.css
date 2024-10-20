@@ -1,3 +1,8 @@
+/* Importing Google font - Poppins */
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"); */
+
+
+/* Map CSS */
 #map {
     /* 
     The leaflet map is a canvas object.
@@ -5,7 +10,11 @@
     By default canvas does not have a height even if you draw
     stuff inside, so that's why you must give it explict height.
     */
-    height: 90vh;
+    /* height: 90vh; */
+    height:100%;
+    width:100%;
+    position:absolute;
+    /* position: relative; */
 }
 
 #map-container {
@@ -15,8 +24,10 @@
 #search-container {
     position: absolute;
     z-index: 500;
-    top: 10px;
-    left: 50px;
+    /* top: 50px; */
+    /* left: 85px; */
+    top: 150px;
+    left: 185px;
     background-color: rgb(255 255 255 / 44%);
     line-height: 24px;
     padding: 10px;
@@ -24,7 +35,229 @@
     max-height: 300px;
 }
 
+.navbar{
+    /* left: 85px; */
+    /* left: 260px; */
+    /* max-width: 100vw; */
+    height: 50px;
+    background-image: linear-gradient(to top, #95b2ec 0%, #3c90ba 100%);
+}
+
+.navbar-brand{
+    background-position: center;
+}
+
+#result-header {  
+    background-image: linear-gradient(-20deg, #0055cd 0%, #8dd1da 100%);
+    text-align: center;
+}
+
+#results {
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+
+.result-listing {
+    /* top: 50px; */
+    /* left: 85px; */
+    height: 100%;
+}
+
+.result-listing ul {
+    margin:0;
+    padding:0;
+    list-style: none;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.result-listing h3 {
+    letter-spacing:3px;
+    font-family:verdana;
+}
+
 #search-results {
 
 
+}
+
+/* Sidebar CSS */
+
+/* Importing Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: #F0F4FF;
+}
+
+.sidebar {
+  position: fixed;
+  /* top: 0; */
+  /* left: 0; */
+  top: 50px;
+  left: 0;
+  height: 100%;
+  /* width: 85px; */
+  width: 85px;
+  display: flex;
+  overflow-x: hidden;
+  flex-direction: column;
+  background: #161a2d;
+  /* padding: 25px 20px; */
+  padding: 5px 5px;
+  transition: all 0.4s ease;
+}
+
+.sidebar:hover {
+  /* width: 260px; */
+  width: 260px;
+}
+
+.sidebar .sidebar-header {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .sidebar-header img {
+  /* width: 42px; */
+  width: 60px;
+  /* border-radius: 50%; */
+  border-radius: 10%;
+  left: 10px;
+}
+
+.sidebar .sidebar-header h2 {
+  color: #fff;
+  /* font-size: 1.25rem; */
+  font-weight: 600;
+  white-space: nowrap;
+  /* margin-left: 23px; */
+  margin-left: 23px;
+  font-size: 15px;
+}
+
+.sidebar-links h4 {
+  color: #fff;
+  font-weight: 500;
+  white-space: nowrap;
+  /* margin: 10px 0; */
+  margin: 5px 0;
+  position: relative;
+  font-size: 15px;
+}
+
+.sidebar-links h4 span {
+  opacity: 0;
+}
+
+.sidebar:hover .sidebar-links h4 span {
+  opacity: 1;
+}
+
+.sidebar-links .menu-separator {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  transform: scaleX(1);
+  transform: translateY(-50%);
+  background: #4f52ba;
+  transform-origin: right;
+  transition-delay: 0.2s;
+}
+
+.sidebar:hover .sidebar-links .menu-separator {
+  transition-delay: 0s;
+  transform: scaleX(0);
+}
+
+.sidebar-links {
+  list-style: none;
+  /* margin-top: 20px; */
+  margin-top: 5px;
+  height: 80%;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.sidebar-links::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar-links li a {
+  display: flex;
+  align-items: center;
+  /* gap: 0 20px; */
+  gap: 0 20px;
+  color: #fff;
+  font-weight: 500;
+  white-space: nowrap;
+  /* padding: 15px 10px; */
+  padding: 5px 5px;
+  text-decoration: none;
+  transition: 0.2s ease;
+  font-size: 15px;
+}
+
+.sidebar-links li a:hover {
+  color: #161a2d;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.user-account {
+  /* margin-top: auto; */
+  margin-top: -100px;
+  /* padding: 12px 10px; */
+  padding: 5px 5px;
+  /* margin-left: -10px; */
+  margin-left: -5px;
+}
+
+.user-profile {
+  display: flex;
+  /* align-items: center; */
+  align-items:center;
+  color: #161a2d;
+}
+
+.user-profile img {
+  /* width: 42px; */
+  width: 60px;
+  /* border-radius: 50%; */
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.user-profile h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  /* font-size: 15px; */
+}
+
+.user-profile span {
+  font-size: 0.775rem;
+  font-weight: 600;
+  /* font-size: 15px; */
+}
+
+.user-detail {
+  margin-left: 23px;
+  /* margin-left: 5px; */
+  white-space: nowrap;
+}
+
+.sidebar:hover .user-account {
+  background: #fff;
+  border-radius: 4px;
 }

@@ -1,12 +1,15 @@
 function createMap() {
-  const singaporeLatLng = [1.3521, 103.8198];
-  const map = L.map("map");
-  map.setView(singaporeLatLng, 11);
+  let singapore = [ 1.29,103.85]; // #1 Singapore latlng
+  let map = L.map('map');
+  map.setView(singapore, 12); // #2 Set the center point
+
+  // const singaporeLatLng = [1.3521, 103.8198];
+  // const map = L.map("map");
+  // map.setView(singaporeLatLng, 11);
 
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
-    attribution:
-      '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map);
 
   return map;
@@ -23,8 +26,8 @@ function addSearchResultToMap(data, searchResultLayer, resultElement, map) {
         const lat = r.geocodes.main.latitude;
         const lng = r.geocodes.main.longitude;
         const marker = L.marker([lat, lng]);
-        marker.bindPopup(`<h1>${r.name}</h1>
-                <h2>Address:${r.location.formatted_address}</h2>           
+        marker.bindPopup(`<h5>${r.name}</h5>
+                <h6>Address:${r.location.formatted_address}</h6>           
             `);
         marker.addTo(searchResultLayer);
 

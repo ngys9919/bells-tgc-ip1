@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   const searchResultLayer = L.layerGroup();
   searchResultLayer.addTo(map);
 
+  // This is a test function in which its search results is output via console. 
+  testFourSqAPI_APIKeys(); // New approach using API Keys
+
   document
     .querySelector("#searchBtn")
     .addEventListener("click", async function () {

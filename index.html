@@ -6,6 +6,13 @@
     <title>Locator with Leaflet Map</title>
     <!-- icon file -->
     <link rel="shortcut icon" href="res/bells_icon.ico">
+    <!-- Bootstrap CSS -->
+    <link 
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+      rel="stylesheet" 
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+      crossorigin="anonymous"
+    />
     <!-- Leaflet CSS -->
     <link
       rel="stylesheet"
@@ -13,18 +20,179 @@
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
       crossorigin=""
     />
+    <!-- Linking Google Font Link For Icons -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
     <!-- our own style sheet -->
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div id="map-container">
-      <div id="search-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="img/bells_logo.jpg" alt="logo" />
+        <h2>Bells Tech</h2>
+      </div>
+      <ul class="sidebar-links">
+        <h4>
+          <span>Main Menu</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <li>
+          <a href="#">
+            <span class="material-symbols-outlined"> dashboard </span
+            >Dashboard</a
+          >
+        </li>
+        <li>
+          <a href="#"
+            ><span class="material-symbols-outlined"> overview </span
+            >Overview</a
+          >
+        </li>
+        <li>
+          <a href="#"
+            ><span class="material-symbols-outlined"> monitoring </span
+            >Analytic</a
+          >
+        </li>
+        <h4>
+          <span>General</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <li>
+          <a href="#"
+            ><span class="material-symbols-outlined"> folder </span>Projects</a
+          >
+        </li>
+        <li>
+          <a href="#"
+            ><span class="material-symbols-outlined"> groups </span>Groups</a
+          >
+        </li>
+        <li>
+          <a href="#"
+            ><span class="material-symbols-outlined"> move_up </span>Transfer</a
+          >
+        </li>
+        <li>
+          <a href="#"
+            ><span class="material-symbols-outlined"> flag </span>All Reports</a
+          >
+        </li>
+        <li>
+          <a href="#"
+            ><span class="material-symbols-outlined">
+              notifications_active </span
+            >Notifications</a
+          >
+        </li>
+        <h4>
+          <span>Account</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <li>
+          <a href="#"
+            ><span class="material-symbols-outlined"> account_circle </span
+            >Profile</a
+          >
+        </li>
+        <li>
+          <a href="#"
+            ><span class="material-symbols-outlined"> settings </span
+            >Settings</a
+          >
+        </li>
+        <li>
+          <a href="#"
+            ><span class="material-symbols-outlined"> logout </span>Logout</a
+          >
+        </li>
+      </ul>
+      <div class="user-account">
+        <div class="user-profile">
+          <img src="img/EricNg-linkedin.jpg" alt="Profile Image" />
+          <div class="user-detail">
+            <h3>Eric Ng</h3>
+            <span>FSD Trainee</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+    <div class="container-fluid m-0 h-100">
+    <div class="row p-0 h-100"> 
+      <div class="col-1 p-0 m-0"></div>
+      <div class="col-3 p-1 m-0">
+        <h3 id="result-header">Search Results</h3>
+        <div id="results"></div>
+        <ul class="p-1"></ul>
+        <div id="search-container">
         <input type="text" id="searchTerms" />
         <button id="searchBtn">Search</button>
         <div id="search-results"></div>
+        </div>
       </div>
-      <div id="map"></div>
+      <div class="col-8 p-0">
+        <!-- <div id="map-container"> -->
+        
+          <!-- <input type="text" id="searchTerms" /> -->
+          <!-- <button id="searchBtn">Search</button> -->
+          <!-- <div id="search-results"></div> -->
+        <!-- </div> -->
+        <div id="map"></div>
+      <!-- </div> -->
+      </div>
     </div>
+
+    <!-- <div id="map-container"> -->
+      <!-- <div id="search-container"> -->
+        <!-- <input type="text" id="searchTerms" /> -->
+        <!-- <button id="searchBtn">Search</button> -->
+        <!-- <div id="search-results"></div> -->
+      <!-- </div> -->
+      <!-- <div id="map"></div> -->
+    <!-- </div> -->
+
+  </div>
 
     <!-- Leaflet -->
     <script
