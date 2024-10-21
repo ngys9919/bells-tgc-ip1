@@ -269,3 +269,18 @@ body {
   background: #fff;
   border-radius: 4px;
 }
+
+#askChatGPTBtn {
+  padding: 5px;
+  margin: 5px;
+}
+
+#resetBtn {
+  padding: 5px;
+  margin: 5px;
+}
+
+#locateBtn {
+  padding: 5px;
+  margin: 5px;
+}

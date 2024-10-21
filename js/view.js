@@ -1,11 +1,17 @@
 function createMap() {
   let singapore = [ 1.29,103.85]; // #1 Singapore latlng
   let map = L.map('map');
-  map.setView(singapore, 12); // #2 Set the center point
+  map.setView(singapore, 10); // #2 Set the center point
 
   // const singaporeLatLng = [1.3521, 103.8198];
   // const map = L.map("map");
   // map.setView(singaporeLatLng, 11);
+
+  // map settings
+map.setMinZoom(10);
+
+let maxBounds = map.getBounds();
+map.setMaxBounds(maxBounds)
 
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
