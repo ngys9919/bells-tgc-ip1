@@ -164,9 +164,24 @@
     <button class="btn btn-outline-success" type="button" id="locateBtn">Locate Me!</button>
 
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchTerms1">
+        <button class="btn btn-outline-success" type="submit" id="searchBtn1">Search</button>
       </form>
+
+      <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0"> -->
+        <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownQuickSearch" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Quick Search
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="#">Item 1</a></li>
+          <li><a class="dropdown-item" href="#">Item 2</a></li>
+          <li><a class="dropdown-item" href="#">Item 3</a></li>
+        </ul>
+      </li>
+    </ul>
+
     </div>
   </div>
 </nav>
@@ -192,20 +207,25 @@
 
       
       <!-- LHS Map -->
-      <div class="col-7 p-0 m-0">
-        <div id="map"></div>
+      <div class="col-8 p-0 m-0">
+      <!-- <div class="col-7 p-0 m-0"> -->
+        <!-- <div id="map"></div> -->
+        <div id="map1"></div>
       </div>
       <!-- RHS Search Results -->
-      <div class="col-4 p-0">
+      <div class="col-3 p-0">
+      <!-- <div class="col-4 p-0"> -->
         <h3 id="result-header">Search Results</h3>
-        <div id="results"></div>
-        <ul class="p-0"></ul>
-        <div id="search-container">
-        <input type="text" id="searchTerms" />
-        <button id="searchBtn">Search</button>
-        <div id="search-results"></div>
+        <div id="results">
+        <ul id="result-listing"></ul>
         </div>
       </div>
+    </div>
+
+    <div id="search-container">
+      <input type="text" id="searchTerms" />
+      <button id="searchBtn">Search</button>
+      <div id="search-results"></div>
     </div>
 
     <!-- <div id="map-container"> -->

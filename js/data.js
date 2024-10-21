@@ -43,6 +43,7 @@ async function search(searchQuery, lat, lng, radius = 2500) {
         ll: `${lat},${lng}`,
         radius: radius,
         limit: 50
+        // limit: 15
       },
     });
     return response.data;
