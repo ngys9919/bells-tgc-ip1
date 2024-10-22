@@ -27,6 +27,27 @@ function testFourSqAPI_APIKeys() {
 
 }
 
+async function loadPostalCode(){
+  let response = await axios.get("./data/postallist.json") 
+  return response.data    
+}
+
+function search2(searchPostalCode) {
+
+for (let entry of loadedData){
+
+  if (entry.postal_code == searchPostalCode){
+
+      return entry;
+
+  }
+}
+
+entry = {"postal_code": 0, "street_name": "", "lat": 1.29, "lon": 103.85};
+console.log(entry);
+return entry;
+
+}
 
 async function search(searchQuery, lat, lng, radius = 2500) {
     const response = await axios.get(FOURSQUARE_API + "/search", {

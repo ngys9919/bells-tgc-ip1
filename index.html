@@ -150,7 +150,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Help</a>
+          <a class="nav-link" href="#">About</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
@@ -164,20 +164,21 @@
     <button class="btn btn-outline-success" type="button" id="locateBtn">Locate Me!</button>
 
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchTerms1">
-        <button class="btn btn-outline-success" type="submit" id="searchBtn1">Search</button>
+        <input class="form-control me-2" type="search" placeholder="Enter Search Keyword" aria-label="Search" id="searchByKeyword">
+        <button class="btn btn-outline-success me-2" type="submit" id="searchKeywordBtn">Search</button>
+        <input class="form-control me-2" type="search" placeholder="Enter Postal Code" aria-label="Search" id="searchByPostalCode">
+        <button class="btn btn-outline-success me-2" type="submit" id="searchPostalCodeBtn">Search</button>
       </form>
 
       <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0"> -->
         <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownQuickSearch" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Quick Search
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSettings" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Settings
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">Item 1</a></li>
-          <li><a class="dropdown-item" href="#">Item 2</a></li>
-          <li><a class="dropdown-item" href="#">Item 3</a></li>
+          <li><a class="dropdown-item" href="#">Maximum Number of Search Results</a></li>
+          <li><a class="dropdown-item" href="#">Radius of Search Location</a></li>
         </ul>
       </li>
     </ul>

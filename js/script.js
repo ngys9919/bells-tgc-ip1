@@ -9,6 +9,16 @@ if (loginCoordinates.length !== 0){
     setCoordinates = loginCoordinates
 };
 
+let loadedData = [];
+
+async function loadPostal() {
+  loadedData = await loadPostalCode();
+  console.log(loadedData);
+  return loadedData;
+}
+
+loadedData = loadPostal();
+
 document.addEventListener("DOMContentLoaded", async function () {
   // create the map
   const map = createMap();
@@ -146,10 +156,12 @@ document
       // map.removeLayer(locateControl)
       // const searchTerms = document.querySelector("#searchTerms");
       searchTerms.value = ""
-      // const searchTerms1 = document.querySelector("#searchTerms1");
-      searchTerms1.value = "Search"
+      // const searchByKeyword = document.querySelector("#searchByKeyword");
+      searchByKeyword.value = "Enter Search Keyword"
       const resultElement = document.querySelector("#search-results");
       resultElement.innerHTML = "";
+      // const searchByPostalCode = document.querySelector("#searchByPostalCode");
+      searchByPostalCode.value = "Enter Postal Code"
       // const searchResultLayer = L.layerGroup();
       // searchResultLayer.clearLayers();
       const resultElement1 = document.querySelector("#result-listing");
@@ -170,6 +182,25 @@ document
         map.removeLayer(mapMarkers1[i]);
       }
   })
+
+
+  document
+  .querySelector("#searchPostalCodeBtn")
+  .addEventListener("click", async function (event) {
+    event.preventDefault();
+
+    const searchPostalCode = document.querySelector("#searchByPostalCode").value;
+
+    let entry = search2(searchPostalCode);
+    
+    // remove all existing markers from the search results layer
+    searchResultLayer.clearLayers();
+
+    // add the search results as marker
+    addPostalSearchResultToMap(entry, searchResultLayer, map);
+
+  });
+
 
   document
     .querySelector("#searchBtn")
@@ -196,15 +227,15 @@ document
     });
 
     document
-    .querySelector("#searchBtn1")
+    .querySelector("#searchKeywordBtn")
     .addEventListener("click", async function (event) {
       event.preventDefault();
-      const searchTerms1 = document.querySelector("#searchTerms1").value;
+      const searchByKeyword = document.querySelector("#searchByKeyword").value;
 
       // get the center of the map
       const center = map.getCenter();
 
-      const data1 = await search(searchTerms1, center.lat, center.lng);
+      const data1 = await search(searchByKeyword, center.lat, center.lng);
 
       console.log(data1);
       

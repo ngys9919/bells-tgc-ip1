@@ -51,6 +51,23 @@
    /* position: absolute; right: 56px  */
 /* }  */
 
+.popup-container {
+    /* position: relative; */
+}
+
+.popup-postal_code {
+
+  color: maroon;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.popup-street_name {
+
+  font-family: "Poppins", sans-serif;
+}
+
 #search-container {
     position: absolute;
     z-index: 500;
@@ -316,3 +333,14 @@ body {
   padding: 5px;
   margin: 5px;
 }
+
+#searchByKeywordBtn {
+  padding: 5px;
+  margin: 5px;
+}
+
+#searchByPostalCodeBtn {
+  padding: 5px;
+  margin: 5px;
+}
+

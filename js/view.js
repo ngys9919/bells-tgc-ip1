@@ -1,9 +1,10 @@
 function createMap() {
-  let singapore = [ 1.29,103.85]; // #1 Singapore latlng
+  let singapore = [1.29,103.85]; // #1 Singapore latlng
   // let map = L.map('map');
   // let map = L.map('map1');
   var map = L.map('map1', {
-    center: [1.2494, 103.8303],
+    // center: [1.2494, 103.8303],
+    center: [1.29, 103.85],
     zoom: 10,
     maxZoom: 19,
     minZoom: 10,
@@ -142,6 +143,40 @@ function addControlPlaceholders(map) {
 // You can also put other controls in the same placeholder.
 // L.control.scale({position: 'verticalcenterright'}).addTo(map);
 
+const customIcon = L.icon({
+  iconUrl: './res/icongreen.png',
+  iconSize: [12, 20],
+});
+
+function addPostalSearchResultToMap(entry, searchResultLayer, map) {
+
+  if (entry.postal_code === 0) {
+    alert("Postal code not found. Please update postallist.json!");
+    map.flyTo([entry.lat, entry.lon], 10);
+  } else {
+    entryPostalCode = entry.postal_code;
+    entryLatitude = entry.lat;
+    entryLongitude = entry.lon;
+    entryCoordinates = [entry.lat, entry.lon];
+    entryStreetName = entry.street_name;  
+  
+    let marker = L.marker([entryLatitude, entryLongitude],{ icon: customIcon });
+    // Add marker to mapMarker for future reference
+    mapMarkers.push(marker);
+
+    marker.bindPopup(`
+      <div class='popup-container'>
+      <p><h5 class='popup-postal_code'> Postal Code: ${entryPostalCode}</h5></p>
+      <p><h6 class='popup-street_name'> Location: ${entryStreetName}</h6></p>
+      </div>`
+    ).addTo(searchResultLayer);
+  
+    map.flyTo([entryLatitude, entryLongitude], 16);
+    marker.openPopup();
+  }
+
+}
+
 let mapMarkers = [];
 
 function addSearchResultToMap(data, searchResultLayer, resultElement, map) {
@@ -207,7 +242,8 @@ function addSearchResultToOrderlist(data1, searchResultLayer1, resultElement1, m
       // eachResultElement1.append(`${r.name}`);
       eachResultElement1.append(" ");
       eachResultElement1.append(`${r.location.address}`);
-      
+      eachResultElement1.append(" ");
+      eachResultElement1.append(`${r.location.postcode}`);
       
 
       // eachResultElement1.append(`<ul><li>${r.location.formatted_address}</li></ul>`);
