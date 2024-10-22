@@ -200,6 +200,12 @@ function addSearchResultToMap(data, searchResultLayer, resultElement, map) {
         const eachResultElement = document.createElement("div");
         eachResultElement.className = "search-result";
         eachResultElement.innerHTML = r.name;
+        // eachResultElement.innerHTML = r.location.address;
+        // eachResultElement.innerHTML = r.location.postcode;
+        eachResultElement.append(" ");
+        eachResultElement.append(`${r.location.address}`);
+        eachResultElement.append(" ");
+        eachResultElement.append(`${r.location.postcode}`);
         eachResultElement.addEventListener("click", function(){
           map.flyTo([lat, lng], 16);
           marker.openPopup();
@@ -235,8 +241,9 @@ function addSearchResultToOrderlist(data1, searchResultLayer1, resultElement1, m
       
 
       // add the search result to the result element
-      const eachResultElement1 = document.createElement('li');
-      // eachResultElement1.className = "search-result";
+      // const eachResultElement1 = document.createElement('li');
+      const eachResultElement1 = document.createElement('div');
+      eachResultElement1.className = "search-result";
       eachResultElement1.innerHTML = r.name;
 
       // eachResultElement1.append(`${r.name}`);

@@ -170,19 +170,6 @@
         <button class="btn btn-outline-success me-2" type="submit" id="searchPostalCodeBtn">Search</button>
       </form>
 
-      <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0"> -->
-        <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSettings" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Settings
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">Maximum Number of Search Results</a></li>
-          <li><a class="dropdown-item" href="#">Radius of Search Location</a></li>
-        </ul>
-      </li>
-    </ul>
-
     </div>
   </div>
 </nav>
@@ -214,20 +201,46 @@
         <div id="map1"></div>
       </div>
       <!-- RHS Search Results -->
+      <!-- <div class="col-3 p-0"> -->
+        <!-- <h3 id="result-header">Search Results</h3> -->
+        <!-- <div id="results"> -->
+        <!-- <ul id="result-listing"></ul> -->
+        <!-- </div> -->
+      <!-- </div> -->
       <div class="col-3 p-0">
-      <!-- <div class="col-4 p-0"> -->
-        <h3 id="result-header">Search Results</h3>
-        <div id="results">
-        <ul id="result-listing"></ul>
+        <div id="search-container">
+          <h3 id="result-header">Search Results</h3>
+          <!-- <ul id="result-listing"></ul> -->
+          <div id="result-listing"></div>
         </div>
       </div>
     </div>
 
-    <div id="search-container">
-      <input type="text" id="searchTerms" />
-      <button id="searchBtn">Search</button>
-      <div id="search-results"></div>
+    <div id="settings-container">
+      <span>Search Settings</span>
+      <div class="input-group mb-3 input-group-sm">
+        <span class="input-group-text">searchLimit</span>
+        <input type="number" class="form-control" placeholder="Maximum Number of Search Results" id="inputSearchLimit">
+      </div>
+      <div class="input-group mb-3 input-group-sm">
+        <span class="input-group-text">searchRadius</span>
+        <input type="number" class="form-control" placeholder="Radius of Search Location" id="inputSearchRadius">
+      </div>
+      <button class="btn btn-outline-success" type="button" id="submitSettingsBtn">Submit</button>
     </div>
+      
+      <div id="search-container-test">
+        <input type="text" id="searchTerms" />
+        <button id="searchBtn">Search</button>
+        <div id="search-results"></div>
+      </div>
+
+    <!-- <div id="search-container"> -->
+      <!-- <h3 id="result-header">Search Results</h3> -->
+      <!-- <div id="results"> -->
+      <!-- <ul id="result-listing"></ul> -->
+      <!-- </div> -->
+    <!-- </div> -->
 
     <!-- <div id="map-container"> -->
       <!-- <div id="search-container"> -->
@@ -240,16 +253,26 @@
 
   </div>
 
+  <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
+    crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" 
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
+    crossorigin="anonymous">
+  </script>
+
     <!-- Leaflet -->
     <script
       src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-      crossorigin=""
-    ></script>
+      crossorigin="">
+    </script>
     
-<script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js"></script>
-<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-<script src="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.umd.js"></script>
 
     <!-- Axios -->
     <script
