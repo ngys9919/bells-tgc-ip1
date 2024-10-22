@@ -149,9 +149,14 @@
             <li><a class="dropdown-item" href="#">Translate</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
+        <!-- <li class="nav-item"> -->
+          <!-- <a class="nav-link" href="#">About</a> -->
+        <!-- </li> -->
+        <!-- <button class="btn btn-outline-success" type="button" id="aboutBtn">About</button> -->
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#aboutModal">
+        About
+        </button>
         <li class="nav-item">
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         </li>
@@ -252,6 +257,29 @@
     <!-- </div> -->
 
   </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">About</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      This project work, part of <strong>Industry Project 1: Front-End Development</strong>, 
+      <wbr>is an individual assessment done by Candidate’s Name (as in NRIC): <strong><em>Ng Yew Seng</em></strong> (Candidate’s NRIC: <strong><em>S XXXX 3 5 3 / F</em></strong>), 
+      <wbr>a trainee under the <strong>(SCTP) Full Stack Developer</strong> course, organized by <strong>Bells Institute of Higher Learning</strong>. 
+      </div>
+      <div class="modal-footer">
+        >> Coder: <strong><em>Ng Yew Seng</em></strong>
+        <wbr>© Copyright 2024
+        <wbr>Bells Institute of Higher Learning
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
   <!-- Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
