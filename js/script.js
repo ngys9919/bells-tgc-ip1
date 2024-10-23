@@ -28,6 +28,8 @@ function loadDefaultSettings() {
   console.log(defaultSearchRadius);
 }
 
+let lang = "en";
+
 loadDefaultSettings();
 
 let loadedData = [];
@@ -41,6 +43,16 @@ async function loadPostal() {
 loadedData = loadPostal();
 
 document.addEventListener("DOMContentLoaded", async function () {
+
+  // language support
+  const userPreferredLanguage = localStorage.getItem('language') || 'en';
+  lang = userPreferredLanguage;
+  const langData = await fetchLanguageData(userPreferredLanguage);
+  updateContent(langData);
+  
+  console.log(lang);
+  console.log(langData);
+
   // create the map
   const map = createMap();
 
@@ -116,7 +128,7 @@ function locateUser(){
 
   let locateClickCount = 0;
 
-  const myLocationMarker = L.marker([1.29, 103.85]);
+  let myLocationMarker = L.marker([1.29, 103.85]);
   let layer = myLocationMarker.bindTooltip('Hi! Welcome to SG-finder.').addTo(map);
   layer.openTooltip();
   // layer.closeTooltip();
@@ -128,7 +140,12 @@ function locateUser(){
     if (locateClickCount % 2 !== 0){
 
         locateControl.start()
-        myLocation.innerText = "Reset Location"
+        if (lang === 'zh') {
+          myLocation.innerText = "复原位置"
+        } else {
+          myLocation.innerText = "Reset Location"
+        }
+        
     }
     else if (locateClickCount % 2 == 0){
 
@@ -136,12 +153,22 @@ function locateUser(){
         // map.setView(setCoordinates, 11.5)
         map.setView(setCoordinates, 10)
         locateClickCount = 0
-        myLocation.innerText = "My Location"
+
+        if (lang === 'zh') {
+          myLocation.innerText = "寻找位置"
+        } else {
+          myLocation.innerText = "My Location"
+        }
+
         for(var i = 0; i < mapMarkers.length; i++){
           map.removeLayer(mapMarkers[i]);
         }
         for(var i = 0; i < mapMarkers1.length; i++){
           map.removeLayer(mapMarkers1[i]);
+        }
+        // Here you remove the layer
+        if (markerCluster) {
+          map.removeLayer(markerCluster);
         }
     }
 });
@@ -154,7 +181,11 @@ geoLocation.addEventListener("click", function() {
 
     if (locateClickCount % 2 !== 0){
 
+      if (lang === 'zh') {
+        myLocation.innerText = "复原位置"
+      } else {
         myLocation.innerText = "Reset Location"
+      }
 
     }
 
@@ -162,19 +193,31 @@ geoLocation.addEventListener("click", function() {
         // map.setView(setCoordinates, 11.5)
         map.setView(setCoordinates, 10)
         locateClickCount = 0
-        myLocation.innerText = "My Location"
+        
+        if (lang === 'zh') {
+          myLocation.innerText = "寻找位置"
+        } else {
+          myLocation.innerText = "My Location"
+        }
+        
         for(var i = 0; i < mapMarkers.length; i++){
           map.removeLayer(mapMarkers[i]);
         }
         for(var i = 0; i < mapMarkers1.length; i++){
           map.removeLayer(mapMarkers1[i]);
         }
+        // Here you remove the layer
+        if (markerCluster) {
+          map.removeLayer(markerCluster);
+        }
     }
 });
 
 document
     .querySelector("#resetBtn")
-    .addEventListener("click", function () {
+    .addEventListener("click", async function () {
+      lang = "en";
+      changeLanguage(lang);
       quickSearchByCategoryID = null;
       // let myLocation = document.querySelector("#locateBtn");
       myLocation.innerText = "Locate Me!"
@@ -205,9 +248,16 @@ document
       for(var i = 0; i < mapMarkers1.length; i++){
         map.removeLayer(mapMarkers1[i]);
       }
+
+      // Here you remove the layer
+      if (markerCluster) {
+        map.removeLayer(markerCluster);
+      }
+
       loadDefaultSettings();
-      map.setView(defaultCoordinates, 10)
-      locateClickCount = 0
+      locateClickCount = 0;
+
+      map.setView(defaultCoordinates, 10);
       myLocationMarker = L.marker([1.29, 103.85]);
       layer = myLocationMarker.bindTooltip('Hi! Welcome to SG-finder.').addTo(map);
       layer.openTooltip();
@@ -244,15 +294,22 @@ document
 
       console.log(data);
 
+      console.error(data.results.length);
+
       // remove all existing markers from the search results layer
       searchResultLayer.clearLayers();
 
       // add the result to the search results div
       const resultElement = document.querySelector("#search-results");
-      resultElement.innerHTML = "";
+      if (data.results.length == 0) {
+        resultElement.innerHTML = "No Results Found!";
+      } else {
+        resultElement.innerHTML = "";
 
-      // add the search results as marker
-      addSearchResultToMap(data, searchResultLayer, resultElement, map);
+        // add the search results as marker
+        addSearchResultToMap(data, searchResultLayer, resultElement, map);
+      }
+      
 
     });
 
@@ -275,16 +332,24 @@ document
 
       console.log(data1);
       
+      console.error(data1.results.length);
+
       // remove all existing markers from the search results layer
       searchResultLayer1.clearLayers();
       map.removeLayer(myLocationMarker);
       
       // add the result to the search results div
       const resultElement1 = document.querySelector("#result-listing");
-      resultElement1.innerHTML = "";
+      
+      if (data1.results.length == 0) {
+        resultElement1.innerHTML = "No Results Found!";
+      } else {
+        resultElement1.innerHTML = "";
 
-      // add the search results to panel
-      addSearchResultToOrderlist(data1, searchResultLayer1, resultElement1, map);
+        // add the search results to panel
+        addSearchResultToOrderlist(data1, searchResultLayer1, resultElement1, map);
+      }
+      
     });
 // });
 
@@ -399,16 +464,39 @@ document
 
       console.log(data1);
       
+      console.error(data1.results.length);
+
       // remove all existing markers from the search results layer
       searchResultLayer1.clearLayers();
 
       // add the result to the search results div
       const resultElement1 = document.querySelector("#result-listing");
-      resultElement1.innerHTML = "";
 
-      // add the search results to panel
-      addSearchResultToOrderlist(data1, searchResultLayer1, resultElement1, map);
+      if (data1.results.length == 0) {
+        resultElement1.innerHTML = "No Results Found!";
+      } else {
+        resultElement1.innerHTML = "";
 
+        // add the search results to panel
+        addSearchResultToOrderlist(data1, searchResultLayer1, resultElement1, map);
+      }
+
+    });
+
+    document
+    .querySelector("#selectEnglish")
+    .addEventListener("click", async function () {
+      // alert("You have selected English!");
+      lang = "en";
+      changeLanguage('en');
+    });
+
+    document
+    .querySelector("#selectChinese")
+    .addEventListener("click", async function () {
+      // alert("You have selected Chinese!");
+      lang = "zh";
+      changeLanguage('zh');
     });
 
 });

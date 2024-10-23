@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SG-finder</title>
+    <meta name="description" content="The application of this project caters to the needs of a specific target user group, the Singapore Tourists,
+    who are finding the places around the visiting country Singapore.">
+    <title data-i18n="title"></title>
+    <!-- <link rel="alternate" hreflang="en" href="https://ngys9919.github.io/bells-tgc-ip1/en/"/> -->
+    <!-- <link rel="alternate" hreflang="zh" href="https://ngys9919.github.io/bells-tgc-ip1/zh/"/> -->
     <!-- icon file -->
     <link rel="shortcut icon" href="res/bells_icon.ico">
     <!-- Bootstrap CSS -->
@@ -48,8 +52,8 @@
     <div class="hideAfterDelay">
       <div class ="landing" class="hideAfterDelay">
           <img class ="main-logo" class="hideAfterDelay" src="img/TripAI.jpg">
-          <p class ="subtitle" class="hideAfterDelay">Welcome to Singapore!</p>
-          <p class ="subtitle" class="hideAfterDelay">Have an enjoyable trip here.</p>
+          <p class ="subtitle" class="hideAfterDelay" data-i18n="welcome_message"></p>
+          <p class ="subtitle" class="hideAfterDelay" data-i18n="welcome_text"></p>
       </div>
   </div>
 
@@ -119,22 +123,23 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     
-    <a class="navbar-brand" href="#">SG-finder</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <a class="navbar-brand" href="#" data-i18n="navbar_title"></a>
+    <!-- No navbar Menu Icon when shrink-size -->
+    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> -->
+      <!-- <span class="navbar-toggler-icon"></span> -->
+    <!-- </button> -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="#" data-i18n="navbar_home"></a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Language
-          </a>
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-i18n="navbar_language"></a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">English</a></li>
-            <li><a class="dropdown-item" href="#">中文</a></li>
+            <!-- <li><a class="dropdown-item" href="/en/" id="selectEnglish">English</a></li> -->
+            <!-- <li><a class="dropdown-item" href="/zh/" id="selectChinese">中文</a></li> -->
+            <li><a class="dropdown-item" href="#" id="selectEnglish">English</a></li>
+            <li><a class="dropdown-item" href="#" id="selectChinese">中文</a></li>
           </ul>
         </li>
         <!-- <li class="nav-item"> -->
@@ -143,29 +148,29 @@
         <!-- <button class="btn btn-outline-success" type="button" id="aboutBtn">About</button> -->
         <!-- Button trigger modal -->
         <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#aboutModal">About</button> -->
-        <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#aboutModal">About</button>
+        <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#aboutModal" data-i18n="navbar_about"></button>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Login</a>
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" data-i18n="navbar_login"></a>
         </li>
       </ul>
 
       
-    <button class="btn btn-outline-success" type="button" id="askChatGPTBtn">Ask ChatGPT</button>
-    <button class="btn btn-outline-success" type="button" id="resetBtn">Total Reset</button>
+    <button class="btn btn-outline-success" type="button" id="askChatGPTBtn" data-i18n="navbar_askChatGPT"></button>
+    <button class="btn btn-outline-success" type="button" id="resetBtn" data-i18n="navbar_resetMap"></button>
       <!-- <button id="locateBtn" type="button" class="btn btn-light">My Location</button> -->
-    <button class="btn btn-outline-success" type="button" id="locateBtn">Locate Me!</button>
+    <button class="btn btn-outline-success" type="button" id="locateBtn" data-i18n="navbar_locateMe"></button>
 
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Enter Search Keyword" aria-label="Search" id="searchByKeyword">
-        <button class="btn btn-outline-success me-2" type="submit" id="searchKeywordBtn">Search</button>
-        <input class="form-control me-2" type="search" placeholder="Enter Postal Code" aria-label="Search" id="searchByPostalCode">
-        <button class="btn btn-outline-success me-2" type="submit" id="searchPostalCodeBtn">Locate</button>
+        <!-- <input class="form-control me-2" type="search" aria-label="Search" id="searchByKeyword" placeholder="Enter Search Keyword"> -->
+        <input class="me-2" type="search" aria-label="Search" id="searchByKeyword" data-i18n="navbar_placeholderSearch">
+        <button class="btn btn-outline-success me-2" type="submit" id="searchKeywordBtn" data-i18n="navbar_search"></button>
+        <!-- <input class="form-control me-2" type="search" aria-label="Search" id="searchByPostalCode" placeholder="Enter Postal Code"> -->
+        <input class="me-2" type="search" aria-label="Search" id="searchByPostalCode" data-i18n="navbar_placeholderLocate">
+        <button class="btn btn-outline-success me-2" type="submit" id="searchPostalCodeBtn" data-i18n="navbar_locate"></button>
       </form>
       <ul class="navbar-nav me-2 mb-2 mb-lg-0">
       <li class="nav-item dropstart">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Quick Search
-        </a>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-i18n="navbar_quickSearch"></a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           <!-- Reset Quick Search -->
           <li><a class="dropdown-item" href="#" id="item1Selected">Reset Quick Search</a></li>
@@ -218,25 +223,25 @@
         <!-- </div> -->
       <!-- </div> -->
       <div class="col-3 p-0">
-        <div id="search-container">
-          <h3 id="result-header">Search Results</h3>
-          <!-- <ul id="result-listing"></ul> -->
-          <div id="result-listing"></div>
+        <div class="container-fluid" id="search-container">
+          <h3 id="result-header" data-i18n="searchResults"></h3>
+          <ul id="result-listing"></ul>
+          <!-- <div id="result-listing"></div> -->
         </div>
       </div>
     </div>
 
-    <div id="settings-container">
-      <span>Search Settings</span>
+    <div class="container-fluid" id="settings-container">
+      <span data-i18n="searchSettings"></span>
       <div class="input-group mb-3 input-group-sm">
-        <span class="input-group-text">searchLimit</span>
+        <span class="input-group-text" data-i18n="searchLimit"></span>
         <input type="number" class="form-control" placeholder="Maximum Number of Search Results" id="inputSearchLimit">
       </div>
       <div class="input-group mb-3 input-group-sm">
-        <span class="input-group-text">searchRadius</span>
+        <span class="input-group-text" data-i18n="searchRadius"></span>
         <input type="number" class="form-control" placeholder="Radius of Search Location" id="inputSearchRadius">
       </div>
-      <button class="btn btn-outline-success" type="button" id="submitSettingsBtn">Submit</button>
+      <button class="btn btn-outline-success" type="button" id="submitSettingsBtn" data-i18n="submit">Submit</button>
     </div>
       
       <div id="search-container-test">
@@ -323,7 +328,7 @@
     <!-- our own javascript files -->
     <!-- SG-finder -->
     <script>
-    alert("What is SG-finder? \n\nThis is a web app for Singapore Tourist to find your place around Singapore, a red dot in the world!")
+      alert("What is SG-finder? \n\nThis is a web app for Singapore Tourist to find your place around Singapore, a red dot in the world!")
     </script>
     <script src="js/data.js"></script>
     <script src="js/view.js"></script>

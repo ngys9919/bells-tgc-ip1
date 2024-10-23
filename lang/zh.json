@@ -1,0 +1,23 @@
+{
+    "title": "新加坡-搜索",
+    "welcome_message": "欢迎来新加坡!",
+    "welcome_text": "祝旅途愉快.",
+    "navbar_title": "SG-finder",
+    "navbar_home": "本页",
+    "navbar_about": "关于",
+    "navbar_login": "登记",
+    "navbar_language": "语言",
+    "navbar_askChatGPT": "问 ChatGPT",
+    "navbar_resetMap": "复原设定",
+    "navbar_locateMe": "找本位置!",
+    "navbar_placeholderSearch": "输入搜索词",
+    "navbar_search": "搜索",
+    "navbar_placeholderLocate": "输入邮政编号",
+    "navbar_locate": "寻找",
+    "navbar_quickSearch": "快捷搜索",
+    "searchResults": "搜索结果",
+    "searchSettings": "搜索设定",
+    "searchLimit": "搜索数限",
+    "searchRadius": "搜索范围",
+    "submit": "呈交"
+}

@@ -1,0 +1,23 @@
+{
+    "title": "SG-finder",
+    "welcome_message": "Welcome to Singapore!",
+    "welcome_text": "Have an enjoyable trip here.",
+    "navbar_title": "SG-finder",
+    "navbar_home": "Home",
+    "navbar_language": "Language",
+    "navbar_about": "About",
+    "navbar_login": "Login",
+    "navbar_askChatGPT": "Ask ChatGPT",
+    "navbar_resetMap": "Reset Map",
+    "navbar_locateMe": "Locate Me!",
+    "navbar_placeholderSearch": "Enter Search Keyword",
+    "navbar_search": "Search",
+    "navbar_placeholderLocate": "Enter Postal Code",
+    "navbar_locate": "Locate",
+    "navbar_quickSearch": "Quick Search",
+    "searchResults": "Search Results",
+    "searchSettings": "Search Settings",
+    "searchLimit": "searchLimit",
+    "searchRadius": "searchRadius",
+    "submit": "Submit"
+}

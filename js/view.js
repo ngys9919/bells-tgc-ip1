@@ -119,6 +119,46 @@ map.setMaxBounds(maxBounds)
   return map;
 }
 
+// Function to set the language preference
+function setLanguagePreference(lang) {
+  localStorage.setItem('language', lang);
+  location.reload();
+}
+
+// Function to fetch language data
+async function fetchLanguageData(lang) {
+  const response = await fetch(`lang/${lang}.json`);
+  return response.json();
+}
+
+// Function to update content based on selected language
+function updateContent(langData) {
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    const key = element.getAttribute("data-i18n");
+
+    if (element.tagName === "INPUT" && key === "navbar_placeholderSearch") {
+      // If the element is an input with placeholder_text attribute, set placeholder
+      element.placeholder = langData[key];
+    } if (element.tagName === "INPUT" && key === "navbar_placeholderLocate") {
+      // If the element is an input with placeholder_text attribute, set placeholder
+      element.placeholder = langData[key];
+    } else {
+      // For other elements, set text content
+      //element.textContent = langData[key];
+      element.innerHTML = langData[key];
+    }
+  });
+}
+
+// Function to change language
+async function changeLanguage(lang) {
+  await setLanguagePreference(lang);
+  
+  const langData = await fetchLanguageData(lang);
+  updateContent(langData);
+
+}
+
 // Create additional Control placeholders
 function addControlPlaceholders(map) {
   var corners = map._controlCorners,
@@ -215,11 +255,12 @@ function addSearchResultToMap(data, searchResultLayer, resultElement, map) {
 }
 
 let mapMarkers1 = [];
+let markerCluster = null;
 
 function addSearchResultToOrderlist(data1, searchResultLayer1, resultElement1, map) {
 
   // create a marker cluster group
-  const markerCluster = L.markerClusterGroup();
+  markerCluster = L.markerClusterGroup();
 
   for (let r of data1.results) {
 
@@ -227,8 +268,7 @@ function addSearchResultToOrderlist(data1, searchResultLayer1, resultElement1, m
       const lat = r.geocodes.main.latitude;
       const lng = r.geocodes.main.longitude;
       const marker = L.marker([lat, lng]);
-      // add to marker clustering)
-      marker.addTo(markerCluster);
+      
       // Add marker to mapMarker for future reference
       mapMarkers1.push(marker);
       marker.bindPopup(`<h5>${r.name}</h5>
@@ -236,10 +276,12 @@ function addSearchResultToOrderlist(data1, searchResultLayer1, resultElement1, m
               <h6>Status:${r.closed_bucket}</h6>           
           `);
       // marker.addTo(searchResultLayer1);
+      // add to marker clustering)
+      marker.addTo(markerCluster);
 
       // add the search result to the result element
-      // const eachResultElement1 = document.createElement('li');
-      const eachResultElement1 = document.createElement('div');
+      const eachResultElement1 = document.createElement('li');
+      // const eachResultElement1 = document.createElement('div');
       eachResultElement1.className = "search-result";
       eachResultElement1.innerHTML = r.name;
 

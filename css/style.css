@@ -91,7 +91,8 @@
   padding: 0px;
   /* padding: 2px; */
   margin: 0px;
-  border: 0;  
+  border: 0;
+  /* visibility: hidden;   */
 }
 
 /* #map-container { */
@@ -424,10 +425,20 @@ body {
   margin: 5px;
 }
 
+/* #searchByKeyword { */
+  /* padding: 0px; */
+  /* margin: 0px; */
+/* } */
+
 #searchByKeywordBtn {
   padding: 5px;
   margin: 5px;
 }
+
+/* #searchByPostalCode { */
+  /* padding: 0px; */
+  /* margin: 0px; */
+/* } */
 
 #searchByPostalCodeBtn {
   padding: 5px;
