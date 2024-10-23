@@ -15,7 +15,8 @@ function testFourSqAPI_APIKeys() {
       // This wont work because of space between lat and lng
       // "ll": '1.3521, 103.8198' ,
       // This work when the space between lat and lng is removed
-      "ll": '1.3521,103.8198' , // The latitude/longitude around which to retrieve place information. This must be specified as latitude,longitude (e.g., ll=41.8781,-87.6298).
+      "ll": '1.29,103.85',
+      // "ll": '1.3521,103.8198' , // The latitude/longitude around which to retrieve place information. This must be specified as latitude,longitude (e.g., ll=41.8781,-87.6298).
       query: 'coffee' // A string to be matched against all content for this place, including but not limited to venue name, category, telephone number, taste, and tips.
     },
   })
@@ -60,6 +61,47 @@ async function search(searchQuery, lat, lng, searchRadius, searchLimit) {
         Authorization: "fsq32JqRqo6AHKIhCP2yosAeYOhHUDuoLuKTfgsOQmhStCY="
       },
       params: {
+        query: searchQuery,
+        ll: `${lat},${lng}`,
+        radius: `${searchRadius}`,
+        limit: `${searchLimit}`
+      },
+    });
+    return response.data;
+  }
+
+  async function quickSearch(categoryQuery, lat, lng, searchRadius, searchLimit) {
+    const response = await axios.get(FOURSQUARE_API + "/search", {
+      headers: {
+        Accept: "application/json",
+        // All the below Authorization can work!
+        // class
+        // Authorization: "fsq3EFsPimlfZXz0cUnuO3fdFPkGT7bmZSrRaQbgeimIoGI=",
+        // eric
+        Authorization: "fsq32JqRqo6AHKIhCP2yosAeYOhHUDuoLuKTfgsOQmhStCY="
+      },
+      params: {
+        categories: `${categoryQuery}`,
+        ll: `${lat},${lng}`,
+        radius: `${searchRadius}`,
+        limit: `${searchLimit}`
+      },
+    });
+    return response.data;
+  }
+
+  async function superSearch(categoryQuery, searchQuery, lat, lng, searchRadius, searchLimit) {
+    const response = await axios.get(FOURSQUARE_API + "/search", {
+      headers: {
+        Accept: "application/json",
+        // All the below Authorization can work!
+        // class
+        // Authorization: "fsq3EFsPimlfZXz0cUnuO3fdFPkGT7bmZSrRaQbgeimIoGI=",
+        // eric
+        Authorization: "fsq32JqRqo6AHKIhCP2yosAeYOhHUDuoLuKTfgsOQmhStCY="
+      },
+      params: {
+        categories: `${categoryQuery}`,
         query: searchQuery,
         ll: `${lat},${lng}`,
         radius: `${searchRadius}`,

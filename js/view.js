@@ -223,7 +223,6 @@ let mapMarkers1 = [];
 
 function addSearchResultToOrderlist(data1, searchResultLayer1, resultElement1, map) {
 
-
   for (let r of data1.results) {
 
     // create and add the marker
@@ -237,8 +236,6 @@ function addSearchResultToOrderlist(data1, searchResultLayer1, resultElement1, m
               <h6>Status:${r.closed_bucket}</h6>           
           `);
       marker.addTo(searchResultLayer1);
-
-      
 
       // add the search result to the result element
       // const eachResultElement1 = document.createElement('li');
@@ -260,10 +257,7 @@ function addSearchResultToOrderlist(data1, searchResultLayer1, resultElement1, m
         marker.openPopup();
       })
       resultElement1.appendChild(eachResultElement1);
-
       
     }
-
-    
 
 }

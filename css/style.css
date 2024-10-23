@@ -1,6 +1,70 @@
 /* Importing Google font - Poppins */
 /* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"); */
 
+/* Opening CSS */
+@keyframes hideAfterDelay {
+  0% {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: none;
+  }
+
+  50% {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: none;
+    }
+
+  70% {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: none;
+  }
+
+    100% {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.hideAfterDelay{
+
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  animation: hideAfterDelay 3s linear forwards;
+  z-index: 10000;
+}
+
+.landing{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.main-logo{
+  /* width: 60%; */
+  /* height: auto; */
+  width: 351px;
+  height: 351px;
+}
+
+.subtitle{
+  /* font-family: 'Montserrat', sans-serif; */
+  /* color: rgb(56, 55, 55); */
+  /* font-weight: 800; */
+  color: maroon;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+
 
 /* Map CSS */
 #map {

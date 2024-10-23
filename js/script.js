@@ -18,6 +18,8 @@ let searchRadius = defaultSearchRadius;
 let searchLimitIsValid = true;
 let searchRadiusIsValid = true;
 
+let quickSearchByCategoryID = null;
+
 function loadDefaultSettings() {
   document.getElementById("inputSearchLimit").value = defaultSearchLimit;
   console.log(defaultSearchLimit);
@@ -142,7 +144,7 @@ function locateUser(){
           map.removeLayer(mapMarkers1[i]);
         }
     }
-})
+});
 
 let geoLocation = document.querySelector('.leaflet-bar-part.leaflet-bar-part-single')
 
@@ -168,11 +170,12 @@ geoLocation.addEventListener("click", function() {
           map.removeLayer(mapMarkers1[i]);
         }
     }
-})
+});
 
 document
     .querySelector("#resetBtn")
     .addEventListener("click", function () {
+      quickSearchByCategoryID = null;
       // let myLocation = document.querySelector("#locateBtn");
       myLocation.innerText = "Locate Me!"
       // const searchTerms = document.querySelector("#searchTerms");
@@ -208,7 +211,7 @@ document
       myLocationMarker = L.marker([1.29, 103.85]);
       layer = myLocationMarker.bindTooltip('Hi! Welcome to SG-finder.').addTo(map);
       layer.openTooltip();
-  })
+  });
 
 
   document
@@ -262,7 +265,13 @@ document
       // get the center of the map
       const center = map.getCenter();
 
-      const data1 = await search(searchByKeyword, center.lat, center.lng, searchRadius, searchLimit);
+      if (quickSearchByCategoryID !== null) {
+        console.error("superSearch");
+        data1 = await superSearch(quickSearchByCategoryID, searchByKeyword, center.lat, center.lng, searchRadius, searchLimit);
+      } else {
+        console.error("search");
+        data1 = await search(searchByKeyword, center.lat, center.lng, searchRadius, searchLimit);
+      }
 
       console.log(data1);
       
@@ -276,12 +285,12 @@ document
       // add the search results to panel
       addSearchResultToOrderlist(data1, searchResultLayer1, resultElement1, map);
     });
-});
+// });
 
 
     document
     .querySelector("#submitSettingsBtn")
-    .addEventListener("click", async function () {
+    .addEventListener("click", function () {
       
       searchLimit = document.querySelector("#inputSearchLimit").value;
 
@@ -308,3 +317,97 @@ document
       }
 
     });
+
+      // 12068	Community and Government > Government Building > Embassy or Consulate
+      // 12069	Community and Government > Government Building > Government Department
+      // 12070	Community and Government > Government Building > Law Enforcement and Public Safety
+      // 12072	Community and Government > Government Building > Law Enforcement and Public Safety > Police Station
+      // 12071	Community and Government > Government Building > Law Enforcement and Public Safety > Fire Station
+
+
+      // 15008	Health and Medicine > Emergency Service
+      // 15009	Health and Medicine > Emergency Service > Ambulance Service
+      // 15010	Health and Medicine > Emergency Service > Emergency Room
+
+      // 15000	Health and Medicine
+      // 15011	Health and Medicine > Healthcare Clinic
+      // 15014	Health and Medicine > Hospital
+      // 15016	Health and Medicine > Medical Center
+      // 15019	Health and Medicine > Mental Health Service > Mental Health Clinic
+      // 15033	Health and Medicine > Physician > Family Medicine Doctor
+      // 15056	Health and Medicine > Women's Health Clinic
+      // 15058	Health and Medicine > Hospital > Children's Hospital
+      // 15059	Health and Medicine > Hospital > Hospital Unit
+
+      // 19000	Travel and Transportation
+      // 19005	Travel and Transportation > Cruise
+      // 19009	Travel and Transportation > Lodging
+      // 19010	Travel and Transportation > Lodging > Bed and Breakfast
+      // 19013	Travel and Transportation > Lodging > Hostel
+      // 19014	Travel and Transportation > Lodging > Hotel
+      // 19018	Travel and Transportation > Lodging > Resort
+      // 19028	Travel and Transportation > Tourist Information and Service
+      // 19029	Travel and Transportation > Tourist Information and Service > Tour Provider
+      // 19030	Travel and Transportation > Transport Hub
+      // 19031	Travel and Transportation > Transport Hub > Airport
+      // 19040	Travel and Transportation > Transport Hub > Airport > International Airport
+      // 19041	Travel and Transportation > Transport Hub > Airport > Private Airport
+      // 19042	Travel and Transportation > Transport Hub > Bus Station
+      // 19043	Travel and Transportation > Transport Hub > Bus Stop
+      // 19045	Travel and Transportation > Transport Hub > Marine Terminal
+      // 19046	Travel and Transportation > Transport Hub > Metro Station
+      // 19047	Travel and Transportation > Transport Hub > Rail Station
+      // 19048	Travel and Transportation > Transport Hub > Rental Car Location
+      // 19049	Travel and Transportation > Transport Hub > Taxi Stand
+      // 19051	Travel and Transportation > Transportation Service
+      // 19053	Travel and Transportation > Transportation Service > Limo Service
+      // 19054	Travel and Transportation > Transportation Service > Public Transportation
+      // 19055	Travel and Transportation > Travel Agency
+      // 19067	Travel and Transportation > Transportation Service > Public Transportation > Bus Line
+      // 19068	Travel and Transportation > Transportation Service > Taxi
+
+    document
+    .querySelector("#item1Selected")
+    .addEventListener("click", async function () {
+      // alert("You have selected Item 1!");
+      quickSearchByCategoryID = null;
+      const resultElement = document.querySelector("#search-results");
+      resultElement.innerHTML = "";
+      const resultElement1 = document.querySelector("#result-listing");
+      resultElement1.innerHTML = "";
+      for(var i = 0; i < mapMarkers.length; i++){
+        map.removeLayer(mapMarkers[i]);
+      }
+      for(var i = 0; i < mapMarkers1.length; i++){
+        map.removeLayer(mapMarkers1[i]);
+      }
+    });
+
+    document
+    .querySelector("#itemN1Selected")
+    .addEventListener("click", async function () {
+      // alert("You have selected N-Item 1!");
+
+      // 12068	Community and Government > Government Building > Embassy or Consulate
+      quickSearchByCategoryID = "12068";
+
+      // get the center of the map
+      const center = map.getCenter();
+
+      data1 = await quickSearch(quickSearchByCategoryID, center.lat, center.lng, searchRadius, searchLimit);
+
+      console.log(data1);
+      
+      // remove all existing markers from the search results layer
+      searchResultLayer1.clearLayers();
+
+      // add the result to the search results div
+      const resultElement1 = document.querySelector("#result-listing");
+      resultElement1.innerHTML = "";
+
+      // add the search results to panel
+      addSearchResultToOrderlist(data1, searchResultLayer1, resultElement1, map);
+
+    });
+
+});
