@@ -277,7 +277,8 @@ document
       
       // remove all existing markers from the search results layer
       searchResultLayer1.clearLayers();
-
+      map.removeLayer(myLocationMarker);
+      
       // add the result to the search results div
       const resultElement1 = document.querySelector("#result-listing");
       resultElement1.innerHTML = "";

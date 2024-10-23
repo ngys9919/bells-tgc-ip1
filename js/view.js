@@ -181,8 +181,6 @@ let mapMarkers = [];
 
 function addSearchResultToMap(data, searchResultLayer, resultElement, map) {
 
-  
-
     for (let r of data.results) {
 
       // create and add the marker
@@ -212,10 +210,7 @@ function addSearchResultToMap(data, searchResultLayer, resultElement, map) {
         })
         resultElement.appendChild(eachResultElement);
 
-
       }
-
-      
 
 }
 
@@ -223,19 +218,24 @@ let mapMarkers1 = [];
 
 function addSearchResultToOrderlist(data1, searchResultLayer1, resultElement1, map) {
 
+  // create a marker cluster group
+  const markerCluster = L.markerClusterGroup();
+
   for (let r of data1.results) {
 
     // create and add the marker
       const lat = r.geocodes.main.latitude;
       const lng = r.geocodes.main.longitude;
       const marker = L.marker([lat, lng]);
+      // add to marker clustering)
+      marker.addTo(markerCluster);
       // Add marker to mapMarker for future reference
       mapMarkers1.push(marker);
       marker.bindPopup(`<h5>${r.name}</h5>
               <h6>Address:${r.location.formatted_address}</h6>
               <h6>Status:${r.closed_bucket}</h6>           
           `);
-      marker.addTo(searchResultLayer1);
+      // marker.addTo(searchResultLayer1);
 
       // add the search result to the result element
       // const eachResultElement1 = document.createElement('li');
@@ -259,5 +259,5 @@ function addSearchResultToOrderlist(data1, searchResultLayer1, resultElement1, m
       resultElement1.appendChild(eachResultElement1);
       
     }
-
+    markerCluster.addTo(map);
 }
