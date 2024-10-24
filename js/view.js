@@ -37,7 +37,7 @@ function createMap() {
   // map.zoomControl.remove();
 
   // default position: topleft for zoom
-  map.zoomControl.setPosition('topright');
+  map.zoomControl.setPosition('bottomright');
 
   // Using Zoom Slider (with Leaflet-zoom-slider plugin):
   // Add zoom slider control

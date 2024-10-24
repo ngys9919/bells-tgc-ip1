@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     initialZoomLevel: 16,
     drawCircle: false,
     returnToPrevBounds: true,
-    position: 'topright',
+    position: 'bottomright',
     strings: {
         title: "Show me where I am, yo!"
     }
