@@ -173,15 +173,22 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-i18n="navbar_quickSearch"></a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           <!-- Reset Quick Search -->
-          <li><a class="dropdown-item" href="#" id="item1Selected">Reset Quick Search</a></li>
+          <li><a class="dropdown-item" href="#" id="item1Selected" data-i18n="qs_ResetQuickSearch">Reset Quick Search</a></li>
           <li><hr class="dropdown-divider"></li>
           <!-- Quick Search for Normal Categories -->
-          <li><a class="dropdown-item" href="#" id="itemN1Selected">Embassy or Consulate</a></li>
-          <li><a class="dropdown-item" href="#" id="itemN2Selected">N-Item 2</a></li>
+          <li><a class="dropdown-item" href="#" id="itemN1Selected" data-i18n="qs_EmbassyOrConsulate">Embassy or Consulate</a></li>
+          <li><a class="dropdown-item" href="#" id="itemN2Selected" data-i18n="qs_TouristInformationAndService">Tourist Information and Service</a></li>
+          <li><a class="dropdown-item" href="#" id="itemN3Selected" data-i18n="qs_Lodging">Lodging</a></li>
+          <li><a class="dropdown-item" href="#" id="itemN4Selected" data-i18n="qs_TransportHub">Transport Hub</a></li>
+          <li><a class="dropdown-item" href="#" id="itemN5Selected" data-i18n="qs_TransportationService">Transportation Service</a></li>
+          <li><a class="dropdown-item" href="#" id="itemN6Selected" data-i18n="qs_TravelAgency">Travel Agency</a></li>
           <li><hr class="dropdown-divider"></li>
           <!-- Quick Search for Emergency Services -->
-          <li><a class="dropdown-item" href="#" id="itemE1Selected">E-Item 1</a></li>
-          <li><a class="dropdown-item" href="#" id="itemE2Selected">E-Item 2</a></li>
+          <li><a class="dropdown-item" href="#" id="itemE1Selected" data-i18n="qs_PoliceStation">Police Station</a></li>
+          <li><a class="dropdown-item" href="#" id="itemE2Selected" data-i18n="qs_FireStation">Fire Station</a></li>
+          <li><a class="dropdown-item" href="#" id="itemE3Selected" data-i18n="qs_EmergencyService">Emergency Service</a></li>
+          <li><a class="dropdown-item" href="#" id="itemE4Selected" data-i18n="qs_Hospital">Hospital</a></li>
+          <li><a class="dropdown-item" href="#" id="itemE5Selected" data-i18n="qs_HealthcareClinic">Healthcare Clinic</a></li>
         </ul>
       </li>
     </ul>
@@ -235,13 +242,13 @@
       <span data-i18n="searchSettings"></span>
       <div class="input-group mb-3 input-group-sm">
         <span class="input-group-text" data-i18n="searchLimit"></span>
-        <input type="number" class="form-control" placeholder="Maximum Number of Search Results" id="inputSearchLimit">
+        <input type="number" min="1" max="50" class="form-control" placeholder="Maximum Number of Search Results" id="inputSearchLimit">
       </div>
       <div class="input-group mb-3 input-group-sm">
         <span class="input-group-text" data-i18n="searchRadius"></span>
-        <input type="number" class="form-control" placeholder="Radius of Search Location" id="inputSearchRadius">
+        <input type="number" min="0" max="100000" class="form-control" placeholder="Radius of Search Location" id="inputSearchRadius">
       </div>
-      <button class="btn btn-outline-success" type="button" id="submitSettingsBtn" data-i18n="submit">Submit</button>
+      <button class="btn btn-outline-success" type="button" id="submitSettingsBtn" data-i18n="searchSubmit"></button>
     </div>
       
       <div id="search-container-test">
@@ -308,7 +315,7 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin="">
     </script>
-    
+
     <!-- Marker clustering: place after Leaflet because it's a plugin for Leaflet -->
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
 
@@ -326,12 +333,23 @@
     ></script>
 
     <!-- our own javascript files -->
-    <!-- SG-finder -->
-    <script>
-      alert("What is SG-finder? \n\nThis is a web app for Singapore Tourist to find your place around Singapore, a red dot in the world!")
-    </script>
+    
     <script src="js/data.js"></script>
     <script src="js/view.js"></script>
     <script src="js/script.js"></script>
+    
+    <script>
+    // SG-finder
+    window.onload = function() { // can also use window.addEventListener('load', (event) => {
+    // the document was fully read and all resources (like images) are loaded too.
+    // const userPreferredLanguage = localStorage.getItem('language') || 'en';
+    // lang = userPreferredLanguage;
+    var message = {en: "What is SG-finder? \n\nThis is a web app for Singapore Tourist to find your place around Singapore, a red dot in the world!",
+                   zh: "什么是新加坡-搜索？\n\n这是一个网站提供给新加坡旅客寻找地方到处玩游这个小岛国！"};
+    alert(message[lang]);
+    // alert("What is SG-finder? \n\nThis is a web app for Singapore Tourist to find your place around Singapore, a red dot in the world!");
+    };
+    </script>
+    
   </body>
 </html>

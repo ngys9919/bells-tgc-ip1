@@ -303,3 +303,5 @@ function addSearchResultToOrderlist(data1, searchResultLayer1, resultElement1, m
     }
     markerCluster.addTo(map);
 }
+
+

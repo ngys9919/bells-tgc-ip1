@@ -19,5 +19,17 @@
     "searchSettings": "搜索设定",
     "searchLimit": "搜索数限",
     "searchRadius": "搜索范围",
-    "submit": "呈交"
+    "searchSubmit": "呈交",
+    "qs_ResetQuickSearch": "清空快搜",
+    "qs_EmbassyOrConsulate": "领事馆",
+    "qs_TouristInformationAndService": "旅游中心与服务",
+    "qs_Lodging": "住所",
+    "qs_TransportHub": "交通中心",
+    "qs_TransportationService": "交通服务",
+    "qs_TravelAgency": "旅行社",
+    "qs_PoliceStation": "警察局",
+    "qs_FireStation": "消防局",
+    "qs_EmergencyService": "紧急服务",
+    "qs_Hospital": "医院",
+    "qs_HealthcareClinic": "诊所"
 }

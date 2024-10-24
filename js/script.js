@@ -63,7 +63,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   const searchResultLayer1 = L.layerGroup();
   searchResultLayer1.addTo(map);
 
-
   // This is a test function in which its search results is output via console. 
   testFourSqAPI_APIKeys(); // New approach using API Keys
 
@@ -83,27 +82,20 @@ document.addEventListener("DOMContentLoaded", async function () {
     initialZoomLevel: 16,
     drawCircle: false,
     returnToPrevBounds: true,
-  };
-
-  // let locateControl = L.control.locate(options)
-  // locateControl.addTo(map)
-
-  var locateControl = L.control.locate({
-    flyTo: true,
-    initialZoomLevel: 16,
-    drawCircle: false,
-    returnToPrevBounds: true,
     position: 'topright',
     strings: {
         title: "Show me where I am, yo!"
     }
-}).addTo(map);
+  };
+
+  let locateControl = L.control.locate(options)
+  locateControl.addTo(map)
 
 function locateUser(){
   map.locate({setView: true, watch: true}) /* This will return map so you can do chaining */
         .on('locationfound', function(e){
-            var marker = L.marker([e.latitude, e.longitude]).bindPopup('Your are here :)');
-            let layer = marker.bindTooltip('Hi! Welcome to Singapore.').addTo(map);
+            var marker = L.marker([e.latitude, e.longitude]).bindPopup('This is your current location.');
+            let layer = marker.bindTooltip('You are here!').addTo(map);
             layer.openTooltip();
             // layer.closeTooltip();
             var circle = L.circle([e.latitude, e.longitude], e.accuracy/2, {
@@ -133,6 +125,7 @@ function locateUser(){
   layer.openTooltip();
   // layer.closeTooltip();
 
+  
   myLocation.addEventListener("click", function() {
 
     locateClickCount ++
@@ -302,7 +295,11 @@ document
       // add the result to the search results div
       const resultElement = document.querySelector("#search-results");
       if (data.results.length == 0) {
-        resultElement.innerHTML = "No Results Found!";
+        if (lang === 'zh') {
+          resultElement.innerHTML = "无搜索结果!";
+        } else {
+          resultElement.innerHTML = "No Results Found!";
+        }
       } else {
         resultElement.innerHTML = "";
 
@@ -342,7 +339,11 @@ document
       const resultElement1 = document.querySelector("#result-listing");
       
       if (data1.results.length == 0) {
-        resultElement1.innerHTML = "No Results Found!";
+        if (lang === 'zh') {
+          resultElement1.innerHTML = "无搜索结果!";
+        } else {
+          resultElement1.innerHTML = "No Results Found!";
+        }
       } else {
         resultElement1.innerHTML = "";
 
@@ -447,7 +448,42 @@ document
       for(var i = 0; i < mapMarkers1.length; i++){
         map.removeLayer(mapMarkers1[i]);
       }
+      // Here you remove the layer
+      if (markerCluster) {
+        map.removeLayer(markerCluster);
+      }
     });
+
+async function quickSearchCall(quickSearchByCategoryID) {
+// get the center of the map
+const center = map.getCenter();
+
+data1 = await quickSearch(quickSearchByCategoryID, center.lat, center.lng, searchRadius, searchLimit);
+
+console.log(data1);
+
+console.error(data1.results.length);
+
+// remove all existing markers from the search results layer
+searchResultLayer1.clearLayers();
+
+// add the result to the search results div
+const resultElement1 = document.querySelector("#result-listing");
+
+if (data1.results.length == 0) {
+  if (lang === 'zh') {
+    resultElement1.innerHTML = "无搜索结果!";
+  } else {
+    resultElement1.innerHTML = "No Results Found!";
+  }
+} else {
+  resultElement1.innerHTML = "";
+
+  // add the search results to panel
+  addSearchResultToOrderlist(data1, searchResultLayer1, resultElement1, map);
+}
+
+    }
 
     document
     .querySelector("#itemN1Selected")
@@ -457,29 +493,127 @@ document
       // 12068	Community and Government > Government Building > Embassy or Consulate
       quickSearchByCategoryID = "12068";
 
-      // get the center of the map
-      const center = map.getCenter();
+      quickSearchCall(quickSearchByCategoryID);
 
-      data1 = await quickSearch(quickSearchByCategoryID, center.lat, center.lng, searchRadius, searchLimit);
+    });
 
-      console.log(data1);
-      
-      console.error(data1.results.length);
+    document
+    .querySelector("#itemN2Selected")
+    .addEventListener("click", async function () {
+      // alert("You have selected N-Item 2!");
 
-      // remove all existing markers from the search results layer
-      searchResultLayer1.clearLayers();
+      // 19028	Travel and Transportation > Tourist Information and Service
+      quickSearchByCategoryID = "19028";
 
-      // add the result to the search results div
-      const resultElement1 = document.querySelector("#result-listing");
+      quickSearchCall(quickSearchByCategoryID);
 
-      if (data1.results.length == 0) {
-        resultElement1.innerHTML = "No Results Found!";
-      } else {
-        resultElement1.innerHTML = "";
+    });
 
-        // add the search results to panel
-        addSearchResultToOrderlist(data1, searchResultLayer1, resultElement1, map);
-      }
+    document
+    .querySelector("#itemN3Selected")
+    .addEventListener("click", async function () {
+      // alert("You have selected N-Item 3!");
+
+      // 19009	Travel and Transportation > Lodging
+      quickSearchByCategoryID = "19009";
+
+      quickSearchCall(quickSearchByCategoryID);
+
+    });
+
+    document
+    .querySelector("#itemN4Selected")
+    .addEventListener("click", async function () {
+      // alert("You have selected N-Item 4!");
+
+      // 19030	Travel and Transportation > Transport Hub
+      quickSearchByCategoryID = "19030";
+
+      quickSearchCall(quickSearchByCategoryID);
+
+    });
+
+    document
+    .querySelector("#itemN5Selected")
+    .addEventListener("click", async function () {
+      // alert("You have selected N-Item 5!");
+
+      // 19051	Travel and Transportation > Transportation Service
+      quickSearchByCategoryID = "19051";
+
+      quickSearchCall(quickSearchByCategoryID);
+
+    });
+
+    document
+    .querySelector("#itemN6Selected")
+    .addEventListener("click", async function () {
+      // alert("You have selected N-Item 6!");
+
+      // 19055	Travel and Transportation > Travel Agency
+      quickSearchByCategoryID = "19055";
+
+      quickSearchCall(quickSearchByCategoryID);
+
+    });
+
+    document
+    .querySelector("#itemE1Selected")
+    .addEventListener("click", async function () {
+      // alert("You have selected E-Item 1!");
+
+      // 12072	Community and Government > Government Building > Law Enforcement and Public Safety > Police Station
+      quickSearchByCategoryID = "12072";
+
+      quickSearchCall(quickSearchByCategoryID);
+
+    });
+
+    document
+    .querySelector("#itemE2Selected")
+    .addEventListener("click", async function () {
+      // alert("You have selected E-Item 2!");
+
+      // 12071	Community and Government > Government Building > Law Enforcement and Public Safety > Fire Station
+      quickSearchByCategoryID = "12071";
+
+      quickSearchCall(quickSearchByCategoryID);
+
+    });
+
+    document
+    .querySelector("#itemE3Selected")
+    .addEventListener("click", async function () {
+      // alert("You have selected E-Item 3!");
+
+      // 15008	Health and Medicine > Emergency Service
+      quickSearchByCategoryID = "15008";
+
+      quickSearchCall(quickSearchByCategoryID);
+
+    });
+
+    document
+    .querySelector("#itemE4Selected")
+    .addEventListener("click", async function () {
+      // alert("You have selected E-Item 4!");
+
+      // 15014	Health and Medicine > Hospital
+      quickSearchByCategoryID = "15014";
+
+      quickSearchCall(quickSearchByCategoryID);
+
+    });
+
+    document
+    .querySelector("#itemE5Selected")
+    .addEventListener("click", async function () {
+      // alert("You have selected E-Item 5!");
+
+      // 15011	Health and Medicine > Healthcare Clinic
+      quickSearchByCategoryID = "15011";
+
+      quickSearchCall(quickSearchByCategoryID);
 
     });
 
@@ -500,3 +634,4 @@ document
     });
 
 });
+

@@ -19,5 +19,17 @@
     "searchSettings": "Search Settings",
     "searchLimit": "searchLimit",
     "searchRadius": "searchRadius",
-    "submit": "Submit"
+    "searchSubmit": "Submit",
+    "qs_ResetQuickSearch": "Reset Quick Search",
+    "qs_EmbassyOrConsulate": "Embassy or Consulate",
+    "qs_TouristInformationAndService": "Tourist Information and Service",
+    "qs_Lodging": "Lodging",
+    "qs_TransportHub": "Transport Hub",
+    "qs_TransportationService": "Transportation Service",
+    "qs_TravelAgency": "Travel Agency",
+    "qs_PoliceStation": "Police Station",
+    "qs_FireStation": "Fire Station",
+    "qs_EmergencyService": "Emergency Service",
+    "qs_Hospital": "Hospital",
+    "qs_HealthcareClinic": "Healthcare Clinic"
 }
