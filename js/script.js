@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   // L.control.scale({'position':'bottomleft', 'metric':true,'imperial':false}).addTo(map);
 
   L.control.scale({
-    position: 'bottomright',
+    // position: 'bottomright',
     'metric':true,
     'imperial':false
   }).addTo(map);
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     initialZoomLevel: 16,
     drawCircle: false,
     returnToPrevBounds: true,
-    position: 'bottomright',
+    // position: 'bottomright',
     strings: {
         title: "Show me where I am, yo!"
     }

@@ -2,7 +2,7 @@ function createMap() {
   let singapore = [1.29,103.85]; // #1 Singapore latlng
   // let map = L.map('map');
   // let map = L.map('map1');
-  var map = L.map('map1', {
+  var map = L.map('map', {
     // center: [1.2494, 103.8303],
     center: [1.29, 103.85],
     zoom: 10,
@@ -27,7 +27,7 @@ function createMap() {
     // prefix: 'Map Data Sources:' // Prefix text before attribution information
   // }).addTo(map);
   
-  map.attributionControl.setPosition('bottomright');
+  // map.attributionControl.setPosition('bottomright');
 
   // map.attributionControl.setPrefix('Map Data Source:'); // Prefix text before attribution information
   // map.attributionControl.addAttribution('&copy; Leaflet');
@@ -37,7 +37,7 @@ function createMap() {
   // map.zoomControl.remove();
 
   // default position: topleft for zoom
-  map.zoomControl.setPosition('bottomright');
+  // map.zoomControl.setPosition('bottomright');
 
   // Using Zoom Slider (with Leaflet-zoom-slider plugin):
   // Add zoom slider control
@@ -94,7 +94,7 @@ function createMap() {
 
 // So the positions can be
 
-// topleft
+// 
 // topright
 // bottomleft
 // bottomright
@@ -171,7 +171,7 @@ function addControlPlaceholders(map) {
       corners[vSide + hSide] = L.DomUtil.create('div', className, container);
   }
 
-  createCorner('verticalcenter', 'left');
+  // createCorner('verticalcenter', 'left');
   createCorner('verticalcenter', 'right');
 }
 
