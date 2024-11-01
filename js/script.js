@@ -28,7 +28,7 @@ function loadDefaultSettings() {
   console.log(defaultSearchRadius);
 }
 
-let lang = "en";
+// let lang = "en";
 
 loadDefaultSettings();
 

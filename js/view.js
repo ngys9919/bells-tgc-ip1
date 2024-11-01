@@ -119,69 +119,7 @@ map.setMaxBounds(maxBounds)
   return map;
 }
 
-// Function to set the language preference
-function setLanguagePreference(lang) {
-  localStorage.setItem('language', lang);
-  location.reload();
-}
 
-// Function to fetch language data
-async function fetchLanguageData(lang) {
-  const response = await fetch(`lang/${lang}.json`);
-  return response.json();
-}
-
-// Function to update content based on selected language
-function updateContent(langData) {
-  document.querySelectorAll("[data-i18n]").forEach((element) => {
-    const key = element.getAttribute("data-i18n");
-
-    if (element.tagName === "INPUT" && key === "navbar_placeholderSearch") {
-      // If the element is an input with placeholder_text attribute, set placeholder
-      element.placeholder = langData[key];
-    } if (element.tagName === "INPUT" && key === "navbar_placeholderLocate") {
-      // If the element is an input with placeholder_text attribute, set placeholder
-      element.placeholder = langData[key];
-    } else {
-      // For other elements, set text content
-      //element.textContent = langData[key];
-      element.innerHTML = langData[key];
-    }
-  });
-}
-
-// Function to change language
-async function changeLanguage(lang) {
-  await setLanguagePreference(lang);
-  
-  const langData = await fetchLanguageData(lang);
-  updateContent(langData);
-
-}
-
-// Create additional Control placeholders
-function addControlPlaceholders(map) {
-  var corners = map._controlCorners,
-      l = 'leaflet-',
-      container = map._controlContainer;
-
-  function createCorner(vSide, hSide) {
-      var className = l + vSide + ' ' + l + hSide;
-
-      corners[vSide + hSide] = L.DomUtil.create('div', className, container);
-  }
-
-  // createCorner('verticalcenter', 'left');
-  createCorner('verticalcenter', 'right');
-}
-
-// addControlPlaceholders(map);
-
-// Change the position of the Zoom Control to a newly created placeholder.
-// map.zoomControl.setPosition('verticalcenterright');
-
-// You can also put other controls in the same placeholder.
-// L.control.scale({position: 'verticalcenterright'}).addTo(map);
 
 const customIcon = L.icon({
   iconUrl: './res/icongreen.png',

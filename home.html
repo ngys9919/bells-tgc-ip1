@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The application of this project caters to the needs of a specific target user group, the Singapore Tourists,
+    who are finding the places around the visiting country Singapore.">
+  <title data-i18n="title"></title>
+  <!-- <link rel="alternate" hreflang="en" href="https://ngys9919.github.io/bells-tgc-ip1/en/"/> -->
+  <!-- <link rel="alternate" hreflang="zh" href="https://ngys9919.github.io/bells-tgc-ip1/zh/"/> -->
+  <!-- icon file -->
+  <link rel="shortcut icon" href="res/bells_icon.ico">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <!-- Marker clustering CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+
+  <!-- Geolocation CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css" />
+
+  <!-- Linking Google Font Link For Icons -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <!-- our own style sheet -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* Bootstrap Breakpoints
+  
+      Extra small	        None	<576px
+      Small	            sm	    ≥576px
+      Medium	            md	    ≥768px
+      Large	            lg	    ≥992px
+      Extra large	        xl	    ≥1200px
+      Extra extra large	xxl	    ≥1400px, max=1580px
+
+      */
+
+    /* Extra small devices (phones, 600px and down) */
+    @media only screen and (max-width: 576px) {
+      body {
+        background-color: lightgrey;
+      }
+
+      .sidebar {
+        visibility: visible;
+      }
+
+      .leaflet-control-container {
+        position: absolute;
+        top: 50px;
+        left: 90vw;
+      }
+
+      .leaflet-container .leaflet-control-attribution {
+        position: absolute;
+        top: 150px;
+        left: 90vw;
+      }
+
+      #map1 {
+        height: 100vh;
+        width: 100%;
+      }
+
+      #settings-container {
+        /* display: none; */
+        visibility: hidden;
+      }
+
+      #search-container {
+        /* display: none; */
+        visibility: hidden;
+      }
+    }
+
+    /* Small devices (portrait tablets and large phones, 600px and up) */
+    @media only screen and (min-width: 576px) {
+      body {
+        background-color: lawngreen;
+      }
+
+      .sidebar {
+        visibility: visible;
+      }
+
+      .leaflet-control-container {
+        position: absolute;
+        top: 50px;
+        left: 90vw;
+      }
+
+      .leaflet-container .leaflet-control-attribution {
+        position: absolute;
+        top: 150px;
+        left: 90vw;
+      }
+
+      #map1 {
+        height: 100vh;
+        width: 100vw;
+      }
+
+      #settings-container {
+        visibility: hidden;
+      }
+
+      #search-container {
+        visibility: hidden;
+      }
+    }
+
+    /* Medium devices (landscape tablets, 768px and up) */
+    @media only screen and (min-width: 768px) {
+      body {
+        background-color: cyan;
+      }
+
+      .sidebar {
+        visibility: hidden;
+      }
+
+      .leaflet-control-container {
+        position: absolute;
+        top: 50px;
+        left: 15px;
+      }
+
+      .leaflet-container .leaflet-control-attribution {
+        position: absolute;
+        top: 150px;
+        left: 15px;
+      }
+
+      #map1 {
+        height: 100vh;
+        width: 100vw;
+      }
+
+      #settings-container {
+        visibility: visible;
+      }
+
+      #search-container {
+        visibility: visible;
+      }
+
+      .result-listing {
+        top: 220px;
+        right: 5px;
+        width: 300px;
+      }
+
+      .result-listing ul {
+        font-size: 8px;
+      }
+
+      .result-listing h3 {
+        letter-spacing: 1px;
+        font-size: 5px;
+      }
+    }
+
+    /* Large devices (laptops/desktops, 992px and up) */
+    @media only screen and (min-width: 992px) {
+      body {
+        background-color: aquamarine;
+      }
+
+      .sidebar {
+        visibility: hidden;
+      }
+
+      .leaflet-control-container {
+        position: absolute;
+        top: 50px;
+        left: 15px;
+      }
+
+      .leaflet-container .leaflet-control-attribution {
+        position: absolute;
+        top: 150px;
+        left: 15px;
+      }
+
+      #map1 {
+        height: 93vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: top;
+      }
+
+      #settings-container {
+        visibility: visible;
+      }
+
+      #search-container {
+        visibility: visible;
+      }
+
+      .result-listing {
+        top: 220px;
+        right: 5px;
+        width: 300px;
+      }
+
+      .result-listing ul {
+        font-size: 8px;
+      }
+
+      .result-listing h3 {
+        letter-spacing: 1px;
+        font-size: 5px;
+      }
+    }
+
+    /* Extra large devices (large laptops and desktops, 1200px and up) */
+    @media only screen and (min-width: 1200px) {
+      body {
+        background-color: skyblue;
+      }
+
+      .sidebar {
+        visibility: hidden;
+      }
+
+      .leaflet-control-container {
+        position: absolute;
+        top: 50px;
+        left: 15px;
+      }
+
+      .leaflet-container .leaflet-control-attribution {
+        position: absolute;
+        top: 150px;
+        left: 15px;
+      }
+
+      #map1 {
+        height: 93vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: top;
+      }
+
+      #settings-container {
+        visibility: visible;
+      }
+
+      #search-container {
+        visibility: visible;
+      }
+
+      .result-listing {
+        top: 220px;
+        right: 5px;
+        width: 300px;
+      }
+
+      .result-listing ul {
+        font-size: 8px;
+      }
+
+      .result-listing h3 {
+        letter-spacing: 1px;
+        font-size: 5px;
+      }
+    }
+
+    /* Extra extra large devices (large tv screens, 1400px and up) */
+    /* @media only screen and (min-width: 1400px) { */
+    @media only screen and (min-width: 1400px) and (max-width: 1580px) {
+      body {
+        background-color: white;
+      }
+
+      .sidebar {
+        visibility: hidden;
+      }
+
+      .leaflet-control-container {
+        position: absolute;
+        top: 50px;
+        left: 15px;
+      }
+
+      .leaflet-container .leaflet-control-attribution {
+        position: absolute;
+        top: 150px;
+        left: 15px;
+      }
+
+      #map1 {
+        height: 93vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: top;
+      }
+
+      #settings-container {
+        visibility: visible;
+      }
+
+      #search-container {
+        visibility: visible;
+      }
+
+      .result-listing {
+        top: 220px;
+        right: 5px;
+        width: 300px;
+      }
+
+      .result-listing ul {
+        font-size: 8px;
+      }
+
+      .result-listing h3 {
+        letter-spacing: 1px;
+        font-size: 5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="img/bells_logo.jpg" alt="logo" />
+      <h2>Bells Tech</h2>
+    </div>
+    <ul class="sidebar-links">
+      <h4>
+        <span>Main Menu</span>
+        <div class="menu-separator"></div>
+      </h4>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> dashboard </span>Dashboard</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> overview </span>Overview</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> monitoring </span>Analytic</a>
+      </li>
+      <h4>
+        <span>General</span>
+        <div class="menu-separator"></div>
+      </h4>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> folder </span>Projects</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> groups </span>Groups</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> move_up </span>Transfer</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> flag </span>All Reports</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined">notifications_active </span>Notifications</a>
+      </li>
+      <h4>
+        <span>Account</span>
+        <div class="menu-separator"></div>
+      </h4>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> account_circle </span>Profile</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> settings </span>Settings</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> logout </span>Logout</a>
+      </li>
+    </ul>
+    <div class="user-account">
+      <div class="user-profile">
+        <img src="img/EricNg-linkedin.jpg" alt="Profile Image" />
+        <div class="user-detail">
+          <h3>Eric Ng</h3>
+          <span>FSD Trainee</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+
+      <a class="navbar-brand" href="index.html" data-i18n="navbar_title"></a>
+      <!-- No navbar Menu Icon when shrink-size -->
+      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> -->
+      <!-- <span class="navbar-toggler-icon"></span> -->
+      <!-- </button> -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="home.html" data-i18n="navbar_home"></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false" data-i18n="navbar_language"></a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <!-- <li><a class="dropdown-item" href="/en/" id="selectEnglish">English</a></li> -->
+              <!-- <li><a class="dropdown-item" href="/zh/" id="selectChinese">中文</a></li> -->
+              <li><a class="dropdown-item" href="#" id="selectEnglish">English</a></li>
+              <li><a class="dropdown-item" href="#" id="selectChinese">中文</a></li>
+            </ul>
+          </li>
+          <!-- <li class="nav-item"> -->
+          <!-- <a class="nav-link" href="#">About</a> -->
+          <!-- </li> -->
+          <!-- <button class="btn btn-outline-success" type="button" id="aboutBtn">About</button> -->
+          <!-- Button trigger modal -->
+          <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#aboutModal">About</button> -->
+          <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#aboutModal"
+            data-i18n="navbar_about"></button>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" data-i18n="navbar_login"></a>
+          </li>
+        </ul>
+
+        <a href="ask-chatgpt.html" class="btn btn-outline-success" id="askChatGPTBtn" data-i18n="navbar_askChatGPT"></a>
+        <!-- <button class="btn btn-outline-success" type="button" id="askChatGPTBtn" data-i18n="navbar_askChatGPT"></button> -->
+        <button class="btn btn-outline-success" type="button" id="resetBtn" data-i18n="navbar_resetMap"></button>
+        <!-- <button id="locateBtn" type="button" class="btn btn-light">My Location</button> -->
+        <button class="btn btn-outline-success" type="button" id="locateBtn" data-i18n="navbar_locateMe"></button>
+
+        <form class="d-flex">
+          <!-- <input class="form-control me-2" type="search" aria-label="Search" id="searchByKeyword" placeholder="Enter Search Keyword"> -->
+          <input class="me-2" type="search" aria-label="Search" id="searchByKeyword"
+            data-i18n="navbar_placeholderSearch">
+          <button class="btn btn-outline-success me-2" type="submit" id="searchKeywordBtn"
+            data-i18n="navbar_search"></button>
+          <!-- <input class="form-control me-2" type="search" aria-label="Search" id="searchByPostalCode" placeholder="Enter Postal Code"> -->
+          <input class="me-2" type="search" aria-label="Search" id="searchByPostalCode"
+            data-i18n="navbar_placeholderLocate">
+          <button class="btn btn-outline-success me-2" type="submit" id="searchPostalCodeBtn"
+            data-i18n="navbar_locate"></button>
+        </form>
+        <ul class="navbar-nav me-2 mb-2 mb-lg-0">
+          <li class="nav-item dropstart">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false" data-i18n="navbar_quickSearch"></a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <!-- Reset Quick Search -->
+              <li><a class="dropdown-item" href="#" id="item1Selected" data-i18n="qs_ResetQuickSearch">Reset Quick
+                  Search</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <!-- Quick Search for Normal Categories -->
+              <li><a class="dropdown-item" href="#" id="itemN1Selected" data-i18n="qs_EmbassyOrConsulate">Embassy or
+                  Consulate</a></li>
+              <li><a class="dropdown-item" href="#" id="itemN2Selected"
+                  data-i18n="qs_TouristInformationAndService">Tourist Information and Service</a></li>
+              <li><a class="dropdown-item" href="#" id="itemN3Selected" data-i18n="qs_Lodging">Lodging</a></li>
+              <li><a class="dropdown-item" href="#" id="itemN4Selected" data-i18n="qs_TransportHub">Transport Hub</a>
+              </li>
+              <li><a class="dropdown-item" href="#" id="itemN5Selected"
+                  data-i18n="qs_TransportationService">Transportation Service</a></li>
+              <li><a class="dropdown-item" href="#" id="itemN6Selected" data-i18n="qs_TravelAgency">Travel Agency</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <!-- Quick Search for Emergency Services -->
+              <li><a class="dropdown-item" href="#" id="itemE1Selected" data-i18n="qs_PoliceStation">Police Station</a>
+              </li>
+              <li><a class="dropdown-item" href="#" id="itemE2Selected" data-i18n="qs_FireStation">Fire Station</a></li>
+              <li><a class="dropdown-item" href="#" id="itemE3Selected" data-i18n="qs_EmergencyService">Emergency
+                  Service</a></li>
+              <li><a class="dropdown-item" href="#" id="itemE4Selected" data-i18n="qs_Hospital">Hospital</a></li>
+              <li><a class="dropdown-item" href="#" id="itemE5Selected" data-i18n="qs_HealthcareClinic">Healthcare
+                  Clinic</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div id="map-container">
+    <!-- <div class="container-fluid m-0 h-100"> -->
+    <!-- <div class="row p-0 h-100">  -->
+    <!-- <div class="col-1 p-0 m-0"></div> -->
+    <!-- LHS Map -->
+    <!-- <div class="col-8 p-0 m-0"> -->
+    <!-- <div id="map1"></div> -->
+    <div id="map"></div>
+    <!-- </div> -->
+    <!-- RHS Search Results -->
+    <!-- <div class="col-3 p-0"> -->
+    <div id="search-container">
+      <h3 id="result-header" data-i18n="searchResults"></h3>
+      <ul id="result-listing"></ul>
+      <!-- <div id="result-listing"></div> -->
+    </div>
+    <!-- </div> -->
+  </div>
+
+  <div class="container-fluid" id="settings-container">
+    <span data-i18n="searchSettings"></span>
+    <div class="input-group mb-3 input-group-sm">
+      <span class="input-group-text" data-i18n="searchLimit"></span>
+      <input type="number" min="1" max="50" class="form-control" placeholder="Maximum Number of Search Results"
+        id="inputSearchLimit">
+    </div>
+    <div class="input-group mb-3 input-group-sm">
+      <span class="input-group-text" data-i18n="searchRadius"></span>
+      <input type="number" min="0" max="100000" class="form-control" placeholder="Radius of Search Location"
+        id="inputSearchRadius">
+    </div>
+    <button class="btn btn-outline-success" type="button" id="submitSettingsBtn" data-i18n="searchSubmit"></button>
+  </div>
+
+  <div id="search-container-test">
+    <input type="text" id="searchTerms" />
+    <button id="searchBtn">Search</button>
+    <div id="search-results"></div>
+  </div>
+
+  <!-- <div id="map-container"> -->
+  <!-- <div id="search-container"> -->
+  <!-- <input type="text" id="searchTerms" /> -->
+  <!-- <button id="searchBtn">Search</button> -->
+  <!-- <div id="search-results"></div> -->
+  <!-- </div> -->
+  <!-- <div id="map"></div> -->
+  <!-- </div> -->
+
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">About</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          This project work, part of <strong>Industry Project 1: Front-End Development</strong>,
+          <wbr>is an individual assessment done by Candidate’s Name (as in NRIC): <strong><em>Ng Yew Seng</em></strong>
+          (Candidate’s NRIC: <strong><em>S XXXX 3 5 3 / F</em></strong>),
+          <wbr>a trainee under the <strong>(SCTP) Full Stack Developer</strong> course, organized by <strong>Bells
+            Institute of Higher Learning</strong>.
+        </div>
+        <div class="modal-footer">
+          >> Coder: <strong><em>Ng Yew Seng</em></strong>
+          <wbr>© Copyright 2024
+          <wbr>Bells Institute of Higher Learning
+          <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+          <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
+
+  <!-- Leaflet -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="">
+    </script>
+
+  <!-- Marker clustering: place after Leaflet because it's a plugin for Leaflet -->
+  <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
+
+  <!-- Geolocation: place after Leaflet because it's a plugin for Leaflet -->
+  <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js"></script>
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+  <script src="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.umd.js"></script>
+
+  <!-- Axios -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.4/axios.min.js"
+    integrity="sha512-6VJrgykcg/InSIutW2biLwA1Wyq+7bZmMivHw19fI+ycW0jIjsadm8wKQQLlfv3YUS4owfMDlZU38NtaAK6fSg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- our own javascript files -->
+  <script src="js/multilang.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/view.js"></script>
+  <script src="js/script.js"></script>
+
+</body>
+
+</html>
