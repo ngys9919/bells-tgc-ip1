@@ -23,21 +23,32 @@
 <body>
 <h1>Ask ChatGPT</h1>
 <form>
+  <label>TripAI Itinerary</label>
   <div class="mb-3">
     <label>Enter place to go</label>
-    <input type="text" class="form-control" name="name" value="">
-</div>
-<div class="mb-3">
+    <input type="text" class="form-control" id="inputPlace" value="Singapore">
+  </div>
+  <div class="mb-3">
     <label>Enter the number of day(s)</label>
-    <input type="number" min="1" max="7" class="form-control" name="designation" value="">
-</div>
-<button type="submit" class="btn btn-primary">Send Request</button>
-<button type="submit" class="btn btn-primary">Clear Answer</button>
-    <div class="alert alert-danger">
+    <input type="number" min="1" max="7" class="form-control" id="inputDays" value="1">
+  </div>
+  <div class="container">
+    <!-- Content here -->
+    <div id="chatgpt-results">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque id adipisci laudantium dolore odit neque autem repellat. Cum autem deleniti distinctio quo, debitis optio tempore molestiae nisi ex quisquam et.
+    </div>
+  </div>
+    <!-- <div id="chatgpt-container"> -->
+      <!-- <div id="chatgpt-results"></div> -->
+    <!-- </div> -->
+  <button type="submit" class="btn btn-primary mr-2 my-2" id="sendRequestBtn">Send Request</button>
+  <button type="submit" class="btn btn-primary mr-2 my-2" id="clearAnswerBtn">Clear Answer</button>
+  
+  <div class="alert alert-danger">
         Please select the prompt that you want to Ask ChatGPT ?
         <div>
-            <input type="submit" value="Confirm" class="btn btn-outline-success"/>
-            <a href="home.html" class="btn btn-outline-success">Cancel</a>
+            <input type="submit" value="Confirm" class="btn btn-outline-success mr-2 my-2"/>
+            <a href="home.html" class="btn btn-outline-success my-2">Cancel</a>
             <!-- <input type="submit" value="Confirm" class="btn btn-danger"/> -->
             <!-- <a href="index.html" class="btn btn-primary">Cancel</a> -->
         </div>
