@@ -13,22 +13,31 @@ window.addEventListener('DOMContentLoaded', async function(){
         // 'data': transformedData1
     // }])
 
-    let rawData = await loadData_jsonFormat();
-    let series = transformData_xMonth_yNumber(rawData);
+    // let rawData = await loadData_jsonFormat();
+    // let series = transformData_xMonth_yNumber(rawData);
     // since chart is a global variable, we can use it
     // inside this function
-    chart2.updateSeries([{  // replace the old series of the chart with a new one
-        'name': 'Sales',
-        'data': series
-    }])
+    // chart2.updateSeries([{  // replace the old series of the chart with a new one
+        // 'name': 'Sales',
+        // 'data': series
+    // }])
 
     let data = await loadData_csvFormat2();
-    let transformedData = transformData_xDate_yNumber(data);
+    let transformedData = transformData_xDate_yNumber2(data);
     // since chart is a global variable, we can use it
     // inside this function
     chart.updateSeries([{  // replace the old series of the chart with a new one
         'name': 'Tourists Arrivals',
         'data': transformedData
+    }])
+
+    let data3 = await loadData_csvFormat2();
+    let transformedData3 = transformData_xRegion_yNumber3(data3);
+    // since chart is a global variable, we can use it
+    // inside this function
+    chart3.updateSeries([{  // replace the old series of the chart with a new one
+        'name': 'Tourists Arrivals',
+        'data': transformedData3
     }])
 })
 
@@ -96,8 +105,11 @@ const barChartOptions = {
 // const chart1 = new ApexCharts(document.querySelector('#chart-xNumber-yNumber'), options);
 // chart1.render();
 
-const chart2 = new ApexCharts(document.querySelector('#chart-xMonth-yNumber'), options);
-chart2.render();
+// const chart2 = new ApexCharts(document.querySelector('#chart-xMonth-yNumber'), options);
+// chart2.render();
 
 const chart = new ApexCharts(document.querySelector('#chart-xDate-yNumber'), options);
 chart.render();
+
+const chart3 = new ApexCharts(document.querySelector('#chart-xRegion-yNumber'), barChartOptions);
+chart3.render();

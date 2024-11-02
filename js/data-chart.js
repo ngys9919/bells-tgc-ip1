@@ -155,3 +155,131 @@ function transformData_xDate_yNumber(rawData) {
     }
     return series;
 }
+
+
+// input: rawData of tourists arrival statistics
+// output: a series, where x is the name of the month-year for Date_of_Arrival, and y is Number_of_Tourists
+function transformData_xDate_yNumber2(rawData) {
+    console.log(rawData);
+    let monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug','Sept','Oct','Nov','Dec'];
+
+    // 1. use map to keep only the information that we want
+    let transformed = rawData.map(function(tourists){
+        return {
+            'number': tourists.Number_of_Tourists,
+            'date': new Date(tourists.Date_of_Arrival) //=> convert from date string to a date object
+        }
+    })
+    console.log(transformed);
+
+    let filtered = transformed.filter(function(tourists){
+        return tourists.date.getFullYear() == 2023;
+    });
+    let withMonth = filtered.map(function(tourists){
+        return {
+            number: tourists.number,
+            month: monthNames[tourists.date.getMonth()]
+        }
+    })
+    console.log(withMonth);
+    // create the empty groups
+    let groups = {};
+    for (let m=0; m < 12; m++) {
+        groups[monthNames[m]] = []; // create one array for month
+    }
+    console.log(groups);
+    // categorize each transaction by its month
+    for(let tourists of withMonth) {
+        let monthNumber = tourists.month;
+        groups[monthNumber].push(tourists);
+    }
+    console.log(groups);
+    let series = [];
+    let reducer = function(totalSoFar, currentTourists ){
+        // console.log(currentTourists);
+        // console.log(currentTourists.number);
+        // console.log(totalSoFar);
+        totalSoFar += parseInt(currentTourists.number);
+        return (totalSoFar);
+        // return currentTourists.number + totalSoFar;
+    }
+    console.log(reducer);
+    for (let eachMonth in groups) {
+        let coordinate = {
+            x: eachMonth,
+            y: groups[eachMonth].reduce(reducer , 0)
+        }
+        // console.log(coordinate);
+        series.push(coordinate);
+        // break;
+    }
+    console.log(series);
+    return series;
+
+}
+
+// input: rawData of tourists arrival statistics
+// output: a series, where x is the name for Region, and y is Number_of_Tourists for each Region
+function transformData_xRegion_yNumber3(rawData) {
+    console.log(rawData);
+    let regionNames = ['Southeast Asia', 'Greater China', 'North Asia', 'South Asia', 'West Asia', 'Americas', 'Europe', 'Oceania','Africa','Others'];
+
+    // 1. use map to keep only the information that we want
+    let transformed = rawData.map(function(tourists){
+        return {
+            'number': tourists.Number_of_Tourists,
+            'region': tourists.Region //=> convert from date string to a date object
+        }
+    })
+    console.log(transformed);
+
+    let transformData = [];
+    let series = [];
+
+    //loop through all the region
+    for (let region of regionNames) {
+        //loop through all years
+        transformData = [];
+        
+        console.log(region);
+
+        // for (let y = 2023) {
+        let sum = 0;
+        // let count = 0;
+        //loop through all data array
+        for (let i = 0; i < rawData.length; i++) {
+            //if curr not equal to region 
+            if (rawData[i].Region !== region) {
+                continue;
+            }
+            else {
+                //compare curr year with year 
+                // let num = data[i].month.slice(0, 4)
+                // if (parseInt(num) === parseInt(y)) {
+                    // count++;
+                    sum += parseInt(rawData[i].Number_of_Tourists);
+                // }
+                console.log(sum);
+            }
+        }
+        // let avg = sum / count;
+        // transformData.push(avg.toFixed(0));
+        transformData.push(sum);
+        // }
+    
+        // series.push({
+            // 'name': region,
+            // 'data': transformData
+        // });
+
+        let coordinate = {
+            x: region,
+            y: transformData
+        }
+        // console.log(coordinate);
+        series.push(coordinate);
+    }
+        console.log(series);
+        return series;
+    
+}
