@@ -90,29 +90,39 @@ function transformData_xMonth_yNumber(rawData) {
     return series;
 }
 
-// input: rawData of sales transaction
+async function loadData_csvFormat2() {
+    // get the CSV file via axios
+    const response = await axios.get('data/Monthly_Tourist_Arrivals_2023-cleaned.csv'); 
+    // const response = await axios.get('data/Monthly_Tourist_Arrivals_2023.csv');
+    // convert the raw CSV file into an array of JSON objects
+    // the csv() function is included in the global scope
+    // when we include in csvtojson js file.
+    const json = await csv().fromString(response.data);
+    return json;
+}
+
+// input: rawData of tourists arrival statistics
 // output: a series, where x is the name of the month-year for Date_of_Arrival, and y is Number_of_Tourists
 function transformData_xDate_yNumber(rawData) {
     console.log(rawData);
     let monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug','Sept','Oct','Nov','Dec']
 
     // 1. use map to keep only the information that we want
-    let transformed = rawData.map(function(transaction){
+    let transformed = rawData.map(function(tourists){
         return {
-            'amount': transaction.payment.amount,
-            'date': new Date(transaction.completed_at) //=> convert from date string to a date object
+            'number': tourists.Number_of_Tourists,
+            'date': new Date(tourists.Date_of_Arrival) //=> convert from date string to a date object
         }
     })
-    let filtered = transformed.filter(function(transaction){
-        return transaction.date.getFullYear() == 2020;
+    let filtered = transformed.filter(function(tourists){
+        return tourists.date.getFullYear() == 2023;
     });
-    let withMonth = filtered.map(function(transaction){
+    let withMonth = filtered.map(function(tourists){
         return {
-            amount: transaction.amount,
-            month: monthNames[transaction.date.getMonth()]
+            number: tourists.number,
+            month: monthNames[tourists.date.getMonth()]
         }
     })
-
 
     // grouping
     // final results should look something like this:
@@ -127,14 +137,14 @@ function transformData_xDate_yNumber(rawData) {
         groups[monthNames[m]] = []; // create one array for month
     }
     // categorize each transaction by its month
-    for(let transaction of withMonth) {
-        let monthNumber = transaction.month;
-        groups[monthNumber].push(transaction);
+    for(let tourists of withMonth) {
+        let monthNumber = tourists.month;
+        groups[monthNumber].push(tourists);
     }
    
     let series = [];
-    let reducer = function(totalSoFar, currentTransaction ){
-        return currentTransaction.amount + totalSoFar;
+    let reducer = function(totalSoFar, currentTourists ){
+        return currentTourists.number + totalSoFar;
     }
     for (let eachMonth in groups) {
         let coordinate = {

@@ -4,14 +4,14 @@ window.addEventListener('DOMContentLoaded', async function(){
     // it is in global scope if we include
     // data.js before chart.js (since the loadData
     // is in chart.js)
-    let data1 = await loadData_csvFormat();
-    let transformedData1 = transformData_xNumber_yNumber(data1);
+    // let data1 = await loadData_csvFormat();
+    // let transformedData1 = transformData_xNumber_yNumber(data1);
     // since chart is a global variable, we can use it
     // inside this function
-    chart1.updateSeries([{  // replace the old series of the chart with a new one
-        'name': 'Sales',
-        'data': transformedData1
-    }])
+    // chart1.updateSeries([{  // replace the old series of the chart with a new one
+        // 'name': 'Sales',
+        // 'data': transformedData1
+    // }])
 
     let rawData = await loadData_jsonFormat();
     let series = transformData_xMonth_yNumber(rawData);
@@ -22,12 +22,12 @@ window.addEventListener('DOMContentLoaded', async function(){
         'data': series
     }])
 
-    let data = await loadData_jsonFormat();
+    let data = await loadData_csvFormat2();
     let transformedData = transformData_xDate_yNumber(data);
     // since chart is a global variable, we can use it
     // inside this function
     chart.updateSeries([{  // replace the old series of the chart with a new one
-        'name': 'Sales',
+        'name': 'Tourists Arrivals',
         'data': transformedData
     }])
 })
@@ -93,8 +93,8 @@ const barChartOptions = {
 // const barChart = new ApexCharts(document.querySelector("#bar-chart"), barChartOptions);
 // barChart.render();
 
-const chart1 = new ApexCharts(document.querySelector('#chart-xNumber-yNumber'), options);
-chart1.render();
+// const chart1 = new ApexCharts(document.querySelector('#chart-xNumber-yNumber'), options);
+// chart1.render();
 
 const chart2 = new ApexCharts(document.querySelector('#chart-xMonth-yNumber'), options);
 chart2.render();

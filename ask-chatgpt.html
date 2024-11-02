@@ -18,11 +18,21 @@
       crossorigin="anonymous"
     />
     <!-- our own style sheet -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style-chatgpt.css" />
 </head>
 <body>
 <h1>Ask ChatGPT</h1>
 <form>
+  <div class="mb-3">
+    <label>Enter place to go</label>
+    <input type="text" class="form-control" name="name" value="">
+</div>
+<div class="mb-3">
+    <label>Enter the number of day(s)</label>
+    <input type="number" min="1" max="7" class="form-control" name="designation" value="">
+</div>
+<button type="submit" class="btn btn-primary">Send Request</button>
+<button type="submit" class="btn btn-primary">Clear Answer</button>
     <div class="alert alert-danger">
         Please select the prompt that you want to Ask ChatGPT ?
         <div>
@@ -43,7 +53,8 @@ crossorigin="anonymous">
 integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
 crossorigin="anonymous">
 </script>
-   
+<!-- our own javascript files -->
+<script src="js/ask-chatgpt.js"></script>  
 </body>
 </html>
 
