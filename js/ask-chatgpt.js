@@ -7,6 +7,14 @@ const promptTour2 = "Please based the itinerary for places to visit on historica
 const promptTour = "Please based the itinerary for places to visit on "
 let chatgptTourType = "popular tour";
 
+const promptList1 = "Please just provide a list of popular places of interest in Singapore with its location in latitude and longtitude format."
+const promptList2 = "Please just provide a list of popular places of interest in Singapore with the output format in an array format and its location in json format with latitude and longtitude."
+
+async function loadData_jsonFormat() {
+    const response = await axios.get('data/chatgpt_places.json');
+    return response.data;
+}
+
 // curl https://api.openai.com/v1/engines/davinci/completions \ -H 
 // "Content-Type: application/json" \ -H 
 // "Authorization: Bearer $OPENAI_API_KEY" \ -d 
@@ -80,7 +88,7 @@ let chatgptTourType = "popular tour";
 // let apiKey = dummy1 + dummy2 + dummy3;
 // console.log(apiKey);
 
-const apiKey = "OPENAI_API_KEY";
+const apiKey = ChatGPT_APIkey;
 
 async function OpenaiFetchAPI2(prompt) {
     console.log("Calling GPT4-o")
@@ -254,6 +262,96 @@ document.addEventListener("DOMContentLoaded", async function () {
     .addEventListener("click", async function () {
         // alert("You have selected Radio6 !");
         chatgptTourType = "tertiary institutions (include popular polytechnics and universities) tour";
+    });
+
+    document
+    .querySelector("#continueBtn")
+    .addEventListener("click", async function () {
+        // alert("You have selected Continue... Button!");
+
+        // add the answer to the chatgpt results div
+        // const resultElement1 = document.querySelector("#chatgpt-results");
+        // resultElement1.innerHTML = "Please wait... ChatGPT is generating your answer!";
+        // resultElement1.className = "chatgpt-result";
+
+        // const prompt2 = promptList1;
+        // const prompt3 = prompt2 + promptFormat;
+        // console.log(prompt3);
+        
+        // const prompt = "Hello!";
+        // await OpenaiFetchAPI3(prompt);
+
+        // await OpenaiFetchAPI3(promptList2);
+        // console.log(promptList2);
+
+        //   resultElement1.innerHTML = 'ChatGPT prompt: ' + `<br> ${promptTemplate} ${chatgptInputPlace}` + ' for ' + `${chatgptInputDays}` + ' days ' + `<br><br>` + 'ChatGPT response: ';
+        //   resultElement1.innerHTML = `${promptTemplate}`;
+        // const reply = chatgpt_reply['choices'][0].message.content;
+        // console.log(reply);
+
+        // resultElement1.innerHTML = `${reply}`;
+        
+        // extractData1 = reply.split("```json");
+        // console.log(extractData1);
+        // console.log(extractData1[1]);
+        // extractData2 = extractData1[1].split("```");
+        // console.log(extractData2);
+        // console.log(extractData2[0]);
+        // extractData = extractData2[0];
+        // console.log(extractData);
+
+        let rawData = await loadData_jsonFormat();
+
+        let transformed = rawData.map(function(placesOfInterests){
+            return {
+                'name': placesOfInterests.name,
+                'lat': placesOfInterests.location.latitude,
+                'lon': placesOfInterests.location.longitude
+            }
+        })
+
+        console.log(transformed);
+
+        let placesList = document.querySelector("#tellmeabout");
+        placesList.innerHTML = ""; // remove all existing places of interest
+    for (let f of transformed) {
+        console.log(f);
+        // 1. create a DOM element
+        let listElement = document.createElement('li');
+
+        // 2. populate content and set properties
+        listElement.innerHTML = `${f.name} <button class="btn btn-outline-success mr-2 my-2 tellMeMoreBtn" style="margin: 5px;">Tell me about...</button><button class="btn btn-outline-success mr-2 my-2 checkLocationBtn" style="margin: 5px;">Check its location.</button>`;
+        listElement.className = 'list-group-item';
+
+        let tellMeMoreButton = listElement.querySelector(".tellMeMoreBtn");
+        // add event listener for the edit button
+        tellMeMoreButton.addEventListener("click", async function() {
+            // alert("You have selected Tell Me More Button!");
+            // add the answer to the chatgpt results div
+            const resultElement1 = document.querySelector("#chatgpt-results");
+            resultElement1.innerHTML = "Please wait... ChatGPT is generating your answer!";
+            resultElement1.className = "chatgpt-result";
+
+            const promptTellMeMore = "Tell me more about ";
+            const promptTellMeMore2 = promptTellMeMore + `${f.name}` + ' in Singapore.';
+            const promptTellMeMore3 = promptTellMeMore2 + promptFormat;
+            await OpenaiFetchAPI3(promptTellMeMore3);
+            console.log(promptTellMeMore3);
+
+            const reply = chatgpt_reply['choices'][0].message.content;
+            console.log(reply);
+            resultElement1.innerHTML = `${reply}`;
+        })
+
+        let checkLocationButton = listElement.querySelector(".checkLocationBtn");
+        checkLocationButton.addEventListener("click", async function() {
+            alert("You have selected Check Location Button!");
+        })
+
+        // 3. add the container the child should go into
+        placesList.appendChild(listElement);
+    }
+
     });
 });
 

@@ -73,8 +73,8 @@
         Tertiary institutions tour
       </label>
     </div>
-    <button type="submit" class="btn btn-primary mr-2 my-2" id="sendRequestBtn">Send Request</button>
-    <button type="submit" class="btn btn-primary mr-2 my-2" id="clearAnswerBtn">Clear Answer</button>
+      <button type="submit" class="btn btn-primary mr-2 my-2" id="sendRequestBtn">Send Request</button>
+      <button type="submit" class="btn btn-primary mr-2 my-2" id="clearAnswerBtn">Clear Answer</button>    
   </form>
   </div>
   <!-- <div class="flex-box inter-200" id="text-area-content"> -->
@@ -86,16 +86,22 @@
   </div>
 </div>
 
-  <div class="alert alert-danger">
-        Please select the prompt that you want to Ask ChatGPT ?
+  <div class="alert alert-info">
+        Using Ask ChatGPT, you may use the feature "Tell me about ..." to gather more information
+        <wbr>about the popular places of interests in Singapore ?
         <div>
-            <input type="submit" value="Confirm" class="btn btn-outline-success mr-2 my-2"/>
-            <a href="home.html" class="btn btn-outline-success my-2">Cancel</a>
+            <input type="submit" value="Continue..." class="btn btn-outline-success mr-2 my-2" id="continueBtn"/>
+            <a href="home.html" class="btn btn-outline-success my-2">Home</a>
             <!-- <input type="submit" value="Confirm" class="btn btn-danger"/> -->
             <!-- <a href="index.html" class="btn btn-primary">Cancel</a> -->
+            
         </div>
     </div>
-
+    <!-- <div id="main" class="container"> -->
+      <h1>Popular Places of Interests in Singapore</h1>
+      <ul id="tellmeabout" class="list-group">
+      </ul>
+  <!-- </div> -->
 
 <!-- Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 

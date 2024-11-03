@@ -1,0 +1,72 @@
+[
+    {
+        "name": "Marina Bay Sands",
+        "location": {
+            "latitude": 1.2834,
+            "longitude": 103.8607
+        }
+    },
+    {
+        "name": "Gardens by the Bay",
+        "location": {
+            "latitude": 1.2816,
+            "longitude": 103.8636
+        }
+    },
+    {
+        "name": "Sentosa Island",
+        "location": {
+            "latitude": 1.2500,
+            "longitude": 103.8200
+        }
+    },
+    {
+        "name": "Orchard Road",
+        "location": {
+            "latitude": 1.3045,
+            "longitude": 103.8318
+        }
+    },
+    {
+        "name": "Chinatown",
+        "location": {
+            "latitude": 1.2825,
+            "longitude": 103.8437
+        }
+    },
+    {
+        "name": "Little India",
+        "location": {
+            "latitude": 1.3064,
+            "longitude": 103.8482
+        }
+    },
+    {
+        "name": "Clarke Quay",
+        "location": {
+            "latitude": 1.2890,
+            "longitude": 103.8456
+        }
+    },
+    {
+        "name": "Singapore Botanic Gardens",
+        "location": {
+            "latitude": 1.3183,
+            "longitude": 103.8158
+        }
+    },
+    {
+        "name": "Merlion Park",
+        "location": {
+            "latitude": 1.2889,
+            "longitude": 103.8600
+        }
+    },
+    {
+        "name": "National Gallery Singapore",
+        "location": {
+            "latitude": 1.2909,
+            "longitude": 103.8515
+        }
+    }
+]
