@@ -5,13 +5,38 @@ const promptFormat = "Please provide your answers straight right away in HTML fo
 const promptTour1 = "Please based the itinerary on historical type of places to visit."
 const promptTour2 = "Please based the itinerary for places to visit on historical tour."
 const promptTour = "Please based the itinerary for places to visit on "
+
 let chatgptTourType = "popular tour";
+let chatgptFileType = "popular";
 
-const promptList1 = "Please just provide a list of popular places of interest in Singapore with its location in latitude and longtitude format."
-const promptList2 = "Please just provide a list of popular places of interest in Singapore with the output format in an array format and its location in json format with latitude and longtitude."
+const promptList0 = "Please just provide a list of popular places of interest in Singapore with its location in latitude and longtitude format."
+const promptList1 = "Please just provide a list of popular places of interest in Singapore with the output format in an array format and its location in json format with latitude and longtitude."
+const promptList2 = "Please just provide a list of budget places of interest in Singapore with the output format in an array format and its location in json format with latitude and longtitude."
+const promptList3 = "Please just provide a list of cultural places of interest in Singapore with the output format in an array format and its location in json format with latitude and longtitude."
+const promptList4 = "Please just provide a list of historical places of interest in Singapore with the output format in an array format and its location in json format with latitude and longtitude."
+const promptList5 = "Please just provide a list of gourmet food places of interest in Singapore with the output format in an array format and its location in json format with latitude and longtitude."
+const promptList6 = "Please just provide a list of tertiary institutions (including polytechnics and universities) places of interest in Singapore with the output format in an array format and its location in json format with latitude and longtitude."
 
-async function loadData_jsonFormat() {
-    const response = await axios.get('data/chatgpt_places.json');
+
+
+
+async function loadData_jsonFormat(chatgptFileType) {
+    if (chatgptFileType == "popular") {
+        filePath = 'data/chatgpt_popular.json';
+    } else if (chatgptFileType == "budget") {
+        filePath = 'data/chatgpt_budget.json';
+    } else if (chatgptFileType == "cultural") {
+        filePath = 'data/chatgpt_cultural.json';
+    } else if (chatgptFileType == "historical") {
+        filePath = 'data/chatgpt_historical.json';
+    } else if (chatgptFileType == "gourmetfood") {
+        filePath = 'data/chatgpt_gourmetfood.json';
+    } else if (chatgptFileType == "tertiaryinstitutions") {
+        filePath = 'data/chatgpt_tertiaryinstitutions.json';
+    } else {
+        filePath = 'data/chatgpt_popular.json';
+    }
+    const response = await axios.get(filePath);
     return response.data;
 }
 
@@ -175,13 +200,40 @@ async function OpenaiFetchAPI3(prompt) {
     
 }
 
+function locateUser(map){
+    map.locate({setView: true, watch: true}) /* This will return map so you can do chaining */
+          .on('locationfound', function(e){
+              var marker = L.marker([e.latitude, e.longitude]).bindPopup('This is your current location.');
+              // Add marker to mapMarker for future reference
+              mapMarkers.push(marker);
+              let layer = marker.bindTooltip('You are here!').addTo(map);
+              layer.openTooltip();
+              // layer.closeTooltip();
+              var circle = L.circle([e.latitude, e.longitude], e.accuracy/2, {
+                  weight: 1,
+                  color: 'blue',
+                  fillColor: '#cacaca',
+                  fillOpacity: 0.2
+              });
+              map.addLayer(marker);
+              map.addLayer(circle);
+          })
+         .on('locationerror', function(e){
+              console.log(e);
+              alert("Location access denied.");
+          });
+}
+
+let map = L.map("chatgpt-map");  // create the map in inside the element with id `chatgpt-map`
+let mapMarkers = [];
+
 document.addEventListener("DOMContentLoaded", async function () {
 
     let singaporeLatlng = [1.3521, 103.8198];
 
     // L is a global variable which represents the Leaflet object
     // all functions and variables in Leaflet are in the `L` object
-    let map = L.map("chatgpt-map");  // create the map in inside the element with id `myMap`
+    
     // let map = L.map("chatgpt-results");  // create the map in inside the element with id `myMap`
     map.setView(singaporeLatlng, 12);   // two parameters: one is an array which represents the lat lng, second the zoom level
 
@@ -193,29 +245,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     tileLayer.addTo(map);
 
-    function locateUser(){
-        map.locate({setView: true, watch: true}) /* This will return map so you can do chaining */
-              .on('locationfound', function(e){
-                  var marker = L.marker([e.latitude, e.longitude]).bindPopup('This is your current location.');
-                  let layer = marker.bindTooltip('You are here!').addTo(map);
-                  layer.openTooltip();
-                  // layer.closeTooltip();
-                  var circle = L.circle([e.latitude, e.longitude], e.accuracy/2, {
-                      weight: 1,
-                      color: 'blue',
-                      fillColor: '#cacaca',
-                      fillOpacity: 0.2
-                  });
-                  map.addLayer(marker);
-                  map.addLayer(circle);
-              })
-             .on('locationerror', function(e){
-                  console.log(e);
-                  alert("Location access denied.");
-              });
-    }
-      
-    locateUser();
+    locateUser(map);
 
     document
     .querySelector("#clearAnswerBtn")
@@ -227,6 +257,26 @@ document.addEventListener("DOMContentLoaded", async function () {
         const resultElement = document.querySelector("#chatgpt-results");
         resultElement.innerHTML = "Ask ChatGPT Response:";
 
+        for(var i = 0; i < mapMarkers.length; i++){
+            map.removeLayer(mapMarkers[i]);
+        }
+    
+        // map.removeLayer(marker);
+        // map.removeLayer(circle);
+       
+        // Here you remove the layer
+        // if (markerCluster) {
+            // map.removeLayer(markerCluster);
+        // }
+
+        map.setView(singaporeLatlng, 12);
+        myLocationMarker = L.marker(singaporeLatlng);
+        // Add marker to mapMarker for future reference
+        mapMarkers.push(myLocationMarker);
+        layer = myLocationMarker.bindTooltip('Hi! Welcome to SG-finder.').addTo(map);
+        layer.openTooltip();
+
+        // locateUser(map);
     });
 
     
@@ -270,6 +320,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     .addEventListener("click", async function () {
         // alert("You have selected Radio1 !");
         chatgptTourType = "popular tour";
+        chatgptFileType = "popular";
     });
 
     document
@@ -277,6 +328,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     .addEventListener("click", async function () {
         // alert("You have selected Radio2 !");
         chatgptTourType = "budget tour";
+        chatgptFileType = "budget";
     });
 
     document
@@ -284,6 +336,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     .addEventListener("click", async function () {
         // alert("You have selected Radio3 !");
         chatgptTourType = "cultural tour";
+        chatgptFileType = "cultural";
     });
 
     document
@@ -291,6 +344,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     .addEventListener("click", async function () {
         // alert("You have selected Radio4 !");
         chatgptTourType = "historical tour";
+        chatgptFileType = "historical";
     });
 
     document
@@ -298,6 +352,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     .addEventListener("click", async function () {
         // alert("You have selected Radio5 !");
         chatgptTourType = "gourmet food tour";
+        chatgptFileType = "gourmetfood";
     });
 
     document
@@ -305,6 +360,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     .addEventListener("click", async function () {
         // alert("You have selected Radio6 !");
         chatgptTourType = "tertiary institutions (include popular polytechnics and universities) tour";
+        chatgptFileType = "tertiaryinstitutions";
     });
 
     // Note: {bubbles: true} because of the event delegation ...
@@ -352,19 +408,19 @@ document.addEventListener("DOMContentLoaded", async function () {
         // alert("You have selected Continue... Button!");
 
         // add the answer to the chatgpt results div
-        // const resultElement1 = document.querySelector("#chatgpt-results");
-        // resultElement1.innerHTML = "Please wait... ChatGPT is generating your answer!";
-        // resultElement1.className = "chatgpt-result";
+        const resultElement1 = document.querySelector("#chatgpt-results");
+        resultElement1.innerHTML = "Please wait... ChatGPT is generating your answer!";
+        resultElement1.className = "chatgpt-result";
 
-        // const prompt2 = promptList1;
+        // const prompt2 = promptList2;
         // const prompt3 = prompt2 + promptFormat;
         // console.log(prompt3);
         
         // const prompt = "Hello!";
         // await OpenaiFetchAPI3(prompt);
 
-        // await OpenaiFetchAPI3(promptList2);
-        // console.log(promptList2);
+        // await OpenaiFetchAPI3(promptList6);
+        // console.log(promptList6);
 
         //   resultElement1.innerHTML = 'ChatGPT prompt: ' + `<br> ${promptTemplate} ${chatgptInputPlace}` + ' for ' + `${chatgptInputDays}` + ' days ' + `<br><br>` + 'ChatGPT response: ';
         //   resultElement1.innerHTML = `${promptTemplate}`;
@@ -382,7 +438,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         // extractData = extractData2[0];
         // console.log(extractData);
 
-        let rawData = await loadData_jsonFormat();
+        
+        let rawData = await loadData_jsonFormat(chatgptFileType);
 
         let transformed = rawData.map(function(placesOfInterests){
             return {
@@ -395,12 +452,23 @@ document.addEventListener("DOMContentLoaded", async function () {
         console.log(transformed);
 
         let listHeader = document.querySelector("#main");
-        listHeader.innerHTML = `<h1>Popular Places of Interests in Singapore</h1>`; // add header
+        if (chatgptFileType == "popular") {
+            listHeader.innerHTML = `<h1>Popular Places of Interests in Singapore</h1>`; // add header
+        } else if (chatgptFileType == "budget") {
+            listHeader.innerHTML = `<h1>Budget Places of Interests in Singapore</h1>`; // add header
+        } else if (chatgptFileType == "cultural") {
+            listHeader.innerHTML = `<h1>Cultural Places of Interests in Singapore</h1>`; // add header
+        } else if (chatgptFileType == "historical") {
+            listHeader.innerHTML = `<h1>Historical Places of Interests in Singapore</h1>`; // add header
+        } else if (chatgptFileType == "gourmetfood") {
+            listHeader.innerHTML = `<h1>Gourmet-Food Places of Interests in Singapore</h1>`; // add header
+        } else if (chatgptFileType == "tertiaryinstitutions") {
+            listHeader.innerHTML = `<h1>Tertiary Institutions Places of Interests in Singapore</h1>`; // add header
+        } else {
+            listHeader.innerHTML = `<h1>Popular Places of Interests in Singapore</h1>`; // add header
+        }
+        
         // 1. create a DOM element
-        // let listHeader = document.createElement('div');
-        // listHeader.innerHTML = 
-
-
         let placesList = document.querySelector("#tellmeabout");
         placesList.innerHTML = ""; // remove all existing places of interest
     for (let f of transformed) {
@@ -422,15 +490,14 @@ document.addEventListener("DOMContentLoaded", async function () {
             resultElement1.className = "chatgpt-result";
 
             const promptTellMeMore = "Tell me more about ";
-            const promptTellMeMore2 = promptTellMeMore + `${f.name}` + ' in Singapore.';
+            const promptTellMeMore2 = promptTellMeMore + `${f.name}` + ' in Singapore. ';
             const promptTellMeMore3 = promptTellMeMore2 + promptFormat;
-            await OpenaiFetchAPI3(promptTellMeMore3);
+            // await OpenaiFetchAPI3(promptTellMeMore3);
             console.log(promptTellMeMore3);
 
-            const reply = chatgpt_reply['choices'][0].message.content;
-            console.log(reply);
-            resultElement1.innerHTML = `${reply}`;
-
+            // const reply = chatgpt_reply['choices'][0].message.content;
+            // console.log(reply);
+            // resultElement1.innerHTML = `${reply}`;
             
         })
 
@@ -440,6 +507,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             // add a marker
             let placeSelected = L.marker([f.lat, f.lon]);
+            // Add marker to mapMarker for future reference
+            mapMarkers.push(placeSelected);
             map.addLayer(placeSelected); // any objects that you can draw on top of a map is known a layer
             placeSelected.bindPopup(`<h6>${f.name}</h6>`); // show some HTML when the marker is clicked
             map.flyTo([f.lat, f.lon], 16);
@@ -457,7 +526,8 @@ document.addEventListener("DOMContentLoaded", async function () {
                 fillOpacity: 0.5,
                 radius: 200
             });
-            circle.addTo(map);
+            // circle.addTo(map);
+            map.addLayer(circle);
         })
 
         // 3. add the container the child should go into

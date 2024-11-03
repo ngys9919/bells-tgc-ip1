@@ -1,0 +1,72 @@
+[
+    {
+        "name": "National Museum of Singapore",
+        "location": {
+            "latitude": 1.2966,
+            "longitude": 103.8501
+        }
+    },
+    {
+        "name": "Asian Civilisations Museum",
+        "location": {
+            "latitude": 1.2903,
+            "longitude": 103.8519
+        }
+    },
+    {
+        "name": "The Peranakan Museum",
+        "location": {
+            "latitude": 1.2927,
+            "longitude": 103.8482
+        }
+    },
+    {
+        "name": "Chinatown Heritage Centre",
+        "location": {
+            "latitude": 1.2825,
+            "longitude": 103.8443
+        }
+    },
+    {
+        "name": "Malay Heritage Centre",
+        "location": {
+            "latitude": 1.3065,
+            "longitude": 103.8553
+        }
+    },
+    {
+        "name": "Buddha Tooth Relic Temple and Museum",
+        "location": {
+            "latitude": 1.2811,
+            "longitude": 103.8459
+        }
+    },
+    {
+        "name": "Sri Mariamman Temple",
+        "location": {
+            "latitude": 1.2809,
+            "longitude": 103.8455
+        }
+    },
+    {
+        "name": "Hindu Endowments Board",
+        "location": {
+            "latitude": 1.2857,
+            "longitude": 103.8485
+        }
+    },
+    {
+        "name": "Singapore Art Museum",
+        "location": {
+            "latitude": 1.2968,
+            "longitude": 103.8480
+        }
+    },
+    {
+        "name": "Esplanade - Theatres on the Bay",
+        "location": {
+            "latitude": 1.2899,
+            "longitude": 103.8571
+        }
+    }
+]

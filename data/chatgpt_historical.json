@@ -1,0 +1,72 @@
+[
+    {
+        "name": "Raffles Hotel",
+        "location": {
+            "latitude": 1.2950,
+            "longitude": 103.8537
+        }
+    },
+    {
+        "name": "Fort Canning Park",
+        "location": {
+            "latitude": 1.2908,
+            "longitude": 103.8472
+        }
+    },
+    {
+        "name": "National Museum of Singapore",
+        "location": {
+            "latitude": 1.2955,
+            "longitude": 103.8462
+        }
+    },
+    {
+        "name": "Changi Chapel and Museum",
+        "location": {
+            "latitude": 1.3662,
+            "longitude": 104.0059
+        }
+    },
+    {
+        "name": "Asian Civilisations Museum",
+        "location": {
+            "latitude": 1.2909,
+            "longitude": 103.8611
+        }
+    },
+    {
+        "name": "The Old Hill Street Police Station",
+        "location": {
+            "latitude": 1.2987,
+            "longitude": 103.8484
+        }
+    },
+    {
+        "name": "Kranji War Cemetery",
+        "location": {
+            "latitude": 1.4334,
+            "longitude": 103.7375
+        }
+    },
+    {
+        "name": "Haw Par Villa",
+        "location": {
+            "latitude": 1.3005,
+            "longitude": 103.7825
+        }
+    },
+    {
+        "name": "Sri Mariamman Temple",
+        "location": {
+            "latitude": 1.2824,
+            "longitude": 103.8452
+        }
+    },
+    {
+        "name": "The Battlebox",
+        "location": {
+            "latitude": 1.2990,
+            "longitude": 103.8404
+        }
+    }
+]

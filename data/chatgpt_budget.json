@@ -1,0 +1,72 @@
+[
+    {
+        "name": "Gardens by the Bay",
+        "location": {
+            "latitude": 1.2816,
+            "longitude": 103.8636
+        }
+    },
+    {
+        "name": "Merlion Park",
+        "location": {
+            "latitude": 1.2873,
+            "longitude": 103.8502
+        }
+    },
+    {
+        "name": "Chinatown",
+        "location": {
+            "latitude": 1.2823,
+            "longitude": 103.8444
+        }
+    },
+    {
+        "name": "Little India",
+        "location": {
+            "latitude": 1.3069,
+            "longitude": 103.8485
+        }
+    },
+    {
+        "name": "Sentosa Island (free areas)",
+        "location": {
+            "latitude": 1.2494,
+            "longitude": 103.8305
+        }
+    },
+    {
+        "name": "East Coast Park",
+        "location": {
+            "latitude": 1.3018,
+            "longitude": 103.9251
+        }
+    },
+    {
+        "name": "Singapore Botanic Gardens",
+        "location": {
+            "latitude": 1.3139,
+            "longitude": 103.8151
+        }
+    },
+    {
+        "name": "Bukit Timah Nature Reserve",
+        "location": {
+            "latitude": 1.3666,
+            "longitude": 103.7829
+        }
+    },
+    {
+        "name": "Fort Canning Park",
+        "location": {
+            "latitude": 1.2931,
+            "longitude": 103.8485
+        }
+    },
+    {
+        "name": "Haji Lane",
+        "location": {
+            "latitude": 1.2993,
+            "longitude": 103.8546
+        }
+    }
+]

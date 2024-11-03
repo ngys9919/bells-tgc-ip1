@@ -1,0 +1,86 @@
+[
+    {
+        "name": "National University of Singapore (NUS)",
+        "location": {
+            "latitude": 1.2952,
+            "longitude": 103.7764
+        }
+    },
+    {
+        "name": "Nanyang Technological University (NTU)",
+        "location": {
+            "latitude": 1.3480,
+            "longitude": 103.6834
+        }
+    },
+    {
+        "name": "Singapore Management University (SMU)",
+        "location": {
+            "latitude": 1.2957,
+            "longitude": 103.8487
+        }
+    },
+    {
+        "name": "Singapore University of Technology and Design (SUTD)",
+        "location": {
+            "latitude": 1.3478,
+            "longitude": 103.9677
+        }
+    },
+    {
+        "name": "Singapore Institute of Technology (SIT)",
+        "location": {
+            "latitude": 1.3591,
+            "longitude": 103.8404
+        }
+    },
+    {
+        "name": "Temasek Polytechnic",
+        "location": {
+            "latitude": 1.3723,
+            "longitude": 103.9520
+        }
+    },
+    {
+        "name": "Ngee Ann Polytechnic",
+        "location": {
+            "latitude": 1.3342,
+            "longitude": 103.7787
+        }
+    },
+    {
+        "name": "Singapore Polytechnic",
+        "location": {
+            "latitude": 1.2891,
+            "longitude": 103.7815
+        }
+    },
+    {
+        "name": "LASALLE College of the Arts",
+        "location": {
+            "latitude": 1.3004,
+            "longitude": 103.8485
+        }
+    },
+    {
+        "name": "Nanyang Academy of Fine Arts (NAFA)",
+        "location": {
+            "latitude": 1.2970,
+            "longitude": 103.8489
+        }
+    },
+    {
+        "name": "Dhulakara College",
+        "location": {
+            "latitude": 1.3500,
+            "longitude": 103.8472
+        }
+    },
+    {
+        "name": "Singapore University of Social Sciences (SUSS)",
+        "location": {
+            "latitude": 1.3595,
+            "longitude": 103.8851
+        }
+    }
+]

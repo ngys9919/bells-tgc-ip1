@@ -1,0 +1,72 @@
+[
+    {
+        "name": "Odette",
+        "location": {
+            "latitude": 1.295075,
+            "longitude": 103.850162
+        }
+    },
+    {
+        "name": "Joel Robuchon Restaurant",
+        "location": {
+            "latitude": 1.288648,
+            "longitude": 103.846054
+        }
+    },
+    {
+        "name": "Restaurant Andre",
+        "location": {
+            "latitude": 1.295882,
+            "longitude": 103.853048
+        }
+    },
+    {
+        "name": "Burnt Ends",
+        "location": {
+            "latitude": 1.372909,
+            "longitude": 103.994472
+        }
+    },
+    {
+        "name": "Les Amis",
+        "location": {
+            "latitude": 1.294466,
+            "longitude": 103.846511
+        }
+    },
+    {
+        "name": "Nicolas Le Restaurant",
+        "location": {
+            "latitude": 1.303403,
+            "longitude": 103.825056
+        }
+    },
+    {
+        "name": "Waku Ghin",
+        "location": {
+            "latitude": 1.285889,
+            "longitude": 103.859217
+        }
+    },
+    {
+        "name": "Shinji by Kanesaka",
+        "location": {
+            "latitude": 1.292903,
+            "longitude": 103.855196
+        }
+    },
+    {
+        "name": "Majollah",
+        "location": {
+            "latitude": 1.295178,
+            "longitude": 103.845977
+        }
+    },
+    {
+        "name": "Wild Rocket",
+        "location": {
+            "latitude": 1.300878,
+            "longitude": 103.840878
+        }
+    }
+]
