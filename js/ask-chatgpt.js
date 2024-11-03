@@ -117,7 +117,7 @@ async function loadData_jsonFormat(chatgptFileType) {
 // console.log(apiKey);
 
 
-const apiKey = ChatGPT_APIkey;
+const apiKey = OPENAI_API_KEY;
 
 async function OpenaiFetchAPI2(prompt) {
     console.log("Calling GPT4-o")
@@ -363,54 +363,41 @@ document.addEventListener("DOMContentLoaded", async function () {
         chatgptFileType = "tertiaryinstitutions";
     });
 
-    // Note: {bubbles: true} because of the event delegation ...
-    document.addEventListener(`click`, handle);
-    document.addEventListener(`virtualhover`, handle);
 
-    // the actual 'trigger' function
-    const trigger = (el, etype, custom) => {
-        const evt = custom ?? new Event( etype, { bubbles: true } );
-        el.dispatchEvent( evt );
-    };
+    //DOM VARS
+    const colorBtn = document.querySelector(".color-button");
 
-    // a custom event ;)
-    const vHover = new CustomEvent(`virtualhover`, 
-    { bubbles: true, detail: `red` });
+    //Event Listeners
+    colorBtn.addEventListener('click', colorBtnClicked);
 
-
-    setTimeout( _ => 
-        trigger( document.querySelector(`#testMe`), `click` ), 1000 );
-
-    function handle(evt) {
-        if (evt.target.id === `clickTrigger`) {
-            trigger(document.querySelector(`#testMe`), `click`);  
-        }
-
-        if (evt.type === `virtualhover`) {
-            evt.target.style.color = evt.detail;
-            return setTimeout( _ => evt.target.style.color = ``, 1000 );
-        }
-
-        if (evt.target.id === `testMe`) {
-            document.querySelector(`#testMeResult`)
-.           insertAdjacentHTML(`beforeend`, `<p>One of us clicked #testMe. 
-            It was <i>${evt.isTrusted ? `<b>you</b>` : `me`}</i>.</p>`);
-            trigger(
-                document.querySelector(`#testMeResult p:last-child`), 
-                `virtualhover`, 
-                vHover );  
-        }
+    // funcs
+    function colorBtnClicked(event){
+        const colors = ["skyblue", "green", "orange", "yellow"];
+        event.target.parentElement.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
     }
 
+    //Simulate buttons
+    const colorBtnSim = document.querySelector(".simulate-color");
+
+    //Simulate button listeners
+    colorBtnSim.addEventListener('click', simulateColorClick);
+
+    //Simulate functions
+    function simulateColorClick(e){
+        const clickEvent = new Event('click');
+        colorBtn.dispatchEvent(clickEvent);
+    }
+
+    
     document
     .querySelector("#continueBtn")
     .addEventListener("click", async function () {
         // alert("You have selected Continue... Button!");
 
         // add the answer to the chatgpt results div
-        const resultElement1 = document.querySelector("#chatgpt-results");
-        resultElement1.innerHTML = "Please wait... ChatGPT is generating your answer!";
-        resultElement1.className = "chatgpt-result";
+        // const resultElement1 = document.querySelector("#chatgpt-results");
+        // resultElement1.innerHTML = "Please wait... ChatGPT is generating your answer!";
+        // resultElement1.className = "chatgpt-result";
 
         // const prompt2 = promptList2;
         // const prompt3 = prompt2 + promptFormat;
@@ -468,8 +455,10 @@ document.addEventListener("DOMContentLoaded", async function () {
             listHeader.innerHTML = `<h1>Popular Places of Interests in Singapore</h1>`; // add header
         }
         
+        
+
         // 1. create a DOM element
-        let placesList = document.querySelector("#tellmeabout");
+        let placesList = document.querySelector("#tellmemore");
         placesList.innerHTML = ""; // remove all existing places of interest
     for (let f of transformed) {
         console.log(f);
@@ -480,7 +469,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         listElement.innerHTML = `${f.name} <button class="btn btn-outline-success mr-2 my-2 tellMeMoreBtn" style="margin: 5px;">Tell me about...</button><button class="btn btn-outline-success mr-2 my-2 checkLocationBtn" style="margin: 5px;">Check its location.</button>`;
         listElement.className = 'list-group-item';
 
+        
         let tellMeMoreButton = listElement.querySelector(".tellMeMoreBtn");
+        let checkLocationButton = listElement.querySelector(".checkLocationBtn");
+
         // add event listener for the edit button
         tellMeMoreButton.addEventListener("click", async function() {
             // alert("You have selected Tell Me More Button!");
@@ -492,17 +484,21 @@ document.addEventListener("DOMContentLoaded", async function () {
             const promptTellMeMore = "Tell me more about ";
             const promptTellMeMore2 = promptTellMeMore + `${f.name}` + ' in Singapore. ';
             const promptTellMeMore3 = promptTellMeMore2 + promptFormat;
-            // await OpenaiFetchAPI3(promptTellMeMore3);
+            await OpenaiFetchAPI3(promptTellMeMore3);
             console.log(promptTellMeMore3);
 
-            // const reply = chatgpt_reply['choices'][0].message.content;
-            // console.log(reply);
-            // resultElement1.innerHTML = `${reply}`;
+            const reply = chatgpt_reply['choices'][0].message.content;
+            console.log(reply);
+            resultElement1.innerHTML = `${reply}`;
             
+            const clickEvent = new Event('click');
+            checkLocationButton.dispatchEvent(clickEvent);
+
         })
 
-        let checkLocationButton = listElement.querySelector(".checkLocationBtn");
+        // let checkLocationButton = listElement.querySelector(".checkLocationBtn");
         checkLocationButton.addEventListener("click", async function() {
+            // alert("You have simulated Check Location Button!");
             // alert("You have selected Check Location Button!");
 
             // add a marker
@@ -532,6 +528,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         // 3. add the container the child should go into
         placesList.appendChild(listElement);
+
     }
 
     });
