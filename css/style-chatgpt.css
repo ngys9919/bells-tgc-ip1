@@ -5,6 +5,35 @@
     font-family: "Poppins", sans-serif;
 }
 
+body {
+  font: 1.2rem/1.5rem verdana, arial;
+  margin: 2rem;
+}
+
+#testMe {
+  cursor: pointer;
+}
+
+p {
+  margin: 0.2rem 0;
+}
+
+/* Map CSS */
+#chatgpt-map {
+  /* 
+  The leaflet map is a canvas object.
+  Canvas allows you to draw shapes and circles and lines etc.
+  By default canvas does not have a height even if you draw
+  stuff inside, so that's why you must give it explict height.
+  */
+  height: 35vh;
+  /* height:100%; */
+  /* width:65%; */
+  /* width:100%; */
+  /* position:absolute; */
+  /* position: relative; */
+}
+
 .parent {
   /* flex container of size auto (height) x 100vw (width) */
   display: flex;

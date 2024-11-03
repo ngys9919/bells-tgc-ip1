@@ -15,6 +15,9 @@ async function loadData_jsonFormat() {
     return response.data;
 }
 
+
+  
+  
 // curl https://api.openai.com/v1/engines/davinci/completions \ -H 
 // "Content-Type: application/json" \ -H 
 // "Authorization: Bearer $OPENAI_API_KEY" \ -d 
@@ -87,6 +90,7 @@ async function loadData_jsonFormat() {
 // let dummy3 = dummy.at(2);
 // let apiKey = dummy1 + dummy2 + dummy3;
 // console.log(apiKey);
+
 
 const apiKey = ChatGPT_APIkey;
 
@@ -173,6 +177,45 @@ async function OpenaiFetchAPI3(prompt) {
 
 document.addEventListener("DOMContentLoaded", async function () {
 
+    let singaporeLatlng = [1.3521, 103.8198];
+
+    // L is a global variable which represents the Leaflet object
+    // all functions and variables in Leaflet are in the `L` object
+    let map = L.map("chatgpt-map");  // create the map in inside the element with id `myMap`
+    // let map = L.map("chatgpt-results");  // create the map in inside the element with id `myMap`
+    map.setView(singaporeLatlng, 12);   // two parameters: one is an array which represents the lat lng, second the zoom level
+
+    // create a tile layer
+    let tileLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    });
+
+    tileLayer.addTo(map);
+
+    function locateUser(){
+        map.locate({setView: true, watch: true}) /* This will return map so you can do chaining */
+              .on('locationfound', function(e){
+                  var marker = L.marker([e.latitude, e.longitude]).bindPopup('This is your current location.');
+                  let layer = marker.bindTooltip('You are here!').addTo(map);
+                  layer.openTooltip();
+                  // layer.closeTooltip();
+                  var circle = L.circle([e.latitude, e.longitude], e.accuracy/2, {
+                      weight: 1,
+                      color: 'blue',
+                      fillColor: '#cacaca',
+                      fillOpacity: 0.2
+                  });
+                  map.addLayer(marker);
+                  map.addLayer(circle);
+              })
+             .on('locationerror', function(e){
+                  console.log(e);
+                  alert("Location access denied.");
+              });
+    }
+      
+    locateUser();
 
     document
     .querySelector("#clearAnswerBtn")
@@ -264,6 +307,45 @@ document.addEventListener("DOMContentLoaded", async function () {
         chatgptTourType = "tertiary institutions (include popular polytechnics and universities) tour";
     });
 
+    // Note: {bubbles: true} because of the event delegation ...
+    document.addEventListener(`click`, handle);
+    document.addEventListener(`virtualhover`, handle);
+
+    // the actual 'trigger' function
+    const trigger = (el, etype, custom) => {
+        const evt = custom ?? new Event( etype, { bubbles: true } );
+        el.dispatchEvent( evt );
+    };
+
+    // a custom event ;)
+    const vHover = new CustomEvent(`virtualhover`, 
+    { bubbles: true, detail: `red` });
+
+
+    setTimeout( _ => 
+        trigger( document.querySelector(`#testMe`), `click` ), 1000 );
+
+    function handle(evt) {
+        if (evt.target.id === `clickTrigger`) {
+            trigger(document.querySelector(`#testMe`), `click`);  
+        }
+
+        if (evt.type === `virtualhover`) {
+            evt.target.style.color = evt.detail;
+            return setTimeout( _ => evt.target.style.color = ``, 1000 );
+        }
+
+        if (evt.target.id === `testMe`) {
+            document.querySelector(`#testMeResult`)
+.           insertAdjacentHTML(`beforeend`, `<p>One of us clicked #testMe. 
+            It was <i>${evt.isTrusted ? `<b>you</b>` : `me`}</i>.</p>`);
+            trigger(
+                document.querySelector(`#testMeResult p:last-child`), 
+                `virtualhover`, 
+                vHover );  
+        }
+    }
+
     document
     .querySelector("#continueBtn")
     .addEventListener("click", async function () {
@@ -312,6 +394,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         console.log(transformed);
 
+        let listHeader = document.querySelector("#main");
+        listHeader.innerHTML = `<h1>Popular Places of Interests in Singapore</h1>`; // add header
+        // 1. create a DOM element
+        // let listHeader = document.createElement('div');
+        // listHeader.innerHTML = 
+
+
         let placesList = document.querySelector("#tellmeabout");
         placesList.innerHTML = ""; // remove all existing places of interest
     for (let f of transformed) {
@@ -341,11 +430,34 @@ document.addEventListener("DOMContentLoaded", async function () {
             const reply = chatgpt_reply['choices'][0].message.content;
             console.log(reply);
             resultElement1.innerHTML = `${reply}`;
+
+            
         })
 
         let checkLocationButton = listElement.querySelector(".checkLocationBtn");
         checkLocationButton.addEventListener("click", async function() {
-            alert("You have selected Check Location Button!");
+            // alert("You have selected Check Location Button!");
+
+            // add a marker
+            let placeSelected = L.marker([f.lat, f.lon]);
+            map.addLayer(placeSelected); // any objects that you can draw on top of a map is known a layer
+            placeSelected.bindPopup(`<h6>${f.name}</h6>`); // show some HTML when the marker is clicked
+            map.flyTo([f.lat, f.lon], 16);
+            placeSelected.openPopup();
+
+            placeSelected.addEventListener("click", function(){
+                alert(`${f.name}`);
+            });
+
+            // first parameter: array that stores the lat lng
+            // second paramater: an object that set the properties of the circle
+            let circle = L.circle([f.lat, f.lon], {
+                color: 'red',
+                fillColor: 'orange',
+                fillOpacity: 0.5,
+                radius: 200
+            });
+            circle.addTo(map);
         })
 
         // 3. add the container the child should go into

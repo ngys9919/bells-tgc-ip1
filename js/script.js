@@ -91,30 +91,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   let locateControl = L.control.locate(options)
   locateControl.addTo(map)
 
-function locateUser(){
-  map.locate({setView: true, watch: true}) /* This will return map so you can do chaining */
-        .on('locationfound', function(e){
-            var marker = L.marker([e.latitude, e.longitude]).bindPopup('This is your current location.');
-            let layer = marker.bindTooltip('You are here!').addTo(map);
-            layer.openTooltip();
-            // layer.closeTooltip();
-            var circle = L.circle([e.latitude, e.longitude], e.accuracy/2, {
-                weight: 1,
-                color: 'blue',
-                fillColor: '#cacaca',
-                fillOpacity: 0.2
-            });
-            map.addLayer(marker);
-            map.addLayer(circle);
-        })
-       .on('locationerror', function(e){
-            console.log(e);
-            alert("Location access denied.");
-        });
-}
-
-  // locateUser();
-
 
   let myLocation = document.querySelector("#locateBtn");
 
