@@ -1,4 +1,11 @@
 const promptTemplate = "I want you to act as a travel guide. I will give you a location and you will suggest the places to visit and some information about it. In addition, include an itinerary based on the number of days. My request is : I am going to ";
+const promptFormat1 = "Please do the html formatting of the content."
+const promptFormat2 = "Please provide your answers in HTML format, using appropriate HTML tags."
+const promptFormat = "Please provide your answers straight right away in HTML format, using appropriate HTML tags."
+const promptTour1 = "Please based the itinerary on historical type of places to visit."
+const promptTour2 = "Please based the itinerary for places to visit on historical tour."
+const promptTour = "Please based the itinerary for places to visit on "
+let chatgptTourType = "popular tour";
 
 // curl https://api.openai.com/v1/engines/davinci/completions \ -H 
 // "Content-Type: application/json" \ -H 
@@ -73,6 +80,7 @@ const promptTemplate = "I want you to act as a travel guide. I will give you a l
 // let apiKey = dummy1 + dummy2 + dummy3;
 // console.log(apiKey);
 
+const apiKey = "OPENAI_API_KEY";
 
 async function OpenaiFetchAPI2(prompt) {
     console.log("Calling GPT4-o")
@@ -117,7 +125,7 @@ async function OpenaiFetchAPI2(prompt) {
 let chatgpt_reply = {};
 
 async function OpenaiFetchAPI3(prompt) {
-    console.log("Calling GPT4-o")
+    console.log("Calling GPT-4o-mini")
     var url = "https://api.openai.com/v1/chat/completions";
     var bearer = 'Bearer ' + `${apiKey}`
     response = await fetch(url, {
@@ -166,9 +174,11 @@ document.addEventListener("DOMContentLoaded", async function () {
         
         // clear the answer to the chatgpt results div
         const resultElement = document.querySelector("#chatgpt-results");
-        resultElement.innerHTML = "";
+        resultElement.innerHTML = "Ask ChatGPT Response:";
 
     });
+
+    
 
     document
     .querySelector("#sendRequestBtn")
@@ -179,31 +189,72 @@ document.addEventListener("DOMContentLoaded", async function () {
         const chatgptInputPlace = document.querySelector("#inputPlace").value;
         const chatgptInputDays = document.querySelector("#inputDays").value;
 
-        const prompt = `${promptTemplate} ${chatgptInputPlace}` + ' for ' + `${chatgptInputDays}` + ' days ';
+        const prompt1 = `${promptTemplate} ${chatgptInputPlace}` + ' for ' + `${chatgptInputDays}` + ' days ';
+        const prompt2 = prompt1 + promptTour + `${chatgptTourType}` + '. ';
+        const prompt3 = prompt2 + promptFormat;
+        console.log(prompt3);
 
-        // const prompt = "Hello!";
-        await OpenaiFetchAPI3(prompt);
-        // console.log(chatgptdata);
-        // const key = 'choices';
       // add the answer to the chatgpt results div
       const resultElement1 = document.querySelector("#chatgpt-results");
-      resultElement1.innerHTML = "";
+      resultElement1.innerHTML = "Please wait... ChatGPT is generating your answer!";
       resultElement1.className = "chatgpt-result";
+
+        // const prompt = "Hello!";
+        // await OpenaiFetchAPI3(prompt);
+        await OpenaiFetchAPI3(prompt3);
+        // console.log(chatgptdata);
+
       //   resultElement1.innerHTML = 'ChatGPT prompt: ' + `<br> ${promptTemplate} ${chatgptInputPlace}` + ' for ' + `${chatgptInputDays}` + ' days ' + `<br><br>` + 'ChatGPT response: ';
         //   resultElement1.innerHTML = `${promptTemplate}`;
     const reply = chatgpt_reply['choices'][0].message.content;
-    console.log(reply);
+    // console.log(reply);
 
       resultElement1.innerHTML = `${reply}`; 
 
-      // add the search result to the result element
-      // const eachResultElement1 = document.createElement('div');
-      // eachResultElement1.className = "chatgpt-result";
-      // eachResultElement1.innerHTML = 'ChatGPT prompt';
-      // eachResultElement1.append = promptTemplate;
-      // eachResultElement1.append(" ");
-      // eachResultElement1.append('ChatGPT response: ');
-      // resultElement1.appendChild(eachResultElement1);
     });
 
+
+    document
+    .querySelector("#flexRadioDefault1")
+    .addEventListener("click", async function () {
+        // alert("You have selected Radio1 !");
+        chatgptTourType = "popular tour";
+    });
+
+    document
+    .querySelector("#flexRadioDefault2")
+    .addEventListener("click", async function () {
+        // alert("You have selected Radio2 !");
+        chatgptTourType = "budget tour";
+    });
+
+    document
+    .querySelector("#flexRadioDefault3")
+    .addEventListener("click", async function () {
+        // alert("You have selected Radio3 !");
+        chatgptTourType = "cultural tour";
+    });
+
+    document
+    .querySelector("#flexRadioDefault4")
+    .addEventListener("click", async function () {
+        // alert("You have selected Radio4 !");
+        chatgptTourType = "historical tour";
+    });
+
+    document
+    .querySelector("#flexRadioDefault5")
+    .addEventListener("click", async function () {
+        // alert("You have selected Radio5 !");
+        chatgptTourType = "gourmet food tour";
+    });
+
+    document
+    .querySelector("#flexRadioDefault6")
+    .addEventListener("click", async function () {
+        // alert("You have selected Radio6 !");
+        chatgptTourType = "tertiary institutions (include popular polytechnics and universities) tour";
+    });
 });
+
+    

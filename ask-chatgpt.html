@@ -22,28 +22,70 @@
 </head>
 <body>
 <h1>Ask ChatGPT</h1>
-<form>
-  <label>TripAI Itinerary</label>
-  <div class="mb-3">
-    <label>Enter place to go</label>
-    <input type="text" class="form-control" id="inputPlace" value="Singapore">
-  </div>
-  <div class="mb-3">
-    <label>Enter the number of day(s)</label>
-    <input type="number" min="1" max="7" class="form-control" id="inputDays" value="1">
-  </div>
-  <div class="container">
-    <!-- Content here -->
-    <div id="chatgpt-results">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque id adipisci laudantium dolore odit neque autem repellat. Cum autem deleniti distinctio quo, debitis optio tempore molestiae nisi ex quisquam et.
+
+<div class="parent">
+  <!-- <div class="flex-box inter-400" id="text-area-header"> -->
+  <div class="child">
+    <label>TripAI Itinerary</label>
+    <form>
+    <div class="mb-3">
+      <label>Enter place to go</label>
+      <input type="text" class="form-control" id="inputPlace" value="Singapore" disabled>
     </div>
+    <div class="mb-3">
+      <label>Enter the number of day(s)</label>
+      <input type="number" min="1" max="7" class="form-control" id="inputDays" value="1">
+    </div>
+    <label>Select type of itinerary</label>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+      <label class="form-check-label" for="flexRadioDefault1">
+        Popular tour
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+      <label class="form-check-label" for="flexRadioDefault2">
+        Budget tour
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+      <label class="form-check-label" for="flexRadioDefault3">
+        Cultural tour
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
+      <label class="form-check-label" for="flexRadioDefault4">
+        Historical tour
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5">
+      <label class="form-check-label" for="flexRadioDefault5">
+        Gourmet-food tour
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6">
+      <label class="form-check-label" for="flexRadioDefault6">
+        Tertiary institutions tour
+      </label>
+    </div>
+    <button type="submit" class="btn btn-primary mr-2 my-2" id="sendRequestBtn">Send Request</button>
+    <button type="submit" class="btn btn-primary mr-2 my-2" id="clearAnswerBtn">Clear Answer</button>
+  </form>
   </div>
-    <!-- <div id="chatgpt-container"> -->
-      <!-- <div id="chatgpt-results"></div> -->
-    <!-- </div> -->
-  <button type="submit" class="btn btn-primary mr-2 my-2" id="sendRequestBtn">Send Request</button>
-  <button type="submit" class="btn btn-primary mr-2 my-2" id="clearAnswerBtn">Clear Answer</button>
-  
+  <!-- <div class="flex-box inter-200" id="text-area-content"> -->
+  <div class="child">
+      <!-- Content here -->
+      <div id="chatgpt-results">
+      Ask ChatGPT Response:
+      </div>
+  </div>
+</div>
+
   <div class="alert alert-danger">
         Please select the prompt that you want to Ask ChatGPT ?
         <div>
@@ -53,7 +95,7 @@
             <!-- <a href="index.html" class="btn btn-primary">Cancel</a> -->
         </div>
     </div>
-</form>
+
 
 <!-- Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
