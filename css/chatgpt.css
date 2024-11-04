@@ -49,12 +49,8 @@ p {
   By default canvas does not have a height even if you draw
   stuff inside, so that's why you must give it explict height.
   */
-  height: 35vh;
-  /* height:100%; */
-  /* width:65%; */
-  /* width:100%; */
-  /* position:absolute; */
-  /* position: relative; */
+  /* height: 35vh; */
+  height: 50vh;
 }
 
 .parent {

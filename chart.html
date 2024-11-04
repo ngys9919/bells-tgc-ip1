@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title data-i18n="title"></title> -->
+    <title>Bells Tech</title>
+    <!-- Bootstrap CSS -->
+    <link 
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+      rel="stylesheet" 
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/chart.css">
+</head>
+<body>
+    <h1>Chart Analytic</h1>
+    <div id="container">
+        <div class="alert alert-info">
+            <label>2023</label>
+            <label>Tourists Arrivals Charts for Singapore</label>
+            <br>
+            <input type="submit" value="Continue..." class="btn btn-outline-success mr-2 my-2" id="continueBtn"/>
+            <a href="chatgpt.html" class="btn btn-outline-success my-2" id="chatgptBtn">Ask ChatGPT</a>
+            <a href="home.html" class="btn btn-outline-success my-2" id="homeBtn">Home</a>
+        </div>
+        <div style="height:80vh" class="chart">
+            <div id="chart-xDate-yNumber"></div>
+        </div>
+        <div style="height:80vh" class="chart">
+            <div id="chart-xRegion-yNumber"></div>
+        </div>
+    </div>
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
+        crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" 
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
+        crossorigin="anonymous">
+    </script>
+
+    <!-- ApexCharts -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    
+    <!-- Axios -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.4/axios.min.js"
+      integrity="sha512-6VJrgykcg/InSIutW2biLwA1Wyq+7bZmMivHw19fI+ycW0jIjsadm8wKQQLlfv3YUS4owfMDlZU38NtaAK6fSg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- csvtojson -->
+    <script src="https://cdn.rawgit.com/Keyang/node-csvtojson/d41f44aa/browser/csvtojson.min.js"></script>
+
+    <!-- our own javascript files -->
+    <script src="js/chart.js"></script>
+</body>
+</html>

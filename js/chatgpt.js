@@ -203,20 +203,26 @@ async function OpenaiFetchAPI3(prompt) {
 function locateUser(map){
     map.locate({setView: true, watch: true}) /* This will return map so you can do chaining */
           .on('locationfound', function(e){
-              var marker = L.marker([e.latitude, e.longitude]).bindPopup('This is your current location.');
-              // Add marker to mapMarker for future reference
-              mapMarkers.push(marker);
-              let layer = marker.bindTooltip('You are here!').addTo(map);
-              layer.openTooltip();
-              // layer.closeTooltip();
-              var circle = L.circle([e.latitude, e.longitude], e.accuracy/2, {
-                  weight: 1,
-                  color: 'blue',
-                  fillColor: '#cacaca',
-                  fillOpacity: 0.2
-              });
-              map.addLayer(marker);
-              map.addLayer(circle);
+            for(var i = 0; i < mapMarkers.length; i++){
+                map.removeLayer(mapMarkers[i]);
+            }
+
+            myMarker = L.marker([e.latitude, e.longitude]).bindPopup('This is your current location.');
+            // Add marker to mapMarker for future reference
+            mapMarkers.push(myMarker);
+            let layer = myMarker.bindTooltip('You are here!').addTo(map);
+            layer.openTooltip();
+            // layer.closeTooltip();
+ 
+            myCircle = L.circle([e.latitude, e.longitude], e.accuracy/2, {
+                weight: 1,
+                color: 'blue',
+                fillColor: '#cacaca',
+                fillOpacity: 0.2
+            });
+            
+            map.addLayer(myMarker);
+            map.addLayer(myCircle);
           })
          .on('locationerror', function(e){
               console.log(e);
@@ -226,6 +232,9 @@ function locateUser(map){
 
 let map = L.map("chatgpt-map");  // create the map in inside the element with id `chatgpt-map`
 let mapMarkers = [];
+
+let myCircle;
+let myMarker;
 
 document.addEventListener("DOMContentLoaded", async function () {
 
@@ -261,13 +270,20 @@ document.addEventListener("DOMContentLoaded", async function () {
             map.removeLayer(mapMarkers[i]);
         }
     
-        // map.removeLayer(marker);
-        // map.removeLayer(circle);
+        myMarker.removeFrom(map);
+        myCircle.removeFrom(map);
        
         // Here you remove the layer
         // if (markerCluster) {
             // map.removeLayer(markerCluster);
         // }
+
+        // remove all circles instances
+        // map.eachLayer((layer) => {
+            // if (layer instanceof L.Circle) {
+            //    layer.remove();
+            // }
+        // });
 
         map.setView(singaporeLatlng, 12);
         myLocationMarker = L.marker(singaporeLatlng);
@@ -362,37 +378,54 @@ document.addEventListener("DOMContentLoaded", async function () {
         chatgptTourType = "tertiary institutions (include popular polytechnics and universities) tour";
         chatgptFileType = "tertiaryinstitutions";
     });
-
-
-    //DOM VARS
-    const colorBtn = document.querySelector(".color-button");
-
-    //Event Listeners
-    colorBtn.addEventListener('click', colorBtnClicked);
-
-    // funcs
-    function colorBtnClicked(event){
-        const colors = ["skyblue", "green", "orange", "yellow"];
-        event.target.parentElement.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
-    }
-
-    //Simulate buttons
-    const colorBtnSim = document.querySelector(".simulate-color");
-
-    //Simulate button listeners
-    colorBtnSim.addEventListener('click', simulateColorClick);
-
-    //Simulate functions
-    function simulateColorClick(e){
-        const clickEvent = new Event('click');
-        colorBtn.dispatchEvent(clickEvent);
-    }
-
     
     document
     .querySelector("#continueBtn")
     .addEventListener("click", async function () {
         // alert("You have selected Continue... Button!");
+
+        // clear the answer to the chatgpt results div
+        const resultElement = document.querySelector("#chatgpt-tellmemore");
+        resultElement.innerHTML = "Tell me more: ";
+
+        // remove all markers instances via mapMarkers array
+        // for(var i = 0; i < mapMarkers.length; i++){
+            // map.removeLayer(mapMarkers[i]);
+        // }
+    
+        // remove all markers instances (no extra measures)
+        map.eachLayer((layer) => {
+            if (layer instanceof L.Marker) {
+               layer.remove();
+            }
+        });
+
+        myMarker.removeFrom(map);
+        myCircle.removeFrom(map);
+       
+        // Here you remove the layer
+        // if (markerCluster) {
+            // map.removeLayer(markerCluster);
+        // }
+
+        // only remove last circle created from L.circle
+        // circle.removeFrom(map);  
+        
+        // remove all circles instances
+        map.eachLayer((layer) => {
+            if (layer instanceof L.Circle) {
+               layer.remove();
+            }
+        });
+
+        map.setView(singaporeLatlng, 12);
+        myLocationMarker = L.marker(singaporeLatlng);
+        // Add marker to mapMarker for future reference
+        mapMarkers.push(myLocationMarker);
+        layer = myLocationMarker.bindTooltip('Hi! Welcome to SG-finder.').addTo(map);
+        layer.openTooltip();
+
+        // locateUser(map);
 
         // add the answer to the chatgpt results div
         // const resultElement1 = document.querySelector("#chatgpt-results");
@@ -477,9 +510,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         tellMeMoreButton.addEventListener("click", async function() {
             // alert("You have selected Tell Me More Button!");
             // add the answer to the chatgpt results div
-            const resultElement1 = document.querySelector("#chatgpt-results");
+            const resultElement1 = document.querySelector("#chatgpt-tellmemore");
             resultElement1.innerHTML = "Please wait... ChatGPT is generating your answer!";
-            resultElement1.className = "chatgpt-result";
+            resultElement1.className = "chatgpt-tellmemore";
 
             const promptTellMeMore = "Tell me more about ";
             const promptTellMeMore2 = promptTellMeMore + `${f.name}` + ' in Singapore. ';
@@ -501,6 +534,12 @@ document.addEventListener("DOMContentLoaded", async function () {
             // alert("You have simulated Check Location Button!");
             // alert("You have selected Check Location Button!");
 
+            // only remove last marker created from L.marker
+            myLocationMarker.removeFrom(map);  
+
+            myMarker.removeFrom(map);
+            myCircle.removeFrom(map);
+
             // add a marker
             let placeSelected = L.marker([f.lat, f.lon]);
             // Add marker to mapMarker for future reference
@@ -516,7 +555,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             // first parameter: array that stores the lat lng
             // second paramater: an object that set the properties of the circle
-            let circle = L.circle([f.lat, f.lon], {
+            circle = L.circle([f.lat, f.lon], {
                 color: 'red',
                 fillColor: 'orange',
                 fillOpacity: 0.5,
@@ -524,6 +563,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             });
             // circle.addTo(map);
             map.addLayer(circle);
+
         })
 
         // 3. add the container the child should go into
