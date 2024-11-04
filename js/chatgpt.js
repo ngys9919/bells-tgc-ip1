@@ -386,7 +386,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         // clear the answer to the chatgpt results div
         const resultElement = document.querySelector("#chatgpt-tellmemore");
-        resultElement.innerHTML = "Tell me more: ";
+        resultElement.innerHTML = "Tell me more... ";
 
         // remove all markers instances via mapMarkers array
         // for(var i = 0; i < mapMarkers.length; i++){

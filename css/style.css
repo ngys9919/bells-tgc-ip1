@@ -64,19 +64,19 @@
 }
 
 /* This is for every leaflet-map controls */
-.leaflet-control-container {
-  position: absolute;
-  top: 50px;
-  left: 15px;
+/* .leaflet-control-container { */
+  /* position: absolute; */
+  /* top: 50px; */
+  /* left: 15px; */
   /* top: 80%; */
   /* left: 300px; */
-} 
+/* }  */
 
-.leaflet-container .leaflet-control-attribution {
-  position: absolute;
-  top: 150px;
-  left: 15px;
-}
+/* .leaflet-container .leaflet-control-attribution { */
+  /* position: absolute; */
+  /* top: 150px; */
+  /* left: 15px; */
+/* } */
 
 /* This is for leaftlet-map zoom control only -> centered */
 /* .leaflet-top { */

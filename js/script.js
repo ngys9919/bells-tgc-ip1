@@ -42,6 +42,95 @@ async function loadPostal() {
 
 loadedData = loadPostal();
 
+
+function addMarkersToLayer(data, layerGroup) {
+let marker = 0;
+
+  for (let d of data) {
+      // const transitLat = d.PossibleLocations[0].LATITUDE;
+      // const transitLon = d.PossibleLocations[0].LONGITUDE;
+      // console.log(d.PossibleLocations[0].LATITUDE, d.PossibleLocations[0].LONGITUDE);
+      if (d.PossibleLocations.length != 0) {
+        marker = L.marker([d.PossibleLocations[0].LATITUDE,d.PossibleLocations[0].LONGITUDE]);
+        marker.bindPopup(`<h5>Station Code:${d.Station}</h5>
+          <h6>Station Name:${d.StationName}</h6>           
+      `);
+        marker.addTo(layerGroup);
+      } else {
+        marker = L.marker([1.29,103.85]);
+        marker.bindPopup(`<h5>Station Code:${d.Station}</h5>
+          <h6>Station Name:${d.StationName}</h6>           
+      `);
+        marker.addTo(layerGroup);
+      }
+      // const marker = L.marker([transitLat,transitLon]);
+      // marker.bindPopup(`<h5>Station Code:${d.stationCode}</h5>
+        // <h6>Station Name:${d.stationName}</h6>           
+    // `);
+      // marker.addTo(layerGroup);
+  }
+}
+
+async function loadData_jsonFormat(fileName) {
+  let filePath = `data/${fileName}.json`;
+  const response = await axios.get(filePath);
+  // console.log(response.data);
+  return response.data;
+}
+
+let entry = {};
+let fileName = null;
+
+function transformData(rawData, fileName) {
+  let transformedData = [];
+  let objTransformedData = [];
+  // console.log(rawData);
+
+  // 1. use map to keep only the information that we want
+  // rawData.map(function(transitData){
+    // console.log(transitData.Station);
+    // console.log(transitData.PossibleLocations[0].BUILDING);
+    // console.log(transitData.PossibleLocations[0].LATITUDE);
+    // console.log(transitData.PossibleLocations[0].LONGITUDE);
+    // if (transitData.PossibleLocations[0] == null) {
+      // transitData.PossibleLocations[0].BUILDING =  transitData.StationName;
+      // transitData.PossibleLocations[0].LATITUDE = 0;
+      // transitData.PossibleLocations[0].LONGITUDE = 0;
+    // }
+    for (let e of rawData){
+
+      console.log(e.PossibleLocations);
+
+      if (e.PossibleLocations.length != 0) {
+
+          entry = {'stationCode': `${e.Station}`, 'stationName': `${e.StationName}`, 'stationLat': `${e.PossibleLocations[0].LATITUDE}`,'stationLon': `${e.PossibleLocations[0].LONGITUDE}`};
+    
+      } else {
+
+        entry = {"stationCode": 0, "stationName": "", "stationLat": 1.29, "stationLon": 103.85};
+        
+      }
+
+      
+
+      transformedData.push(entry);
+      // console.log(transformedData);
+    }
+  // })
+
+ 
+
+  // console.log("transformedData" + transformedData);
+    objTransformedData.push({
+      'name': fileName,
+      'data': transformedData
+    });
+    // console.log("objTransformedData" + objTransformedData);
+    // return transformedData;
+    return objTransformedData;
+}
+
+
 document.addEventListener("DOMContentLoaded", async function () {
 
   // language support
@@ -65,6 +154,51 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // This is a test function in which its search results is output via console. 
   testFourSqAPI_APIKeys(); // New approach using API Keys
+
+  // const mrtRequest = axios.get("data/mrt_stations.json");
+  // const lrtRequest =  axios.get("data/lrt_stations.json");
+  
+  fileName = "mrt_stations-cleaned";
+  let dataMRT = await loadData_jsonFormat(fileName);
+  // console.log(dataMRT);
+  // const mrtRequest = transformData(dataMRT, fileName);
+  const mrtRequest = dataMRT;
+
+  // console.log("MRT" + mrtRequest);
+
+  fileName = "lrt_stations-cleaned";
+  let dataLRT = await loadData_jsonFormat(fileName);
+  // const lrtRequest = transformData(dataLRT, fileName);
+  const lrtRequest = dataLRT;
+
+  // console.log("LRT" + lrtRequest);
+
+  const mrtResponse = mrtRequest;
+  const lrtResponse = lrtRequest;
+      
+  // console.log(mrtResponse);
+  // console.log(lrtResponse);
+
+  const mrtLayerGroup = L.layerGroup();
+  mrtLayerGroup.addTo(map);
+  addMarkersToLayer(mrtResponse, mrtLayerGroup);
+
+  const lrtLayerGroup = L.layerGroup();
+  addMarkersToLayer(lrtResponse, lrtLayerGroup);
+
+  const baseLayers = {
+    "MRT Stations": mrtLayerGroup,
+    "LRT Stations": lrtLayerGroup
+  }
+
+  // const baseLayers = {
+    // "Transit Stations": transitLayerGroup
+  // }
+  
+
+  // first parameter: base layers
+  // second parameter: overlays, in this case: none
+  L.control.layers(baseLayers, {}).addTo(map);
 
   // default position: bottomleft for scale
   // L.control.scale().addTo(map);
