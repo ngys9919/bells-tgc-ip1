@@ -2,6 +2,7 @@
     display:flex;
 }
 
+
 .chart {
     flex-basis: 100%;
     flex:1;
