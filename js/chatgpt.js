@@ -202,12 +202,25 @@ async function OpenaiFetchAPI3(prompt) {
     
 }
 
+// singaporeLatlng
+let currentLat = 1.3521;
+let currentLng = 103.8198;
+let targetLat = 1.3521;
+let targetLng = 103.8198;
+let targetLocation = "Singapore";
+
 function locateUser(map){
     map.locate({setView: true, watch: true}) /* This will return map so you can do chaining */
           .on('locationfound', function(e){
             for(var i = 0; i < mapMarkers.length; i++){
                 map.removeLayer(mapMarkers[i]);
             }
+
+            currentLat = e.latitude;
+            currentLng = e.longitude;
+            targetLat = currentLat;
+            targetLng = currentLng;
+            targetLocation = "";
 
             myMarker = L.marker([e.latitude, e.longitude]).bindPopup('This is your current location.');
             // Add marker to mapMarker for future reference
@@ -230,6 +243,91 @@ function locateUser(map){
               console.log(e);
               alert("Location access denied.");
           });
+}
+
+// How do I calculate the distance between two points specified by latitude and longitude?
+
+// For clarification, I'd like the distance in kilometers; the points use the WGS84 system 
+// and I'd like to understand the relative accuracies of the approaches available.
+
+// Here are some comparisons of the various algorithms offered here:
+
+// geoDistance(50,5,58,3)
+// Haversine: 899 km
+// Maymenn: 833 km
+// Keerthana: 897 km
+// google.maps.geometry.spherical.computeDistanceBetween(): 900 km
+
+// geoDistance(50,5,-58,-3)
+// Haversine: 12030 km
+// Maymenn: 11135 km
+// Keerthana: 10310 km
+// google.maps.geometry.spherical.computeDistanceBetween(): 12044 km
+
+// geoDistance(.05,.005,.058,.003)
+// Haversine: 0.9169 km
+// Maymenn: 0.851723 km
+// Keerthana: 0.917964 km
+// google.maps.geometry.spherical.computeDistanceBetween(): 0.917964 km
+
+// geoDistance(.05,80,.058,80.3)
+// Haversine: 33.37 km
+// Maymenn: 33.34 km
+// Keerthana: 33.40767 km
+// google.maps.geometry.spherical.computeDistanceBetween(): 33.40770 km
+
+// Calculate distance between two latitude-longitude points? 
+// 1.Haversine formula
+// 2.Maymenn
+// 3.Keerthana
+
+// This script [in Javascript] calculates great-circle distances between the two points –
+// that is, the shortest distance over the earth’s surface – using the ‘Haversine’ formula.
+function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+    var dLon = deg2rad(lon2-lon1); 
+    var a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2)
+      ; 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    var d = R * c; // Distance in km
+    return d;
+  }
+  
+  function deg2rad(deg) {
+    return deg * (Math.PI/180)
+  }
+
+// Anyway, here is a Javascript implementation of Keerthana's algorithm:
+function geoDistance(lat1, lng1, lat2, lng2){
+    const a = 6378.137; // equitorial radius in km
+    const b = 6356.752; // polar radius in km
+
+    var sq = x => (x*x);
+    var sqr = x => Math.sqrt(x);
+    var cos = x => Math.cos(x);
+    var sin = x => Math.sin(x);
+    var radius = lat => sqr((sq(a*a*cos(lat))+sq(b*b*sin(lat)))/(sq(a*cos(lat))+sq(b*sin(lat))));
+
+    lat1 = lat1 * Math.PI / 180;
+    lng1 = lng1 * Math.PI / 180;
+    lat2 = lat2 * Math.PI / 180;
+    lng2 = lng2 * Math.PI / 180;
+
+    var R1 = radius(lat1);
+    var x1 = R1*cos(lat1)*cos(lng1);
+    var y1 = R1*cos(lat1)*sin(lng1);
+    var z1 = R1*sin(lat1);
+
+    var R2 = radius(lat2);
+    var x2 = R2*cos(lat2)*cos(lng2);
+    var y2 = R2*cos(lat2)*sin(lng2);
+    var z2 = R2*sin(lat2);
+
+    return sqr(sq(x1-x2)+sq(y1-y2)+sq(z1-z2));
 }
 
 let map = L.map("chatgpt-map");  // create the map in inside the element with id `chatgpt-map`
@@ -257,6 +355,21 @@ document.addEventListener("DOMContentLoaded", async function () {
     tileLayer.addTo(map);
 
     locateUser(map);
+
+    document
+    .querySelector("#distanceCalBtn")
+    .addEventListener("click", function () {
+        // alert("You have clicked Calculate Distance Button!");
+        // lat1, lng1 -> current location
+        // lat2, lng2 -> target location
+        // distance = geoDistance(lat1, lng1, lat2, lng2);
+        const distance = geoDistance(currentLat, currentLng, targetLat, targetLng);
+        if (targetLocation == "") {
+            alert('You are at current location! The calculated distance is ' + `${distance}` + ' km away.');
+        } else {
+            alert('The distance between ' + `${targetLocation}` + ' and current location is ' + `${distance}` + ' km away.');
+        }
+    });
 
     document
     .querySelector("#clearAnswerBtn")
@@ -402,6 +515,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
         });
 
+        // remove last marker instance
         myMarker.removeFrom(map);
         myCircle.removeFrom(map);
        
@@ -526,6 +640,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             console.log(reply);
             resultElement1.innerHTML = `${reply}`;
             
+            // Simulated clicked event for checkLocationBtn 
             const clickEvent = new Event('click');
             checkLocationButton.dispatchEvent(clickEvent);
 
@@ -542,6 +657,10 @@ document.addEventListener("DOMContentLoaded", async function () {
             myMarker.removeFrom(map);
             myCircle.removeFrom(map);
 
+            targetLocation = f.name;
+            targetLat = f.lat;
+            targetLng = f.lon;
+
             // add a marker
             let placeSelected = L.marker([f.lat, f.lon]);
             // Add marker to mapMarker for future reference
@@ -552,7 +671,17 @@ document.addEventListener("DOMContentLoaded", async function () {
             placeSelected.openPopup();
 
             placeSelected.addEventListener("click", function(){
-                alert(`${f.name}`);
+                // alert(`${f.name}`);
+                // lat1, lng1 -> current location
+                // lat2, lng2 -> target location
+                // distance = geoDistance(lat1, lng1, lat2, lng2);
+                const distance = geoDistance(currentLat, currentLng, targetLat, targetLng);
+                alert('The distance between ' + `${targetLocation}` + ' and current location is ' + `${distance}` + ' km away.');
+                // if (targetLocation == "") {
+                    // alert('You are at current location! The calculated distance is ' + `${distance}` + ' km away.');
+                // } else {
+                    // alert('The distance between ' + `${targetLocation}` + ' and current location is ' + `${distance}` + ' km away.');
+                // }
             });
 
             // first parameter: array that stores the lat lng

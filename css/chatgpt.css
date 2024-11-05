@@ -88,4 +88,21 @@ p {
     /* text-align: left; */
 }
 
+#distanceCalBtn{
+  height: 50px;
+  width: 50px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  text-align: center;
+  text-justify: center;
+  padding: 2px;
+  border: 1px solid black;
+  margin: 0px;
+  word-wrap: break-word;
+  line-height: 1;
+  position: absolute;
+  top: 720px;
+  right: 50px;
+  z-index: 1000;
+}
 
