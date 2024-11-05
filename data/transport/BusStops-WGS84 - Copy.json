@@ -1,4 +1,4 @@
-[
+{"type":"FeatureCollection", "features": [
 {"type":"Feature","geometry":{"type":"Point","coordinates":[103.90130200762603,1.393027471073748]},"properties":{"BUS_STOP_N":"65059","BUS_ROOF_N":"B12","LOC_DESC":"ST ANNE'S CH"}},
 {"type":"Feature","geometry":{"type":"Point","coordinates":[103.77437326481821,1.298920570452863]},"properties":{"BUS_STOP_N":"16171","BUS_ROOF_N":"B06","LOC_DESC":"YUSOF ISHAK HSE"}},
 {"type":"Feature","geometry":{"type":"Point","coordinates":[103.86369931407206,1.335636950297945]},"properties":{"BUS_STOP_N":"61101","BUS_ROOF_N":"NIL","LOC_DESC":"BLK 120"}},
@@ -5165,4 +5165,4 @@
 {"type":"Feature","geometry":{"type":"Point","coordinates":[103.75624209327158,1.4277015316939956]},"properties":{"BUS_STOP_N":"49091","BUS_ROOF_N":"B03","LOC_DESC":"OPP KRANJI WTR RECLAM PT."}},
 {"type":"Feature","geometry":{"type":"Point","coordinates":[103.7565864955206,1.4275943536603959]},"properties":{"BUS_STOP_N":"49099","BUS_ROOF_N":"B02A","LOC_DESC":"AFT KRANJI WTR RECLAIM PLT"}},
 {"type":"Feature","geometry":{"type":"Point","coordinates":[103.82761246143261,1.447087767222673]},"properties":{"BUS_STOP_N":"58269","BUS_ROOF_N":"UNK","LOC_DESC":"OPP VISIONAIRE"}}
-]
+]}

@@ -1,4 +1,4 @@
-[
+{"type":"FeatureCollection", "features": [
 {"type":"Feature","geometry":{"type":"Point","coordinates":[103.84751022401123,1.31055921839711]},"properties":{"TYPE_CD":"","TYPE_CD_DE":"TAXI STAND"}},
 {"type":"Feature","geometry":{"type":"Point","coordinates":[103.84527040274499,1.2823909378662373]},"properties":{"TYPE_CD":"","TYPE_CD_DE":"TAXI STAND"}},
 {"type":"Feature","geometry":{"type":"Point","coordinates":[103.84625118974597,1.2824789910851973]},"properties":{"TYPE_CD":"","TYPE_CD_DE":"TAXI STAND"}},
@@ -370,4 +370,4 @@
 {"type":"Feature","geometry":{"type":"Point","coordinates":[103.93895918983898,1.3121716594182797]},"properties":{"TYPE_CD":"","TYPE_CD_DE":"TAXI STAND"}},
 {"type":"Feature","geometry":{"type":"Point","coordinates":[103.83734139873121,1.3137544538499681]},"properties":{"TYPE_CD":"","TYPE_CD_DE":"TAXI STOP"}},
 {"type":"Feature","geometry":{"type":"Point","coordinates":[103.77572261866295,1.343191423760534]},"properties":{"TYPE_CD":"","TYPE_CD_DE":"TAXI STAND"}}
-]
+]}

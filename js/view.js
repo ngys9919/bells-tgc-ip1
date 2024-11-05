@@ -121,9 +121,9 @@ map.setMaxBounds(maxBounds)
 
 
 
-const customIcon = L.icon({
-  iconUrl: './res/icongreen.png',
-  iconSize: [12, 20],
+const customIconLocateMe = L.icon({
+  iconUrl: './res/markerLocateMe.png',
+  iconSize: [20, 40],
 });
 
 function addPostalSearchResultToMap(entry, searchResultLayer, map) {
@@ -138,7 +138,7 @@ function addPostalSearchResultToMap(entry, searchResultLayer, map) {
     entryCoordinates = [entry.lat, entry.lon];
     entryStreetName = entry.street_name;  
   
-    let marker = L.marker([entryLatitude, entryLongitude],{ icon: customIcon });
+    let marker = L.marker([entryLatitude, entryLongitude],{ icon: customIconLocateMe });
     // Add marker to mapMarker for future reference
     mapMarkers.push(marker);
 
