@@ -123,6 +123,25 @@ function addMarkersToCluster(data, clusterGroup) {
           // add to marker clustering)
           marker.addTo(clusterGroup);
         }
+      } else if (layerGroupID == "TAXI") {
+            // keep in mind that the API is [lng, lat] so we have to inverse manually
+            const taxiLat = d.geometry.coordinates[1];
+            const taxiLng = d.geometry.coordinates[0];
+            marker = L.marker([taxiLat, taxiLng],{ icon: customIconTAXI });
+            // marker.addTo(layerGroup);
+            // add to marker clustering)
+            marker.addTo(clusterGroup);
+      } else if (layerGroupID == "BUS") {
+        // keep in mind that the API is [lng, lat] so we have to inverse manually
+        const busLat = d.geometry.coordinates[1];
+        const busLng = d.geometry.coordinates[0];
+        marker = L.marker([busLat, busLng],{ icon: customIconBUS });
+        marker.bindPopup(`<h5>Bus Stop No.: ${d.properties.BUS_STOP_N}</h5>
+          <h6>Location Description: ${d.properties.LOC_DESC}</h6>           
+        `);
+        // marker.addTo(layerGroup);
+        // add to marker clustering)
+        marker.addTo(clusterGroup);        
       } else {
         console.error("Error: No layerGroupID defined!");
     }
@@ -132,11 +151,11 @@ function addMarkersToCluster(data, clusterGroup) {
 
   let layerGroupID = null;
 
-  function addMarkersToCircleLayer(data, layerGroup, layerGroupID) {
+  function addMarkersToCircleLayer(data, layerGroup) {
     let marker = 0;
     
       for (let d of data) {
-        
+        if ((layerGroupID == "MRT") || (layerGroupID == "LRT")) {
           // const transitLat = d.PossibleLocations[0].LATITUDE;
           // const transitLon = d.PossibleLocations[0].LONGITUDE;
           // console.log(d.PossibleLocations[0].LATITUDE, d.PossibleLocations[0].LONGITUDE);
@@ -165,6 +184,11 @@ function addMarkersToCluster(data, clusterGroup) {
           `);
             marker.addTo(layerGroup);
           }
+        } else if (layerGroupID == "TAXI") {
+
+        } else if (layerGroupID == "BUS") {
+
+        }
       }
     }
 
@@ -174,6 +198,16 @@ const customIconMRT = L.icon({
 });
 
 const customIconLRT = L.icon({
+  iconUrl: './res/markerLRT.png',
+  iconSize: [20, 40],
+});
+
+const customIconTAXI = L.icon({
+  iconUrl: './res/markerMRT.png',
+  iconSize: [20, 40],
+});
+
+const customIconBUS = L.icon({
   iconUrl: './res/markerLRT.png',
   iconSize: [20, 40],
 });
@@ -453,7 +487,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   addMarkersToLayerTRANSIT(mrtResponse.data, transitLayerGroup);
   // addMarkersToLayer(mrtResponse, mrtLayerGroup);
   // addMarkersToLayer(mrtResponse, transitLayerGroup);
-  // addMarkersToCircleLayer(mrtResponse, mrtLayerGroup, layerGroupID);
+  // addMarkersToCircleLayer(mrtResponse, mrtLayerGroup);
 
   layerGroupID = "LRT";
   const lrtLayerGroup = L.layerGroup();
@@ -461,7 +495,30 @@ document.addEventListener("DOMContentLoaded", async function () {
   addMarkersToLayerTRANSIT(lrtResponse.data, transitLayerGroup);
   // addMarkersToLayer(lrtResponse, lrtLayerGroup);
   // addMarkersToLayer(lrtResponse, transitLayerGroup);
-  // addMarkersToCircleLayer(lrtResponse, lrtLayerGroup, layerGroupID);
+  // addMarkersToCircleLayer(lrtResponse, lrtLayerGroup);
+
+  // create a marker cluster group
+  clusterGroup = L.markerClusterGroup();
+  clusterGroupMRT = L.markerClusterGroup();
+  clusterGroupLRT = L.markerClusterGroup();
+  clusterGroupTAXI = L.markerClusterGroup();
+  clusterGroupBUS = L.markerClusterGroup();
+
+  layerGroupID = "MRT";
+  addMarkersToCluster(mrtResponse.data, clusterGroupMRT);
+  // addMarkersToCluster(mrtResponse.data, clusterGroup);
+  layerGroupID = "LRT";
+  addMarkersToCluster(lrtResponse.data, clusterGroupLRT);
+  // addMarkersToCluster(lrtResponse.data, clusterGroup);
+  layerGroupID = "TAXI";
+  addMarkersToCluster(taxiResponse.data, clusterGroupTAXI);
+  layerGroupID = "BUS";
+  addMarkersToCluster(busResponse.data, clusterGroupBUS);
+
+  // clusterGroupMRT.addTo(map);
+  // clusterGroupLRT.addTo(map);
+  // clusterGroupTAXI.addTo(map);
+  // clusterGroupBUS.addTo(map);
 
   const clearLayerGroup = L.layerGroup();
 
@@ -483,10 +540,14 @@ document.addEventListener("DOMContentLoaded", async function () {
   // optional (can toggle on or off) and can have more than one visible 
   let overlays = {
     // "MRT/LRT Stations": transitLayerGroup,
-    "MRT Stations": mrtLayerGroup,
-    "LRT Stations": lrtLayerGroup,
-    "TAXI Stands": taxiLayerGroup,
-    "BUS Stops": busLayerGroup
+    // "MRT Stations": mrtLayerGroup,
+    // "LRT Stations": lrtLayerGroup,
+    // "TAXI Stands": taxiLayerGroup,
+    // "BUS Stops": busLayerGroup
+    "MRT Stations": clusterGroupMRT,
+    "LRT Stations": clusterGroupLRT,
+    "TAXI Stands": clusterGroupTAXI,
+    "BUS Stops": clusterGroupBUS
   };
 
   // a layer control to our map
@@ -494,23 +555,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   
 
-  // create a marker cluster group
-  clusterGroup = L.markerClusterGroup();
-
-  layerGroupID = "MRT";
-  addMarkersToCluster(mrtResponse.data, clusterGroup);
-  layerGroupID = "LRT";
-  addMarkersToCluster(lrtResponse.data, clusterGroup);
-  // addMarkersToCluster(taxiResponse.data, clusterGroup);
-  // addMarkersToCluster(busResponse.data, clusterGroup);
-
-  // addMarkersToCluster(mrtResponse, clusterGroup);
-  // addMarkersToCluster(lrtResponse, clusterGroup);
-  // addMarkersToCluster(taxiResponse, clusterGroup);
-  // addMarkersToCluster(busResponse, clusterGroup);
-
-  clusterGroup.addTo(map);
-
+  
 
   // default position: bottomleft for scale
   // L.control.scale().addTo(map);
@@ -884,7 +929,9 @@ async function quickSearchCall(quickSearchByCategoryID) {
 // get the center of the map
 const center = map.getCenter();
 
-data1 = await quickSearch(quickSearchByCategoryID, center.lat, center.lng, searchRadius, searchLimit);
+searchByKeyword = "";
+// data1 = await quickSearch(quickSearchByCategoryID, center.lat, center.lng, searchRadius, searchLimit);
+data1 = await superSearch(quickSearchByCategoryID, searchByKeyword, center.lat, center.lng, searchRadius, searchLimit);
 
 console.log(data1);
 

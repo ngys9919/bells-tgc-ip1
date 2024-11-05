@@ -74,28 +74,6 @@ async function search(searchQuery, lat, lng, searchRadius, searchLimit) {
     return response.data;
   }
 
-  async function quickSearch(categoryQuery, lat, lng, searchRadius, searchLimit) {
-    const response = await axios.get(FOURSQUARE_API + "/search", {
-      headers: {
-        Accept: "application/json",
-        // All the below Authorization can work!
-        // class
-        // Authorization: "fsq3EFsPimlfZXz0cUnuO3fdFPkGT7bmZSrRaQbgeimIoGI=",
-        // eric
-        // Authorization: "fsq32JqRqo6AHKIhCP2yosAeYOhHUDuoLuKTfgsOQmhStCY="
-        // eric-IP1
-        Authorization: "fsq3GZ7aLjpLI7RnZyuknMkORQIHsEPpMA2j9S0hj/4ybtg="
-      },
-      params: {
-        categories: `${categoryQuery}`,
-        ll: `${lat},${lng}`,
-        radius: `${searchRadius}`,
-        limit: `${searchLimit}`
-      },
-    });
-    return response.data;
-  }
-
   async function superSearch(categoryQuery, searchQuery, lat, lng, searchRadius, searchLimit) {
     const response = await axios.get(FOURSQUARE_API + "/search", {
       headers: {
