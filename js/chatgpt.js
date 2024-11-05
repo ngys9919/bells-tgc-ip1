@@ -1,3 +1,5 @@
+const OPENAI_API = "https://api.openai.com/v1/chat/completions";
+
 const promptTemplate = "I want you to act as a travel guide. I will give you a location and you will suggest the places to visit and some information about it. In addition, include an itinerary based on the number of days. My request is : I am going to ";
 const promptFormat1 = "Please do the html formatting of the content."
 const promptFormat2 = "Please provide your answers in HTML format, using appropriate HTML tags."
@@ -22,19 +24,19 @@ const promptList6 = "Please just provide a list of tertiary institutions (includ
 
 async function loadData_jsonFormat(chatgptFileType) {
     if (chatgptFileType == "popular") {
-        filePath = 'data/chatgpt_popular.json';
+        filePath = 'data/chatgpt/chatgpt_popular.json';
     } else if (chatgptFileType == "budget") {
-        filePath = 'data/chatgpt_budget.json';
+        filePath = 'data/chatgpt/chatgpt_budget.json';
     } else if (chatgptFileType == "cultural") {
-        filePath = 'data/chatgpt_cultural.json';
+        filePath = 'data/chatgpt/chatgpt_cultural.json';
     } else if (chatgptFileType == "historical") {
-        filePath = 'data/chatgpt_historical.json';
+        filePath = 'data/chatgpt/chatgpt_historical.json';
     } else if (chatgptFileType == "gourmetfood") {
-        filePath = 'data/chatgpt_gourmetfood.json';
+        filePath = 'data/chatgpt/chatgpt_gourmetfood.json';
     } else if (chatgptFileType == "tertiaryinstitutions") {
-        filePath = 'data/chatgpt_tertiaryinstitutions.json';
+        filePath = 'data/chatgpt/chatgpt_tertiaryinstitutions.json';
     } else {
-        filePath = 'data/chatgpt_popular.json';
+        filePath = 'data/chatgpt/chatgpt_popular.json';
     }
     const response = await axios.get(filePath);
     return response.data;
@@ -163,7 +165,7 @@ let chatgpt_reply = {};
 
 async function OpenaiFetchAPI3(prompt) {
     console.log("Calling GPT-4o-mini")
-    var url = "https://api.openai.com/v1/chat/completions";
+    var url = OPENAI_API;
     var bearer = 'Bearer ' + `${apiKey}`
     response = await fetch(url, {
         method: 'POST',

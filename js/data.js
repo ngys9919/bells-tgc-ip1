@@ -4,9 +4,11 @@ function testFourSqAPI_APIKeys() {
       Accept: "application/json",
       // All the below Authorization can work!
       // class
-      Authorization: "fsq3EFsPimlfZXz0cUnuO3fdFPkGT7bmZSrRaQbgeimIoGI=",
+      // Authorization: "fsq3EFsPimlfZXz0cUnuO3fdFPkGT7bmZSrRaQbgeimIoGI=",
       // eric
       // Authorization: "fsq32JqRqo6AHKIhCP2yosAeYOhHUDuoLuKTfgsOQmhStCY="
+      // eric-IP1
+      Authorization: "fsq3GZ7aLjpLI7RnZyuknMkORQIHsEPpMA2j9S0hj/4ybtg="
     },
     params: {
       // static query using testFourSqAPI_APIKeys()
@@ -29,7 +31,7 @@ function testFourSqAPI_APIKeys() {
 }
 
 async function loadPostalCode(){
-  let response = await axios.get("./data/postallist.json") 
+  let response = await axios.get("./data/postal/postallist.json") 
   return response.data    
 }
 
@@ -58,7 +60,9 @@ async function search(searchQuery, lat, lng, searchRadius, searchLimit) {
         // class
         // Authorization: "fsq3EFsPimlfZXz0cUnuO3fdFPkGT7bmZSrRaQbgeimIoGI=",
         // eric
-        Authorization: "fsq32JqRqo6AHKIhCP2yosAeYOhHUDuoLuKTfgsOQmhStCY="
+        // Authorization: "fsq32JqRqo6AHKIhCP2yosAeYOhHUDuoLuKTfgsOQmhStCY="
+        // eric-IP1
+        Authorization: "fsq3GZ7aLjpLI7RnZyuknMkORQIHsEPpMA2j9S0hj/4ybtg="
       },
       params: {
         query: searchQuery,
@@ -78,7 +82,9 @@ async function search(searchQuery, lat, lng, searchRadius, searchLimit) {
         // class
         // Authorization: "fsq3EFsPimlfZXz0cUnuO3fdFPkGT7bmZSrRaQbgeimIoGI=",
         // eric
-        Authorization: "fsq32JqRqo6AHKIhCP2yosAeYOhHUDuoLuKTfgsOQmhStCY="
+        // Authorization: "fsq32JqRqo6AHKIhCP2yosAeYOhHUDuoLuKTfgsOQmhStCY="
+        // eric-IP1
+        Authorization: "fsq3GZ7aLjpLI7RnZyuknMkORQIHsEPpMA2j9S0hj/4ybtg="
       },
       params: {
         categories: `${categoryQuery}`,
@@ -98,7 +104,9 @@ async function search(searchQuery, lat, lng, searchRadius, searchLimit) {
         // class
         // Authorization: "fsq3EFsPimlfZXz0cUnuO3fdFPkGT7bmZSrRaQbgeimIoGI=",
         // eric
-        Authorization: "fsq32JqRqo6AHKIhCP2yosAeYOhHUDuoLuKTfgsOQmhStCY="
+        //Authorization: "fsq32JqRqo6AHKIhCP2yosAeYOhHUDuoLuKTfgsOQmhStCY="
+        // eric-IP1
+        Authorization: "fsq3GZ7aLjpLI7RnZyuknMkORQIHsEPpMA2j9S0hj/4ybtg="
       },
       params: {
         categories: `${categoryQuery}`,

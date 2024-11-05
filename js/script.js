@@ -72,7 +72,7 @@ let marker = 0;
 }
 
 async function loadData_jsonFormat(fileName) {
-  let filePath = `data/${fileName}.json`;
+  let filePath = `data/transport/${fileName}.json`;
   const response = await axios.get(filePath);
   // console.log(response.data);
   return response.data;
@@ -155,8 +155,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   // This is a test function in which its search results is output via console. 
   testFourSqAPI_APIKeys(); // New approach using API Keys
 
-  // const mrtRequest = axios.get("data/mrt_stations.json");
-  // const lrtRequest =  axios.get("data/lrt_stations.json");
+  // const mrtRequest = axios.get("data/transport/mrt_stations.json");
+  // const lrtRequest =  axios.get("data/transport/lrt_stations.json");
   
   fileName = "mrt_stations-cleaned";
   let dataMRT = await loadData_jsonFormat(fileName);
