@@ -29,6 +29,10 @@ function loadDefaultSettings() {
 }
 
 // let lang = "en";
+let languageSelected = document.getElementById("sbSelectLanguage");
+languageSelected.selected = "English";
+let sidebarHover = false;
+let sidebarVisible = false;
 
 loadDefaultSettings();
 
@@ -87,6 +91,10 @@ dataLRT = loadData(fileName);
 // console.log(dataLRT);
 
 let clusterGroup = null;
+let clusterGroupMRT = null;
+let clusterGroupLRT = null;
+let clusterGroupTAXI = null;
+let clusterGroupBUS = null;
 
 function addMarkersToCluster(data, clusterGroup) {
     let marker = 0;
@@ -291,6 +299,7 @@ let marker = 0;
     }
   }
 
+
 document.addEventListener("DOMContentLoaded", async function () {
 
   // language support
@@ -301,6 +310,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   
   console.log(lang);
   console.log(langData);
+  console.log(languageSelected.value);
 
   // create the map
   const map = createMap();
@@ -406,6 +416,22 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // return;
 
+  const sidebarElement = document.querySelector(".sidebar");
+
+  sidebarElement.addEventListener("mouseover", event => {
+    // console.log("Mouse in (over)");
+    // alert("You have mouse over sidebar!");
+    sidebarHover = true;
+  });
+
+  sidebarElement.addEventListener("mouseout", event => {
+    // console.log("Mouse out");
+    // alert("You have mouse out sidebar!");
+    sidebarHover = false;
+  });
+
+  // sidebarFunction();
+
   fileName = "TaxiStands-WGS84";
 
   // let dataTAXI = await loadData_jsonFormat(fileName);
@@ -506,15 +532,16 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   layerGroupID = "MRT";
   addMarkersToCluster(mrtResponse.data, clusterGroupMRT);
-  // addMarkersToCluster(mrtResponse.data, clusterGroup);
+  addMarkersToCluster(mrtResponse.data, clusterGroup);
   layerGroupID = "LRT";
   addMarkersToCluster(lrtResponse.data, clusterGroupLRT);
-  // addMarkersToCluster(lrtResponse.data, clusterGroup);
+  addMarkersToCluster(lrtResponse.data, clusterGroup);
   layerGroupID = "TAXI";
   addMarkersToCluster(taxiResponse.data, clusterGroupTAXI);
   layerGroupID = "BUS";
   addMarkersToCluster(busResponse.data, clusterGroupBUS);
 
+  // clusterGroup.addTo(map);
   // clusterGroupMRT.addTo(map);
   // clusterGroupLRT.addTo(map);
   // clusterGroupTAXI.addTo(map);
@@ -523,10 +550,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   const clearLayerGroup = L.layerGroup();
 
   const baseLayers = {
-    "Clear": clearLayerGroup
+    "Clear": clearLayerGroup,
+    // "MRT/LRT Stations": transitLayerGroup,
+    "TRANSIT": clusterGroup
   }
 
-  // transitLayerGroup.addTo(map); // show by default
+  clearLayerGroup.addTo(map); // show by default
 
   // const baseLayers = {
     // "Transit Stations": transitLayerGroup
@@ -536,7 +565,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   // first parameter: base layers
   // second parameter: overlays, in this case: none
   // L.control.layers(baseLayers, {}).addTo(map);
-
+  // L.control.layers(baseLayers, null, { position: "topleft", sortLayers: false}).addTo(map);
+  
   // optional (can toggle on or off) and can have more than one visible 
   let overlays = {
     // "MRT/LRT Stations": transitLayerGroup,
@@ -550,11 +580,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     "BUS Stops": clusterGroupBUS
   };
 
+  // default position for base layer control is topright
   // a layer control to our map
-  L.control.layers(baseLayers, overlays).addTo(map);
+  // L.control.layers(baseLayers, overlays).addTo(map);
 
-  
-
+  // change position of base layer control in map to topleft with sorting
+  L.control
+    .layers(baseLayers, overlays, { position: "topleft", sortLayers: true})
+    .addTo(map);
   
 
   // default position: bottomleft for scale
@@ -563,15 +596,18 @@ document.addEventListener("DOMContentLoaded", async function () {
   // L.control.scale({'position':'bottomleft', 'metric':true,'imperial':false}).addTo(map);
 
   L.control.scale({
-    // position: 'bottomright',
+    position: 'bottomright',
     'metric':true,
     'imperial':false
   }).addTo(map);
 
-  let options = {
+
+  // To enable high accuracy (GPS) mode, set the enableHighAccuracy in locateOptions.
+  let locateOptions = {
+    enableHighAccuracy: true, 
     flyTo: true,
     initialZoomLevel: 16,
-    drawCircle: false,
+    drawCircle: true,
     returnToPrevBounds: true,
     // position: 'bottomright',
     strings: {
@@ -579,7 +615,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   };
 
-  let locateControl = L.control.locate(options)
+  let locateControl = L.control.locate(locateOptions)
   locateControl.addTo(map)
 
 
@@ -1105,6 +1141,36 @@ if (data1.results.length == 0) {
       lang = "zh";
       changeLanguage('zh');
     });
+
+    // document
+    // .querySelector("#sbSelectLanguage")
+    // .addEventListener("click", async function () {
+      // alert("You have selected sidebar Language!");
+    // });
+
+    // let languageSelected = document.getElementById("sbSelectLanguage");
+
+    // languageSelected.addEventListener("click", function() {
+        // var options = languageSelected.querySelectorAll("option");
+        // var count = options.length;
+        // alert("You have selected sidebar Language!");
+    // });
+    
+    languageSelected.addEventListener("change", function() {
+        if(languageSelected.value == "English")
+        {
+          // alert("You have selected sidebar English!");
+          lang = "en";
+          changeLanguage('en');
+        } else if (languageSelected.value == "中文")
+        {
+          // alert("You have selected sidebar Chinese!");
+          lang = "zh";
+          changeLanguage('zh');
+        }
+        
+    });
+    
 
 });
 

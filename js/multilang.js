@@ -26,7 +26,17 @@ function setLanguagePreference(lang) {
         //element.textContent = langData[key];
         element.innerHTML = langData[key];
       }
+
+      // Dont change sidebar language for English, use icons instead!
+      
     });
+
+    // Change sidebar language accordingly
+    if (lang == "en") {
+      languageSelected.value = "English";
+    } else if (lang == "zh") {
+      languageSelected.value = "中文";
+    }
   }
   
   // Function to change language
@@ -39,7 +49,7 @@ function setLanguagePreference(lang) {
   }
 
   let lang = "en";
-
+  
   // Call updateContent() on page load
 window.addEventListener('DOMContentLoaded', async () => {
     const userPreferredLanguage = localStorage.getItem('language') || 'en';

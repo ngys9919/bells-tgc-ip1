@@ -1,48 +1,20 @@
 /* Importing Google font - Poppins */
 /* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"); */
 
-/* Opening CSS */
-@keyframes hideAfterDelay {
-  0% {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: none;
-  }
-
-  50% {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: none;
-    }
-
-  70% {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: none;
-  }
-
-    100% {
-    opacity: 0;
-    pointer-events: none;
-  }
-}
-
-
-
 /* Map CSS */
 #map {
-    /* 
+  /* 
     The leaflet map is a canvas object.
     Canvas allows you to draw shapes and circles and lines etc.
     By default canvas does not have a height even if you draw
     stuff inside, so that's why you must give it explict height.
     */
-    height: 93vh;
-    /* height:100%; */
-    /* width:65%; */
-    /* width:100%; */
-    /* position:absolute; */
-    /* position: relative; */
+  height: 93vh;
+  /* height:100%; */
+  /* width:65%; */
+  /* width:100%; */
+  /* position:absolute; */
+  /* position: relative; */
 }
 
 #map1 {
@@ -60,37 +32,103 @@
 }
 
 #map-container {
-    position: relative;
+  position: relative;
 }
 
 /* This is for every leaflet-map controls */
 /* .leaflet-control-container { */
-  /* position: absolute; */
-  /* top: 50px; */
-  /* left: 15px; */
-  /* top: 80%; */
-  /* left: 300px; */
+/* position: absolute; */
+/* top: 50px; */
+/* left: 15px; */
+/* top: 80%; */
+/* left: 300px; */
 /* }  */
 
-/* .leaflet-container .leaflet-control-attribution { */
+
+
+/* this work */
+.leaflet-control-zoom {
+  position: absolute;
+  top: 20px;
+  left: 5px;
+}
+
+/* .leaflet-control-zoom { */
   /* position: absolute; */
-  /* top: 150px; */
-  /* left: 15px; */
+  /* top: 30vh; */
+  /* left: 1vw; */
 /* } */
+
+/* this wont work */
+/* .leaflet-control-scale { */
+/* position: absolute; */
+/* top: 200px; */
+/* left: 155px; */
+/* } */
+
+/* this work */
+.leaflet-bar-part.leaflet-bar-part-single {
+  position: absolute;
+  top: 20px;
+  left: 55px;
+}
+
+/* .leaflet-bar-part.leaflet-bar-part-single { */
+  /* position: absolute; */
+  /* top: 50vh; */
+  /* left: 1vw; */
+/* } */
+
+/* this work */
+/* position must be fixed for expanded list, however top needs to change to 70px */
+/* if position is absolute the expanded list is restrictive, however top is same as 20px */
+.leaflet-control-layers {
+  position: fixed;
+  top: 70px;
+  left: 105px;
+}
+
+/* .leaflet-control-layers { */
+  /* position: absolute; */
+  /* top: 15vh; */
+  /* left: 1vw; */
+/* } */
+
+/* this wont work */
+/* .leaflet-control-attribution { */
+/* position: absolute; */
+/* top: 200px; */
+/* left: 255px; */
+/* } */
+
+
+/* default positioning is scale control above attribution control */
+/* this shows scale control inline with attribution control (and change from left to right, that is, left scale, right attribution) */
+.leaflet-control-container .leaflet-bottom.leaflet-right>* {
+  margin: 0;
+  float: left;
+  direction: ltr;
+  clear: none;
+}
+
+/* default positioning is scale control above attribution control */
+/* this shows scale control inline with attribution control (and normal from right to left, that is, left attribution, right scale) */
+/* .leaflet-control-scale { margin-bottom: 0 !important; } */
+/* .leaflet-control-attribution { clear: none !important; } */
 
 /* This is for leaftlet-map zoom control only -> centered */
 /* .leaflet-top { */
-  /* bottom: 0; */
+/* bottom: 0; */
 /* } */
 /* .leaflet-top .leaflet-control-zoom { */
-  /* top:50%; */
-  /* transform: translateY(-50%); */
-  /* margin-top: 0; */
+/* top:50%; */
+/* transform: translateY(-50%); */
+/* margin-top: 0; */
 /* } */
 
 
 .popup-container {
-    /* position: relative; */
+  /* position: relative; */
 }
 
 .popup-postal_code {
@@ -107,20 +145,20 @@
 }
 
 #search-container-test {
-    position: absolute;
-    z-index: 500;
-    /* LHS Search Results; */
-    /* top: 150px; */
-    /* left: 185px; */
-    /* RHS Search Results */
-    top: 150px;
-    right: 5px;
-    background-color: rgb(255 255 255 / 44%);
-    line-height: 24px;
-    padding: 5px;
-    overflow-y: auto;
-    max-height: 300px;
-    visibility: hidden;
+  position: absolute;
+  z-index: 500;
+  /* LHS Search Results; */
+  /* top: 150px; */
+  /* left: 185px; */
+  /* RHS Search Results */
+  top: 150px;
+  right: 5px;
+  background-color: rgb(255 255 255 / 44%);
+  line-height: 24px;
+  padding: 5px;
+  overflow-y: auto;
+  max-height: 300px;
+  visibility: hidden;
 }
 
 #settings-container {
@@ -151,28 +189,28 @@
   max-height: 450px;
 }
 
-.navbar{
-    /* left: 85px; */
-    /* left: 260px; */
-    /* max-width: 100vw; */
-    height: 50px;
-    background-image: linear-gradient(to top, #95b2ec 0%, #3c90ba 100%);
+.navbar {
+  /* left: 85px; */
+  /* left: 260px; */
+  /* max-width: 100vw; */
+  height: 50px;
+  background-image: linear-gradient(to top, #95b2ec 0%, #3c90ba 100%);
 }
 
-.navbar-brand{
-    background-position: center;
+.navbar-brand {
+  background-position: center;
 }
 
-#result-header {  
-    background-image: linear-gradient(-20deg, #0055cd 0%, #8dd1da 100%);
-    text-align: center;
+#result-header {
+  background-image: linear-gradient(-20deg, #0055cd 0%, #8dd1da 100%);
+  text-align: center;
 }
 
 #results {
-    height:100%;
-    /* width:35%; */
-    width:30%;
-    position:absolute;
+  height: 100%;
+  /* width:35%; */
+  width: 30%;
+  position: absolute;
 }
 
 .result-listing {
@@ -181,24 +219,7 @@
   width: 600px;
 }
 
-.result-listing ul {
-    margin:0;
-    padding:0;
-    list-style: none;
-    /* overflow-x: scroll; */
-    /* overflow-y: scroll; */
-    scrollbar-width: none;
-}
-
-.result-listing h3 {
-    letter-spacing:3px;
-    font-family:verdana;
-}
-
-#search-results {
-
-
-}
+#search-results {}
 
 /* Sidebar CSS */
 
@@ -217,7 +238,7 @@ body {
   /* max-height: 90vh; */
   background: #F0F4FF;
   overflow-x: hidden;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
 }
 
 .sidebar {
@@ -238,7 +259,7 @@ body {
   /* padding: 25px 20px; */
   padding: 5px 5px;
   transition: all 0.4s ease;
-  visibility: hidden;  
+  visibility: hidden;
 }
 
 .sidebar:hover {
@@ -352,7 +373,7 @@ body {
 .user-profile {
   display: flex;
   /* align-items: center; */
-  align-items:center;
+  align-items: center;
   color: #161a2d;
 }
 
@@ -403,8 +424,8 @@ body {
 }
 
 /* #searchByKeyword { */
-  /* padding: 0px; */
-  /* margin: 0px; */
+/* padding: 0px; */
+/* margin: 0px; */
 /* } */
 
 #searchByKeywordBtn {
@@ -413,12 +434,11 @@ body {
 }
 
 /* #searchByPostalCode { */
-  /* padding: 0px; */
-  /* margin: 0px; */
+/* padding: 0px; */
+/* margin: 0px; */
 /* } */
 
 #searchByPostalCodeBtn {
   padding: 5px;
   margin: 5px;
 }
-
