@@ -32,27 +32,7 @@
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <!-- our own style sheet -->
   <link rel="stylesheet" href="css/style.css" />
-  <style>
-    #myDIV {
-      /* width: 100%; */
-      /* padding: 50px 0; */
-      /* text-align: center; */
-      /* background-color: lightblue; */
-      /* margin-top: 20px; */
-      /* visibility: hidden; */
-      /* visibility: visible; */
-    }
 
-    .myBTN {
-       top:120%;
-       left:55%;
-       width:100px;
-       height:40px;
-       position: absolute;
-       z-index: 2;
-       background: orange; 
-    }
-  </style>
   <style>
     /* Bootstrap Breakpoints
   
@@ -75,9 +55,8 @@
         visibility: visible;
       }
 
-      #map1 {
-        height: 100vh;
-        width: 100%;
+      #sidebar-search-container {
+        display: block;
       }
 
       #settings-container {
@@ -118,14 +97,12 @@
         background-color: lawngreen;
       }
 
-
       .sidebar {
         visibility: visible;
       }
 
-      #map1 {
-        height: 100vh;
-        width: 100vw;
+      #sidebar-search-container {
+        display: block;
       }
 
       #settings-container {
@@ -168,9 +145,8 @@
         visibility: visible;
       }
 
-      #map1 {
-        height: 100vh;
-        width: 100vw;
+      #sidebar-search-container {
+        display: block;
       }
 
       #settings-container {
@@ -220,12 +196,8 @@
         visibility: hidden;
       }
 
-      #map1 {
-        height: 93vh;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: top;
+      #sidebar-search-container {
+        display: none;
       }
 
       #settings-container {
@@ -267,16 +239,12 @@
         background-color: skyblue;
       }
 
-
       .sidebar {
         visibility: hidden;
       }
 
-      #map1 {
-        height: 93vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: top;
+      #sidebar-search-container {
+        display: none;
       }
 
       #settings-container {
@@ -319,16 +287,12 @@
         background-color: white;
       }
 
-
       .sidebar {
         visibility: hidden;
       }
 
-      #map1 {
-        height: 93vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: top;
+      #sidebar-search-container {
+        display: none;
       }
 
       #settings-container {
@@ -374,12 +338,13 @@
     </div>
     <ul class="sidebar-links">
       <h4>
-        <span>Main Menu</span>
+        <span>Language Setting</span>
+        <!-- <span data-i18n="sidebar_languageSetting">Language Setting</span> -->
         <div class="menu-separator"></div>
       </h4>
-      <li>
-        <a href="home.html" data-i18n="navbar_home"><span class="material-symbols-outlined"> dashboard </span> Home </a>
-      </li>
+      <!-- <li> -->
+        <!-- <a href="#" data-i18n="navbar_home"><span class="material-symbols-outlined"> dashboard </span> Home </a> -->
+      <!-- </li> -->
       <!-- <li> -->
         <!-- <a href="#"><span class="material-symbols-outlined"> overview </span>Overview</a> -->
       <!-- </li> -->
@@ -391,23 +356,36 @@
         <option value="中文" id="sbSelectChinese">中文</option>
       </select>
       <h4>
-        <span>Search Engine</span>
+        <span>Menu Selection</span>
+        <!-- <span data-i18n="sidebar_menuSelection">Menu Selection</span> -->
         <div class="menu-separator"></div>
       </h4>
+      <!-- <li> -->
+        <!-- <a href="#" data-i18n="navbar_locateMe"><span class="material-symbols-outlined"> folder </span> Locate Me! </a> -->
+      <!-- </li> -->
       <li>
-        <a href="#" data-i18n="navbar_locateMe"><span class="material-symbols-outlined"> folder </span> Locate Me! </a>
+        <a href="#"><span class="material-symbols-outlined"> folder </span><button class="btn btn-outline-success" type="button" id="resetBtn" data-i18n="navbar_resetMap"> Reset Map </button></a>
+      </li>
+      <!-- <button class="btn btn-outline-success" type="button" id="resetBtn" data-i18n="navbar_resetMap"> Reset Map </button> -->
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> groups </span><button class="btn btn-outline-success" type="button" id="locateBtn" data-i18n="navbar_locateMe"> Locate Me! </button></a>
+      </li>
+      <!-- <button class="btn btn-outline-success" type="button" id="locateBtn" data-i18n="navbar_locateMe"> Locate Me! </button> -->
+      <!-- <li>  -->
+        <!-- <a href="#" data-i18n="navbar_placeholderSearch"><span class="material-symbols-outlined"> groups </span> Search </a> -->
+      <!-- </li> -->
+      <!-- <li> -->
+        <!-- <a href="#" data-i18n="navbar_placeholderLocate"><span class="material-symbols-outlined"> move_up </span> Postal Search </a> -->
+      <!-- </li> -->
+      <li>
+        <!-- <a href="chatgpt.html" data-i18n="navbar_askChatGPT"><span class="material-symbols-outlined"> flag </span> Ask ChatGPT </a> -->
+        <!-- <a href="chatgpt.html" class="btn btn-outline-success" id="askChatGPTBtn" data-i18n="navbar_askChatGPT"></a> -->
+        <a href="chatgpt.html"><span class="material-symbols-outlined"> flag </span><button class="btn btn-outline-success" type="button" id="askChatGPTBtn" data-i18n="navbar_askChatGPT"> Ask ChatGPT </button></a>
       </li>
       <li>
-        <a href="#" data-i18n="navbar_placeholderSearch"><span class="material-symbols-outlined"> groups </span> Search </a>
-      </li>
-      <li>
-        <a href="#" data-i18n="navbar_placeholderLocate"><span class="material-symbols-outlined"> move_up </span> Postal Search </a>
-      </li>
-      <li>
-        <a href="chatgpt.html" data-i18n="navbar_askChatGPT"><span class="material-symbols-outlined"> flag </span> Ask ChatGPT </a>
-      </li>
-      <li>
-        <a href="chart.html" data-i18n="navbar_chart"><span class="material-symbols-outlined"> notifications_active </span> Chart </a>
+        <!-- <a href="chart.html" data-i18n="navbar_chart"><span class="material-symbols-outlined"> notifications_active </span> Chart </a> -->
+        <!-- <a href="chart.html" class="btn btn-outline-success" id="chartBtn" data-i18n="navbar_chart"><span class="material-symbols-outlined"> notifications_active </span> Chart </a> -->
+        <a href="chart.html"><span class="material-symbols-outlined"> notifications_active </span><button class="btn btn-outline-success" type="button" id="chartBtn" data-i18n="navbar_chart"> Chart </button></a>
       </li>
       <h4>
         <span>Account</span>
@@ -445,7 +423,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="home.html" data-i18n="navbar_home"></a>
+            <a class="nav-link active" aria-current="page" href="#" data-i18n="navbar_home"></a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="chart.html" data-i18n="navbar_chart"></a>
@@ -481,15 +459,11 @@
 
         <form class="d-flex">
           <!-- <input class="form-control me-2" type="search" aria-label="Search" id="searchByKeyword" placeholder="Enter Search Keyword"> -->
-          <input class="me-2" type="search" aria-label="Search" id="searchByKeyword"
-            data-i18n="navbar_placeholderSearch">
-          <button class="btn btn-outline-success me-2" type="submit" id="searchKeywordBtn"
-            data-i18n="navbar_search"></button>
+          <input class="me-2" type="search" aria-label="Search" id="searchByKeyword" data-i18n="navbar_placeholderSearch">
+          <button class="btn btn-outline-success me-2" type="submit" id="searchKeywordBtn" data-i18n="navbar_search"></button>
           <!-- <input class="form-control me-2" type="search" aria-label="Search" id="searchByPostalCode" placeholder="Enter Postal Code"> -->
-          <input class="me-2" type="search" aria-label="Search" id="searchByPostalCode"
-            data-i18n="navbar_placeholderLocate">
-          <button class="btn btn-outline-success me-2" type="submit" id="searchPostalCodeBtn"
-            data-i18n="navbar_locate"></button>
+          <input class="me-2" type="search" aria-label="Search" id="searchByPostalCode" data-i18n="navbar_placeholderLocate">
+          <button class="btn btn-outline-success me-2" type="submit" id="searchPostalCodeBtn" data-i18n="navbar_locate"></button>
         </form>
         <ul class="navbar-nav me-2 mb-2 mb-lg-0">
           <li class="nav-item dropstart">
@@ -567,10 +541,13 @@
     <button class="btn btn-outline-success" type="button" id="submitSettingsBtn" data-i18n="searchSubmit"></button>
   </div>
 
-  <div id="search-container-test">
-    <input type="text" id="searchTerms" />
-    <button id="searchBtn">Search</button>
-    <div id="search-results"></div>
+  <div id="sidebar-search-container">
+    <input type="text" placeholder="" id="sidebarSearchTerms" data-i18n="sidebar_placeholderSearch"/>
+    <!-- <button class="btn btn-outline-success" id="sidebar-searchBtn">Search</button> -->
+    <!-- <button class="btn btn-outline-success" id="sidebar-toggleBtn">Toggle On/Off</button> -->
+    <button id="sidebarSearchBtn" data-i18n="sidebar_Search">Search</button>
+    <button id="sidebarToggleBtn" data-i18n="sidebar_Toggle">Toggle On/Off</button>
+    <div id="sidebar-search-results"></div>
   </div>
 
   
@@ -611,23 +588,6 @@
     </div>
   </div>
 
-  <p>Click the "Try it" button to toggle between hiding and showing the DIV element:</p>
-
-  <button class="myBTN" onclick="myDivFunction()">Try it</button>
-
-  <!-- <div id="myDIV"> -->
-  <!-- This is my DIV element. -->
-  <!-- </div> -->
-
-  <p><b>Note:</b> The element will not take up any space when the display property 
-  is set to "none".</p>
-
-  <p id="myP1">This is some text.</p>
-  <p id="myP2">This is some text.</p>
-
-  <input type="button" onclick="demoDisplay()" value="Hide text with display property">
-  <input type="button" onclick="demoVisibility()" value="Hide text with visibility property">
-
   <!-- Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
     integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
@@ -654,48 +614,11 @@
     integrity="sha512-6VJrgykcg/InSIutW2biLwA1Wyq+7bZmMivHw19fI+ycW0jIjsadm8wKQQLlfv3YUS4owfMDlZU38NtaAK6fSg=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
-    
-
   <!-- our own javascript files -->
   <script src="js/multilang.js"></script>
   <script src="js/data.js"></script>
   <script src="js/view.js"></script>
   <script src="js/script.js"></script>
-
-  <script>
-    // alert(document.getElementById("myDIV").style.display);
-    // alert(document.getElementById("myP1").style.display);
-    alert(window.getComputedStyle(document.getElementById("myDIV")).visibility);
-
-    function myDivFunction() {
-      let x = document.getElementById("myDIV");
-      if (x.style.display === "none") {
-        x.style.display = "flex";
-        sidebarDisplay = false;
-        alert("Sidebar display is none!");
-      } else {
-        x.style.display = "none";
-        sidebarDisplay = true;
-        alert("Sidebar display is others!");
-      }
-      if (window.getComputedStyle(x).visibility === "hidden") {
-        // sidebarVisible = false;
-        alert("Sidebar visibility is hidden!");
-      } else if (window.getComputedStyle(x).visibility === "visible") {
-        // sidebarVisible = true;
-        alert("Sidebar visibility is visible!");
-      }
-    }
-
-    function demoDisplay() {
-      document.getElementById("myP1").style.display = "none";
-    }
-
-    function demoVisibility() {
-      document.getElementById("myP2").style.visibility = "hidden";
-    }
-  </script>
 </body>
 
 </html>

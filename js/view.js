@@ -174,7 +174,7 @@ function addSearchResultToMap(data, searchResultLayer, resultElement, map) {
 
         // add the search result to the result element
         const eachResultElement = document.createElement("div");
-        eachResultElement.className = "search-result";
+        eachResultElement.className = "sidebar-search-result";
         eachResultElement.innerHTML = r.name;
         // eachResultElement.innerHTML = r.location.address;
         // eachResultElement.innerHTML = r.location.postcode;

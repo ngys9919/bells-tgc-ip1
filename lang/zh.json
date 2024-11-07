@@ -32,5 +32,12 @@
     "qs_FireStation": "消防局",
     "qs_EmergencyService": "紧急服务",
     "qs_Hospital": "医院",
-    "qs_HealthcareClinic": "诊所"
+    "qs_HealthcareClinic": "诊所",
+    "sidebar_languageSetting": "语言设定",
+    "sidebar_menuSelection": "菜单选项",
+    "sidebar_placeholderSearch": "",
+    "sidebar_Search": "搜索",
+    "sidebar_Toggle": "切换显示",
+    "sidebar_Toggle_ListingsOff": "显示是关",
+    "sidebar_Toggle_ListingsOn": "显示是开"
 }

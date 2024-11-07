@@ -32,5 +32,12 @@
     "qs_FireStation": "Fire Station",
     "qs_EmergencyService": "Emergency Service",
     "qs_Hospital": "Hospital",
-    "qs_HealthcareClinic": "Healthcare Clinic"
+    "qs_HealthcareClinic": "Healthcare Clinic",
+    "sidebar_languageSetting": "Language Setting",
+    "sidebar_menuSelection": "Menu Selection",
+    "sidebar_placeholderSearch": "",
+    "sidebar_Search": "Search",
+    "sidebar_Toggle": "Toggle On/Off",
+    "sidebar_Toggle_ListingsOff": "Listings Off",
+    "sidebar_Toggle_ListingsOn": "Listings On"
 }

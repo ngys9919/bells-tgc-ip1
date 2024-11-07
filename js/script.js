@@ -31,7 +31,7 @@ function loadDefaultSettings() {
 // let lang = "en";
 let languageSelected = document.getElementById("sbSelectLanguage");
 languageSelected.selected = "English";
-let sidebarHover = false;
+
 let sidebarVisible = false;
 
 loadDefaultSettings();
@@ -46,49 +46,10 @@ async function loadPostal() {
 
 loadedData = loadPostal();
 
+// check sidebar visibility
+checkSidebarVisibility();
+
 let fileName = null;
-
-async function loadData_jsonFormat(fileName) {
-  let filePath = `data/transport/${fileName}.json`;
-  console.log(filePath);
-  const response = await axios.get(filePath);
-  console.log(response.data);
-  return response.data;
-}
-
-function loadData(fileName) {
-  const data = loadData_jsonFormat(fileName);
-  console.log(data);
-  return data;
-}
-
-let dataTAXI = [];
-
-fileName = "TaxiStands-WGS84";
-
-dataTAXI = loadData(fileName);
-console.log(dataTAXI);
-
-let dataBUS = [];
-
-fileName = "BusStops-WGS84";
-
-dataBUS = loadData(fileName);
-// console.log(dataBUS);
-
-let dataMRT = [];
-
-fileName = "mrt_stations-cleaned";
-
-dataMRT = loadData(fileName);
-// console.log(dataMRT);
-
-let dataLRT = [];
-
-fileName = "lrt_stations-cleaned";
-  
-dataLRT = loadData(fileName);
-// console.log(dataLRT);
 
 let clusterGroup = null;
 let clusterGroupMRT = null;
@@ -302,12 +263,21 @@ let marker = 0;
 
 document.addEventListener("DOMContentLoaded", async function () {
 
+  // check sidebar visibility
+  checkSidebarVisibility();
+
+  // sidebar language support
+  const userSidebarToggleState = localStorage.getItem('sidebarToggleState') || 'toggleonoff';
+  sidebarToggleState= userSidebarToggleState;
+
   // language support
   const userPreferredLanguage = localStorage.getItem('language') || 'en';
   lang = userPreferredLanguage;
   const langData = await fetchLanguageData(userPreferredLanguage);
   updateContent(langData);
   
+  
+
   console.log(lang);
   console.log(langData);
   console.log(languageSelected.value);
@@ -322,6 +292,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const searchResultLayer1 = L.layerGroup();
   searchResultLayer1.addTo(map);
 
+
   // This is a test function in which its search results is output via console. 
   testFourSqAPI_APIKeys(); // New approach using API Keys
   
@@ -330,107 +301,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // let taxiLayer = L.geoJson(response.data);
   // taxiLayer.addTo(map);
-
-  function myFunction(arg) {
-    // this output the first row
-    // console.log(arg.var1 + ' ' + arg.var2 + ' ' + arg.var3);
-    // alert(arg.var1 + ' ' + arg.var2 + ' ' + arg.var3);
-    // this is for array iteration
-    arg.forEach(theFunction);
-
-    function theFunction(value, index, array) {
-      // this output all the rows of column var1 
-      // console.log(array[index].var1);
-      // alert(array[index].var1);
-    };
-  }
-
-  myFunction ([{ var0: "Option 0", var1: "Option 1", var2: "Option 2", var5: "Option 5", var3: "Option 3", var4: "Option 4" },
-              { var0: "Option 10", var1: "Option 11", var2: "Option 12", var5: "Option 15", var3: "Option 13", var4: "Option 14" }
-  ]);
-  
-  let ArrayID = 0;
-  let myArray1 = [];
-  let myArray2 = [];
-
-  myArray1 = [{ var0: "Option 0", var1: "Option 1", var2: "Option 2", var5: "Option 5", var3: "Option 3", var4: "Option 4" },
-    { var0: "Option 10", var1: "Option 11", var2: "Option 12", var5: "Option 15", var3: "Option 13", var4: "Option 14" },
-    { var0: "Option 20", var1: "Option 21", var2: "Option 22", var5: "Option 25", var3: "Option 23", var4: "Option 24" }
-  ];
-
-  myArray2 = [{ var10: "Option 0", var11: "Option 1", var15: "Option 5", var14: "Option 4" },
-    { var10: "Option 10", var11: "Option 11", var15: "Option 15", var14: "Option 14" },
-    { var10: "Option 20", var11: "Option 21", var15: "Option 25", var14: "Option 24" }
-  ];
-
-  function arrayFunction1(myArray1) {
-      myArray1.forEach(theFunction1);
-  }
-
-  function arrayFunction2(myArray2) {
-      myArray2.forEach(theFunction2);
-  }
-
-  function arrayFunction3(passArray) {
-    if (ArrayID == 1) {
-      passArray.forEach(theFunction1);
-    } else if (ArrayID == 2) {
-      passArray.forEach(theFunction2);
-    }
-  }
-
-  function theFunction1(value, index, array) {
-      // this output all the rows of column var1 
-      console.log(array[index].var1);
-      alert(array[index].var1);
-  }
-
-  function theFunction2(value, index, array) {
-      // this output all the rows of column var14 
-      console.log(array[index].var14);
-      alert(array[index].var14);
-  }
-
-  // ArrayID = 1;
-  // arrayFunction1(myArray1);
-
-  // ArrayID = 2;
-  // arrayFunction2(myArray2);
-
-  // ArrayID = 1;
-  // arrayFunction3(myArray1);
-
-  // ArrayID = 2;
-  // arrayFunction3(myArray2);
-
-  function yourFunction(args) {
-    let defaults = {opt1: true, opt2: 'something'};
-    let params = {...defaults, ...args}; // right-most object overwrites 
-    const {opt1, opt2, opt3} = params
-    // this output the new value for opt2, ie "Args Nothing", note opt1 -> unchanged, opt3 -> undefined
-    console.log(opt1 + ' ' + opt2 + ' ' + opt3);
-    alert(opt1 + ' ' + opt2 + ' ' + opt3);
-  }
-
-  // yourFunction ({ opt2: "Args Nothing"});
-
-  // return;
-
-  const sidebarElement = document.querySelector(".sidebar");
-
-  sidebarElement.addEventListener("mouseover", event => {
-    // console.log("Mouse in (over)");
-    // alert("You have mouse over sidebar!");
-    sidebarHover = true;
-  });
-
-  sidebarElement.addEventListener("mouseout", event => {
-    // console.log("Mouse out");
-    // alert("You have mouse out sidebar!");
-    sidebarHover = false;
-  });
-
-  // sidebarFunction();
 
   fileName = "TaxiStands-WGS84";
 
@@ -637,9 +507,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         locateControl.start()
         if (lang === 'zh') {
-          myLocation.innerText = "复原位置"
+          myLocation.innerText = "复原位置";
         } else {
-          myLocation.innerText = "Reset Location"
+          myLocation.innerText = "Reset Location";
         }
         
     }
@@ -651,9 +521,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         locateClickCount = 0
 
         if (lang === 'zh') {
-          myLocation.innerText = "寻找位置"
+          myLocation.innerText = "寻找位置";
         } else {
-          myLocation.innerText = "My Location"
+          myLocation.innerText = "My Location";
         }
 
         for(var i = 0; i < mapMarkers.length; i++){
@@ -678,9 +548,9 @@ geoLocation.addEventListener("click", function() {
     if (locateClickCount % 2 !== 0){
 
       if (lang === 'zh') {
-        myLocation.innerText = "复原位置"
+        myLocation.innerText = "复原位置";
       } else {
-        myLocation.innerText = "Reset Location"
+        myLocation.innerText = "Reset Location";
       }
 
     }
@@ -691,9 +561,9 @@ geoLocation.addEventListener("click", function() {
         locateClickCount = 0
         
         if (lang === 'zh') {
-          myLocation.innerText = "寻找位置"
+          myLocation.innerText = "寻找位置";
         } else {
-          myLocation.innerText = "My Location"
+          myLocation.innerText = "My Location";
         }
         
         for(var i = 0; i < mapMarkers.length; i++){
@@ -713,16 +583,18 @@ geoLocation.addEventListener("click", function() {
     }
 });
 
+
 document
     .querySelector("#resetBtn")
     .addEventListener("click", async function () {
       lang = "en";
-      changeLanguage(lang);
+      sidebarToggleState = "toggleonoff";
+      changeLanguage(lang, sidebarToggleState);
       quickSearchByCategoryID = null;
       // let myLocation = document.querySelector("#locateBtn");
-      myLocation.innerText = "Locate Me!"
-      // const searchTerms = document.querySelector("#searchTerms");
-      searchTerms.value = ""
+      myLocation.innerText = "Locate Me!";
+      // const searchTerms = document.querySelector("#sidebarSearchTerms");
+      searchTerms.value = "";
       // const searchByKeyword = document.querySelector("#searchByKeyword");
       searchByKeyword.value = "Enter Search Keyword"
       const resultElement = document.querySelector("#search-results");
@@ -733,6 +605,8 @@ document
       // searchResultLayer.clearLayers();
       const resultElement1 = document.querySelector("#result-listing");
       resultElement1.innerHTML = "";
+      const myToggle = document.getElementById("sidebarToggleBtn");
+      myToggle.innerTEXT = "Toggle On/Off";
       // const searchResultLayer1 = L.layerGroup();
       // searchResultLayer1.clearLayers();
       // map.removeLayer(searchResultLayer);
@@ -781,16 +655,43 @@ document
 
   });
 
+  document
+    .querySelector("#sidebarToggleBtn")
+    .addEventListener("click", async function () {
+      // alert("You have clicked Toggle button!");
+      let x = document.getElementById("sidebar-search-results");
+      let y = document.getElementById("sidebarToggleBtn");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+        sidebarToggleState = "toggleon";
+        if (lang === 'zh') {
+           y.innerHTML = "显示是开";
+        } else {
+           y.innerHTML = "Listings On";
+        }
+        // alert("Sidebar Search Display is toggle on!");
+      } else {
+        x.style.display = "none";
+        sidebarToggleState = "toggleoff";
+        if (lang === 'zh') {
+          y.innerHTML = "显示是关";
+        } else {
+          y.innerHTML = "Listings Off";
+        }
+        // alert("Sidebar Search Display is toggle off!");
+      }
+      // alert(x.style.display);
+    });
 
   document
-    .querySelector("#searchBtn")
+    .querySelector("#sidebarSearchBtn")
     .addEventListener("click", async function () {
-      const searchTerms = document.querySelector("#searchTerms").value;
+      const searchTerms = document.querySelector("#sidebarSearchTerms").value;
 
       // get the center of the map
       const center = map.getCenter();
 
-      const data = await search(searchTerms, center.lat, center.lng, radius=2500, limit=50);
+      const data = await search(searchTerms, center.lat, center.lng, radius=2500, limit=5);
 
       console.log(data);
 
@@ -800,7 +701,7 @@ document
       searchResultLayer.clearLayers();
 
       // add the result to the search results div
-      const resultElement = document.querySelector("#search-results");
+      const resultElement = document.querySelector("#sidebar-search-results");
       if (data.results.length == 0) {
         if (lang === 'zh') {
           resultElement.innerHTML = "无搜索结果!";
@@ -1131,7 +1032,8 @@ if (data1.results.length == 0) {
     .addEventListener("click", async function () {
       // alert("You have selected English!");
       lang = "en";
-      changeLanguage('en');
+      sidebarToggleState = "toggleonoff";
+      changeLanguage(lang, sidebarToggleState);
     });
 
     document
@@ -1139,7 +1041,8 @@ if (data1.results.length == 0) {
     .addEventListener("click", async function () {
       // alert("You have selected Chinese!");
       lang = "zh";
-      changeLanguage('zh');
+      sidebarToggleState = "toggleonoff";
+      changeLanguage(lang, sidebarToggleState);
     });
 
     // document
@@ -1156,19 +1059,18 @@ if (data1.results.length == 0) {
         // alert("You have selected sidebar Language!");
     // });
     
-    languageSelected.addEventListener("change", function() {
-        if(languageSelected.value == "English")
+    languageSelected.addEventListener("change", function() {  
+      if(languageSelected.value == "English")
         {
           // alert("You have selected sidebar English!");
           lang = "en";
-          changeLanguage('en');
+          changeLanguage(lang, sidebarToggleState);
         } else if (languageSelected.value == "中文")
         {
           // alert("You have selected sidebar Chinese!");
           lang = "zh";
-          changeLanguage('zh');
+          changeLanguage(lang, sidebarToggleState);
         }
-        
     });
     
 

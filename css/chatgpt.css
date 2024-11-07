@@ -5,42 +5,6 @@
     font-family: "Poppins", sans-serif;
 }
 
-body {
-  font: 1.2rem/1.5rem verdana, arial;
-  margin: 2rem;
-}
-
-#testMe {
-  cursor: pointer;
-}
-
-p {
-  margin: 0.2rem 0;
-}
-
-.grid-container{
-  width:100%;
-  display:grid;
-  grid-template-columns:50% 50%;
-  grid-template-rows:50% 50%;
-  grid-gap: 5px;
-}
-
-.key-button{
-  background-color: skyblue;
-  border: 1px solid black;
-}
-.color-button{
-  border: 1px solid black;
-  font-size:1.3rem;
-}
-
-.pastebox-div{
-  background-color:#ffd000;
-  border: 1px solid black;
-  font-size:1.3rem;
-}
-
 /* Map CSS */
 #chatgpt-map {
   /* 
@@ -61,11 +25,11 @@ p {
   /* flex-direction: column; */
   flex-direction: row;
   /* background-color: white; */
-  font-size: 1.25vw;
+  /* font-size: 1.25vw; */
 }
 
 .child {
-  /* each flex item of 220px (width) */
+  /* each flex item of 50% (width) */
   /* background-color: white; */
   color: black;
   border: 1px solid black;
@@ -74,7 +38,7 @@ p {
   flex-basis: 50%;  
 }
 
-  #chatgpt-results {
+#chatgpt-results {
     /* width: 100%; */
     /* height: 300px; */
     /* width: 35%; */
@@ -89,10 +53,10 @@ p {
 }
 
 #distanceCalBtn{
-  height: 50px;
-  width: 50px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 9px;
+  height: 60px;
+  width: 80px;
+  /* font-family: 'Montserrat', sans-serif; */
+  /* font-size: 9px; */
   text-align: center;
   text-justify: center;
   padding: 2px;
@@ -101,8 +65,8 @@ p {
   word-wrap: break-word;
   line-height: 1;
   position: absolute;
-  top: 720px;
-  right: 50px;
+  top: 780px;
+  right: 35px;
   z-index: 1000;
 }
 
