@@ -34,11 +34,23 @@
   <link rel="stylesheet" href="css/style.css" />
   <style>
     #myDIV {
-      width: 100%;
-      padding: 50px 0;
-      text-align: center;
-      background-color: lightblue;
-      margin-top: 20px;
+      /* width: 100%; */
+      /* padding: 50px 0; */
+      /* text-align: center; */
+      /* background-color: lightblue; */
+      /* margin-top: 20px; */
+      /* visibility: hidden; */
+      /* visibility: visible; */
+    }
+
+    .myBTN {
+       top:120%;
+       left:55%;
+       width:100px;
+       height:40px;
+       position: absolute;
+       z-index: 2;
+       background: orange; 
     }
   </style>
   <style>
@@ -105,6 +117,7 @@
       body {
         background-color: lawngreen;
       }
+
 
       .sidebar {
         visibility: visible;
@@ -202,6 +215,7 @@
         background-color: aquamarine;
       }
 
+
       .sidebar {
         visibility: hidden;
       }
@@ -252,6 +266,7 @@
       body {
         background-color: skyblue;
       }
+
 
       .sidebar {
         visibility: hidden;
@@ -304,6 +319,7 @@
         background-color: white;
       }
 
+
       .sidebar {
         visibility: hidden;
       }
@@ -351,8 +367,7 @@
 </head>
 
 <body>
-  
-  <aside class="sidebar">
+  <aside class="sidebar" id="myDIV">
     <div class="sidebar-header">
       <img src="img/bells_logo.jpg" alt="logo" />
       <h2>Bells Tech</h2>
@@ -418,7 +433,6 @@
       </div>
     </div>
   </aside>
-
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -599,11 +613,11 @@
 
   <p>Click the "Try it" button to toggle between hiding and showing the DIV element:</p>
 
-  <button onclick="myDivFunction()">Try it</button>
+  <button class="myBTN" onclick="myDivFunction()">Try it</button>
 
-  <div id="myDIV">
-  This is my DIV element.
-  </div>
+  <!-- <div id="myDIV"> -->
+  <!-- This is my DIV element. -->
+  <!-- </div> -->
 
   <p><b>Note:</b> The element will not take up any space when the display property 
   is set to "none".</p>
@@ -641,31 +655,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-    <script>
-      // alert(document.getElementById("myDiv").style.display);
-      alert(document.getElementById("myP1").style.display);
-
-      function myDivFunction() {
-        let x = document.getElementById("myDiv");
-        if (x.style.display === "none") {
-          x.style.display = "block";
-          // sidebarVisible = false;
-          // alert("Sidebar is hidden!");
-        } else {
-          x.style.display = "none";
-          // sidebarVisible = true;
-          // alert("Sidebar is visible!");
-        }
-      }
-
-      function demoDisplay() {
-        document.getElementById("myP1").style.display = "none";
-      }
-
-      function demoVisibility() {
-        document.getElementById("myP2").style.visibility = "hidden";
-      }
-    </script>
+    
 
   <!-- our own javascript files -->
   <script src="js/multilang.js"></script>
@@ -673,7 +663,39 @@
   <script src="js/view.js"></script>
   <script src="js/script.js"></script>
 
-  
+  <script>
+    // alert(document.getElementById("myDIV").style.display);
+    // alert(document.getElementById("myP1").style.display);
+    alert(window.getComputedStyle(document.getElementById("myDIV")).visibility);
+
+    function myDivFunction() {
+      let x = document.getElementById("myDIV");
+      if (x.style.display === "none") {
+        x.style.display = "flex";
+        sidebarDisplay = false;
+        alert("Sidebar display is none!");
+      } else {
+        x.style.display = "none";
+        sidebarDisplay = true;
+        alert("Sidebar display is others!");
+      }
+      if (window.getComputedStyle(x).visibility === "hidden") {
+        // sidebarVisible = false;
+        alert("Sidebar visibility is hidden!");
+      } else if (window.getComputedStyle(x).visibility === "visible") {
+        // sidebarVisible = true;
+        alert("Sidebar visibility is visible!");
+      }
+    }
+
+    function demoDisplay() {
+      document.getElementById("myP1").style.display = "none";
+    }
+
+    function demoVisibility() {
+      document.getElementById("myP2").style.visibility = "hidden";
+    }
+  </script>
 </body>
 
 </html>

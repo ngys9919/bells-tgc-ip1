@@ -363,7 +363,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         // lat1, lng1 -> current location
         // lat2, lng2 -> target location
         // distance = geoDistance(lat1, lng1, lat2, lng2);
-        const distance = geoDistance(currentLat, currentLng, targetLat, targetLng);
+        const distance = geoDistance(currentLat, currentLng, targetLat, targetLng).toFixed(2);
         if (targetLocation == "") {
             alert('You are at current location! The calculated distance is ' + `${distance}` + ' km away.');
         } else {
@@ -675,7 +675,8 @@ document.addEventListener("DOMContentLoaded", async function () {
                 // lat1, lng1 -> current location
                 // lat2, lng2 -> target location
                 // distance = geoDistance(lat1, lng1, lat2, lng2);
-                const distance = geoDistance(currentLat, currentLng, targetLat, targetLng);
+                const distance = geoDistance(currentLat, currentLng, targetLat, targetLng).toFixed(2);
+
                 alert('The distance between ' + `${targetLocation}` + ' and current location is ' + `${distance}` + ' km away.');
                 // if (targetLocation == "") {
                     // alert('You are at current location! The calculated distance is ' + `${distance}` + ' km away.');

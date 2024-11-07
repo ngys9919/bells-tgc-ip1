@@ -211,12 +211,12 @@ const customIconLRT = L.icon({
 });
 
 const customIconTAXI = L.icon({
-  iconUrl: './res/markerMRT.png',
+  iconUrl: './res/markerTAXI.png',
   iconSize: [20, 40],
 });
 
 const customIconBUS = L.icon({
-  iconUrl: './res/markerLRT.png',
+  iconUrl: './res/markerBUS.png',
   iconSize: [20, 40],
 });
 
