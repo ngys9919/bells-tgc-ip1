@@ -55,7 +55,7 @@
     /* background-image: url('/images/shark.jpg'); */
     /* background-image: url('/images/shark.jpg'); */
     /* background-image: url("images/shark.jpg"); */
-    background-image: url("/images/singapore-changi-airport.webp");
+    background-image: url("/img/singapore-changi-airport.webp");
     background-size: cover;
     grid-column: 1 / 9;
     grid-row: 1 / 4;

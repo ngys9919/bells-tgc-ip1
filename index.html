@@ -9,7 +9,7 @@
   <!-- Set Up an HTML Redirect on the Website from index.html to home.html -->
   <meta http-equiv="refresh" content="1; URL=http://127.0.0.1:5500/home.html" />
 
-  <title data-i18n="title"></title>
+  <title>SG-finder: intro</title>
   <!-- <link rel="alternate" hreflang="en" href="https://ngys9919.github.io/bells-tgc-ip1/en/"/> -->
   <!-- <link rel="alternate" hreflang="zh" href="https://ngys9919.github.io/bells-tgc-ip1/zh/"/> -->
   <!-- icon file -->
@@ -22,18 +22,21 @@
     opacity: 1;
     visibility: visible;
     pointer-events: none;
+    background-color: #dee3ea;
+  }
+
+  25% {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: none;
+    background-color: #aac5ec;
   }
 
   50% {
     opacity: 1;
     visibility: visible;
     pointer-events: none;
-  }
-
-  70% {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: none;
+    background-color: #85b1ed;
   }
 
   100% {
@@ -85,25 +88,40 @@
   <div class="hideAfterDelay">
     <div class="landing" class="hideAfterDelay">
       <img class="main-logo" class="hideAfterDelay" src="img/TripAI.jpg">
-      <p class="subtitle" class="hideAfterDelay" data-i18n="welcome_message"></p>
-      <p class="subtitle" class="hideAfterDelay" data-i18n="welcome_text"></p>
+      <p class="subtitle" class="hideAfterDelay"></p>
+      <p class="subtitle" class="hideAfterDelay"></p>
     </div>
   </div>
 
   <!-- our own javascript files -->
-  <script src="js/multilang.js"></script>
+  <!-- <script src="js/multilang.js"></script> -->
   <script type="text/javascript">
     // SG-finder
     window.onload = function () { // can also use window.addEventListener('load', (event) => {
       // the document was fully read and all resources (like images) are loaded too.
-      // userPreferredLanguage = localStorage.getItem('language') || 'en';
-      // lang = userPreferredLanguage;
-      var message = {
+      userPreferredLanguage = localStorage.getItem('language') || 'en';
+      lang = userPreferredLanguage;
+      let message = {
         en: "What is SG-finder? \n\nThis is a web app for Singapore Tourist to find your place around Singapore, a red dot in the world!",
         zh: "什么是新加坡-搜索？\n\n这是一个网站提供给新加坡旅客寻找地方到处玩游这个小岛国！"
       };
-      alert(message[lang]);
+      
+      // alert(message[lang]);
       // alert("What is SG-finder? \n\nThis is a web app for Singapore Tourist to find your place around Singapore, a red dot in the world!");
+      // the document was fully read and all resources (like images) are loaded too.
+      
+      let collection = document.getElementsByClassName("subtitle");
+      if (lang == 'zh') {
+        collection[0].innerHTML = "欢迎来新加坡!";
+        collection[1].innerHTML = "祝旅途愉快.";
+      } else {
+        collection[0].innerHTML = "Welcome to Singapore!";
+        collection[1].innerHTML = "Have an enjoyable trip here.";
+      }
+      
+      setTimeout(function() {
+  	    alert(message[lang]);
+      },10)
     };
   </script>
 
