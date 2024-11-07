@@ -1,9 +1,87 @@
-#container {
-    display:flex;
-}
+.grid {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: minmax(2em, 1fr) repeat(6,minmax(auto, 10em)) minmax(2em, 1fr);
+  }
 
+  .grid_2-8 {
+    grid-column: 2 / 8;
+  }
 
-.chart {
-    flex-basis: 100%;
-    flex:1;
+  .grid_3-7 {
+    grid-column: 3 / 7;
+  }
+
+  .grid_1-5 {
+    grid-column: 1 / 5;
+  }
+
+  .grid_5-9 {
+    grid-column: 5 / 9;
+  }
+
+  .header {
+    background-color: #000;
+    color: #fff;
+    padding: 1em;
+    position: sticky;
+    text-align: center;
+    top: 0;
+    z-index: 10;
+  }
+
+  .header_menu {
+    column-gap: 1em;
+    display:  flex;
+    justify-content: center;
+  }
+
+  .header_menu-link {
+    color: #a8d6f7;
+  }
+
+  .menulist {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+  }
+
+  .feature {
+    grid-template-rows: 4em 1fr 4em;
+    min-height: 100vh;
+  }
+
+  .feature-img {
+    /* background-image: url('/images/shark.jpg'); */
+    /* background-image: url('/images/shark.jpg'); */
+    /* background-image: url("images/shark.jpg"); */
+    background-image: url("/images/singapore-changi-airport.webp");
+    background-size: cover;
+    grid-column: 1 / 9;
+    grid-row: 1 / 4;
+  }
+
+  .feature-content {
+    background-color: #183a53;
+    color: #fff;
+    grid-row-start: 2;
+    margin: 4em 0;
+    padding: 2em 2em;
+  }
+
+  .feature-content-1 {
+    align-self: start;
+    grid-column: 2 / 6;
+    opacity: 0.5;
+  }
+
+  .feature-content-2 {
+    align-self: end;
+    grid-column: 5 / 8;
+    opacity: 0.3;
+  }
+
+  .chart {
+    grid-template-rows: 4em 1fr 4em;
+    min-height: 80vh;  
 }

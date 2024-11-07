@@ -14,50 +14,141 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/chart.css">
+    <style>
+    @media (min-width: 600px){
+      .feature-content-1 {
+        opacity: 0.5;
+      }
+
+      .feature-content-2 {
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 600px){
+      .feature-content-1 {
+        opacity: 0.5;
+      }
+
+      .feature-content-2 {
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 350px){
+      .feature-content-1 {
+        opacity: 0.5;
+      }
+
+      .feature-content-2 {
+        opacity: 0;
+      }
+    }
+
+    @media (min-width: 1200px){
+      .feature-content-1 {
+        opacity: 0.5;
+      }
+
+      .feature-content-2 {
+        opacity: 0.3;
+      }
+    }
+
+
+    @media (min-width: 1440px){
+      .feature-content-1 {
+        opacity: 0.5;
+      }
+
+      .feature-content-2 {
+        opacity: 0.3;
+      }
+    }
+
+    @media (min-width: 2560px){
+      .feature-content-1 {
+        opacity: 0.5;
+      }
+
+      .feature-content-2 {
+        opacity: 0.3;
+      }
+    }
+    </style>
 </head>
 <body>
-    <h1>Chart Analytic</h1>
-    <div id="container">
-        <div class="alert alert-info" style="background-color: rgb(255 255 255 / 44%); overflow-y: scroll; line-height: 24px; max-width: 380px; max-height: 600px">
-            <h4>2023</h4>
-            <h5>Tourists Arrivals Charts for Singapore</h5>
-            <br>
-            <p>The charts provide insights into tourist arrivals to Singapore in 2023,
-            <wbr>analyzed by both monthly trends and regional origins.</p>
-            <ol>
-            <li><strong>Tourist Arrivals by Month</strong> (Line Chart on the Left)</li>
-                <ul>
-                <li><strong>Peak Period: </strong>Tourist arrivals peaked around July with approximately 1.4 million visitors. This could be due to summer holidays in many countries, making it a popular travel season.</li>
-                <li><strong>Low Period: </strong>The lowest arrivals were recorded in January at around 0.9 million visitors, potentially due to the post-holiday season or colder months in other regions.</li>
-                <li><strong>Seasonal Trend: </strong>There’s a noticeable increase in tourist arrivals from January to July and then a decline from August to October, followed by a small recovery in November and December.</li>
-                <li><strong><em>Insights: </em></strong>The trend suggests a strong seasonality effect, with more tourists visiting Singapore during mid-year and end-of-year holiday seasons.</li>
-                </ul>
-            <br>
-            <li><strong>Tourist Arrivals by Region</strong> (Bar Chart on the Right)</li>
-                <ul>
-                <li><strong>Top Region: </strong>Southeast Asia is the largest contributor, with over 5 million tourists arriving from this region. This makes sense as Singapore is geographically close and culturally connected to Southeast Asia.</li>
-                <li><strong>Second-Highest Region: </strong>Greater China ranks second, contributing around 2 million tourists. This may include travelers from China, Hong Kong, and Taiwan, markets that typically have strong travel connections to Singapore.</li>
-                <li><strong>Other Significant Contributors: </strong>Europe and Oceania show moderate levels of arrivals, each contributing between 500,000 to 1 million tourists.</li>
-                <li><strong>Minor Contributors: </strong>Regions like Africa, West Asia, and the Americas have relatively low tourist arrival numbers, indicating fewer visitors from these regions.</li>
-                <li><strong><em>Insights: </em></strong>The dominance of tourists from neighboring regions reflects Singapore’s appeal within Asia, though it continues to attract visitors from Western regions like Europe and Oceania.</li>
-                </ul>
-            </ol>
-            <br>
-            <h4>Summary</h4>
-            <p>The data suggests that tourist arrivals to Singapore in 2023 were influenced by seasonality, with a mid-year peak, and that the majority of tourists came from Southeast Asia, followed by Greater China. This aligns with Singapore’s position as a travel hub in Asia and its connectivity with nearby regions.</p>
-            <br>
-            <!-- <input type="submit" value="Continue..." class="btn btn-outline-success mr-2 my-2" id="continueBtn"/> -->
-            <a href="chatgpt.html" class="btn btn-outline-success my-2" id="chatgptBtn">Ask ChatGPT</a>
-            <a href="home.html" class="btn btn-outline-success my-2" id="homeBtn">Home</a>
+    <header class="header grid">
+        <div class="header_content grid_2-8">
+          <h1>Chart Analytic</h1>
         </div>
-        <div style="height:80vh" class="chart">
+        <nav class="grid_3-7">
+          <ul class="header_menu menulist">
+            <li>
+              <a href="chatgpt.html" class="btn btn-outline-success my-2 header_menu-link" id="chatgptBtn">Ask ChatGPT</a>
+            </li>
+            <li>
+              <a href="home.html" class="btn btn-outline-success my-2 header_menu-link" id="homeBtn">Home</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <section class="feature grid">
+        <div class="feature-img"></div>
+
+        <article class="feature-content feature-content-1">
+          Welcome to Singapore! Known as the "Lion City," Singapore is a dynamic melting pot of cultures, 
+          blending Chinese, Malay, Indian, and Western influences into a vibrant urban landscape. 
+          From the iconic Marina Bay Sands and the futuristic Gardens by the Bay to the historic charm of
+          Chinatown, Little India, and Kampong Glam, there is something for every taste. 
+        </article>
+        
+        <article class="feature-content feature-content-2">
+          This city-state also takes pride in its cleanliness, safety, and efficiency, offering a world-class 
+          public transport system that makes exploring easy and enjoyable. With its unique blend of nature and modernity, 
+          Singapore promises an unforgettable experience!
+        </article>
+        
+      </section>
+      
+    <div class="chart grid">
+        <div style="height:80vh" class="grid_1-5">
             <div id="chart-xDate-yNumber"></div>
         </div>
-        <div style="height:80vh" class="chart">
+        <div style="height:80vh" class="grid_5-9">
             <div id="chart-xRegion-yNumber"></div>
         </div>
     </div>
 
+    <div class="alert alert-info">
+      <h4>2023</h4>
+      <h5>Tourists Arrivals Charts for Singapore</h5>
+      <br>
+      <p>The charts provide insights into tourist arrivals to Singapore in 2023,
+      <wbr>analyzed by both monthly trends and regional origins.</p>
+      <ol>
+      <li><strong>Tourist Arrivals by Month</strong> (Line Chart on the Left)</li>
+          <ul>
+          <li><strong>Peak Period: </strong>Tourist arrivals peaked around July with approximately 1.4 million visitors. This could be due to summer holidays in many countries, making it a popular travel season.</li>
+          <li><strong>Low Period: </strong>The lowest arrivals were recorded in January at around 0.9 million visitors, potentially due to the post-holiday season or colder months in other regions.</li>
+          <li><strong>Seasonal Trend: </strong>There’s a noticeable increase in tourist arrivals from January to July and then a decline from August to October, followed by a small recovery in November and December.</li>
+          <li><strong><em>Insights: </em></strong>The trend suggests a strong seasonality effect, with more tourists visiting Singapore during mid-year and end-of-year holiday seasons.</li>
+          </ul>
+      <br>
+      <li><strong>Tourist Arrivals by Region</strong> (Bar Chart on the Right)</li>
+          <ul>
+          <li><strong>Top Region: </strong>Southeast Asia is the largest contributor, with over 5 million tourists arriving from this region. This makes sense as Singapore is geographically close and culturally connected to Southeast Asia.</li>
+          <li><strong>Second-Highest Region: </strong>Greater China ranks second, contributing around 2 million tourists. This may include travelers from China, Hong Kong, and Taiwan, markets that typically have strong travel connections to Singapore.</li>
+          <li><strong>Other Significant Contributors: </strong>Europe and Oceania show moderate levels of arrivals, each contributing between 500,000 to 1 million tourists.</li>
+          <li><strong>Minor Contributors: </strong>Regions like Africa, West Asia, and the Americas have relatively low tourist arrival numbers, indicating fewer visitors from these regions.</li>
+          <li><strong><em>Insights: </em></strong>The dominance of tourists from neighboring regions reflects Singapore’s appeal within Asia, though it continues to attract visitors from Western regions like Europe and Oceania.</li>
+          </ul>
+      </ol>
+      <br>
+      <h4>Summary</h4>
+      <p>The data suggests that tourist arrivals to Singapore in 2023 were influenced by seasonality, with a mid-year peak, and that the majority of tourists came from Southeast Asia, followed by Greater China. This aligns with Singapore’s position as a travel hub in Asia and its connectivity with nearby regions.</p>
+      <br>
+  </div>
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
