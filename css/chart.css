@@ -21,6 +21,7 @@
   }
 
   .header {
+    grid-area: header;
     background-color: #000;
     color: #fff;
     padding: 1em;
@@ -47,6 +48,7 @@
   }
 
   .feature {
+    grid-area: feature;
     grid-template-rows: 4em 1fr 4em;
     min-height: 100vh;
   }
@@ -81,7 +83,20 @@
     opacity: 0.3;
   }
 
-  .chart {
-    grid-template-rows: 4em 1fr 4em;
-    min-height: 80vh;  
+.chart {
+  display: grid;
+  grid-template-rows: 4em 1fr 4em;
+  min-height: 80vh; 
+}
+
+.chart1 {
+  grid-area: chart1;
+}
+
+.chart2 {
+  grid-area: chart2;
+}
+
+.summary {
+  grid-area: summary;
 }

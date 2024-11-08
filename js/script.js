@@ -34,6 +34,8 @@ languageSelected.selected = "English";
 
 let sidebarVisible = false;
 
+
+
 loadDefaultSettings();
 
 let loadedData = [];
@@ -266,6 +268,10 @@ document.addEventListener("DOMContentLoaded", async function () {
   // check sidebar visibility
   checkSidebarVisibility();
 
+  // mobile orientation support
+  const userMobileOrientation = localStorage.getItem('mobileOrientation') || 'portrait';
+  mobileOrientation = userMobileOrientation;
+
   // sidebar language support
   const userSidebarToggleState = localStorage.getItem('sidebarToggleState') || 'toggleonoff';
   sidebarToggleState= userSidebarToggleState;
@@ -274,7 +280,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const userPreferredLanguage = localStorage.getItem('language') || 'en';
   lang = userPreferredLanguage;
   const langData = await fetchLanguageData(userPreferredLanguage);
-  updateContent(langData);
+  updateContent(langData, sidebarToggleState);
   
   
 
@@ -498,9 +504,17 @@ document.addEventListener("DOMContentLoaded", async function () {
   layer.openTooltip();
   // layer.closeTooltip();
 
+  document
+    .querySelector("#sidebarLocateBtn")
+    .addEventListener("click", function () {
+      // alert("You have simulated Locate Button!");
+      // Simulated clicked event for checkLocationBtn 
+      const clickEvent = new Event('click');
+      document.querySelector("#locateBtn").dispatchEvent(clickEvent);
+  });
   
   myLocation.addEventListener("click", function() {
-
+    
     locateClickCount ++
 
     if (locateClickCount % 2 !== 0){
@@ -583,13 +597,23 @@ geoLocation.addEventListener("click", function() {
     }
 });
 
+document
+    .querySelector("#sidebarResetBtn")
+    .addEventListener("click", function () {
+      // alert("You have simulated Reset Button!");
+      // Simulated clicked event for checkLocationBtn 
+      const clickEvent = new Event('click');
+      document.querySelector("#resetBtn").dispatchEvent(clickEvent);
+  });
 
 document
     .querySelector("#resetBtn")
     .addEventListener("click", async function () {
       lang = "en";
-      sidebarToggleState = "toggleonoff";
-      changeLanguage(lang, sidebarToggleState);
+      sidebarToggleState = "toggleonff";
+      // sidebarToggleState = "toggleon";
+      // mobileOrientation = "portrait";
+      changeLanguage(lang, sidebarToggleState, mobileOrientation);
       quickSearchByCategoryID = null;
       // let myLocation = document.querySelector("#locateBtn");
       myLocation.innerText = "Locate Me!";
@@ -606,7 +630,11 @@ document
       const resultElement1 = document.querySelector("#result-listing");
       resultElement1.innerHTML = "";
       const myToggle = document.getElementById("sidebarToggleBtn");
-      myToggle.innerTEXT = "Toggle On/Off";
+      if (mobileOrientation == "landscape") {
+        myToggle.innerHTML = "Toggle On/Off";
+      } else if (mobileOrientation == "portrait") {
+        myToggle.innerHTML = "On/Off";
+      }
       // const searchResultLayer1 = L.layerGroup();
       // searchResultLayer1.clearLayers();
       // map.removeLayer(searchResultLayer);
@@ -661,8 +689,14 @@ document
       // alert("You have clicked Toggle button!");
       let x = document.getElementById("sidebar-search-results");
       let y = document.getElementById("sidebarToggleBtn");
+      let w = document.getElementById("sidebarSearchBtn");
+      let z = document.getElementById("sidebarSearchTerms");
       if (x.style.display === "none") {
         x.style.display = "block";
+        w.style.opacity = 1;
+        z.style.opacity = 1;
+        // Then, enable the button
+        // z.disabled = false;
         sidebarToggleState = "toggleon";
         if (lang === 'zh') {
            y.innerHTML = "显示是开";
@@ -670,8 +704,12 @@ document
            y.innerHTML = "Listings On";
         }
         // alert("Sidebar Search Display is toggle on!");
-      } else {
+      } else if (x.style.display === "block") {
         x.style.display = "none";
+        w.style.opacity = 0;
+        z.style.opacity = 0;
+        // Then, disable the button
+        // z.disabled = true;
         sidebarToggleState = "toggleoff";
         if (lang === 'zh') {
           y.innerHTML = "显示是关";
@@ -679,6 +717,19 @@ document
           y.innerHTML = "Listings Off";
         }
         // alert("Sidebar Search Display is toggle off!");
+      } else {
+        // alert(x.style.display);
+        x.style.display = "block";
+        w.style.opacity = 1;
+        z.style.opacity = 1;
+        // Then, enable the button
+        // z.disabled = false;
+        sidebarToggleState = "toggleonoff";
+        if (lang === 'zh') {
+           y.innerHTML = "切换显示";
+        } else {
+           y.innerHTML = "Toggle On/Off";
+        }
       }
       // alert(x.style.display);
     });
@@ -1032,8 +1083,8 @@ if (data1.results.length == 0) {
     .addEventListener("click", async function () {
       // alert("You have selected English!");
       lang = "en";
-      sidebarToggleState = "toggleonoff";
-      changeLanguage(lang, sidebarToggleState);
+      // sidebarToggleState = "toggleonoff";
+      changeLanguage(lang, sidebarToggleState, mobileOrientation);
     });
 
     document
@@ -1041,8 +1092,8 @@ if (data1.results.length == 0) {
     .addEventListener("click", async function () {
       // alert("You have selected Chinese!");
       lang = "zh";
-      sidebarToggleState = "toggleonoff";
-      changeLanguage(lang, sidebarToggleState);
+      // sidebarToggleState = "toggleonoff";
+      changeLanguage(lang, sidebarToggleState, mobileOrientation);
     });
 
     // document
@@ -1064,12 +1115,12 @@ if (data1.results.length == 0) {
         {
           // alert("You have selected sidebar English!");
           lang = "en";
-          changeLanguage(lang, sidebarToggleState);
+          changeLanguage(lang, sidebarToggleState, mobileOrientation);
         } else if (languageSelected.value == "中文")
         {
           // alert("You have selected sidebar Chinese!");
           lang = "zh";
-          changeLanguage(lang, sidebarToggleState);
+          changeLanguage(lang, sidebarToggleState, mobileOrientation);
         }
     });
     

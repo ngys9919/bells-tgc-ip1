@@ -10,9 +10,10 @@ function checkSidebarVisibility() {
 }
 
 // Function to set the language preference
-function setLanguagePreference(lang, sidebarToggleState) {
+function setLanguagePreference(lang, sidebarToggleState, mobileOrientation) {
     localStorage.setItem('language', lang);
     localStorage.setItem('sidebarToggleState', sidebarToggleState);
+    localStorage.setItem('mobileOrientation', mobileOrientation);
     location.reload();
   }
   
@@ -23,7 +24,7 @@ function setLanguagePreference(lang, sidebarToggleState) {
   }
   
   // Function to update content based on selected language
-  function updateContent(langData) {
+  function updateContent(langData, sidebarToggleState) {
     // if ((sidebarVisible == true) && (lang == "en")) {
       // console.log("Icons for Sidebar!");
     // } else {
@@ -40,17 +41,25 @@ function setLanguagePreference(lang, sidebarToggleState) {
           // If the element is an input with placeholder_text attribute, set placeholder
           element.placeholder = langData[key];
         } else if (element.tagName === "BUTTON" && key === "sidebar_Toggle") {
+          let x = document.getElementById("sidebar-search-results");
           let y = document.getElementById("sidebarToggleBtn");
-
+          let w = document.getElementById("sidebarSearchBtn");
+          let z = document.getElementById("sidebarSearchTerms");
           if ((sidebarVisible == true) && (lang == "zh")) {
             // alert("You have come here 2!");
             if (sidebarToggleState === "toggleon") {
-              alert("You have come here toggleon!");
+              // alert("You have come here toggleon!");
+              x.style.display = "block";
               y.innerHTML = "显示是开";
+              w.style.opacity = 1;
+              z.style.opacity = 1;
               // console.log(y.innerHTML);
             } else if (sidebarToggleState === "toggleoff") {
               // alert("You have come here toggleoff!");
+              x.style.display = "none";
               y.innerHTML = "显示是关";
+              w.style.opacity = 0;
+              z.style.opacity = 0;
               // console.log(y.innerHTML);
             } else {
               // alert("You have come here toggle onoff!");
@@ -62,15 +71,25 @@ function setLanguagePreference(lang, sidebarToggleState) {
             // alert("You have come here 1!");
             if (sidebarToggleState === "toggleon") {
               // alert("You have come here toggleon!");
+              x.style.display = "block";
               y.innerHTML = "Listings On";
+              w.style.opacity = 1;
+              z.style.opacity = 1;
               // console.log(y.innerHTML);
             } else if (sidebarToggleState === "toggleoff") {
               // alert("You have come here toggleoff!");
+              x.style.display = "none";
               y.innerHTML = "Listings Off";
+              w.style.opacity = 0;
+              z.style.opacity = 0;
               // console.log(y.innerHTML);
             } else {
+              if (mobileOrientation == "landscape") {
+                y.innerHTML = "Toggle On/Off";
+              } else if (mobileOrientation == "portrait") {
+                y.innerHTML = "On/Off";
+              }
               // alert("You have come here toggle onoff!");
-              y.innerHTML = "Toggle On/Off";
               // console.log(y.innerHTML);
             }
             // console.log(y.innerHTML);
@@ -106,17 +125,18 @@ function setLanguagePreference(lang, sidebarToggleState) {
 
 
   // Function to change language
-  async function changeLanguage(lang, sidebarToggleState) {
-    await setLanguagePreference(lang, sidebarToggleState);
+  async function changeLanguage(lang, sidebarToggleState, mobileOrientation) {
+    await setLanguagePreference(lang, sidebarToggleState, mobileOrientation);
     
     const langData = await fetchLanguageData(lang);
     checkSidebarVisibility();
-    updateContent(langData);
+    updateContent(langData, sidebarToggleState);
   
   }
 
 let lang = "en";
 let sidebarToggleState = "toggleonoff";
+let mobileOrientation = "portrait";
 
 function debounce (func, wait, immediate) {
     var timeout;
@@ -141,6 +161,9 @@ async function resizeUpdateContent() {
 
   // Call updateContent() on page load
 window.addEventListener('DOMContentLoaded', async () => {
+    // mobile orientation support
+    const userMobileOrientation = localStorage.getItem('mobileOrientation') || 'portrait';
+    mobileOrientation = userMobileOrientation;
     // sidebar language support
     const userSidebarToggleState = localStorage.getItem('sidebarToggleState') || 'toggleonoff';
     sidebarToggleState = userSidebarToggleState;
@@ -149,7 +172,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     lang = userPreferredLanguage;
     const langData = await fetchLanguageData(userPreferredLanguage);
     checkSidebarVisibility();
-    updateContent(langData);
+    updateContent(langData, sidebarToggleState);
 });
 
 // window.addEventListener('resize',debounce(handler, delay, immediate),false);
@@ -166,6 +189,9 @@ window.addEventListener('resize', debounce(() => resizeUpdateContent(), 200, fal
 
 // window.addEventListener('resize', async function() {
   // alert("You have resized!");
+  // mobile orientation
+  // const userMobileOrientation = localStorage.getItem('mobileOrientation') || 'portrait';
+  // mobileOrientation = userMobileOrientation;
   // toggle state
   // const userSidebarToggleState = localStorage.getItem('sidebarToggleState') || 'toggleonoff';
   // sidebarToggleState = userSidebarToggleState;
@@ -174,9 +200,19 @@ window.addEventListener('resize', debounce(() => resizeUpdateContent(), 200, fal
   // lang = userPreferredLanguage;
   // const langData = await fetchLanguageData(userPreferredLanguage);
   // checkSidebarVisibility();
-  // updateContent(langData);
+  // updateContent(langData, sidebarToggleState);
 // });
 
 // For mobile orientation changes use:
-window.addEventListener('orientationchange', () => console.log('hello'), false);
-
+window.addEventListener('orientationchange', (event) => {
+  // angle = 0 => portrait mode
+  // angle = 90 => landscape mode
+  
+  if (event.target.screen.orientation.angle == 0) {
+    mobileOrientation = "portrait";
+  } else if (event.target.screen.orientation.angle == 90) {
+    mobileOrientation = "landscape";
+  }
+  changeLanguage(lang, sidebarToggleState, mobileOrientation);
+  // alert(`orientation change ${event.target.screen.orientation.angle}`), false
+});

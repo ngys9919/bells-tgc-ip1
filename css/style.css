@@ -445,3 +445,23 @@ body {
   padding: 2px;
   margin: 2px;
 }
+
+#sidebarChartBtn {
+  padding: 5px;
+  margin: 5px;
+}
+
+#sidebarAskChatGPTBtn {
+  padding: 5px;
+  margin: 5px;
+}
+
+#sidebarResetBtn {
+  padding: 5px;
+  margin: 5px;
+}
+
+#sidebarLocateBtn {
+  padding: 5px;
+  margin: 5px;
+}

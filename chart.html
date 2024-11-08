@@ -75,7 +75,40 @@
         opacity: 0.3;
       }
     }
-    </style>
+
+  @media (orientation: landscape) {
+  .chart{
+    grid-template-areas: 
+            "header"
+            "feature"
+            "chart1 chart2"
+            "summary"
+  }
+
+  .chart {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+  }
+}
+
+  @media (orientation: portrait) {
+  .chart{
+    grid-template-areas: 
+            "header"
+            "feature"
+            "chart1"
+            "chart2"
+            "summary"
+    }
+    .chart {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+      place-items: center;
+    }
+  }
+  </style>
 </head>
 <body>
     <header class="header grid">
@@ -111,16 +144,21 @@
         
       </section>
       
-    <div class="chart grid">
-        <div style="height:80vh" class="grid_1-5">
-            <div id="chart-xDate-yNumber"></div>
-        </div>
-        <div style="height:80vh" class="grid_5-9">
-            <div id="chart-xRegion-yNumber"></div>
-        </div>
+    <!-- <div class="chart grid"> -->
+      <div class="chart">
+        <!-- <div style="height:80vh" class="grid_1-5"> -->
+          <div style="height:80vh">
+          <div class="chart1" id="chart-xDate-yNumber"></div>
+          </div>
+        <!-- </div> -->
+        <!-- <div style="height:80vh" class="grid_5-9"> -->
+          <div style="height:80vh">
+          <div class="chart2" id="chart-xRegion-yNumber"></div>
+          </div>
+        <!-- </div> -->
     </div>
 
-    <div class="alert alert-info">
+    <div class="summary alert alert-info">
       <h4>2023</h4>
       <h5>Tourists Arrivals Charts for Singapore</h5>
       <br>

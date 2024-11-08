@@ -327,6 +327,46 @@
         left: 105px;
       }
     }
+
+    @media only screen and (max-width: 768px) and (orientation: landscape) {
+      .leaflet-control-zoom {
+        position: absolute;
+        top: 20px;
+        left: 485px;
+      }
+
+      .leaflet-bar-part.leaflet-bar-part-single {
+        position: absolute;
+        top: 20px;
+        left: 535px;
+      }
+
+      .leaflet-control-layers {
+        position: fixed;
+        top: 70px;
+        left: 585px;
+      }
+}
+
+  @media (orientation: portrait) {
+    .leaflet-control-zoom {
+        position: absolute;
+        top: 20px;
+        left: 315px;
+      }
+
+      .leaflet-bar-part.leaflet-bar-part-single {
+        position: absolute;
+        top: 20px;
+        left: 365px;
+      }
+
+      .leaflet-control-layers {
+        position: fixed;
+        top: 70px;
+        left: 415px;
+      }
+  }
   </style>
 </head>
 
@@ -364,11 +404,11 @@
         <!-- <a href="#" data-i18n="navbar_locateMe"><span class="material-symbols-outlined"> folder </span> Locate Me! </a> -->
       <!-- </li> -->
       <li>
-        <a href="#"><span class="material-symbols-outlined"> folder </span><button class="btn btn-outline-success" type="button" id="resetBtn" data-i18n="navbar_resetMap"> Reset Map </button></a>
+        <a href="#"><span class="material-symbols-outlined"> folder </span><button class="btn btn-outline-success" type="button" id="sidebarResetBtn" data-i18n="navbar_resetMap"> Reset Map </button></a>
       </li>
       <!-- <button class="btn btn-outline-success" type="button" id="resetBtn" data-i18n="navbar_resetMap"> Reset Map </button> -->
       <li>
-        <a href="#"><span class="material-symbols-outlined"> groups </span><button class="btn btn-outline-success" type="button" id="locateBtn" data-i18n="navbar_locateMe"> Locate Me! </button></a>
+        <a href="#"><span class="material-symbols-outlined"> groups </span><button class="btn btn-outline-success" type="button" id="sidebarLocateBtn" data-i18n="navbar_locateMe"> Locate Me! </button></a>
       </li>
       <!-- <button class="btn btn-outline-success" type="button" id="locateBtn" data-i18n="navbar_locateMe"> Locate Me! </button> -->
       <!-- <li>  -->
@@ -380,12 +420,12 @@
       <li>
         <!-- <a href="chatgpt.html" data-i18n="navbar_askChatGPT"><span class="material-symbols-outlined"> flag </span> Ask ChatGPT </a> -->
         <!-- <a href="chatgpt.html" class="btn btn-outline-success" id="askChatGPTBtn" data-i18n="navbar_askChatGPT"></a> -->
-        <a href="chatgpt.html"><span class="material-symbols-outlined"> flag </span><button class="btn btn-outline-success" type="button" id="askChatGPTBtn" data-i18n="navbar_askChatGPT"> Ask ChatGPT </button></a>
+        <a href="chatgpt.html"><span class="material-symbols-outlined"> flag </span><button class="btn btn-outline-success" type="button" id="sidebarAskChatGPTBtn" data-i18n="navbar_askChatGPT"> Ask ChatGPT </button></a>
       </li>
       <li>
         <!-- <a href="chart.html" data-i18n="navbar_chart"><span class="material-symbols-outlined"> notifications_active </span> Chart </a> -->
         <!-- <a href="chart.html" class="btn btn-outline-success" id="chartBtn" data-i18n="navbar_chart"><span class="material-symbols-outlined"> notifications_active </span> Chart </a> -->
-        <a href="chart.html"><span class="material-symbols-outlined"> notifications_active </span><button class="btn btn-outline-success" type="button" id="chartBtn" data-i18n="navbar_chart"> Chart </button></a>
+        <a href="chart.html"><span class="material-symbols-outlined"> notifications_active </span><button class="btn btn-outline-success" type="button" id="sidebarChartBtn" data-i18n="navbar_chart"> Chart </button></a>
       </li>
       <h4>
         <span>Account</span>
@@ -545,8 +585,8 @@
     <input type="text" placeholder="" id="sidebarSearchTerms" data-i18n="sidebar_placeholderSearch"/>
     <!-- <button class="btn btn-outline-success" id="sidebar-searchBtn">Search</button> -->
     <!-- <button class="btn btn-outline-success" id="sidebar-toggleBtn">Toggle On/Off</button> -->
-    <button id="sidebarSearchBtn" data-i18n="sidebar_Search">Search</button>
-    <button id="sidebarToggleBtn" data-i18n="sidebar_Toggle">Toggle On/Off</button>
+    <button id="sidebarSearchBtn" data-i18n="sidebar_Search"></button>
+    <button id="sidebarToggleBtn" data-i18n="sidebar_Toggle"></button>
     <div id="sidebar-search-results"></div>
   </div>
 
