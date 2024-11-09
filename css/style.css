@@ -392,6 +392,26 @@ body {
   border-radius: 4px;
 }
 
+.chartBtnClass {
+  padding: 5px;
+  margin: 5px;
+}
+
+.askChatGPTBtnClass {
+  padding: 5px;
+  margin: 5px;
+}
+
+.resetBtnClass {
+  padding: 5px;
+  margin: 5px;
+}
+
+/* .locateBtnClass { */
+  /* padding: 5px; */
+  /* margin: 5px; */
+/* } */
+
 #chartBtn {
   padding: 5px;
   margin: 5px;
@@ -446,20 +466,20 @@ body {
   margin: 2px;
 }
 
-#sidebarChartBtn {
-  padding: 5px;
-  margin: 5px;
-}
+/* #sidebarChartBtn { */
+  /* padding: 5px; */
+  /* margin: 5px; */
+/* } */
 
-#sidebarAskChatGPTBtn {
-  padding: 5px;
-  margin: 5px;
-}
+/* #sidebarAskChatGPTBtn { */
+  /* padding: 5px; */
+  /* margin: 5px; */
+/* } */
 
-#sidebarResetBtn {
-  padding: 5px;
-  margin: 5px;
-}
+/* #sidebarResetBtn { */
+  /* padding: 5px; */
+  /* margin: 5px; */
+/* } */
 
 #sidebarLocateBtn {
   padding: 5px;

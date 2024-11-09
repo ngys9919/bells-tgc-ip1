@@ -139,7 +139,7 @@ let sidebarToggleState = "toggleonoff";
 let mobileOrientation = "portrait";
 
 function debounce (func, wait, immediate) {
-    var timeout;
+    let timeout;
     return () => {
         const context = this, args = arguments;
         const later = function() {

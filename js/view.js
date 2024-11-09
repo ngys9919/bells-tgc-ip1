@@ -2,7 +2,7 @@ function createMap() {
   let singapore = [1.29,103.85]; // #1 Singapore latlng
   // let map = L.map('map');
   // let map = L.map('map1');
-  var map = L.map('map', {
+  let map = L.map('map', {
     // center: [1.2494, 103.8303],
     center: [1.29, 103.85],
     zoom: 10,
@@ -47,12 +47,12 @@ function createMap() {
   // can be zoomed using the scroll wheel of the mouse. 
   // When this option is enabled, users can zoom in and out of the map by scrolling up or down with the mouse wheel. 
   // Conversely, when it’s disabled, scrolling the mouse wheel won’t change the zoom level of the map.
-  // var map = L.map('map', {
+  // let map = L.map('map', {
     // scrollWheelZoom: true // Enable scroll wheel zoom
   // });
 
 // Or disable scroll wheel zoom
-// var map = L.map('map', {
+// let map = L.map('map', {
 //     scrollWheelZoom: false // Disable scroll wheel zoom
 // });
 
@@ -60,7 +60,7 @@ function createMap() {
 // Attribution refers to giving credit to the data sources or map providers whose content is being used in the map. 
 // The attributionControl allows developers to control how this attribution information is presented to users.
 
-// var map = L.map('map', {
+// let map = L.map('map', {
   // attributionControl: true, // Enable attribution control
   // attributionControlOptions: {
       // position: 'bottomright', // Position the control in the bottom-right corner
@@ -86,7 +86,7 @@ function createMap() {
   // const map = L.map("map");
   // map.setView(singaporeLatLng, 11);
 
-  // var map = L.map('map', {
+  // let map = L.map('map', {
     // maxZoom: 19,
     // minZoom: 10,
     // zoomControl: false
