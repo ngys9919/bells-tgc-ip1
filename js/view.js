@@ -2,12 +2,14 @@
   
 function createMap() {
   
-  let singapore = [1.29,103.85]; // #1 Singapore latlng
+  let singapore = [1.2761, 103.8458]; // internationalPlaza
+  // let singapore = [1.29,103.85]; // #1 Singapore latlng
   // let map = L.map('map');
   // let map = L.map('map1');
   let map = L.map('map', {
     // center: [1.2494, 103.8303],
-    center: [1.29, 103.85],
+    // center: [1.29, 103.85],
+    center: [1.2761, 103.8458],
     zoom: 10,
     maxZoom: 19,
     minZoom: 10,
@@ -18,7 +20,7 @@ function createMap() {
     // preferCanvas: true // Enable Canvas rendering
   });
   
-  map.setView(singapore, 10); // #2 Set the center point
+  map.setView(singapore, 12); // #2 Set the center point
 
   // The attribution control allows you to display attribution data in a small text box on a map. 
   // It is put on the map by default unless you set its attributionControl option to false.
@@ -111,7 +113,9 @@ L.control.zoom({
 
 // preferCanvas: true // Enable Canvas rendering
 
+  // const singaporeLatLng = [1.29, 103.85];
   // const singaporeLatLng = [1.3521, 103.8198];
+  // const singaporeLatLng = [1.2761, 103.8458];
   // const map = L.map("map");
   // map.setView(singaporeLatLng, 11);
 
