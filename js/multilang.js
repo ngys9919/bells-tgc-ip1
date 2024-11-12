@@ -162,15 +162,21 @@ function resizeUpdateContent() {
   if (width < 768) {
     // alert("The width is now phone-sized!");
     // map.setView(singapore, 12); 
-    // map.zoomIn(); 
+    // map.zoomIn();
+    // set the zoom level to 10
+    // map.setZoom(10); 
   } else if ((width >= 768) && (width <= 992)) {
     // alert("The width is now tablet-sized!");
     // map.setView(singapore, 11);
     // map.zoomIn();
+    // set the zoom level to 8
+    // map.setZoom(8);
   } else {
     // alert("The width is now laptop-sized!");
     // map.setView(singapore, 10);
     // map.zoomOut();
+    // set the zoom level to 8
+    // map.setZoom(8);
   }
   // Refresh the page by setting the URL to itself
   location.href = location.href;

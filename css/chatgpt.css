@@ -98,5 +98,6 @@
 }
 
 #extension {
-  visibility: hidden;
+  /* visibility: hidden; */
+  visibility: visible;
 }

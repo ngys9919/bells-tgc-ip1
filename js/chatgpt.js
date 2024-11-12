@@ -498,10 +498,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     .querySelector("#continueBtn")
     .addEventListener("click", async function () {
         // alert("You have selected Continue... Button!");
-        const extension = document.getElementById("extension");
-        if (window.getComputedStyle(extension).visibility === "hidden") {
-            extension.style.visibility = "visible";
-        }
+        // const extension = document.getElementById("extension");
+        // if (window.getComputedStyle(extension).visibility === "hidden") {
+            // extension.style.visibility = "visible";
+            // locateUser(map);
+        // }
         
         // clear the answer to the chatgpt results div
         const resultElement = document.querySelector("#chatgpt-tellmemore");

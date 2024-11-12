@@ -1,4 +1,8 @@
-let singapore = [1.29,103.85]; // #1 Singapore latlng
+
+  
+function createMap() {
+  
+  let singapore = [1.29,103.85]; // #1 Singapore latlng
   // let map = L.map('map');
   // let map = L.map('map1');
   let map = L.map('map', {
@@ -14,9 +18,6 @@ let singapore = [1.29,103.85]; // #1 Singapore latlng
     // preferCanvas: true // Enable Canvas rendering
   });
   
-function createMap() {
-  
-
   map.setView(singapore, 10); // #2 Set the center point
 
   // The attribution control allows you to display attribution data in a small text box on a map. 

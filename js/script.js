@@ -1,13 +1,13 @@
 const FOURSQUARE_API = "https://api.foursquare.com/v3/places";
 
-let loginCoordinates = [];
+// let loginCoordinates = [];
 // let defaultCoordinates = [1.33433, 103.821833];
 let defaultCoordinates = [1.29, 103.85]; // #1 Singapore latlng
 let setCoordinates = defaultCoordinates;
 
-if (loginCoordinates.length !== 0) {
-  setCoordinates = loginCoordinates
-};
+// if (loginCoordinates.length !== 0) {
+  // setCoordinates = loginCoordinates
+// };
 
 let defaultSearchLimit = 10;
 let defaultSearchRadius = 2500;
@@ -532,6 +532,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       locateControl.stop()
       // map.setView(setCoordinates, 11.5)
       map.setView(setCoordinates, 10)
+      
       locateClickCount = 0
 
       if (lang === 'zh') {
@@ -572,6 +573,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     else if (locateClickCount % 2 == 0) {
       // map.setView(setCoordinates, 11.5)
       map.setView(setCoordinates, 10)
+      
       locateClickCount = 0
 
       if (lang === 'zh') {

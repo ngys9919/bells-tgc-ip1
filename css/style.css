@@ -134,14 +134,13 @@
   cursor: pointer;
 }
 
-.leaflet-control-zoom-slider {
+/* .leaflet-control-zoom-slider { */
   /* Styles for the zoom slider (if applicable) */
   /* Add your styles here */
-}
+/* } */
 
 
 .popup-postal_code {
-
   color: maroon;
   font-family: "Poppins", sans-serif;
   font-size: 12px;
@@ -149,7 +148,6 @@
 }
 
 .popup-street_name {
-
   font-family: "Poppins", sans-serif;
 }
 
