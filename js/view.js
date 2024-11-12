@@ -1,5 +1,4 @@
-function createMap() {
-  let singapore = [1.29,103.85]; // #1 Singapore latlng
+let singapore = [1.29,103.85]; // #1 Singapore latlng
   // let map = L.map('map');
   // let map = L.map('map1');
   let map = L.map('map', {
@@ -14,6 +13,9 @@ function createMap() {
     preferCanvas: false // Disable Canvas rendering (default behavior)
     // preferCanvas: true // Enable Canvas rendering
   });
+  
+function createMap() {
+  
 
   map.setView(singapore, 10); // #2 Set the center point
 

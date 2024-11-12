@@ -19,6 +19,7 @@
 
 #map-container {
   position: relative;
+  /* width: 100%; */
 }
 
 /* This is for every leaflet-map controls */
@@ -34,8 +35,8 @@
 
 /* this work */
 .leaflet-control-zoom {
-  position: absolute;
-  top: 20px;
+  position: fixed;
+  top: 60px;
   left: 5px;
 }
 
@@ -54,8 +55,8 @@
 
 /* this work */
 .leaflet-bar-part.leaflet-bar-part-single {
-  position: absolute;
-  top: 20px;
+  position: fixed;
+  top: 85px;
   left: 55px;
 }
 
@@ -70,7 +71,7 @@
 /* if position is absolute the expanded list is restrictive, however top is same as 20px */
 .leaflet-control-layers {
   position: fixed;
-  top: 70px;
+  top: 60px;
   left: 105px;
 }
 
@@ -174,13 +175,12 @@
 }
 
 #settings-container {
-  position: absolute;
   z-index: 500;
-  /* LHS Search Results; */
-  /* top: 150px; */
-  /* left: 185px; */
-  /* RHS Search Results */
-  top: 50px;
+  /* position: absolute; */
+  /* top: 50px; */
+  /* right: 5px; */
+  position: fixed;
+  top: 52px;
   right: 5px;
   width: 380px;
   background-color: rgb(255 255 255 / 44%);
@@ -188,16 +188,18 @@
 }
 
 #search-container {
-  position: absolute;
   z-index: 500;
-  top: 160px;
+  /* position: absolute; */
+  /* top: 160px; */
+  /* right: 5px; */
+  position: fixed;
+  top: 220px;
   right: 5px;
   width: 380px;
   background-color: rgb(255 255 255 / 44%);
   padding: 5px;
   overflow-y: auto;
   line-height: 24px;
-  /* max-height: 480px; */
   max-height: 450px;
 }
 
@@ -216,13 +218,6 @@
 #result-header {
   background-image: linear-gradient(-20deg, #0055cd 0%, #8dd1da 100%);
   text-align: center;
-}
-
-#results {
-  height: 100%;
-  /* width:35%; */
-  width: 30%;
-  position: absolute;
 }
 
 .result-listing {
@@ -246,6 +241,7 @@
 body {
   min-height: 100vh;
   /* max-height: 90vh; */
+  width: auto;
   background: #F0F4FF;
   /* overflow-x: hidden; */
   /* overflow-y: hidden; */

@@ -498,7 +498,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     .querySelector("#continueBtn")
     .addEventListener("click", async function () {
         // alert("You have selected Continue... Button!");
-
+        const extension = document.getElementById("extension");
+        if (window.getComputedStyle(extension).visibility === "hidden") {
+            extension.style.visibility = "visible";
+        }
+        
         // clear the answer to the chatgpt results div
         const resultElement = document.querySelector("#chatgpt-tellmemore");
         resultElement.innerHTML = "Tell me more... ";
@@ -615,7 +619,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         let listElement = document.createElement('li');
 
         // 2. populate content and set properties
-        listElement.innerHTML = `${f.name} <button class="btn btn-outline-success mr-2 my-2 tellMeMoreBtn" style="margin: 5px;">Tell me about...</button><button class="btn btn-outline-success mr-2 my-2 checkLocationBtn" style="margin: 5px;">Check its location.</button>`;
+        listElement.innerHTML = `${f.name} <button class="btn btn-outline-success mr-2 my-2 tellMeMoreBtn" style="margin: 5px;">Tell me more...</button><button class="btn btn-outline-success mr-2 my-2 checkLocationBtn" style="margin: 5px;">Check its location.</button>`;
         listElement.className = 'list-group-item';
 
         

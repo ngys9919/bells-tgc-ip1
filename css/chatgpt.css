@@ -97,3 +97,6 @@
   z-index: 1000;
 }
 
+#extension {
+  visibility: hidden;
+}

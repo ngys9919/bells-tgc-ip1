@@ -153,10 +153,28 @@ function debounce (func, wait, immediate) {
     };
 };
 
-async function resizeUpdateContent() {
+function resizeUpdateContent() {
   // alert("You have resized!");
+  // get the width of the screen after the resize event
+  let width = document.documentElement.clientWidth;
+  // tablets are between 768 and 922 pixels wide
+  // phones are less than 768 pixels wide
+  if (width < 768) {
+    // alert("The width is now phone-sized!");
+    // map.setView(singapore, 12); 
+    // map.zoomIn(); 
+  } else if ((width >= 768) && (width <= 992)) {
+    // alert("The width is now tablet-sized!");
+    // map.setView(singapore, 11);
+    // map.zoomIn();
+  } else {
+    // alert("The width is now laptop-sized!");
+    // map.setView(singapore, 10);
+    // map.zoomOut();
+  }
   // Refresh the page by setting the URL to itself
   location.href = location.href;
+  
 }
 
   // Call updateContent() on page load
@@ -180,27 +198,31 @@ window.addEventListener('DOMContentLoaded', async () => {
 // Use a debounce function to mitigate the excess calls.
 // It will never fire more than once every 200ms.
 // For immediate set to true, the side-effect is that for async-wait it need processing time, hence affects display.
-// this wont work
+// this work
 window.addEventListener('resize', debounce(() => resizeUpdateContent(), 200, false),false);
 // this work
 // window.addEventListener('resize', debounce(() => console.log('hello'), 200, false), false);
 // this work
 // window.addEventListener('resize', debounce(() => alert('hello resizing'), 200, false), false);
 
-// window.addEventListener('resize', async function() {
+// window.addEventListener('resize', function() {
   // alert("You have resized!");
-  // mobile orientation
-  // const userMobileOrientation = localStorage.getItem('mobileOrientation') || 'portrait';
-  // mobileOrientation = userMobileOrientation;
-  // toggle state
-  // const userSidebarToggleState = localStorage.getItem('sidebarToggleState') || 'toggleonoff';
-  // sidebarToggleState = userSidebarToggleState;
-  // language support
-  // const userPreferredLanguage = localStorage.getItem('language') || 'en';
-  // lang = userPreferredLanguage;
-  // const langData = await fetchLanguageData(userPreferredLanguage);
-  // checkSidebarVisibility();
-  // updateContent(langData, sidebarToggleState);
+  // get the width of the screen after the resize event
+  // let width = document.documentElement.clientWidth;
+  // tablets are between 768 and 922 pixels wide
+  // phones are less than 768 pixels wide
+  // if (width < 768) {
+    // alert("The width is now phone-sized!");
+      
+  // } else if ((width >= 768) && (width <= 992)) {
+    // alert("The width is now tablet-sized!");
+    
+  // } else {
+    // alert("The width is now laptop-sized!");
+
+  // }
+  // Refresh the page by setting the URL to itself
+  // location.href = location.href;
 // });
 
 // For mobile orientation changes use:
