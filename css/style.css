@@ -112,6 +112,32 @@
 /* margin-top: 0; */
 /* } */
 
+/* Example CSS to style the Zoom Control */
+.leaflet-control-zoom {
+  /* Styles for the container of the Zoom Control */
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.leaflet-control-zoom-in, .leaflet-control-zoom-out {
+  /* Styles for the zoom in and zoom out buttons */
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.leaflet-control-zoom-slider {
+  /* Styles for the zoom slider (if applicable) */
+  /* Add your styles here */
+}
+
 
 .popup-postal_code {
 

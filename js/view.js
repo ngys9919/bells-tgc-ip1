@@ -56,6 +56,32 @@ function createMap() {
 //     scrollWheelZoom: false // Disable scroll wheel zoom
 // });
 
+// Customizing the position of the Zoom Control
+// let zoomControl = L.control.zoom({ position: 'topright' }).addTo(map);
+// Other possible positions include 'topleft', 'bottomleft', 'bottomright'
+
+// Changing the zoom levels
+// map.setZoom(10); // Sets the map zoom level to 10
+// map.zoomIn();    // Zooms in by one level
+// map.zoomOut();   // Zooms out by one level
+
+// Disabling the Zoom Control
+// map.removeControl(zoomControl);
+
+// Customizing the behavior of the Zoom Control
+// let zoomControl = L.control.zoom({
+L.control.zoom({
+    // zoomInText: '+',      // Custom text for zoom in button
+    // zoomOutText: '-',     // Custom text for zoom out button
+    // zoomInTitle: 'Zoom In',   // Tooltip for zoom in button
+    // zoomOutTitle: 'Zoom Out', // Tooltip for zoom out button
+    // position: 'topright'  // Position of the control
+    zoomInText: '+',      // Custom text for zoom in button
+    zoomOutText: '-',     // Custom text for zoom out button
+    zoomInTitle: 'Click + to Zoom In',   // Tooltip for zoom in button
+    zoomOutTitle: 'Click - to Zoom Out', // Tooltip for zoom out button
+}).addTo(map);
+
 // In Leaflet.js, the attributionControl is a built-in feature that manages the display of attribution information on the map. 
 // Attribution refers to giving credit to the data sources or map providers whose content is being used in the map. 
 // The attributionControl allows developers to control how this attribution information is presented to users.

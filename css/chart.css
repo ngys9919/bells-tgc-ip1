@@ -22,7 +22,8 @@
 
   .header {
     grid-area: header;
-    background-color: #000;
+    background-image: linear-gradient(to top, #95b2ec 0%, #3c90ba 100%);
+    /* background-color: #000; */
     color: #fff;
     padding: 1em;
     position: sticky;
