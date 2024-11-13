@@ -1,7 +1,15 @@
-let singaporeLat = 1.3521;
-let singaporeLng = 103.8198;
-let singapore = [singaporeLat, singaporeLng]; // singaporeLatlng
-let singaporeZoomLevel = 12;
+// IMPORTANT NOTE: Do not use let for lat, lng; used const instead;
+// because the locateBtn may has problem with geolocation detection of current location
+// because zoom level must match for L.map and map.setView in view.js
+
+// Real Cause:
+// In function createMap() in view.js, let singaporeMap = [1.3521, 103.8198]; // singaporeLatlng must be declared locally;
+// The variable defined in data.js when used in view.js could cause the above issue.
+// let singaporeMap = [1.3521, 103.8198]; // singaporeLatlng
+const singaporeLat = 1.3521;
+const singaporeLng = 103.8198;
+const singapore = [singaporeLat, singaporeLng]; // singaporeLatlng
+const singaporeZoomLevel = 12;
 
 function testFourSqAPI_APIKeys() {
   const response = axios.get(FOURSQUARE_API + "/search", {

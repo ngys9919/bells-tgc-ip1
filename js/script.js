@@ -95,7 +95,7 @@ function addMarkersToCluster(data, clusterGroup) {
         // marker = L.marker([1.2761, 103.8458]);
         // marker = L.marker([1.3586, 103.9899]);
         // marker = L.marker([1.3521, 103.8198]);
-        marker = L.marker(singapore);
+        marker = L.marker([singaporeLat, singaporeLng]);
         marker.bindPopup(`<h5>Station Code:${d.Station}</h5>
             <h6>Station Name:${d.StationName}</h6>           
         `);
@@ -162,7 +162,7 @@ function addMarkersToCircleLayer(data, layerGroup) {
         // marker = L.marker([1.2761, 103.8458]);
         // marker = L.marker([1.3586, 103.9899]);
         // marker = L.marker([1.3521, 103.8198]);
-        marker = L.marker(singapore);
+        marker = L.marker([singaporeLat, singaporeLng]);
         marker.bindPopup(`<h5>Station Code:${d.Station}</h5>
               <h6>Station Name:${d.StationName}</h6>           
           `);
@@ -237,7 +237,7 @@ function addMarkersToLayerTRANSIT(data, layerGroup) {
         // marker = L.marker([1.2761, 103.8458], { icon: customIcon });
         // marker = L.marker([1.3586, 103.9899], { icon: customIcon });
         // marker = L.marker([1.3521, 103.8198], { icon: customIcon });
-        marker = L.marker([singapore], { icon: customIcon });
+        marker = L.marker([singaporeLat, singaporeLng], { icon: customIcon });
         marker.bindPopup(`<h5>Station Code:${array[index].Station}</h5>
               <h6>Station Name:${array[index].StationName}</h6>           
           `);
@@ -520,7 +520,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   // let myLocationMarker = L.marker([1.2761, 103.8458]);
   // let myLocationMarker = L.marker([1.3586, 103.9899]);
   // let myLocationMarker = L.marker([1.3521, 103.8198]);
-  let myLocationMarker = L.marker(singapore);
+  let myLocationMarker = L.marker([singaporeLat, singaporeLng]);
   let layer = myLocationMarker.bindTooltip('Hi! Welcome to SG-finder.').addTo(map);
   layer.openTooltip();
   // layer.closeTooltip();
@@ -687,7 +687,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         // myLocationMarker = L.marker([1.2761, 103.8458]);
         // myLocationMarker = L.marker([1.3586, 103.9899]);
         // myLocationMarker = L.marker([1.3521, 103.8198]);
-        myLocationMarker = L.marker(singapore);
+        myLocationMarker = L.marker([singaporeLat, singaporeLng]);
         layer = myLocationMarker.bindTooltip('Hi! Welcome to SG-finder.').addTo(map);
         layer.openTooltip()
       });
@@ -750,7 +750,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       // myLocationMarker = L.marker([1.2761, 103.8458]);
       // myLocationMarker = L.marker([1.3586, 103.9899]);
       // myLocationMarker = L.marker([1.3521, 103.8198]);
-      // myLocationMarker = L.marker(singapore);
+      myLocationMarker = L.marker([singaporeLat, singaporeLng]);
       // layer = myLocationMarker.bindTooltip('Hi! Welcome to SG-finder.').addTo(map);
       // layer.openTooltip();
     // });

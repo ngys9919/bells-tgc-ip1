@@ -1,3 +1,13 @@
+/* bootstrap overwrites */
+.bg-body-tertiary {
+  background-color: blue !important; /* overrides specificity by adding "!important" to the end of the declaration */
+}
+
+/* font stack */
+/* font-family: ideal, safe, default; */
+h1 {color: black; font-family: "Poppins", Times, sans-serif;}
+
+
 .grid {
     box-sizing: border-box;
     display: grid;

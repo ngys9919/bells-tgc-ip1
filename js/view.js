@@ -1,6 +1,7 @@
 
   
 function createMap() {
+  let singaporeMap = [1.3521, 103.8198]; // singaporeLatlng
   // let singapore = [1.3521, 103.8198]; // singaporeLatlng
   // let singapore = [1.3586, 103.9899]; // changiAirport
   // let singapore = [1.2761, 103.8458]; // internationalPlaza
@@ -8,14 +9,16 @@ function createMap() {
   // let map = L.map('map');
   // let map = L.map('map1');
   
-  
+  // center: [1.2494, 103.8303],  // Sentosa
+  // center: [1.29, 103.85],
+  // center: [1.2761, 103.8458],
+  // center: [1.3586, 103.9899],
+  // center: [1.3521, 103.8198],
+  // center: [singaporeLat, singaporeLng],
+  // zoom: 10,
+  // zoom: singaporeZoomLevel,
   let map = L.map('map', {
-    // center: [1.2494, 103.8303],  // Sentosa
-    // center: [1.29, 103.85],
-    // center: [1.2761, 103.8458],
-    // center: [1.3586, 103.9899],
-    // center: [1.3521, 103.8198],
-    center: [singaporeLat, singaporeLng],
+    center: [1.3521, 103.8198],
     zoom: 10,
     maxZoom: 19,
     minZoom: 10,
@@ -27,7 +30,9 @@ function createMap() {
   });
   
   // map.setView(singapore, 12); // #2 Set the center point
-  map.setView(singapore, singaporeZoomLevel); // #2 Set the center point
+  // map.setView(singapore, singaporeZoomLevel); // #2 Set the center point
+  map.setView(singaporeMap, singaporeZoomLevel); // #2 Set the center point
+
 
   // The attribution control allows you to display attribution data in a small text box on a map. 
   // It is put on the map by default unless you set its attributionControl option to false.
@@ -124,7 +129,7 @@ L.control.zoom({
   // const singaporeLatLng = [1.2761, 103.8458];
   // const singaporeLatLng = [1.3586, 103.9899];
   // const singaporeLatLng = [1.3521, 103.8198];
-  // const singaporeLatLng = singapore;
+  // const singaporeLatLng = [singaporeLat, singaporeLng];
   // const map = L.map("map");
   // map.setView(singaporeLatLng, 11);
   // map.setView(singaporeLatLng, 12);
