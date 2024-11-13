@@ -1,3 +1,8 @@
+let singaporeLat = 1.3521;
+let singaporeLng = 103.8198;
+let singapore = [singaporeLat, singaporeLng]; // singaporeLatlng
+let singaporeZoomLevel = 12;
+
 const OPENAI_API = "https://api.openai.com/v1/chat/completions";
 
 const promptTemplate = "I want you to act as a travel guide. I will give you a location and you will suggest the places to visit and some information about it. In addition, include an itinerary based on the number of days. My request is : I am going to ";
@@ -214,16 +219,24 @@ async function OpenaiFetchAPI3(prompt) {
 // let targetLat = 1.3521;
 // let targetLng = 103.8198;
 
+// internationalPlaza
 // let currentLat = 1.2761;
 // let currentLng = 103.8458;
 // let targetLat = 1.2761;
 // let targetLng = 103.8458;
 // let targetLocation = "Singapore";
 
-let currentLat = 1.3586;
-let currentLng = 103.9899;
-let targetLat = 1.3586;
-let targetLng = 103.9899;
+// changiAirport
+// let currentLat = 1.3586;
+// let currentLng = 103.9899;
+// let targetLat = 1.3586;
+// let targetLng = 103.9899;
+// let targetLocation = "Singapore";
+
+let currentLat = singaporeLat;
+let currentLng = singaporeLng;
+let targetLat = singaporeLat;
+let targetLng = singaporeLng;
 let targetLocation = "Singapore";
 
 function locateUser(map){
@@ -358,13 +371,18 @@ document.addEventListener("DOMContentLoaded", async function () {
     // let singaporeLatlng = [1.29, 103.85];
     // let singaporeLatlng = [1.2761, 103.8458];
     // let singaporeLatlng = [1.3586, 103.9899];
-    let singaporeLatlng = [1.3521, 103.8198];
+    // let singaporeLatlng = [1.3521, 103.8198];
+    let singaporeLatlng = [singaporeLat, singaporeLng];
+    // let singaporeLatlng = singapore;
 
     // L is a global variable which represents the Leaflet object
     // all functions and variables in Leaflet are in the `L` object
     
     // let map = L.map("chatgpt-results");  // create the map in inside the element with id `myMap`
-    map.setView(singaporeLatlng, 12);   // two parameters: one is an array which represents the lat lng, second the zoom level
+    // two parameters: one is an array which represents the lat lng, second the zoom level
+    // map.setView(singaporeLatlng, 12);
+    map.setView(singaporeLatlng, singaporeZoomLevel);
+    // map.setView(singapore, singaporeZoomLevel); 
 
     // create a tile layer
     let tileLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -420,8 +438,11 @@ document.addEventListener("DOMContentLoaded", async function () {
             // }
         // });
 
-        map.setView(singaporeLatlng, 12);
-        myLocationMarker = L.marker(singaporeLatlng);
+        // map.setView(singaporeLatlng, 12);
+        // map.setView(singaporeLatlng, singaporeZoomLevel);
+        map.setView(singapore, singaporeZoomLevel);
+        // myLocationMarker = L.marker(singaporeLatlng);
+        myLocationMarker = L.marker(singapore);
         // Add marker to mapMarker for future reference
         mapMarkers.push(myLocationMarker);
         layer = myLocationMarker.bindTooltip('Hi! Welcome to SG-finder.').addTo(map);
@@ -559,8 +580,11 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
         });
 
-        map.setView(singaporeLatlng, 12);
-        myLocationMarker = L.marker(singaporeLatlng);
+        // map.setView(singaporeLatlng, 12);
+        // map.setView(singaporeLatlng, singaporeZoomLevel);
+        map.setView(singapore, singaporeZoomLevel);
+        // myLocationMarker = L.marker(singaporeLatlng);
+        myLocationMarker = L.marker(singapore);
         // Add marker to mapMarker for future reference
         mapMarkers.push(myLocationMarker);
         layer = myLocationMarker.bindTooltip('Hi! Welcome to SG-finder.').addTo(map);

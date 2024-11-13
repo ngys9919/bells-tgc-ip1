@@ -1,3 +1,8 @@
+let singaporeLat = 1.3521;
+let singaporeLng = 103.8198;
+let singapore = [singaporeLat, singaporeLng]; // singaporeLatlng
+let singaporeZoomLevel = 12;
+
 function testFourSqAPI_APIKeys() {
   const response = axios.get(FOURSQUARE_API + "/search", {
     headers: {
