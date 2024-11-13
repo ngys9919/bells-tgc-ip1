@@ -5,11 +5,6 @@
     /* font-family: "Poppins", sans-serif; */
 /* } */
 
-/* bootstrap overwrites */
-.bg-body-tertiary {
-  background-color: blue !important; /* overrides specificity by adding "!important" to the end of the declaration */
-}
-
 /* font stack */
 /* font-family: ideal, safe, default; */
 h1 {color: black; font-family: "Poppins", Times, sans-serif;}
@@ -94,7 +89,7 @@ h1 {color: black; font-family: "Poppins", Times, sans-serif;}
   /* font-family: 'Montserrat', sans-serif; */
   /* font-size: 9px; */
   text-align: center;
-  text-justify: center;
+  /* text-justify: center; */
   padding: 2px;
   border: 1px solid black;
   margin: 0px;

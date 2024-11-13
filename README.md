@@ -15,31 +15,123 @@ Industry Project: **Front-End Development**
 <!-- Heading level 3 -->
 ### Project File Structure:
 
-* HTML Files (hypertext markup language)
+: README.md
 
 >>> Home page (Landing Page)
 : index.html
 
+* HTML Files (hypertext markup language)
+: index.html
+: home.html
+: chart.html
+: chatgpt.html
+
 * CSS Folder (cascading style sheets)
-: bootstrap.css
 : style.css
+: chart.css
+: chatgpt.css
 
 * IMG Folder (images)
 : bells_logo.jpg
-: bellstech_logo.png
-: index-1.png
-: index-2.png
+: EricNg-linkedin.jpg
+: SG-2023-Tourists-Arrivals-Charts.png
+: singapore-changi-airport.webp
+: SG-finder-SINGAPORE.png
+: SINGAPORE-SG-finder.png
+: SG-finder-index.png
+: SG-finder-home.png
+: SG-finder-chart.png
+: SG-finder-chatgpt.png
+: SG-finder-sidebar.png
 
 * RES Folder (resources)
 : bells.ico
+: icongreen.png
+: markerLocateMe.png
+: marker.png
+: markerMRT.png
+: markerLRT.png
+: markerBUS.png
+: markerTAXI.png
+
+* LANG Folder (languages)
+: en.json
+: zh.json
+
+* DATA Folder (data)
+: postal sub-folder
+: transport sub-folder
+: chart sub-folder
+: chatgpt sub-folder
+: node_modules sub-folder
+: convertCsvToJson.js
+: package-lock.json
+: package.json
 
 * JS Folder (javascript)
-: axios.js
+: multilang.js
 : script.js
 : data.js
+: view.js
+: chart.js
+: chatgpt.js
 
 <!-- Heading level 1 -->
 # Project Guide
+For the purpose of the portfolio project, a landing page is created for the following:
+
+```json
+{
+1. "SG-finder" : in our case "index.html (just welcome page) redirect to home.html (main page)"
+}
+```
+
+This project is named ***SG-finder*** for **SINGAPORE**, it also has *TripAI feature*. 
+
+The application of this project caters to the needs of a specific target user group, the Singapore Tourists,
+who are finding the places around the visiting country Singapore.
+
+The website provides an one-stop entry point to the Singapore Tourists with the following, namely:
+
+***
+1. *Where Are You Locator*
+2. *Search by Keyword*
+3. *Search by Postal Code*
+4. *Quick Search by Category*
+5. *Base/Layer Clusters/Markers for Public Transportation*
+6. *Chart Analytic for Singapore Visitors*
+7. *Ask ChatGPT for Itinerary Recommendations*
+***
+
+The web development is done using [Visual Studio Code][3] with responsive design concepts that provide media query breakpoints based on the following screen sizes:
+
+***Bootstrap Breakpoints***
+    
+| Device(s) | Description | Prefix | Screen Sizes |
+| :--- | :---: | :---: | ---: |
+| phones | Extra small | None | <576px |
+| portrait tablets and large phones | Small | sm | ≥576px |
+| landscape tablets | Medium | md | ≥768px |
+| laptops/desktops | Large | lg | ≥992px |
+| large laptops and desktops | Extra large | xl | ≥1200px |
+| large tv screens | Extra extra large | xxl | ≥1400px, max:1580px |
+
+
+This simple website has a BellsTech logo and navigational bar with Home, Chart, Language, About, Login (disabled) links and buttons like Ask ChatGPT, Reset Map, Locate Me!, input boxes for Keyword Search and Postal Search, and Quick Search dropdown menu in the home page for laptops and sidebar with Language Setting (English and Chinese) and Menu Selection (Reset Map, Locate Me!, Ask ChatGPT and Chart), with Acount (Profile, Settings and Logout) for future implementations.
+
+This provides an inner site navigation bar that allows the user to view the different pages in the site for large devices
+(like laptops and TV screens) and sidebar navigation menu for small devices (like phones and tablets).
+
+![SG-finder's Landing Page. This website is so cool!](img/SG-finder-index.png "index.html Landing Page")
+
+![SG-finder's Home Page - Navigationbar](img/SG-finder-home.png "home.html Home Page - navbar")
+
+![SG-finder's Home Page - Sidebar](img/SG-finder-sidebar.png "home.html Home Page - sidebar")
+
+![SG-finder's Chart Page](img/SG-finder-chart.png "chart.html Chart Page")
+
+![SG-finder's ChatGPT Page](img/SG-finder-chatgpt.png "chatgpt.html ChatGPT Page")
+
 
 The website is deployed using [GitHub Pages][1] so that it is available via a public web address.
 
@@ -111,17 +203,32 @@ Thanks to Bells for support!
 - [x] Bootstrap (v5.3.3) 
 - [x] JavaScript for interactivity
 - [x] Axios (v1.7.2) for asynchronous functions
+- [x] Leaflet for mapping
+- [x] FourSquare for Place APIs 
+- [x] ApexCharts for charting
+- [x] OpenAI for ChatGPT APIs 
 
 
 <!-- Heading level 2 -->
 ## References
-1.  [Microsoft Visual Studio Code](https://code.visualstudio.com)
+1.  [Bells Institute of Higher Learning](https://bells.sg)
+  
+2.  [Microsoft Visual Studio Code](https://code.visualstudio.com)
 
-2.  [Microsoft GitHub](https://www.github.com)
+3.  [Microsoft GitHub](https://www.github.com)
 
-3.  [Axios](https://axios-http.com/docs/intro)
+4.  [Bootstrap](https://getbootstrap.com/)
+ 
+5.  [Axios](https://axios-http.com/docs/intro)
 
-4.  [Bells Institute of Higher Learning](https://bells.sg)
+6.  [Leaflet](https://axios-http.com/docs/intro)
+
+7.  [FourSquare](https://location.foursquare.com/developer/)
+
+8.  [ApexCharts](https://apexcharts.com/)
+
+9.  [OpenAI](https://openai.com/)
+
 
 <!-- hyperlinks -->
 [1]: https://github.com "GitHub"
