@@ -18,7 +18,8 @@ function testFourSqAPI_APIKeys() {
       // "ll": '1.3521, 103.8198' ,
       // This work when the space between lat and lng is removed
       // "ll": '1.29,103.85',
-      "ll": '1.2761,103.8458',
+      // "ll": '1.2761,103.8458',
+      "ll": '1.3586,103.9899',
       // "ll": '1.3521,103.8198' , // The latitude/longitude around which to retrieve place information. This must be specified as latitude,longitude (e.g., ll=41.8781,-87.6298).
       query: 'coffee' // A string to be matched against all content for this place, including but not limited to venue name, category, telephone number, taste, and tips.
     },
@@ -48,7 +49,8 @@ for (let entry of loadedData){
 }
 
 // entry = {"postal_code": 0, "street_name": "", "lat": 1.29, "lon": 103.85};
-entry = {"postal_code": 0, "street_name": "", "lat": 1.2761, "lon": 103.8458};
+// entry = {"postal_code": 0, "street_name": "", "lat": 1.2761, "lon": 103.8458};
+entry = {"postal_code": 0, "street_name": "", "lat": 1.3586, "lon": 103.9899};
 console.log(entry);
 return entry;
 
