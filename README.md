@@ -259,7 +259,7 @@ Chart page:
 
 
 ChatGPT page:
-1. Flexbox - 
+1. Flexbox - to layout using parent-child classes of flex display with flex-direction of row
 
 2. Header - 
    1. Chart icon - to goto Chart page
