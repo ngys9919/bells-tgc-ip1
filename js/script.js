@@ -4,7 +4,8 @@ const FOURSQUARE_API = "https://api.foursquare.com/v3/places";
 // let defaultCoordinates = [1.33433, 103.821833];
 // let defaultCoordinates = [1.29, 103.85]; // #1 Singapore latlng
 // let defaultCoordinates = [1.2761, 103.8458]; // internationalPlaza
-let defaultCoordinates = [1.3586, 103.9899]; // changiAirport
+// let defaultCoordinates = [1.3586, 103.9899]; // changiAirport
+let defaultCoordinates = [1.3521, 103.8198]; // singaporeLatlng
 let setCoordinates = defaultCoordinates;
 
 // if (loginCoordinates.length !== 0) {
@@ -90,7 +91,8 @@ function addMarkersToCluster(data, clusterGroup) {
       } else {
         // marker = L.marker([1.29, 103.85]);
         // marker = L.marker([1.2761, 103.8458]);
-        marker = L.marker([1.3586, 103.9899]);
+        // marker = L.marker([1.3586, 103.9899]);
+        marker = L.marker([1.3521, 103.8198]);
         marker.bindPopup(`<h5>Station Code:${d.Station}</h5>
             <h6>Station Name:${d.StationName}</h6>           
         `);
@@ -155,7 +157,8 @@ function addMarkersToCircleLayer(data, layerGroup) {
       } else {
         // marker = L.marker([1.29, 103.85]);
         // marker = L.marker([1.2761, 103.8458]);
-        marker = L.marker([1.3586, 103.9899]);
+        // marker = L.marker([1.3586, 103.9899]);
+        marker = L.marker([1.3521, 103.8198]);
         marker.bindPopup(`<h5>Station Code:${d.Station}</h5>
               <h6>Station Name:${d.StationName}</h6>           
           `);
@@ -228,7 +231,8 @@ function addMarkersToLayerTRANSIT(data, layerGroup) {
       } else {
         // marker = L.marker([1.29, 103.85], { icon: customIcon });
         // marker = L.marker([1.2761, 103.8458], { icon: customIcon });
-        marker = L.marker([1.3586, 103.9899], { icon: customIcon });
+        // marker = L.marker([1.3586, 103.9899], { icon: customIcon });
+        marker = L.marker([1.3521, 103.8198], { icon: customIcon });
         marker.bindPopup(`<h5>Station Code:${array[index].Station}</h5>
               <h6>Station Name:${array[index].StationName}</h6>           
           `);
@@ -509,7 +513,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // let myLocationMarker = L.marker([1.29, 103.85]);
   // let myLocationMarker = L.marker([1.2761, 103.8458]);
-  let myLocationMarker = L.marker([1.3586, 103.9899]);
+  // let myLocationMarker = L.marker([1.3586, 103.9899]);
+  let myLocationMarker = L.marker([1.3521, 103.8198]);
   let layer = myLocationMarker.bindTooltip('Hi! Welcome to SG-finder.').addTo(map);
   layer.openTooltip();
   // layer.closeTooltip();
@@ -668,7 +673,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         map.setView(defaultCoordinates, 10);
         // myLocationMarker = L.marker([1.29, 103.85]);
         // myLocationMarker = L.marker([1.2761, 103.8458]);
-        myLocationMarker = L.marker([1.3586, 103.9899]);
+        // myLocationMarker = L.marker([1.3586, 103.9899]);
+        myLocationMarker = L.marker([1.3521, 103.8198]);
         layer = myLocationMarker.bindTooltip('Hi! Welcome to SG-finder.').addTo(map);
         layer.openTooltip()
       });
@@ -728,6 +734,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       // myLocationMarker = L.marker([1.29, 103.85]);
       // myLocationMarker = L.marker([1.2761, 103.8458]);
       // myLocationMarker = L.marker([1.3586, 103.9899]);
+      // myLocationMarker = L.marker([1.3521, 103.8198]);
       // layer = myLocationMarker.bindTooltip('Hi! Welcome to SG-finder.').addTo(map);
       // layer.openTooltip();
     // });

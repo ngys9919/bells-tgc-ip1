@@ -1,16 +1,20 @@
 
   
 function createMap() {
-  let singapore = L.marker([1.3586, 103.9899]); // changiAirport
+  let singapore = [1.3521, 103.8198]; // singaporeLatlng
+  // let singapore = [1.3586, 103.9899]; // changiAirport
   // let singapore = [1.2761, 103.8458]; // internationalPlaza
   // let singapore = [1.29,103.85]; // #1 Singapore latlng
   // let map = L.map('map');
   // let map = L.map('map1');
+  
+  
   let map = L.map('map', {
-    // center: [1.2494, 103.8303],
+    // center: [1.2494, 103.8303],  // Sentosa
     // center: [1.29, 103.85],
     // center: [1.2761, 103.8458],
-    center: [1.3586, 103.9899],
+    // center: [1.3586, 103.9899],
+    center: [1.3521, 103.8198],
     zoom: 10,
     maxZoom: 19,
     minZoom: 10,
@@ -117,6 +121,7 @@ L.control.zoom({
   // const singaporeLatLng = [1.29, 103.85];
   // const singaporeLatLng = [1.2761, 103.8458];
   // const singaporeLatLng = [1.3586, 103.9899];
+  // const singaporeLatLng = [1.3521, 103.8198];
   // const map = L.map("map");
   // map.setView(singaporeLatLng, 11);
 

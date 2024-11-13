@@ -202,11 +202,17 @@ async function OpenaiFetchAPI3(prompt) {
     
 }
 
-// singaporeLatlng
+// Singapore latlng
 // let currentLat = 1.29;
 // let currentLng = 103.85;
 // let targetLat = 1.29;
 // let targetLng = 103.85;
+
+// singaporeLatlng
+// let currentLat = 1.3521;
+// let currentLng = 103.8198;
+// let targetLat = 1.3521;
+// let targetLng = 103.8198;
 
 // let currentLat = 1.2761;
 // let currentLng = 103.8458;
@@ -351,7 +357,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // let singaporeLatlng = [1.29, 103.85];
     // let singaporeLatlng = [1.2761, 103.8458];
-    let singaporeLatlng = [1.3586, 103.9899];
+    // let singaporeLatlng = [1.3586, 103.9899];
+    let singaporeLatlng = [1.3521, 103.8198];
 
     // L is a global variable which represents the Leaflet object
     // all functions and variables in Leaflet are in the `L` object
