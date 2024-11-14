@@ -95,9 +95,12 @@ h1 {color: black; font-family: "Poppins", Times, sans-serif;}
   margin: 0px;
   word-wrap: break-word;
   line-height: 1;
-  position: absolute;
-  top: 780px;
-  right: 35px;
+  /* position: absolute; */
+  /* top: 780px; */
+  /* right: 35px; */
+  /* position: relative; */
+  /* top: -260px; */
+  /* left: 50px; */
   z-index: 1000;
 }
 

@@ -24,7 +24,8 @@ function setLanguagePreference(lang, sidebarToggleState, mobileOrientation) {
   }
   
   // Function to update content based on selected language
-  function updateContent(langData, sidebarToggleState) {
+  function updateContent(langData, sidebarToggleState, mobileOrientation) {
+    // alert("You have come here!" + mobileOrientation);
     // if ((sidebarVisible == true) && (lang == "en")) {
       // console.log("Icons for Sidebar!");
     // } else {
@@ -45,7 +46,8 @@ function setLanguagePreference(lang, sidebarToggleState, mobileOrientation) {
           let y = document.getElementById("sidebarToggleBtn");
           let w = document.getElementById("sidebarSearchBtn");
           let z = document.getElementById("sidebarSearchTerms");
-          if ((sidebarVisible == true) && (lang == "zh")) {
+          // if ((sidebarVisible == true) && (lang == "zh")) {
+          if (lang == "zh") {
             // alert("You have come here 2!");
             if (sidebarToggleState === "toggleon") {
               // alert("You have come here toggleon!");
@@ -67,7 +69,8 @@ function setLanguagePreference(lang, sidebarToggleState, mobileOrientation) {
               // console.log(y.innerHTML);
             }
             // console.log(y.innerHTML);
-          } else if ((sidebarVisible == true) && (lang == "en")) {
+          // } else if ((sidebarVisible == true) && (lang == "en")) {
+          } else if (lang == "en") {
             // alert("You have come here 1!");
             if (sidebarToggleState === "toggleon") {
               // alert("You have come here toggleon!");
@@ -130,7 +133,7 @@ function setLanguagePreference(lang, sidebarToggleState, mobileOrientation) {
     
     const langData = await fetchLanguageData(lang);
     checkSidebarVisibility();
-    updateContent(langData, sidebarToggleState);
+    updateContent(langData, sidebarToggleState, mobileOrientation);
   
   }
 
@@ -179,7 +182,7 @@ function resizeUpdateContent() {
     // map.setZoom(8);
   }
   // Refresh the page by setting the URL to itself
-  location.href = location.href;
+  // location.href = location.href;
   
 }
 
@@ -196,7 +199,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     lang = userPreferredLanguage;
     const langData = await fetchLanguageData(userPreferredLanguage);
     checkSidebarVisibility();
-    updateContent(langData, sidebarToggleState);
+    updateContent(langData, sidebarToggleState, mobileOrientation);
 });
 
 // window.addEventListener('resize',debounce(handler, delay, immediate),false);

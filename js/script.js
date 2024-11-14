@@ -1,6 +1,6 @@
 const FOURSQUARE_API = "https://api.foursquare.com/v3/places";
 
-// let loginCoordinates = [];
+let loginCoordinates = [];
 // let defaultCoordinates = [1.33433, 103.821833];
 // let defaultCoordinates = [1.29, 103.85]; // #1 Singapore latlng
 // let defaultCoordinates = [1.2761, 103.8458]; // internationalPlaza
@@ -10,9 +10,9 @@ let defaultCoordinates = [singaporeLat, singaporeLng]; // singaporeLatlng
 let setCoordinates = defaultCoordinates;
 let setZoomlevel = 12;
 
-// if (loginCoordinates.length !== 0) {
-  // setCoordinates = loginCoordinates
-// };
+if (loginCoordinates.length !== 0) {
+  setCoordinates = loginCoordinates
+};
 
 let defaultSearchLimit = 10;
 let defaultSearchRadius = 2500;
@@ -297,7 +297,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const userPreferredLanguage = localStorage.getItem('language') || 'en';
   lang = userPreferredLanguage;
   const langData = await fetchLanguageData(userPreferredLanguage);
-  updateContent(langData, sidebarToggleState);
+  updateContent(langData, sidebarToggleState, mobileOrientation);
 
 
 
@@ -552,9 +552,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       locateControl.stop()
       // map.setView(setCoordinates, 11.5)
-      // map.setView(setCoordinates, 10)
+      map.setView(setCoordinates, 10)
       // map.setView(setCoordinates, 12)
-      map.setView(setCoordinates, setZoomlevel)
+      // map.setView(setCoordinates, setZoomlevel)
       
       locateClickCount = 0
 
@@ -595,9 +595,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     else if (locateClickCount % 2 == 0) {
       // map.setView(setCoordinates, 11.5)
-      // map.setView(setCoordinates, 10)
+      map.setView(setCoordinates, 10)
       // map.setView(setCoordinates, 12)
-      map.setView(setCoordinates, setZoomlevel)
+      // map.setView(setCoordinates, setZoomlevel)
       
       locateClickCount = 0
 

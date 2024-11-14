@@ -150,7 +150,7 @@ This provides an inner site navigation bar that allows the user to view the diff
 
 <!-- Heading level 3 -->
 ### Existing Features
-The user interface is provided by CSS Bootstrap framework. The content is done up with HTML markup language whilst the style for the website is beautified with CSS stylesheets.
+The user interface is provided by CSS Bootstrap framework. The content is done up with HTML markup language whilst the style for the website is beautified with CSS stylesheets. The interactivity for the front-end UI components like Dropdown menus, Search inputs, Buttons clicked and internal simulated click, data retrieval and manipulation, are all provided by plain vanilla JavaScript. No other frameworks such as React, Vue, Angular etc is used.
 
 Index page:
 1. App Logo - to identify the app SG-finder, with CSS animation and alert message 
@@ -159,7 +159,7 @@ Index page:
 Home page:
 1. Logo - to identify the brand of the organization via its logo image
 2. Navigation Bars:
-   About link - About link: to open modal dialog box
+   About link - About link: to open modal dialog box describing the about information
 
    Login link (disabled) - reserved for future
 
@@ -203,7 +203,7 @@ Home page:
    2. Enter Postal Code input box with Locate button to begin
       To search by postal code numbers
 
-1. Search Settings - 
+3. Search Settings - 
    To modify search settings like the following:
    1. searchLimit (default: 10, min:1, max: 50)
    To limit the number of results for query search strings
@@ -211,13 +211,13 @@ Home page:
    2. searchRadius (default: 2500, min: 0, max: 100000)
    To limit the radius of search location for query strings
    
-2. Search Results - 
+4. Search Results - 
    To display search results (auto-scrollbar) in bullet form with the following:
    1. Name
    2. Address
    3. Postal Code
 
-3. Map
+5. Map
    Base Layers - 
    1. Clear - to clear the base layers from map
    2. TRANSIT - to show clusters group for MRT and LRT on map
@@ -278,7 +278,7 @@ ChatGPT page:
    4. Click Send Request button to generate the ChatGPT reply
    5. Click Clear Answer button to reset the ChatGPT reply
 
-4. Tell me more - Click Continue... button to gather more information about your\
+4. Tell me more - Click Continue... button to gather more information about your
                   selected type on places of interests in Singapore
 
    Top 10 Places of Interests will be listed, with the folowing options for each listing.
@@ -289,7 +289,7 @@ ChatGPT page:
 
 <!-- Heading level 3 -->
 ### Future Implementation
-To deploy into web site using cloud-hosting platform.
+To deploy into web site using cloud-hosting platform, especially resolving the issue of SECRET KEY being unable to host at the front-end web application. The multilingual support could be extended to cover the other html pages and web contents, even could be expanded to cover major languages based on tourists arrivals by countries. It could also be scaled up to include globally for Trip Advisor (part of Ask ChatGPT web page) without any constraint on just one country Singapore. Future implementation could also be further enhanced with user account profile, login and settings to store persistently into database for personal customisation and search memory.
 
 <!-- Heading level 2 -->
 ## Testing
@@ -303,13 +303,13 @@ To deploy into web site using cloud-hosting platform.
 
    https://jigsaw.w3.org/css-validator/#validate_by_upload
 
-3. Using Test-Cases
+3. Using Test-Cases\
    Test-Driven Development (TDD) approach is adopted.\
-   Future approach using test automation tools may be explored.
+   Future approach using test automation tools may be explored. An example use-case is to adopt Selenium, an open-source automation testing suite that autmates browsers and simulates user actions to verify web aplication functionality. The other is using Cypress, a JavaScript tool that provides capabilities for UI and functional tset automation, including unit and integration tests. For a Node.js (that is, JavaScript Everywhere run-time library) framework, Playwright, another testing tool for creating, running, and debugging functional tests for web aplications. It allows us to quickly write front end tests that simulates user interactions without involving the server or database. 
 
 4. Actual Usage   
    4.1 The url is activated in real use-case for laptop (Acer notebook) via browser (Google Chrome).   
-   4.2 The url is activated in real use-cases (portrait and auto-rotate) for mobile (Samsung Galaxy smartphone) via browser and short-cut.
+   4.2 The url could be activated in real use-cases (portrait and auto-rotate) for mobile (say, Samsung Galaxy smartphone) via browser and short-cut (note this is not tested).
 
 <!-- Heading level 2 -->
 ## Credits

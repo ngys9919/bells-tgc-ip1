@@ -27,8 +27,65 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css">
 
-    <!-- our own style sheet -->
-    <link rel="stylesheet" href="css/chatgpt.css">
+  <!-- our own style sheet -->
+  <link rel="stylesheet" href="css/chatgpt.css">
+  <style>
+    @media (orientation: landscape) {
+      .parent {
+        background-color: rgb(205, 223, 242);
+        flex-direction: row;
+        /* font-size: 2.1vw; */
+      }
+      .child {
+        background-color: rgb(205, 223, 242);
+        color: blue;
+        font-size: 2.1vw;
+      }
+      #tripai-logo, #tripai-advisor-text {
+        /* width: 20%; */
+        /* specify picture size */
+        width: auto;
+        height: 80px;
+        /* side-by-side pictures */
+        display: inline-block;
+        /* provide perimeter gaps */
+        padding: 2px 2px;
+      }
+      #distanceCalBtn {
+        position: absolute;
+        top: 1000px;
+        right: 35px;
+      } 
+    }
+
+    @media (orientation: portrait) {
+      .parent {
+        background-color: rgb(205, 223, 242);
+        flex-direction: column;
+        /* font-size: 2.7vw; */
+      }
+      .child {
+        background-color: rgb(205, 223, 242);
+        color: black;
+        font-size: 2.7vw;
+      }
+      #tripai-logo, #tripai-advisor-text {
+        /* width: 15%; */
+        /* specify picture size */
+        width: auto;
+        height: 100px;
+        /* side-by-side pictures */
+        display: inline-block;
+        /* provide perimeter gaps */
+        padding: 2px 2px;
+      }
+      #distanceCalBtn {
+        position: absolute;
+        top: 880px;
+        right: 35px;
+      }  
+    }
+  </style>
 </head>
 <body>
   <header class="header">
@@ -48,7 +105,9 @@
   </header>
 <div class="parent">
   <div class="child p-2">
-    <label>TripAI Advisor</label>
+    <img id="tripai-logo" src="img/TripAI.jpg" alt="TripAI logo">
+    <img id="tripai-advisor-text" src="img/TripAI-Advisor.jpg" alt="TripAI text">
+    <!-- <label>TripAI Advisor</label> -->
     <form>
     <div class="mb-3">
       <label>Enter place to go</label>
@@ -127,9 +186,9 @@
       <ul id="tellmemore" class="list-group"></ul>
     </div>
     <div class="child">
-      <button id="distanceCalBtn" type="button" class="btn btn-light"> Calculate distance </button>
       <!-- Content here -->
       <div id="chatgpt-map"></div>
+      <button id="distanceCalBtn" type="button" class="btn btn-light"> Calculate distance </button>
       <div id="chatgpt-tellmemore">
         Tell me more...
       </div>
