@@ -1,7 +1,18 @@
 /* font stack */
 /* font-family: ideal, safe, default; */
-h1 {color: black; font-family: "Poppins", Times, sans-serif;}
+h1 {color: black; font-family: "Lucida Console", Courier, monospace;}
+h4 {color: blue; font-family: 'Poppins', "Times New Roman", Times, serif;}
+h5 {color: blue; font-family: 'Poppins', "Times New Roman", Times, sans-serif;}
+h6 {color: white;}
 
+h5 ~ ul {
+  color: black;
+  line-height: 1.5;
+  list-style-type:circle;
+  padding: 8px 20px;
+  margin: 0.75em 0.75em;
+  /* padding: 0.75em 0.75em; */
+}
 
 .grid {
     box-sizing: border-box;
@@ -89,12 +100,22 @@ h1 {color: black; font-family: "Poppins", Times, sans-serif;}
     opacity: 0.3;
   }
 
+.chart-span {
+  grid-column: span 2;
+  justify-items: stretch;
+  align-items: stretch;
+  font-size: medium;
+}
 .chart {
   display: grid;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 4em 1fr 4em;
   min-height: 80vh; 
 }
 
+.summary {
+  grid-area: summary;
+}
 .chart1 {
   grid-area: chart1;
 }
@@ -103,6 +124,6 @@ h1 {color: black; font-family: "Poppins", Times, sans-serif;}
   grid-area: chart2;
 }
 
-.summary {
-  grid-area: summary;
+.chart-summary {
+  grid-area: chart-summary;
 }

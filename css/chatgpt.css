@@ -5,9 +5,102 @@
     /* font-family: "Poppins", sans-serif; */
 /* } */
 
+/* How to use a font-stack */
+/* In this case, the font-family property has multiple values. */
+
+/* It is a prioritized, comma-separated list of font family names you can apply to text,  */
+/* indicating that all the fonts are alternatives. This makes for maximum browser and  */
+/* operating system compatability. */
+
+/* The list is prioritized from left to right, from highest to lowest priority. */
+
+/* We can list as many fonts as we wish, but best practice is to list three to four. */
+
+/* If all else fails, there will always be a generic font listed at the end as a last option-fallback mechanism. */
+
+/* From the group listed, the browser has to support at least one option and  */
+/* the generic name guarantees that something in the desired font-family will be rendered. */
+
+/* The Serif font type */
+/* Serif fonts are characterised by the little extra fine details on the ends of the letters. */
+
+/* At the end of the main strokes of characters, there are small flourish strokes called serifs. */
+
+/* Serif fonts are traditionally used widely in print as they are considered readable for lengthy passages of text.  */
+/* But they don't always display well on screens. */
+
+/* Serif fonts are considered to be among the most classic, elegant, and traditional fonts you can use. */
+
+/* With this Serif font type, each letter has a different width. */
+
+/* 1. Serif Fonts: */
+
+/* 1.1 Georgia */
+/* 1.2 Times */
+/* 1.3 Times New Roman */
+/* 1.4 Bodoni */
+/* 1.5 Garamond */
+/* 1.6 Palatino */
+/* 1.7 ITC Clearface */
+/* 1.8 Plantin */
+/* 1.9 Freight Text */
+/* 1.10 Didot */
+/* 1.11 American Typewriter */
+
+/* The Sans-Serif font type */
+/* This type of font creates a clean design look, while at the same time being very readable and clear. */
+
+/* This font type has straight ends on each letter and there are no strokes at the edges,  */
+/* making the characters look sharp and flat and with clean lines. */
+
+/* Sans-serif fonts are considered modern, minimalistic, contemporary and a bit more  */
+/* readable choice for high resolution computer screens. */
+
+/* With this Sans-Serif font type, each letter has a different width. */
+
+/* 2. Sans-Serif Fonts */
+
+/* 2.1 Arial */
+/* 2.2 Verdana */
+/* 2.3 Helvetica */
+/* 2.4 Geneva */
+/* 2.5 Tahoma */
+/* 2.6 Trebuchet MS */
+/* 2.7 Open Sans */
+/* 2.8 Liberation Sans */
+/* 2.9 Impact */
+
+/* The Monospace font type */
+/* With this font type, every letter has the same fixed width and letters are equally spaced apart. */
+
+/* So, with the monospace typeface, all letters have the same width.  */
+/* This makes text align nicely and makes it easy to follow,  */
+/* giving designs a clean appearance and mechanical feel. */
+
+/* 3. Monospace Fonts */
+
+/* 3.1 Courier */
+/* 3.2 MS Courier New */
+/* 3.3 Monaco */
+/* 3.4 Lucinda Console */
+/* 3.5 Andalé Mono */
+/* 3.6 Menlo */
+/* 3.7 Consolas */
+
+/* 4. Fantasy and Cursive Fonts */
+
+/* There are two more generic font types available, fantasy and cursive,  */
+/* but the most widely used fonts are the ones mentioned above. */
+
 /* font stack */
 /* font-family: ideal, safe, default; */
-h1 {color: black; font-family: "Poppins", Times, sans-serif;}
+/* The browser will first look for Poppins.  */
+/* If it is installed, the browser will display that font.  */
+/* Overwise it will look for Times New Roman.  */
+/* If that also isn't available, it will resort to displaying the generic default serif family font. */
+
+/* h1 {color: black; font-family: 'Poppins', "Times New Roman", Times, serif;} */
+h1 {color: black; font-family: "Lucida Console", Courier, monospace;}
 
 /* Map CSS */
 #chatgpt-map {

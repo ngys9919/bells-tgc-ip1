@@ -81,8 +81,9 @@
     grid-template-areas: 
             "header"
             "feature"
-            "chart1 chart2"
             "summary"
+            "chart1 chart2"
+            "chart-summary"
   }
 
   .chart {
@@ -97,9 +98,10 @@
     grid-template-areas: 
             "header"
             "feature"
+            "summary"
             "chart1"
             "chart2"
-            "summary"
+            "chart-summary"
     }
     .chart {
       display: grid;
@@ -126,8 +128,7 @@
           </ul>
         </nav>
       </header>
-      <section class="feature grid">
-        <h5>About Singapore tourists: </h5>
+      <section class="feature grid">        
         <div class="feature-img"></div>
 
         <article class="feature-content feature-content-1">
@@ -150,7 +151,61 @@
       </section>
       
     <!-- <div class="chart grid"> -->
-      <div class="chart">
+      
+        <div class="chart-span">
+          <h4 style="margin: 10px;">About <span style="font-variant: small-caps; font-size: 4vh; color: red;">Singapore</span> and its tourists: </h4>
+          <p style="margin: 50px; text-align: justify; font-size: 3vh; color: brown;">Singapore, known as the "Lion City," is a small but vibrant Southeast Asian country that attracts millions of tourists every year. 
+            It’s celebrated for its diverse blend of cultures, stunning architecture, modern infrastructure, lush green spaces, and world-class 
+            amenities, making it a top travel destination. Its tourists come mainly from Southeast Asia and Greater China, also others including regions like 
+            Europe, Oceania, Africa, North Asia, South Asia, West Asia, the Americas and Others.</p>
+
+          <h5 style="margin: 10px;">Key Attractions for Tourists</h5>
+          <ul>
+            <li>
+              <strong><span style="color: red;">Marina Bay Sands: </span></strong>This iconic hotel is known for its distinctive architecture and offers luxurious rooms, fine dining, and a famous rooftop infinity pool with views of Singapore’s skyline.
+            </li>
+            <li>
+              <strong><span style="color: red;">Gardens by the Bay: </span></strong>A futuristic botanical garden, it’s home to the famous Supertree Grove, Cloud Forest, and Flower Dome, offering a mix of nature and innovative design.
+            </li>
+            <li>
+              <strong><span style="color: red;">Sentosa Island: </span></strong>A popular resort destination with beaches, amusement parks, and the famous Universal Studios Singapore.
+            </li>
+            <li>
+              <strong><span style="color: red;">Orchard Road: </span></strong>Singapore’s premier shopping district, with a vast array of international and local brands, high-end boutiques, and dining options.
+            </li>
+            <li>
+              <strong><span style="color: red;">Singapore Zoo and Night Safari: </span></strong>Known for its open and humane enclosures, the zoo offers an immersive experience with various wildlife, while the Night Safari allows visitors to observe nocturnal animals.
+            </li>
+          </ul>
+          
+          <h5 style="margin: 10px;">Unique Cultural Experiences</h5>
+          <ul>
+            <li>
+              <strong><span style="color: red;">Chinatown, Little India, and Kampong Glam: </span></strong>These cultural neighborhoods showcase Singapore's ethnic diversity, with temples, mosques, markets, and traditional eateries that highlight Chinese, Indian, and Malay heritage.
+            </li>
+            <li>
+              <strong><span style="color: red;">Hawker Centers: </span></strong>These are bustling food courts where visitors can experience local flavors, such as Hainanese chicken rice, laksa, chili crab, and satay, at affordable prices.
+            </li>
+            <li>
+              <strong><span style="color: red;">Festivals: </span></strong>Tourists can enjoy a range of festivals, including Chinese New Year, Deepavali, Hari Raya, and the Great Singapore Sale.
+            </li>
+          </ul>
+
+          <h5 style="margin: 10px;">Key Tourist Tips</h5>          
+          <ul>
+            <li>
+              <strong><span style="color: red;">Public Transport: </span></strong>Singapore has a highly efficient public transport system, including buses and the MRT (Mass Rapid Transit), which are affordable and tourist-friendly.
+            </li>
+            <li>
+              <strong><span style="color: red;">Strict Regulations: </span></strong>Singapore is known for its cleanliness and strict laws. Tourists should be mindful of regulations, like no littering, no smoking in certain public areas, and no chewing gum in public.
+            </li>
+            <li>
+              <strong><span style="color: red;">Weather: </span></strong>Singapore’s tropical climate means it’s warm and humid year-round, so visitors should dress comfortably and stay hydrated.
+            </li>
+          </ul>
+        </div>
+
+        <div class="chart">
         <!-- <div style="height:80vh" class="grid_1-5"> -->
           <div style="height:80vh">
           <div class="chart1" id="chart-xDate-yNumber"></div>
