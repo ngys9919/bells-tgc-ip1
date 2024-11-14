@@ -43,7 +43,9 @@ function testFourSqAPI_APIKeys() {
 }
 
 async function loadPostalCode(){
-  let response = await axios.get("./data/postal/postallist.json") 
+  // let response = await axios.get("./data/postal/postallist.json")
+  // From GitHub raw => (Sorry about that, but we can’t show files that are this big right now.)
+  let response = await axios.get("data/postal/postallist.json")  
   return response.data    
 }
 

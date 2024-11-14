@@ -1,6 +1,7 @@
 async function loadData_csvFormat() {
     // get the CSV file via axios
-    const response = await axios.get('data/chart/Monthly_Tourist_Arrivals_2023-cleaned.csv'); 
+    // const response = await axios.get('data/chart/Monthly_Tourist_Arrivals_2023-cleaned.csv');
+    const response = await axios.get('https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/chart/Monthly_Tourist_Arrivals_2023-cleaned.csv');  
     // const response = await axios.get('data/Monthly_Tourist_Arrivals_2023.csv');
     // convert the raw CSV file into an array of JSON objects
     // the csv() function is included in the global scope

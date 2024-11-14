@@ -29,19 +29,26 @@ const promptList6 = "Please just provide a list of tertiary institutions (includ
 
 async function loadData_jsonFormat(chatgptFileType) {
     if (chatgptFileType == "popular") {
-        filePath = 'data/chatgpt/chatgpt_popular.json';
+        // filePath = 'data/chatgpt/chatgpt_popular.json';
+        filePath = 'https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/chatgpt/chatgpt_popular.json';
     } else if (chatgptFileType == "budget") {
-        filePath = 'data/chatgpt/chatgpt_budget.json';
+        // filePath = 'data/chatgpt/chatgpt_budget.json';
+        filePath = 'https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/chatgpt/chatgpt_budget.json';
     } else if (chatgptFileType == "cultural") {
-        filePath = 'data/chatgpt/chatgpt_cultural.json';
+        // filePath = 'data/chatgpt/chatgpt_cultural.json';
+        filePath = 'https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/chatgpt/chatgpt_cultural.json';
     } else if (chatgptFileType == "historical") {
-        filePath = 'data/chatgpt/chatgpt_historical.json';
+        // filePath = 'data/chatgpt/chatgpt_historical.json';
+        filePath = 'https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/chatgpt/chatgpt_historical.json';
     } else if (chatgptFileType == "gourmetfood") {
-        filePath = 'data/chatgpt/chatgpt_gourmetfood.json';
+        // filePath = 'data/chatgpt/chatgpt_gourmetfood.json';
+        filePath = 'https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/chatgpt/chatgpt_gourmetfood.json';
     } else if (chatgptFileType == "tertiaryinstitutions") {
-        filePath = 'data/chatgpt/chatgpt_tertiaryinstitutions.json';
+        // filePath = 'data/chatgpt/chatgpt_tertiaryinstitutions.json';
+        filePath = 'https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/chatgpt/chatgpt_tertiaryinstitutions.json';
     } else {
-        filePath = 'data/chatgpt/chatgpt_popular.json';
+        // filePath = 'data/chatgpt/chatgpt_popular.json';
+        filePath = 'https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/chatgpt/chatgpt_popular.json';
     }
     const response = await axios.get(filePath);
     return response.data;
@@ -469,23 +476,47 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       // add the answer to the chatgpt results div
       const resultElement1 = document.querySelector("#chatgpt-results");
-      resultElement1.innerHTML = "Please wait... ChatGPT is generating your answer!";
-      resultElement1.className = "chatgpt-result";
+        // add the search result to the result element
+        const eachResultElement1 = document.createElement("p");
+        eachResultElement1.className = "chatgpt-result";
+        eachResultElement1.innerHTML += `Please wait... ChatGPT is generating your answer! <br>`;
+        document.getElementById("chatgpt-results").appendChild(eachResultElement1);
+        
+    //   resultElement1.innerHTML = "Please wait... ChatGPT is generating your answer!";
+    //   resultElement1.className = "chatgpt-result";
 
         // const prompt = "Hello!";
         // await OpenaiFetchAPI3(prompt);
-        await OpenaiFetchAPI3(prompt3);
+        try {
+            await OpenaiFetchAPI3(prompt3);
+            const reply = chatgpt_reply['choices'][0].message.content;
+            // console.log(reply);
+    
+            eachResultElement1.innerHTML = `${reply}`;
+            // document.getElementById("chatgpt-results").appendChild(eachResultElement1);
+        } catch (error) {
+            console.error("Error connecting to OpenAI ChatGPT", error);
+            eachResultElement1.innerHTML += `Error connecting to OpenAI ChatGPT: ${error} <br>`;
+            // document.getElementById("chatgpt-results").appendChild(eachResultElement1); 
+            eachResultElement1.innerHTML += `TripAI Advisor... feature is currently unavailable!`;
+            // document.getElementById("chatgpt-results").appendChild(eachResultElement1);
+        } finally {
+            console.error("Finally, Fetch API completed!");
+            // document.getElementById("chatgpt-results").appendChild(eachResultElement1);
+            resultElement1.appendChild(eachResultElement1);
+        }
+        
         // console.log(chatgptdata);
 
       //   resultElement1.innerHTML = 'ChatGPT prompt: ' + `<br> ${promptTemplate} ${chatgptInputPlace}` + ' for ' + `${chatgptInputDays}` + ' days ' + `<br><br>` + 'ChatGPT response: ';
-        //   resultElement1.innerHTML = `${promptTemplate}`;
-    const reply = chatgpt_reply['choices'][0].message.content;
+      //   resultElement1.innerHTML = `${promptTemplate}`;
+    
+    // const reply = chatgpt_reply['choices'][0].message.content;
     // console.log(reply);
 
-      resultElement1.innerHTML = `${reply}`; 
+    // resultElement1.innerHTML = `${reply}`; 
 
     });
-
 
     document
     .querySelector("#flexRadioDefault1")
@@ -676,22 +707,48 @@ document.addEventListener("DOMContentLoaded", async function () {
             // alert("You have selected Tell Me More Button!");
             // add the answer to the chatgpt results div
             const resultElement1 = document.querySelector("#chatgpt-tellmemore");
-            resultElement1.innerHTML = "Please wait... ChatGPT is generating your answer!";
-            resultElement1.className = "chatgpt-tellmemore";
+            // resultElement1.innerHTML = "Please wait... ChatGPT is generating your answer!";
+            // resultElement1.className = "chatgpt-tellmemore";
+            // add the search result to the result element
+        const eachResultElement1 = document.createElement("p");
+        eachResultElement1.className = "chatgpt-tellmemore";
+            eachResultElement1.innerHTML += `Please wait... ChatGPT is generating your answer! <br>`;
+            document.getElementById("chatgpt-tellmemore").appendChild(eachResultElement1);
 
             const promptTellMeMore = "Tell me more about ";
             const promptTellMeMore2 = promptTellMeMore + `${f.name}` + ' in Singapore. ';
             const promptTellMeMore3 = promptTellMeMore2 + promptFormat;
-            await OpenaiFetchAPI3(promptTellMeMore3);
-            console.log(promptTellMeMore3);
+            // await OpenaiFetchAPI3(promptTellMeMore3);
+            // console.log(promptTellMeMore3);
 
-            const reply = chatgpt_reply['choices'][0].message.content;
-            console.log(reply);
-            resultElement1.innerHTML = `${reply}`;
+            try {
+                await OpenaiFetchAPI3(promptTellMeMore3);
+                console.log(promptTellMeMore3);
+                const reply = chatgpt_reply['choices'][0].message.content;
+                console.log(reply);
+                // resultElement1.innerHTML = `${reply}`;
+                eachResultElement1.innerHTML = `${reply}`;
+            
+                // Simulated clicked event for checkLocationBtn 
+                const clickEvent = new Event('click');
+                checkLocationButton.dispatchEvent(clickEvent);
+            } catch (error) {
+                console.error("Error connecting to OpenAI ChatGPT", error);
+                eachResultElement1.innerHTML += `Error connecting to OpenAI ChatGPT: ${error} <br>`;
+                eachResultElement1.innerHTML += "Tell me more... feature is currently unavailable!";
+            } finally {
+                console.error("Finally, Fetch API completed!");
+                // document.getElementById("chatgpt-tellmemore").appendChild(eachResultElement1);
+                resultElement1.appendChild(eachResultElement1);
+            }
+
+            // const reply = chatgpt_reply['choices'][0].message.content;
+            // console.log(reply);
+            // resultElement1.innerHTML = `${reply}`;
             
             // Simulated clicked event for checkLocationBtn 
-            const clickEvent = new Event('click');
-            checkLocationButton.dispatchEvent(clickEvent);
+            // const clickEvent = new Event('click');
+            // checkLocationButton.dispatchEvent(clickEvent);
 
         })
 

@@ -22,7 +22,7 @@ function createMap() {
     zoom: 10,
     maxZoom: 19,
     minZoom: 10,
-    zoomControl: true,
+    zoomControl: false,
     scrollWheelZoom: true,
     attributionControl: true,
     preferCanvas: false // Disable Canvas rendering (default behavior)
@@ -93,10 +93,10 @@ L.control.zoom({
     // zoomInTitle: 'Zoom In',   // Tooltip for zoom in button
     // zoomOutTitle: 'Zoom Out', // Tooltip for zoom out button
     // position: 'topright'  // Position of the control
-    zoomInText: '+',      // Custom text for zoom in button
-    zoomOutText: '-',     // Custom text for zoom out button
-    zoomInTitle: 'Click + to Zoom In',   // Tooltip for zoom in button
-    zoomOutTitle: 'Click - to Zoom Out', // Tooltip for zoom out button
+    zoomInText: '+',
+    zoomOutText: '-',
+    zoomInTitle: 'Click + to Zoom In',
+    zoomOutTitle: 'Click - to Zoom Out'
 }).addTo(map);
 
 // In Leaflet.js, the attributionControl is a built-in feature that manages the display of attribution information on the map. 

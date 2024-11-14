@@ -287,17 +287,17 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // mobile orientation support
   const userMobileOrientation = localStorage.getItem('mobileOrientation') || 'portrait';
-  mobileOrientation = userMobileOrientation;
+  mbOrientation = userMobileOrientation;
 
   // sidebar language support
   const userSidebarToggleState = localStorage.getItem('sidebarToggleState') || 'toggleonoff';
-  sidebarToggleState = userSidebarToggleState;
+  sbToggleState = userSidebarToggleState;
 
   // language support
   const userPreferredLanguage = localStorage.getItem('language') || 'en';
   lang = userPreferredLanguage;
   const langData = await fetchLanguageData(userPreferredLanguage);
-  updateContent(langData, sidebarToggleState, mobileOrientation);
+  updateContent(langData, sbToggleState, mbOrientation);
 
 
 
@@ -333,7 +333,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   // const taxiResponse = dataTAXI;
   // console.log(taxiResponse);
 
-  const taxiRequest = axios.get("data/transport/TaxiStands-WGS84.json");
+  // const taxiRequest = axios.get("data/transport/TaxiStands-WGS84.json");
+  const taxiRequest = axios.get("https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/transport/TaxiStands-WGS84.json");
 
   const taxiResponse = await taxiRequest;
 
@@ -355,7 +356,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   // const busResponse = dataBUS;
   // console.log(busResponse);
 
-  const busRequest = axios.get("data/transport/BusStops-WGS84.json");
+  // const busRequest = axios.get("data/transport/BusStops-WGS84.json");
+  const busRequest = axios.get("https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/transport/BusStops-WGS84.json");
 
   const busResponse = await busRequest;
 
@@ -377,7 +379,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   // const mrtResponse = dataMRT;
   // console.log(mrtResponse);
 
-  const mrtRequest = axios.get("data/transport/mrt_stations-cleaned.json");
+  // const mrtRequest = axios.get("data/transport/mrt_stations-cleaned.json");
+  const mrtRequest = axios.get("https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/transport/mrt_stations-cleaned.json");
 
   const mrtResponse = await mrtRequest;
 
@@ -391,7 +394,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   // const lrtResponse = dataLRT;
   // console.log(lrtResponse);
 
-  const lrtRequest = axios.get("data/transport/lrt_stations-cleaned.json");
+  // const lrtRequest = axios.get("data/transport/lrt_stations-cleaned.json");
+  const lrtRequest = axios.get("https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/transport/lrt_stations-cleaned.json");
 
   const lrtResponse = await lrtRequest;
 
@@ -624,80 +628,79 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   });
 
-  let buttonsReset = document.querySelectorAll(".resetBtnClass");
-  let i = 0, length = buttonsReset.length;
-  for (i; i < length; i++) {
-    if (document.addEventListener) {
-      buttonsReset[i].addEventListener("click", function () {
-        // use keyword this to target clicked button
-        lang = "en";
-        sidebarToggleState = "toggleonff";
-        // sidebarToggleState = "toggleon";
-        // mobileOrientation = "portrait";
-        changeLanguage(lang, sidebarToggleState, mobileOrientation);
-        quickSearchByCategoryID = null;
-        // let myLocation = document.querySelector("#locateBtn");
-        myLocation.innerText = "Locate Me!";
-        // const searchTerms = document.querySelector("#sidebarSearchTerms");
-        searchTerms.value = "";
-        // const searchByKeyword = document.querySelector("#searchByKeyword");
-        searchByKeyword.value = "Enter Search Keyword"
-        const resultElement = document.querySelector("#search-results");
-        resultElement.innerHTML = "";
-        // const searchByPostalCode = document.querySelector("#searchByPostalCode");
-        searchByPostalCode.value = "Enter Postal Code"
-        // const searchResultLayer = L.layerGroup();
-        // searchResultLayer.clearLayers();
-        const resultElement1 = document.querySelector("#result-listing");
-        resultElement1.innerHTML = "";
-        const myToggle = document.getElementById("sidebarToggleBtn");
-        if (mobileOrientation == "landscape") {
-          myToggle.innerHTML = "Toggle On/Off";
-        } else if (mobileOrientation == "portrait") {
-          myToggle.innerHTML = "On/Off";
-        }
-        // const searchResultLayer1 = L.layerGroup();
-        // searchResultLayer1.clearLayers();
-        // map.removeLayer(searchResultLayer);
-        // map.removeLayer(searchResultLayer1);
-        // map.removeLayer(marker);
-        // marker.closePopup();
-        // $(".leaflet-marker-icon").remove(); $(".leaflet-popup").remove();
-        // $('.leaflet-interactive').remove(); 
-        // $(".leaflet-popup-pane").empty(); $(".leaflet-marker-pane").empty();
-        for (let i = 0; i < mapMarkers.length; i++) {
-          map.removeLayer(mapMarkers[i]);
-        }
-        for (let i = 0; i < mapMarkers1.length; i++) {
-          map.removeLayer(mapMarkers1[i]);
-        }
+  let buttonsReset = document.querySelectorAll('.resetBtnClass'); //get all buttons
+    buttonsReset.forEach( btn => {
+        btn.addEventListener('click', functionReset);
+  });
+  
+  function functionReset(ev) {
+    // let id = ev.currentTarget.id;
+    // let btn = document.getElementById(id);
+    // let div = document.getElementById('box');
+    // box.className = id;
+    
+    // use keyword this to target clicked button
+    lang = "en";
+    sbToggleState = "toggleonff";
+    // sbToggleState = "toggleon";
+    // mbOrientation = "portrait";
+    changeLanguage(lang, sbToggleState, mbOrientation);
+    quickSearchByCategoryID = null;
+    // let myLocation = document.querySelector("#locateBtn");
+    myLocation.innerText = "Locate Me!";
+    // const searchTerms = document.querySelector("#sidebarSearchTerms");
+    searchTerms.value = "";
+    // const searchByKeyword = document.querySelector("#searchByKeyword");
+    searchByKeyword.value = "Enter Search Keyword"
+    const resultElement = document.querySelector("#search-results");
+    resultElement.innerHTML = "";
+    // const searchByPostalCode = document.querySelector("#searchByPostalCode");
+    searchByPostalCode.value = "Enter Postal Code"
+    // const searchResultLayer = L.layerGroup();
+    // searchResultLayer.clearLayers();
+    const resultElement1 = document.querySelector("#result-listing");
+    resultElement1.innerHTML = "";
+    const myToggle = document.getElementById("sidebarToggleBtn");
+    if (mbOrientation == "landscape") {
+      myToggle.innerHTML = "Toggle On/Off";
+    } else if (mbOrientation == "portrait") {
+      myToggle.innerHTML = "On/Off";
+    }
+    // const searchResultLayer1 = L.layerGroup();
+    // searchResultLayer1.clearLayers();
+    // map.removeLayer(searchResultLayer);
+    // map.removeLayer(searchResultLayer1);
+    // map.removeLayer(marker);
+    // marker.closePopup();
+    // $(".leaflet-marker-icon").remove(); $(".leaflet-popup").remove();
+    // $('.leaflet-interactive').remove(); 
+    // $(".leaflet-popup-pane").empty(); $(".leaflet-marker-pane").empty();
+    for (let i = 0; i < mapMarkers.length; i++) {
+      map.removeLayer(mapMarkers[i]);
+    }
+    for (let i = 0; i < mapMarkers1.length; i++) {
+      map.removeLayer(mapMarkers1[i]);
+    }
 
-        // Here you remove the layer
-        if (markerCluster) {
-          map.removeLayer(markerCluster);
-        }
+    // Here you remove the layer
+    if (markerCluster) {
+      map.removeLayer(markerCluster);
+    }
 
-        loadDefaultSettings();
-        locateClickCount = 0;
+    loadDefaultSettings();
+    locateClickCount = 0;
 
-        // map.setView(defaultCoordinates, 10);
-        // map.setView(defaultCoordinates, 12);
-        map.setView(defaultCoordinates, setZoomlevel);
-        // myLocationMarker = L.marker([1.29, 103.85]);
-        // myLocationMarker = L.marker([1.2761, 103.8458]);
-        // myLocationMarker = L.marker([1.3586, 103.9899]);
-        // myLocationMarker = L.marker([1.3521, 103.8198]);
-        myLocationMarker = L.marker([singaporeLat, singaporeLng]);
-        layer = myLocationMarker.bindTooltip('Hi! Welcome to SG-finder.').addTo(map);
-        layer.openTooltip()
-      });
-    } else {
-      buttonsReset[i].attachEvent("onclick", function () {
-        // use buttonsReset[i] to target clicked button
-        item.onclick = e => alert("i am:", e.target);
-      });
-    };
-  };
+    // map.setView(defaultCoordinates, 10);
+    // map.setView(defaultCoordinates, 12);
+    map.setView(defaultCoordinates, setZoomlevel);
+    // myLocationMarker = L.marker([1.29, 103.85]);
+    // myLocationMarker = L.marker([1.2761, 103.8458]);
+    // myLocationMarker = L.marker([1.3586, 103.9899]);
+    // myLocationMarker = L.marker([1.3521, 103.8198]);
+    myLocationMarker = L.marker([singaporeLat, singaporeLng]);
+    layer = myLocationMarker.bindTooltip('Hi! Welcome to SG-finder.').addTo(map);
+    layer.openTooltip()
+  }
 
   // document
     // .querySelector("#sidebarResetBtn")
@@ -712,8 +715,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     // .querySelector("#resetBtn")
     // .addEventListener("click", async function () {
       // lang = "en";
-      // sidebarToggleState = "toggleonff";
-      // changeLanguage(lang, sidebarToggleState, mobileOrientation);
+      // sbToggleState = "toggleonff";
+      // changeLanguage(lang, sbToggleState, mbOrientation);
       // quickSearchByCategoryID = null;
       // myLocation.innerText = "Locate Me!";
       // searchTerms.value = "";
@@ -724,9 +727,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       // const resultElement1 = document.querySelector("#result-listing");
       // resultElement1.innerHTML = "";
       // const myToggle = document.getElementById("sidebarToggleBtn");
-      // if (mobileOrientation == "landscape") {
+      // if (mbOrientation == "landscape") {
         // myToggle.innerHTML = "Toggle On/Off";
-      // } else if (mobileOrientation == "portrait") {
+      // } else if (mbOrientation == "portrait") {
         // myToggle.innerHTML = "On/Off";
       // }
 
@@ -787,7 +790,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         z.style.opacity = 1;
         // Then, enable the button
         // z.disabled = false;
-        sidebarToggleState = "toggleon";
+        sbToggleState = "toggleon";
         if (lang === 'zh') {
           y.innerHTML = "显示是开";
         } else {
@@ -800,7 +803,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         z.style.opacity = 0;
         // Then, disable the button
         // z.disabled = true;
-        sidebarToggleState = "toggleoff";
+        sbToggleState = "toggleoff";
         if (lang === 'zh') {
           y.innerHTML = "显示是关";
         } else {
@@ -814,7 +817,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         z.style.opacity = 1;
         // Then, enable the button
         // z.disabled = false;
-        sidebarToggleState = "toggleonoff";
+        sbToggleState = "toggleonoff";
         if (lang === 'zh') {
           y.innerHTML = "切换显示";
         } else {
@@ -1173,8 +1176,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     .addEventListener("click", async function () {
       // alert("You have selected English!");
       lang = "en";
-      // sidebarToggleState = "toggleonoff";
-      changeLanguage(lang, sidebarToggleState, mobileOrientation);
+      // sbToggleState = "toggleonoff";
+      changeLanguage(lang, sbToggleState, mbOrientation);
     });
 
   document
@@ -1182,8 +1185,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     .addEventListener("click", async function () {
       // alert("You have selected Chinese!");
       lang = "zh";
-      // sidebarToggleState = "toggleonoff";
-      changeLanguage(lang, sidebarToggleState, mobileOrientation);
+      // sbToggleState = "toggleonoff";
+      changeLanguage(lang, sbToggleState, mbOrientation);
     });
 
   // document
@@ -1204,11 +1207,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (languageSelected.value == "English") {
       // alert("You have selected sidebar English!");
       lang = "en";
-      changeLanguage(lang, sidebarToggleState, mobileOrientation);
+      changeLanguage(lang, sbToggleState, mbOrientation);
     } else if (languageSelected.value == "中文") {
       // alert("You have selected sidebar Chinese!");
       lang = "zh";
-      changeLanguage(lang, sidebarToggleState, mobileOrientation);
+      changeLanguage(lang, sbToggleState, mbOrientation);
     }
   });
 

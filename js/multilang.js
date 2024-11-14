@@ -10,10 +10,10 @@ function checkSidebarVisibility() {
 }
 
 // Function to set the language preference
-function setLanguagePreference(lang, sidebarToggleState, mobileOrientation) {
+function setLanguagePreference(lang, sbToggleState, mbOrientation) {
     localStorage.setItem('language', lang);
-    localStorage.setItem('sidebarToggleState', sidebarToggleState);
-    localStorage.setItem('mobileOrientation', mobileOrientation);
+    localStorage.setItem('sidebarToggleState', sbToggleState);
+    localStorage.setItem('mobileOrientation', mbOrientation);
     location.reload();
   }
   
@@ -24,8 +24,8 @@ function setLanguagePreference(lang, sidebarToggleState, mobileOrientation) {
   }
   
   // Function to update content based on selected language
-  function updateContent(langData, sidebarToggleState, mobileOrientation) {
-    // alert("You have come here!" + mobileOrientation);
+  function updateContent(langData, sbToggleState, mbOrientation) {
+    // alert("You have come here!" + mbOrientation);
     // if ((sidebarVisible == true) && (lang == "en")) {
       // console.log("Icons for Sidebar!");
     // } else {
@@ -49,14 +49,14 @@ function setLanguagePreference(lang, sidebarToggleState, mobileOrientation) {
           // if ((sidebarVisible == true) && (lang == "zh")) {
           if (lang == "zh") {
             // alert("You have come here 2!");
-            if (sidebarToggleState === "toggleon") {
+            if (sbToggleState === "toggleon") {
               // alert("You have come here toggleon!");
               x.style.display = "block";
               y.innerHTML = "显示是开";
               w.style.opacity = 1;
               z.style.opacity = 1;
               // console.log(y.innerHTML);
-            } else if (sidebarToggleState === "toggleoff") {
+            } else if (sbToggleState === "toggleoff") {
               // alert("You have come here toggleoff!");
               x.style.display = "none";
               y.innerHTML = "显示是关";
@@ -72,14 +72,14 @@ function setLanguagePreference(lang, sidebarToggleState, mobileOrientation) {
           // } else if ((sidebarVisible == true) && (lang == "en")) {
           } else if (lang == "en") {
             // alert("You have come here 1!");
-            if (sidebarToggleState === "toggleon") {
+            if (sbToggleState === "toggleon") {
               // alert("You have come here toggleon!");
               x.style.display = "block";
               y.innerHTML = "Listings On";
               w.style.opacity = 1;
               z.style.opacity = 1;
               // console.log(y.innerHTML);
-            } else if (sidebarToggleState === "toggleoff") {
+            } else if (sbToggleState === "toggleoff") {
               // alert("You have come here toggleoff!");
               x.style.display = "none";
               y.innerHTML = "Listings Off";
@@ -87,9 +87,9 @@ function setLanguagePreference(lang, sidebarToggleState, mobileOrientation) {
               z.style.opacity = 0;
               // console.log(y.innerHTML);
             } else {
-              if (mobileOrientation == "landscape") {
+              if (mbOrientation == "landscape") {
                 y.innerHTML = "Toggle On/Off";
-              } else if (mobileOrientation == "portrait") {
+              } else if (mbOrientation == "portrait") {
                 y.innerHTML = "On/Off";
               }
               // alert("You have come here toggle onoff!");
@@ -128,18 +128,18 @@ function setLanguagePreference(lang, sidebarToggleState, mobileOrientation) {
 
 
   // Function to change language
-  async function changeLanguage(lang, sidebarToggleState, mobileOrientation) {
-    await setLanguagePreference(lang, sidebarToggleState, mobileOrientation);
+  async function changeLanguage(lang, sbToggleState, mbOrientation) {
+    await setLanguagePreference(lang, sbToggleState, mbOrientation);
     
     const langData = await fetchLanguageData(lang);
     checkSidebarVisibility();
-    updateContent(langData, sidebarToggleState, mobileOrientation);
+    updateContent(langData, sbToggleState, mbOrientation);
   
   }
 
 let lang = "en";
-let sidebarToggleState = "toggleonoff";
-let mobileOrientation = "portrait";
+let sbToggleState = "toggleonoff";
+let mbOrientation = "portrait";
 
 function debounce (func, wait, immediate) {
     let timeout;
@@ -190,16 +190,16 @@ function resizeUpdateContent() {
 window.addEventListener('DOMContentLoaded', async () => {
     // mobile orientation support
     const userMobileOrientation = localStorage.getItem('mobileOrientation') || 'portrait';
-    mobileOrientation = userMobileOrientation;
+    mbOrientation = userMobileOrientation;
     // sidebar language support
     const userSidebarToggleState = localStorage.getItem('sidebarToggleState') || 'toggleonoff';
-    sidebarToggleState = userSidebarToggleState;
+    sbToggleState = userSidebarToggleState;
     // language support
     const userPreferredLanguage = localStorage.getItem('language') || 'en';
     lang = userPreferredLanguage;
     const langData = await fetchLanguageData(userPreferredLanguage);
     checkSidebarVisibility();
-    updateContent(langData, sidebarToggleState, mobileOrientation);
+    updateContent(langData, sbToggleState, mbOrientation);
 });
 
 // window.addEventListener('resize',debounce(handler, delay, immediate),false);
@@ -240,10 +240,10 @@ window.addEventListener('orientationchange', (event) => {
   // angle = 90 => landscape mode
   
   if (event.target.screen.orientation.angle == 0) {
-    mobileOrientation = "portrait";
+    mbOrientation = "portrait";
   } else if (event.target.screen.orientation.angle == 90) {
-    mobileOrientation = "landscape";
+    mbOrientation = "landscape";
   }
-  changeLanguage(lang, sidebarToggleState, mobileOrientation);
+  changeLanguage(lang, sbToggleState, mbOrientation);
   // alert(`orientation change ${event.target.screen.orientation.angle}`), false
 });
