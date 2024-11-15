@@ -325,20 +325,36 @@ document.addEventListener("DOMContentLoaded", async function () {
   // let taxiLayer = L.geoJson(response.data);
   // taxiLayer.addTo(map);
 
-  fileName = "TaxiStands-WGS84";
+  // Part 1: Get all the JSON data
 
-  // let dataTAXI = await loadData_jsonFormat(fileName);
-  // console.log(dataTAXI);
-
-  // const taxiResponse = dataTAXI;
-  // console.log(taxiResponse);
-
+  // launch these 3 axios.get together
   // const taxiRequest = axios.get("data/transport/TaxiStands-WGS84.json");
   const taxiRequest = axios.get("https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/transport/TaxiStands-WGS84.json");
+  // const busRequest = axios.get("data/transport/BusStops-WGS84.json");
+  const busRequest = axios.get("https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/transport/BusStops-WGS84.json");
+  // const mrtRequest = axios.get("data/transport/mrt_stations-cleaned.json");
+  const mrtRequest = axios.get("https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/transport/mrt_stations-cleaned.json");
+  // const lrtRequest = axios.get("data/transport/lrt_stations-cleaned.json");
+  const lrtRequest = axios.get("https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/transport/lrt_stations-cleaned.json");
 
   const taxiResponse = await taxiRequest;
-
   console.log(taxiResponse.data);
+  const busResponse = await busRequest;
+  console.log(busResponse.data);
+  const mrtResponse = await mrtRequest;
+  console.log(mrtResponse.data);
+  const lrtResponse = await lrtRequest;
+  console.log(lrtResponse.data);
+
+  // Part 2: Go through the JSON data and create layer groups has based them
+  
+  fileName = "TaxiStands-WGS84";
+
+  // const taxiRequest = axios.get("data/transport/TaxiStands-WGS84.json");
+  // const taxiRequest = axios.get("https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/transport/TaxiStands-WGS84.json");
+
+  // const taxiResponse = await taxiRequest;
+  // console.log(taxiResponse.data);
 
   layerGroupID = "TAXI";
   const taxiLayerGroup = L.layerGroup();
@@ -350,18 +366,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   fileName = "BusStops-WGS84";
 
-  // let dataBUS = await loadData_jsonFormat(fileName);
-  // console.log(dataBUS);
-
-  // const busResponse = dataBUS;
-  // console.log(busResponse);
-
   // const busRequest = axios.get("data/transport/BusStops-WGS84.json");
-  const busRequest = axios.get("https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/transport/BusStops-WGS84.json");
+  // const busRequest = axios.get("https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/transport/BusStops-WGS84.json");
 
-  const busResponse = await busRequest;
-
-  console.log(busResponse.data);
+  // const busResponse = await busRequest;
+  // console.log(busResponse.data);
 
   layerGroupID = "BUS";
   const busLayerGroup = L.layerGroup();
@@ -373,33 +382,19 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   fileName = "mrt_stations-cleaned";
 
-  // let dataMRT = await loadData_jsonFormat(fileName);
-  // console.log(dataMRT);
-
-  // const mrtResponse = dataMRT;
-  // console.log(mrtResponse);
-
   // const mrtRequest = axios.get("data/transport/mrt_stations-cleaned.json");
-  const mrtRequest = axios.get("https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/transport/mrt_stations-cleaned.json");
+  // const mrtRequest = axios.get("https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/transport/mrt_stations-cleaned.json");
 
-  const mrtResponse = await mrtRequest;
-
-  console.log(mrtResponse.data);
+  // const mrtResponse = await mrtRequest;
+  // console.log(mrtResponse.data);
 
   fileName = "lrt_stations-cleaned";
 
-  // let dataLRT = await loadData_jsonFormat(fileName);
-  // console.log(dataLRT);
-
-  // const lrtResponse = dataLRT;
-  // console.log(lrtResponse);
-
   // const lrtRequest = axios.get("data/transport/lrt_stations-cleaned.json");
-  const lrtRequest = axios.get("https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/transport/lrt_stations-cleaned.json");
+  // const lrtRequest = axios.get("https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/transport/lrt_stations-cleaned.json");
 
-  const lrtResponse = await lrtRequest;
-
-  console.log(lrtResponse.data);
+  // const lrtResponse = await lrtRequest;
+  // console.log(lrtResponse.data);
 
   const transitLayerGroup = L.layerGroup();
 
@@ -765,6 +760,34 @@ document.addEventListener("DOMContentLoaded", async function () {
       event.preventDefault();
 
       const searchPostalCode = document.querySelector("#searchByPostalCode").value;
+
+      // const postalcode = parseInt(searchPostalCode);
+      // console.log(postalcode);
+
+      let postalcode_length = searchPostalCode.length;
+
+      if (isNaN(parseInt(searchPostalCode))) {
+          console.log("Invalid Postal Code! You must enter numbers.");
+          alert("Invalid Postal Code! You must enter numbers.");
+          return(-1);
+      } else if (postalcode_length.length===0) {
+        console.log("Invalid Postal Code! You entered nothing.");
+        alert("Invalid Postal Code! You entered nothing.");
+        return(-1);
+      } else if (postalcode_length !== 6) {
+          console.log("Postal Code is 6 digits only!");
+          alert("Postal Code is 6 digits only!");
+          return(-1);
+      }
+  
+      //regular expression to check if the input is a number
+      let postalcode_isDigits = searchPostalCode.match(/^\d{6}/); 
+
+      if (!postalcode_isDigits) {
+        console.log("Postal Code must be digits!");
+        alert("Postal Code must be digits!");
+        return(-1);
+      }
 
       let entry = search2(searchPostalCode);
 
