@@ -558,7 +558,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (lang === 'zh') {
         myLocation.innerText = "复原位置";
       } else {
-        myLocation.innerText = "Reset Location";
+        // myLocation.innerText = "Reset Location";
+        myLocation.innerText = "Position Reset";
       }
 
     }
@@ -609,7 +610,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (lang === 'zh') {
         myLocation.innerText = "复原位置";
       } else {
-        myLocation.innerText = "Reset Location";
+        // myLocation.innerText = "Reset Location";
+        myLocation.innerText = "Position Reset";
       }
 
     }
@@ -974,7 +976,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   document
     .querySelector("#submitSettingsBtn")
     .addEventListener("click", function () {
-
+      // alert("You have clicked Submit Settings Button!");
       searchLimit = document.querySelector("#inputSearchLimit").value;
 
       if ((searchLimit <= 0) || (searchLimit > 50)) {
@@ -1000,6 +1002,14 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
 
     });
+
+    document
+    .querySelector("#clearSearchResultsBtn")
+    .addEventListener("click", function () {
+      // alert("You have clicked Clear Search Results Button!");
+      const resultElement1 = document.querySelector("#result-listing");
+      resultElement1.innerHTML = "";
+  });
 
   // 12068	Community and Government > Government Building > Embassy or Consulate
   // 12069	Community and Government > Government Building > Government Department

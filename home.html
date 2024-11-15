@@ -446,12 +446,15 @@
       <img src="img/bells_logo.jpg" alt="logo">
       <h2>Bells Tech</h2>
     </div>
-    <ul class="sidebar-links">
+    <!-- <ul class="sidebar-links"> -->
+    <div class="sidebar-links">
       <h4>
         <span>Language Setting</span>
         <!-- <span data-i18n="sidebar_languageSetting">Language Setting</span> -->
         <div class="menu-separator"></div>
       </h4>
+      <!-- <p class="menu-separator"></p> -->
+      <!-- <ul> -->
       <!-- <li> -->
         <!-- <a href="#" data-i18n="navbar_home"><span class="material-symbols-outlined"> dashboard </span> Home </a> -->
       <!-- </li> -->
@@ -461,6 +464,7 @@
       <!-- <li> -->
         <!-- <a href="#"><span class="material-symbols-outlined"> monitoring </span>Language</a> -->
       <!-- </li> -->
+    <!-- </ul> -->
       <select name="languageSelected" class="form-control" id="sbSelectLanguage">
         <option value="English" id="sbSelectEnglish">English</option>
         <option value="中文" id="sbSelectChinese">中文</option>
@@ -470,6 +474,8 @@
         <!-- <span data-i18n="sidebar_menuSelection">Menu Selection</span> -->
         <div class="menu-separator"></div>
       </h4>
+      <!-- <p class="menu-separator"></p> -->
+      <ul>
       <!-- <li> -->
         <!-- <a href="#" data-i18n="navbar_locateMe"><span class="material-symbols-outlined"> folder </span> Locate Me! </a> -->
       <!-- </li> -->
@@ -501,10 +507,13 @@
         <!-- <a href="chart.html"><span class="material-symbols-outlined"> notifications_active </span><button class="btn btn-outline-primary" type="button" id="sidebarChartBtn" data-i18n="navbar_chart"> Chart </button></a> -->
         <a href="chart.html"><span class="material-symbols-outlined"> notifications_active </span><button class="btn btn-outline-primary chartBtnClass" type="button" data-i18n="navbar_chart"> Chart </button></a>
       </li>
+    </ul>
       <h4>
         <span>Account</span>
         <div class="menu-separator"></div>
       </h4>
+      <!-- <p class="menu-separator"></p> -->
+      <ul>
       <li>
         <a href="#"><span class="material-symbols-outlined"> account_circle </span>Profile</a>
       </li>
@@ -515,6 +524,8 @@
         <a href="#"><span class="material-symbols-outlined"> logout </span>Logout</a>
       </li>
     </ul>
+    </div>
+    <!-- </ul> -->
     <div class="user-account">
       <div class="user-profile">
         <img src="img/EricNg-linkedin.jpg" alt="Profile Image">
@@ -535,13 +546,15 @@
       <!-- <span class="navbar-toggler-icon"></span> -->
       <!-- </button> -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <button type="button" class="btn btn-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="To display about modal box" data-bs-toggle="modal" data-bs-target="#aboutModal" data-i18n="navbar_about"></button>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <!-- <a class="nav-link active" aria-current="page" href="#" data-i18n="navbar_home"></a> -->
             <a class="nav-link active" href="#" onclick="videoLanguageFunct()" id="videoLink" data-i18n="navbar_video"></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="chart.html" data-i18n="navbar_chart"></a>
+            <!-- <a class="nav-link active" aria-current="page" href="chart.html" data-i18n="navbar_chart"></a> -->
+            <a class="nav-link active" href="chart.html" data-i18n="navbar_chart"></a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLang" role="button" data-bs-toggle="dropdown"
@@ -554,13 +567,12 @@
             </ul>
           </li>
           <!-- <li class="nav-item"> -->
-          <!-- <a class="nav-link" href="#">About</a> -->
+          <!-- <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#aboutModal" data-i18n="navbar_about"></a> -->
           <!-- </li> -->
           <!-- <button class="btn btn-outline-primary" type="button" id="aboutBtn">About</button> -->
           <!-- Button trigger modal -->
           <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#aboutModal">About</button> -->
-          <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#aboutModal"
-            data-i18n="navbar_about"></button>
+          <!-- <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#aboutModal" data-i18n="navbar_about"></button> -->
           <li class="nav-item">
             <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" data-i18n="navbar_login"></a> -->
             <a class="nav-link active" href="#" onclick="stbLanguageFunct()" id="stbLink" data-i18n="navbar_stb"></a>
@@ -572,21 +584,21 @@
         </ul>
 
         <!-- <a href="chatgpt.html" class="btn btn-outline-primary" id="askChatGPTBtn" data-i18n="navbar_askChatGPT"></a> -->
-        <a href="chatgpt.html" class="btn btn-outline-primary btn-sm askChatGPTBtnClass" data-i18n="navbar_askChatGPT"></a>
+        <a href="chatgpt.html" class="btn btn-outline-primary btn-sm askChatGPTBtnClass" data-bs-toggle="tooltip" data-bs-placement="bottom" title="To ask ChatGPT about trip planning" data-i18n="navbar_askChatGPT"></a>
         <!-- <button class="btn btn-outline-primary" type="button" id="askChatGPTBtn" data-i18n="navbar_askChatGPT"></button> -->
         <!-- <button class="btn btn-outline-primary" type="button" id="resetBtn" data-i18n="navbar_resetMap"></button> -->
-        <button class="btn btn-outline-primary btn-sm resetBtnClass" type="button" data-i18n="navbar_resetMap"></button>
+        <button class="btn btn-outline-primary btn-sm resetBtnClass" data-bs-toggle="tooltip" data-bs-placement="bottom" title="To reset map and settings to default" type="button" data-i18n="navbar_resetMap"></button>
         <!-- <button id="locateBtn" type="button" class="btn btn-light">My Location</button> -->
-        <button class="btn btn-outline-primary btn-sm" type="button" id="locateBtn" data-i18n="navbar_locateMe"></button>
+        <button class="btn btn-outline-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom" title="To locate current position onto map" type="button" id="locateBtn" data-i18n="navbar_locateMe"></button>
         <!-- <button class="btn btn-outline-primary locateBtnClass" type="button" data-i18n="navbar_locateMe"></button> -->
 
         <form class="d-flex">
           <!-- <input class="form-control me-2" type="search" aria-label="Search" id="searchByKeyword" placeholder="Enter Search Keyword"> -->
           <input class="me-2" type="search" aria-label="Search" id="searchByKeyword" data-i18n="navbar_placeholderSearch">
-          <button class="btn btn-outline-primary btn-sm me-2" type="submit" id="searchKeywordBtn" data-i18n="navbar_search"></button>
+          <button class="btn btn-outline-primary btn-sm me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="To search locations defined by keyword string" type="submit" id="searchKeywordBtn" data-i18n="navbar_search"></button>
           <!-- <input class="form-control me-2" type="search" aria-label="Search" id="searchByPostalCode" placeholder="Enter Postal Code"> -->
           <input class="me-2" type="search" aria-label="Search" id="searchByPostalCode" data-i18n="navbar_placeholderLocate">
-          <button class="btn btn-outline-primary btn-sm me-2" type="submit" id="searchPostalCodeBtn" data-i18n="navbar_locate"></button>
+          <button class="btn btn-outline-primary btn-sm me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="To find location indicated by postal code" type="submit" id="searchPostalCodeBtn" data-i18n="navbar_locate"></button>
         </form>
         <ul class="navbar-nav me-2 mb-2 mb-lg-0">
           <li class="nav-item dropstart">
@@ -661,7 +673,8 @@
       <input type="number" min="0" max="100000" class="form-control" placeholder="Radius of Search Location"
         id="inputSearchRadius">
     </div>
-    <button class="btn btn-outline-primary" type="button" id="submitSettingsBtn" data-i18n="searchSubmit"></button>
+    <button class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="To submit modified settings" type="button" id="submitSettingsBtn" data-i18n="searchSubmit"></button>
+    <button class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="To clear search results display area" type="button" id="clearSearchResultsBtn" data-i18n="searchClear"></button>
   </div>
 
   <div id="sidebar-search-container">
@@ -745,7 +758,7 @@
   <script>
     function videoLanguageFunct() {
       if (lang == "zh") {
-        if (confirm("您将离开此新加坡-搜索 (SG-finder) 网页并跳转至优酷 (YouTube) 网站。您确定吗？")) {
+        if (confirm("您将离开此新加坡-搜索 (SG-finder) 网页并跳转至优酷 (YouTube) 网站, 您将观看《新加坡！令人驚嘆的文化/景點/旅遊/旅行/攻略》视频，由眼界文化呈现。您确定吗？")) {
           console.log("VIDEO-ZH: You pressed OK!");
           // document.getElementById("videoLink").href = "https://www.youtu.be/EpuRkAJzwA0"; // this link cant work
           document.getElementById("videoLink").href = "https://www.youtube.com/watch?v=EpuRkAJzwA0";
@@ -753,7 +766,7 @@
           console.log("VIDEO-ZH: You pressed Cancel!");
         }
       } else {
-        if (confirm("You will be leaving this SG-finder web page and redirect to YouTube website. Are you sure?")) {
+        if (confirm("You will be leaving this SG-finder web page and redirect to YouTube website, where you will be watching a video named “Made in Singapore” by VisitSingapore. Are you sure?")) {
           console.log("VIDEO-EN: You pressed OK!");
           // document.getElementById("videoLink").href = "https://youtu.be/kij3n1iikKc"; // this link can work
           document.getElementById("videoLink").href = "https://www.youtube.com/watch?v=kij3n1iikKc";
@@ -765,14 +778,14 @@
 
     function stbLanguageFunct() {
       if (lang == "zh") {
-        if (confirm("您将离开此新加坡-搜索 (SG-finder) 网页并跳转至新加坡旅游局 (Singapore Tourism Board) 网站。您确定吗？")) {
+        if (confirm("您将离开此新加坡-搜索 (SG-finder) 网页并跳转至新加坡旅游局 (Singapore Tourism Board) 官方网站。您确定吗？")) {
           console.log("STB-ZH: You pressed OK!");
           document.getElementById("stbLink").href = "https://www.stb.gov.sg/";
         } else {
           console.log("STB-ZH: You pressed Cancel!");
         }
       } else {
-        if (confirm("You will be leaving this SG-finder web page and redirect to Singapore Tourism Board (STB) website. Are you sure?")) {
+        if (confirm("You will be leaving this SG-finder web page and redirect to Singapore Tourism Board (STB) official website. Are you sure?")) {
           console.log("STB-EN: You pressed OK!");
           document.getElementById("stbLink").href = "https://www.stb.gov.sg/";
         } else {
@@ -783,14 +796,14 @@
 
     function vsLanguageFunct() {
       if (lang == "zh") {
-        if (confirm("您将离开此新加坡-搜索 (SG-finder) 网页并跳转至观光新加坡 (Visit Singapore) 网站。您确定吗？")) {
+        if (confirm("您将离开此新加坡-搜索 (SG-finder) 网页并跳转至观光新加坡 (Visit Singapore) 官方网站。您确定吗？")) {
           console.log("VS-ZH: You pressed OK!");
           document.getElementById("vsgLink").href = "https://www.visitsingapore.com.cn/";
         } else {
           console.log("VS-ZH: You pressed Cancel!");
         }
       } else {
-        if (confirm("You will be leaving this SG-finder web page and redirect to Visit Singapore (Visit SG) website. Are you sure?")) {
+        if (confirm("You will be leaving this SG-finder web page and redirect to Visit Singapore (Visit SG) official website. Are you sure?")) {
           console.log("VS-EN: You pressed OK!");
           document.getElementById("vsgLink").href = "https://www.visitsingapore.com/";
         } else {
