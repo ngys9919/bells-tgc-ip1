@@ -347,7 +347,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   console.log(lrtResponse.data);
 
   // Part 2: Go through the JSON data and create layer groups has based them
-  
+
   fileName = "TaxiStands-WGS84";
 
   // const taxiRequest = axios.get("data/transport/TaxiStands-WGS84.json");
@@ -471,6 +471,21 @@ document.addEventListener("DOMContentLoaded", async function () {
     "TAXI Stands": clusterGroupTAXI,
     "BUS Stops": clusterGroupBUS
   };
+
+  document.getElementById("sgFinder").addEventListener("mouseover", mouseOver);
+  document.getElementById("sgFinder").addEventListener("mouseout", mouseOut);
+
+  function mouseOver() {
+    // console.log("Mouse in (over)");
+    // alert("You have mouse over SG-finder!");
+    document.getElementById("sgFinder").style.color = "red";
+  }
+
+  function mouseOut() {
+    // console.log("Mouse out");
+    // alert("You have mouse out SG-finder!");
+    document.getElementById("sgFinder").style.color = "black";
+  }
 
   // default position for base layer control is topright
   // a layer control to our map

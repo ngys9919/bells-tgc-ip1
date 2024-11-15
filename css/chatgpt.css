@@ -100,7 +100,7 @@
 /* If that also isn't available, it will resort to displaying the generic default serif family font. */
 
 /* h1 {color: black; font-family: 'Poppins', "Times New Roman", Times, serif;} */
-h1 {color: black; font-family: "Lucida Console", Courier, monospace;}
+h1 {color: blue; font-family: "Lucida Console", Courier, monospace;}
 
 /* Map CSS */
 #chatgpt-map {

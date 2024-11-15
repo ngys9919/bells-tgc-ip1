@@ -3,7 +3,19 @@
 
 /* bootstrap overwrites */
 .bg-body-tertiary {
-  background-color: blue !important; /* overrides specificity by adding "!important" to the end of the declaration */
+  font-variant: small-caps !important; /* overrides specificity by adding "!important" to the end of the declaration */
+}
+
+.nav.navbar-nav.navbar-right li a {
+  color: blue !important;
+}
+
+.nav-link {
+  color: blue !important;
+}
+
+#sgFinder {
+  color: black;
 }
 
 /* Map CSS */
