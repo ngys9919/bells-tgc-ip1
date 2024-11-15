@@ -3,7 +3,8 @@ let singaporeLng = 103.8198;
 let singapore = [singaporeLat, singaporeLng]; // singaporeLatlng
 let singaporeZoomLevel = 12;
 
-const OPENAI_API = "https://api.openai.com/v1/chat/completions";
+// const OPENAI_API = "https://api.openai.com/v1/chat/completions";
+
 
 const promptTemplate = "I want you to act as a travel guide. I will give you a location and you will suggest the places to visit and some information about it. In addition, include an itinerary based on the number of days. My request is : I am going to ";
 const promptFormat1 = "Please do the html formatting of the content."
@@ -131,70 +132,71 @@ async function loadData_jsonFormat(chatgptFileType) {
 // console.log(apiKey);
 
 
-const apiKey = OPENAI_API_KEY;
+// const apiKey = OPENAI_API_KEY;
 
-async function OpenaiFetchAPI2(prompt) {
-    console.log("Calling GPT4-o")
-    let url = "https://api.openai.com/v1/chat/completions";
-    let bearer = 'Bearer ' + `${apiKey}`
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Authorization': bearer,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "model": "gpt-4o-mini",
-            "messages": [
-                {
-                    "role": "user",
-                    "content": `${prompt}`
-                }
-            ]
-        })
+// async function OpenaiFetchAPI2(prompt) {
+    // console.log("Calling GPT4-o")
+    // let url = "https://api.openai.com/v1/chat/completions";
+    // let bearer = 'Bearer ' + `${apiKey}`
+    // fetch(url, {
+        // method: 'POST',
+        // headers: {
+            // 'Authorization': bearer,
+            // 'Content-Type': 'application/json'
+        // },
+        // body: JSON.stringify({
+            // "model": "gpt-4o-mini",
+            // "messages": [
+                // {
+                    // "role": "user",
+                    // "content": `${prompt}`
+                // }
+            // ]
+        // })
 
 
-    }).then(response => {
-        let ret = response.json();
-        return ret;
+    // }).then(response => {
+        // let ret = response.json();
+        // return ret;
        
-    }).then(data=>{
-        console.log(data)
-        console.log(typeof data)
-        console.log(Object.keys(data))
-        console.log(data['choices'][0].message.content)
-        // return data;
-    })
-    .catch(error => {
-        console.log('Something bad happened ' + error)
-    });
+    // }).then(data=>{
+        // console.log(data)
+        // console.log(typeof data)
+        // console.log(Object.keys(data))
+        // console.log(data['choices'][0].message.content)
 
-}
+    // })
+    // .catch(error => {
+        // console.log('Something bad happened ' + error)
+    // });
+
+// }
 
 // OpenaiFetchAPI2();
 
+// const OPENAI_API = "https://api.openai.com/v1/chat/completions";
+// const proxyUri = "https://sg-finder-app-cgdgd.ondigitalocean.app/v1/chat/completions";
+// const proxyUri = "https://localhost:3000/v1/chat/completions";
+
+
+// Use this for express app.use() via proxy server;
+const proxyUri = "http://127.0.0.1:3000/v1/chat/completions";
+
+// This wont work for proxy, but only for direct call;
+// const proxyUri = "https://api.openai.com/v1/chat/completions/";
+
+
 let chatgpt_reply = {};
 
-async function OpenaiFetchAPI3(prompt) {
-    console.log("Calling GPT-4o-mini")
-    let url = OPENAI_API;
-    let bearer = 'Bearer ' + `${apiKey}`
-    response = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Authorization': bearer,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "model": "gpt-4o-mini",
-            "messages": [
-                {
-                    "role": "user",
-                    "content": `${prompt}`
-                }
-            ]
-        })
 
+// This is for running at backend only with proxy server!
+// Remember to start proxy server first before starting the frontend.
+async function OpenaiFetchAPI3(prompt3) {
+    console.log("Calling GPT-4o-mini from Frontend via chatgpt.js")
+    let url = proxyUri;
+    console.log(url);
+    response = await fetch(url, {
+        
 
     }).then(response => {
         let ret = response.json();
@@ -209,10 +211,68 @@ async function OpenaiFetchAPI3(prompt) {
         // return data;
     })
     .catch(error => {
-        console.log('Something bad happened ' + error)
+        console.log('Error happened in fetching ChatGPT ' + error)
     });
     
 }
+
+const promptUri = "http://127.0.0.1:3000/prompt/";
+
+async function promptFetchAPI3(prompt) {
+    console.log("Passing prompt variable from Frontend to Backend");
+    let url = promptUri;
+    console.log(url);
+    response = await fetch(url + 'prompt=' + `${prompt}`, {
+    // response = await fetch(url + 'prompt=' + prompt.toString(), {
+    }).then(response => {
+        let ret = response;
+        console.log(ret);
+        return ret;
+    })
+    .catch(error => {
+        console.log('Error happened in fetching Prompt ' + error)
+    });
+}
+
+// This is for running at frontend only with local host!
+// async function OpenaiFetchAPI4(prompt) {
+    // console.log("Calling GPT-4o-mini")
+    // let url = OPENAI_API;
+    // let bearer = 'Bearer ' + `${apiKey}`
+    // response = await fetch(url, {
+        // method: 'POST',
+        // headers: {
+            // 'Authorization': bearer,
+            // 'Content-Type': 'application/json'
+        // },
+        // body: JSON.stringify({
+            // "model": "gpt-4o-mini",
+            // "messages": [
+                // {
+                    // "role": "user",
+                    // "content": `${prompt}`
+                // }
+            // ]
+        // })
+
+
+    // }).then(response => {
+        // let ret = response.json();
+        // return ret;
+       
+    // }).then(data=>{
+        // chatgpt_reply = data;
+        // console.log(data)
+        // console.log(typeof data)
+        // console.log(Object.keys(data))
+        // console.log(data['choices'][0].message.content)
+        
+    // })
+    // .catch(error => {
+        // console.log('Something bad happened ' + error)
+    // });
+    
+// }
 
 // Singapore latlng
 // let currentLat = 1.29;
@@ -487,10 +547,23 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         // const prompt = "Hello!";
         // await OpenaiFetchAPI3(prompt);
+
+        // const prompt4 = "Say goodbye to me!";
+
+        try {
+            await promptFetchAPI3(prompt3);
+            // await promptFetchAPI3(prompt4);
+        } catch (error) {
+            console.error("Error passing prompt to backend", error);
+        } finally {
+            console.log("Finally, Featch API - Prompt completed!");
+        }
+
         try {
             await OpenaiFetchAPI3(prompt3);
+            // await OpenaiFetchAPI4(prompt3);
             const reply = chatgpt_reply['choices'][0].message.content;
-            // console.log(reply);
+            console.log(reply);
     
             eachResultElement1.innerHTML = `${reply}`;
             // document.getElementById("chatgpt-results").appendChild(eachResultElement1);
@@ -501,7 +574,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             eachResultElement1.innerHTML += `TripAI Advisor... feature is currently unavailable!`;
             // document.getElementById("chatgpt-results").appendChild(eachResultElement1);
         } finally {
-            console.error("Finally, Fetch API completed!");
+            console.log("Finally, Fetch API - ChatGPT completed!");
             // document.getElementById("chatgpt-results").appendChild(eachResultElement1);
             resultElement1.appendChild(eachResultElement1);
         }
@@ -721,8 +794,20 @@ document.addEventListener("DOMContentLoaded", async function () {
             // await OpenaiFetchAPI3(promptTellMeMore3);
             // console.log(promptTellMeMore3);
 
+            // const prompt4 = "Say goodbye to me!";
+
+            try {
+                await promptFetchAPI3(promptTellMeMore3);
+                // await promptFetchAPI3(prompt4);
+            } catch (error) {
+                console.error("Error passing prompt to backend", error);
+            } finally {
+                console.log("Finally, Featch API - Prompt completed!");
+            }
+
             try {
                 await OpenaiFetchAPI3(promptTellMeMore3);
+                // await OpenaiFetchAPI4(promptTellMeMore3);
                 console.log(promptTellMeMore3);
                 const reply = chatgpt_reply['choices'][0].message.content;
                 console.log(reply);
