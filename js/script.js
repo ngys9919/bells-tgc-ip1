@@ -588,6 +588,13 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (markerCluster) {
         map.removeLayer(markerCluster);
       }
+      // Here you remove the layer
+      // if (clusterGroup) {
+        // map.removeLayer(clusterGroup);
+      // }
+      // if (map.hasLayer(clusterGroup)) {
+        // map.removeLayer(clusterGroup);
+      // }
     }
   });
 
@@ -632,7 +639,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         map.removeLayer(markerCluster);
       }
       // Here you remove the layer
-      if (clusterGroup) {
+      // if (clusterGroup) {
+        // map.removeLayer(clusterGroup);
+      // }
+      if (map.hasLayer(clusterGroup)) {
         map.removeLayer(clusterGroup);
       }
     }
@@ -697,6 +707,14 @@ document.addEventListener("DOMContentLoaded", async function () {
       map.removeLayer(markerCluster);
     }
 
+    // Here you remove the layer
+    // if (clusterGroup) {
+    // map.removeLayer(clusterGroup);
+    // }
+    if (map.hasLayer(clusterGroup)) {
+      map.removeLayer(clusterGroup);
+    }
+
     loadDefaultSettings();
     locateClickCount = 0;
 
@@ -752,6 +770,14 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       // if (markerCluster) {
         // map.removeLayer(markerCluster);
+      // }
+
+      // Here you remove the layer
+      // if (clusterGroup) {
+        // map.removeLayer(clusterGroup);
+      // }
+      // if (map.hasLayer(clusterGroup)) {
+        // map.removeLayer(clusterGroup);
       // }
 
       // locateClickCount = 0;
@@ -1041,6 +1067,13 @@ document.addEventListener("DOMContentLoaded", async function () {
       // Here you remove the layer
       if (markerCluster) {
         map.removeLayer(markerCluster);
+      }
+      // Here you remove the layer
+      // if (clusterGroup) {
+        // map.removeLayer(clusterGroup);
+      // }
+      if (map.hasLayer(clusterGroup)) {
+        map.removeLayer(clusterGroup);
       }
     });
 

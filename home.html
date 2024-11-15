@@ -537,7 +537,8 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#" data-i18n="navbar_home"></a>
+            <!-- <a class="nav-link active" aria-current="page" href="#" data-i18n="navbar_home"></a> -->
+            <a class="nav-link active" href="#" onclick="videoLanguageFunct()" id="videoLink" data-i18n="navbar_video"></a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="chart.html" data-i18n="navbar_chart"></a>
@@ -561,7 +562,12 @@
           <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#aboutModal"
             data-i18n="navbar_about"></button>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" data-i18n="navbar_login"></a>
+            <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" data-i18n="navbar_login"></a> -->
+            <a class="nav-link active" href="#" onclick="stbLanguageFunct()" id="stbLink" data-i18n="navbar_stb"></a>
+          </li>
+          <li class="nav-item">
+            <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" data-i18n="navbar_login"></a> -->
+            <a class="nav-link active" href="#" onclick="vsLanguageFunct()" id="vsgLink" data-i18n="navbar_vs"></a>
           </li>
         </ul>
 
@@ -736,6 +742,63 @@
   <script src="js/data.js"></script>
   <script src="js/view.js"></script>
   <script src="js/script.js"></script>
+  <script>
+    function videoLanguageFunct() {
+      if (lang == "zh") {
+        if (confirm("您将离开此新加坡-搜索 (SG-finder) 网页并跳转至优酷 (YouTube) 网站。您确定吗？")) {
+          console.log("VIDEO-ZH: You pressed OK!");
+          // document.getElementById("videoLink").href = "https://www.youtu.be/EpuRkAJzwA0"; // this link cant work
+          document.getElementById("videoLink").href = "https://www.youtube.com/watch?v=EpuRkAJzwA0";
+        } else {
+          console.log("VIDEO-ZH: You pressed Cancel!");
+        }
+      } else {
+        if (confirm("You will be leaving this SG-finder web page and redirect to YouTube website. Are you sure?")) {
+          console.log("VIDEO-EN: You pressed OK!");
+          // document.getElementById("videoLink").href = "https://youtu.be/kij3n1iikKc"; // this link can work
+          document.getElementById("videoLink").href = "https://www.youtube.com/watch?v=kij3n1iikKc";
+        } else {
+          console.log("VIDEO-EN: You pressed Cancel!");
+        }
+      }
+    }
+
+    function stbLanguageFunct() {
+      if (lang == "zh") {
+        if (confirm("您将离开此新加坡-搜索 (SG-finder) 网页并跳转至新加坡旅游局 (Singapore Tourism Board) 网站。您确定吗？")) {
+          console.log("STB-ZH: You pressed OK!");
+          document.getElementById("stbLink").href = "https://www.stb.gov.sg/";
+        } else {
+          console.log("STB-ZH: You pressed Cancel!");
+        }
+      } else {
+        if (confirm("You will be leaving this SG-finder web page and redirect to Singapore Tourism Board (STB) website. Are you sure?")) {
+          console.log("STB-EN: You pressed OK!");
+          document.getElementById("stbLink").href = "https://www.stb.gov.sg/";
+        } else {
+          console.log("STB-EN: You pressed Cancel!");
+        }
+      }
+    }
+
+    function vsLanguageFunct() {
+      if (lang == "zh") {
+        if (confirm("您将离开此新加坡-搜索 (SG-finder) 网页并跳转至观光新加坡 (Visit Singapore) 网站。您确定吗？")) {
+          console.log("VS-ZH: You pressed OK!");
+          document.getElementById("vsgLink").href = "https://www.visitsingapore.com.cn/";
+        } else {
+          console.log("VS-ZH: You pressed Cancel!");
+        }
+      } else {
+        if (confirm("You will be leaving this SG-finder web page and redirect to Visit Singapore (Visit SG) website. Are you sure?")) {
+          console.log("VS-EN: You pressed OK!");
+          document.getElementById("vsgLink").href = "https://www.visitsingapore.com/";
+        } else {
+          console.log("VS-EN: You pressed Cancel!");
+        }
+      }
+    }
+  </script>
 </body>
 
 </html>
