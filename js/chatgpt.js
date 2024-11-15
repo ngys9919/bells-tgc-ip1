@@ -459,6 +459,20 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     tileLayer.addTo(map);
 
+    let options1 = {
+        flyTo: true,
+        initialZoomLevel: 16,
+        drawCircle: false,
+        returnToPrevBounds: true,
+        position: 'bottomleft',
+        strings: {
+            title: "Show me where I am, yo!"
+        }
+    };
+     
+    let locateControl = L.control.locate(options1)
+    locateControl.addTo(map);
+
     locateUser(map);
 
     document
@@ -468,28 +482,43 @@ document.addEventListener("DOMContentLoaded", async function () {
         // lat1, lng1 -> current location
         // lat2, lng2 -> target location
         // distance = geoDistance(lat1, lng1, lat2, lng2);
-        const distance = geoDistance(currentLat, currentLng, targetLat, targetLng).toFixed(2);
+        // const distance = geoDistance(currentLat, currentLng, targetLat, targetLng).toFixed(2);
+        const distance = geoDistance(currentLat, currentLng, targetLat, targetLng);
+        const distanceFormatted = parseFloat(distance).toFixed(2);
+        
         if (targetLocation == "") {
-            alert('You are at current location! The calculated distance is ' + `${distance}` + ' km away.');
+            // alert('You are at current location! The calculated distance is ' + `${distance}` + ' km away.');
+            alert('You are at current location! The calculated distance is ' + `${distanceFormatted}` + ' km away.');
         } else {
-            alert('The distance between ' + `${targetLocation}` + ' and current location is ' + `${distance}` + ' km away.');
+            // alert('The distance between ' + `${targetLocation}` + ' and current location is ' + `${distance}` + ' km away.');
+            alert('The distance between ' + `${targetLocation}` + ' and current location is ' + `${distanceFormatted}` + ' km away.');
         }
     });
 
-    document
-    .querySelector("#clearAnswerBtn")
-    .addEventListener("click", async function (event) {
-        event.preventDefault();
-        // alert("You have clicked Clear Answer Button!");
-        
-        // clear the answer to the chatgpt results div
-        const resultElement = document.querySelector("#chatgpt-results");
-        resultElement.innerHTML = "Ask ChatGPT Response:";
+    let geoLocation = document.querySelector('.leaflet-bar-part.leaflet-bar-part-single')
 
-        for(let i = 0; i < mapMarkers.length; i++){
-            map.removeLayer(mapMarkers[i]);
-        }
+    geoLocation.addEventListener("click", function() {
+        // alert("You have clicked geolocation control Button!");
+        // locateUser(map);
+    });
+
+    document
+    .querySelector("#resetMapBtn")
+    .addEventListener("click", function () {
+        // alert("You have clicked Reset Map Button!");
+        // remove all markers instances via mapMarkers array
+        // for(let i = 0; i < mapMarkers.length; i++){
+            // map.removeLayer(mapMarkers[i]);
+        // }
     
+        // remove all markers instances (no extra measures)
+        map.eachLayer((layer) => {
+            if (layer instanceof L.Marker) {
+               layer.remove();
+            }
+        });
+
+        // remove last marker instance
         myMarker.removeFrom(map);
         myCircle.removeFrom(map);
        
@@ -498,12 +527,15 @@ document.addEventListener("DOMContentLoaded", async function () {
             // map.removeLayer(markerCluster);
         // }
 
+        // only remove last circle created from L.circle
+        // circle.removeFrom(map);  
+        
         // remove all circles instances
-        // map.eachLayer((layer) => {
-            // if (layer instanceof L.Circle) {
-            //    layer.remove();
-            // }
-        // });
+        map.eachLayer((layer) => {
+            if (layer instanceof L.Circle) {
+               layer.remove();
+            }
+        });
 
         // map.setView(singaporeLatlng, 12);
         // map.setView(singaporeLatlng, singaporeZoomLevel);
@@ -516,6 +548,29 @@ document.addEventListener("DOMContentLoaded", async function () {
         layer.openTooltip();
 
         // locateUser(map);
+    });
+
+    document
+    .querySelector("#clearPlacesBtn")
+    .addEventListener("click", function () {
+        // alert("You have clicked Clear Places of Interests Button!");
+        let placesList = document.querySelector("#tellmemore");
+        placesList.innerHTML = ""; // remove all existing places of interest
+
+        let listHeader = document.querySelector("#main");
+        // listHeader.innerHTML = `<h1>Places of Interests in Singapore</h1>`; // add 
+        listHeader.innerHTML = `<h1></h1>`; // add header
+    });
+
+    document
+    .querySelector("#clearAnswerBtn")
+    .addEventListener("click", async function (event) {
+        event.preventDefault();
+        // alert("You have clicked Clear Answer Button!");
+        
+        // clear the answer to the chatgpt results div
+        const resultElement = document.querySelector("#chatgpt-results");
+        resultElement.innerHTML = "Ask ChatGPT Response:";
     });
 
     
@@ -653,49 +708,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         const resultElement = document.querySelector("#chatgpt-tellmemore");
         resultElement.innerHTML = "Tell me more... ";
 
-        // remove all markers instances via mapMarkers array
-        // for(let i = 0; i < mapMarkers.length; i++){
-            // map.removeLayer(mapMarkers[i]);
-        // }
-    
-        // remove all markers instances (no extra measures)
-        map.eachLayer((layer) => {
-            if (layer instanceof L.Marker) {
-               layer.remove();
-            }
-        });
-
-        // remove last marker instance
-        myMarker.removeFrom(map);
-        myCircle.removeFrom(map);
-       
-        // Here you remove the layer
-        // if (markerCluster) {
-            // map.removeLayer(markerCluster);
-        // }
-
-        // only remove last circle created from L.circle
-        // circle.removeFrom(map);  
-        
-        // remove all circles instances
-        map.eachLayer((layer) => {
-            if (layer instanceof L.Circle) {
-               layer.remove();
-            }
-        });
-
-        // map.setView(singaporeLatlng, 12);
-        // map.setView(singaporeLatlng, singaporeZoomLevel);
-        map.setView(singapore, singaporeZoomLevel);
-        // myLocationMarker = L.marker(singaporeLatlng);
-        myLocationMarker = L.marker(singapore);
-        // Add marker to mapMarker for future reference
-        mapMarkers.push(myLocationMarker);
-        layer = myLocationMarker.bindTooltip('Hi! Welcome to SG-finder.').addTo(map);
-        layer.openTooltip();
-
-        // locateUser(map);
-
         // add the answer to the chatgpt results div
         // const resultElement1 = document.querySelector("#chatgpt-results");
         // resultElement1.innerHTML = "Please wait... ChatGPT is generating your answer!";
@@ -754,7 +766,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         } else if (chatgptFileType == "tertiaryinstitutions") {
             listHeader.innerHTML = `<h1>Tertiary Institutions Places of Interests in Singapore</h1>`; // add header
         } else {
-            listHeader.innerHTML = `<h1>Popular Places of Interests in Singapore</h1>`; // add header
+            listHeader.innerHTML = `<h1>Places of Interests in Singapore</h1>`; // add header
         }
         
         
@@ -866,9 +878,12 @@ document.addEventListener("DOMContentLoaded", async function () {
                 // lat1, lng1 -> current location
                 // lat2, lng2 -> target location
                 // distance = geoDistance(lat1, lng1, lat2, lng2);
-                const distance = geoDistance(currentLat, currentLng, targetLat, targetLng).toFixed(2);
-
-                alert('The distance between ' + `${targetLocation}` + ' and current location is ' + `${distance}` + ' km away.');
+                // const distance = geoDistance(currentLat, currentLng, targetLat, targetLng).toFixed(2);
+                const distance = geoDistance(currentLat, currentLng, targetLat, targetLng);
+                const distanceFormatted = parseFloat(distance).toFixed(2);
+                
+                // alert('The distance between ' + `${targetLocation}` + ' and current location is ' + `${distance}` + ' km away.');
+                alert('The distance between ' + `${targetLocation}` + ' and current location is ' + `${distanceFormatted}` + ' km away.');
                 // if (targetLocation == "") {
                     // alert('You are at current location! The calculated distance is ' + `${distance}` + ' km away.');
                 // } else {

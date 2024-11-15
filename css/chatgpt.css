@@ -197,6 +197,27 @@ h1 {color: blue; font-family: "Lucida Console", Courier, monospace;}
   z-index: 1000;
 }
 
+#resetMapBtn{
+  height: 60px;
+  width: 80px;
+  /* font-family: 'Montserrat', sans-serif; */
+  /* font-size: 9px; */
+  text-align: center;
+  /* text-justify: center; */
+  padding: 2px;
+  border: 1px solid black;
+  margin: 0px;
+  word-wrap: break-word;
+  line-height: 1;
+  /* position: absolute; */
+  /* top: 780px; */
+  /* right: 35px; */
+  /* position: relative; */
+  /* top: -260px; */
+  /* left: 50px; */
+  z-index: 1000;
+}
+
 #extension {
   /* visibility: hidden; */
   visibility: visible;
