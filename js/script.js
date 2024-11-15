@@ -472,21 +472,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     "BUS Stops": clusterGroupBUS
   };
 
-  document.getElementById("sgFinder").addEventListener("mouseover", mouseOver);
-  document.getElementById("sgFinder").addEventListener("mouseout", mouseOut);
-
-  function mouseOver() {
-    // console.log("Mouse in (over)");
-    // alert("You have mouse over SG-finder!");
-    document.getElementById("sgFinder").style.color = "red";
-  }
-
-  function mouseOut() {
-    // console.log("Mouse out");
-    // alert("You have mouse out SG-finder!");
-    document.getElementById("sgFinder").style.color = "black";
-  }
-
   // default position for base layer control is topright
   // a layer control to our map
   // L.control.layers(baseLayers, overlays).addTo(map);
@@ -496,6 +481,21 @@ document.addEventListener("DOMContentLoaded", async function () {
     .layers(baseLayers, overlays, { position: "topleft", sortLayers: true })
     .addTo(map);
 
+
+  document.getElementById("sgFinder").addEventListener("mouseover", mouseOver);
+  document.getElementById("sgFinder").addEventListener("mouseout", mouseOut);
+  
+  function mouseOver() {
+    // console.log("Mouse in (over)");
+    // alert("You have mouse over SG-finder!");
+    document.getElementById("sgFinder").style.color = "red";
+  }
+  
+  function mouseOut() {
+    // console.log("Mouse out");
+    // alert("You have mouse out SG-finder!");
+    document.getElementById("sgFinder").style.color = "black";
+  }
 
   // default position: bottomleft for scale
   // L.control.scale().addTo(map);
