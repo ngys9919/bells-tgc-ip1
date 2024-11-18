@@ -640,6 +640,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     .addEventListener("click", function () {
         // alert("You have clicked Reset Map Button!");
         geoLocationClickCount = 0;
+        
+        targetLat = singaporeLat;
+        targetLng = singaporeLng;
+        targetLocation = "Singapore";
+        
         // map.stopLocate();
         // locateControl.stop();
         // map.locate({setView: true, watch: false});
@@ -932,10 +937,15 @@ document.addEventListener("DOMContentLoaded", async function () {
             // alert("You have selected Tell Me More Button!");
             // add the answer to the chatgpt results div
             const resultElement1 = document.querySelector("#chatgpt-tellmemore");
+            resultElement1.innerHTML = "";
             // resultElement1.innerHTML = "Please wait... ChatGPT is generating your answer!";
             // resultElement1.className = "chatgpt-tellmemore";
             // add the search result to the result element
         const eachResultElement1 = document.createElement("p");
+        
+        
+        eachResultElement1.innerHTML = `Tell me more... <br>`;
+        resultElement1.appendChild(eachResultElement1);
         eachResultElement1.className = "chatgpt-tellmemore";
             eachResultElement1.innerHTML += `Please wait... ChatGPT is generating your answer! <br>`;
             document.getElementById("chatgpt-tellmemore").appendChild(eachResultElement1);

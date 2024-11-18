@@ -26,7 +26,10 @@
     By default canvas does not have a height even if you draw
     stuff inside, so that's why you must give it explict height.
     */
+  /* This height of 93vh wont see bottom gap but see scrollbar-y */
   height: 93vh;
+  /* This height of 92vh will see bottom gap but wont see scrollbar-y */
+  /* height: 92vh; */
   /* height:100%; */
   /* width:65%; */
   /* width:100%; */
