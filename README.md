@@ -16,6 +16,7 @@ Industry Project: **Front-End Development**
 ### Project File Structure:
 
 : README.md
+: SCTP_Industry Project 1 - NG-YEW-SENG-353F.pdf
 
 >>> Home page (Landing Page)
 : index.html
@@ -75,6 +76,12 @@ Industry Project: **Front-End Development**
 : view.js
 : chart.js
 : chatgpt.js
+
+*proxy Folder (express)
+: node_modules sub-folder
+: server.js
+: package-lock.json
+: package.json
 
 <!-- Heading level 1 -->
 # Project Guide
@@ -161,12 +168,12 @@ Home page:
 2. Navigation Bars:
    About link - About link: to open modal dialog box describing the about information
 
-   Login link (disabled) - reserved for future
-
    html links - SG-finder (navbar-brand): to jump to index.html page\
-              - Home link: to jump to home.html page\
+              - Video link: to jump to youtube video page depending on language selection\
+              - STB (Singapore Tourism Board) link: to jump to official Singapore Tourism Board landing page\
+              - Visit SG (Visit Singapore) link: to jump to official Visit Singapore landing page depending on language selection\ 
               - Chart link: to jump to chart.html page\
-              - Ask ChatGPT button: to jump to chatgpt.html page
+              - ChatGPT button: to jump to chatgpt.html page
 
    buttons - Ask ChatGPT button: to jump to chatgpt.html page\
            - Reset Map button: to reset map and settings to default\
@@ -242,8 +249,11 @@ Home page:
    4. Scale Control - The scale in metric unit, that is, km
    5. Attribution Control - The attribution for map data, that is, Leaflet / OpenStreetMap
 
+6. Tooltips - adding custom Bootstrap tooltips at bottom direction for buttons to enhance user experience
+
+
 Chart page:
-1. CSS Grid - to layout into header, features, charts and summary
+1. CSS Grid - to layout into header, features, summary, charts and chart-summary
 
 2. Header - 
    1. ChatGPT icon - to goto ChatGPT page
@@ -251,11 +261,17 @@ Chart page:
 
 3. Features - to briefly describe about Singapore in 2 paragraphs
 
-4. Charts - 
+4. Summary - to expand the Singapore story into the following sections:
+   4.1 About Singapore and its tourists
+   4.2 Key Attractions for Tourists
+   4.3 Unique Cultural Experiences
+   4.4 Key Tourist Tips
+
+5. Charts - 
    1. Line Chart -> Tourists Arrivals By Months
    2. Bar Chart -> Tourists Arrivals By Regions
 
-5. Summary - to give data storytelling insights into the charts 
+6. Chart-Summary - to give data storytelling insights into the charts 
 
 
 ChatGPT page:
@@ -280,12 +296,13 @@ ChatGPT page:
 
 4. Tell me more - Click Continue... button to gather more information about your
                   selected type on places of interests in Singapore
+                - Click Clear Places of Interests Listing button to declutter the display and clear the listing display 
 
    Top 10 Places of Interests will be listed, with the folowing options for each listing.
    1. Tell me more... button - to ask ChatGPT about the selected place of interests
    2. Check its location button - to map the location of the selected place of interests onto map
    3. Calculate Distance button - to calculate the distance between current location and the selected place of interests
-
+   4. Reset Map button - to clear map markers and circles and revert back to Singapore position
 
 <!-- Heading level 3 -->
 ### Future Implementation
@@ -307,9 +324,13 @@ To deploy into web site using cloud-hosting platform, especially resolving the i
    Test-Driven Development (TDD) approach is adopted.\
    Future approach using test automation tools may be explored. An example use-case is to adopt Selenium, an open-source automation testing suite that autmates browsers and simulates user actions to verify web aplication functionality. The other is using Cypress, a JavaScript tool that provides capabilities for UI and functional tset automation, including unit and integration tests. For a Node.js (that is, JavaScript Everywhere run-time library) framework, Playwright, another testing tool for creating, running, and debugging functional tests for web aplications. It allows us to quickly write front end tests that simulates user interactions without involving the server or database. 
 
-4. Actual Usage   
-   4.1 The url is activated in real use-case for laptop (Acer notebook) via browser (Google Chrome).   
-   4.2 The url could be activated in real use-cases (portrait and auto-rotate) for mobile (say, Samsung Galaxy smartphone) via browser and short-cut (note this is not tested).
+4. Using Chrome Inspector (F12 function key)   
+   4.1 The website is checked for responsiveness with Chrome browser for screen sizes through Toggle device toolbar (Ctrl + Shift + M).   
+   4.2 The website is also checked with re-sizing the browser windows to see the effect of media query on screen dimensions. 
+
+5. Actual Usage   
+   5.1 The url is activated in real use-case for laptop (Acer notebook) via browser (Google Chrome).   
+   5.2 The url could be activated in real use-cases (portrait and auto-rotate) for mobile (say, Samsung Galaxy smartphone) via browser and short-cut (note this is not tested).
 
 <!-- Heading level 2 -->
 ## Credits
