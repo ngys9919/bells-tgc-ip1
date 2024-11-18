@@ -27,10 +27,10 @@ let quickSearchByCategoryID = null;
 
 function loadDefaultSettings() {
   document.getElementById("inputSearchLimit").value = defaultSearchLimit;
-  console.log(defaultSearchLimit);
+  // console.log(defaultSearchLimit);
 
   document.getElementById("inputSearchRadius").value = defaultSearchRadius;
-  console.log(defaultSearchRadius);
+  // console.log(defaultSearchRadius);
 }
 
 // let lang = "en";
@@ -47,7 +47,7 @@ let loadedData = [];
 
 async function loadPostal() {
   loadedData = await loadPostalCode();
-  console.log(loadedData);
+  // console.log(loadedData);
   return loadedData;
 }
 
@@ -301,9 +301,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
 
-  console.log(lang);
-  console.log(langData);
-  console.log(languageSelected.value);
+  // console.log(lang);
+  // console.log(langData);
+  // console.log(languageSelected.value);
 
   // create the map
   const map = createMap();
@@ -338,13 +338,13 @@ document.addEventListener("DOMContentLoaded", async function () {
   const lrtRequest = axios.get("https://raw.githubusercontent.com/ngys9919/bells-tgc-ip1/refs/heads/main/data/transport/lrt_stations-cleaned.json");
 
   const taxiResponse = await taxiRequest;
-  console.log(taxiResponse.data);
+  // console.log(taxiResponse.data);
   const busResponse = await busRequest;
-  console.log(busResponse.data);
+  // console.log(busResponse.data);
   const mrtResponse = await mrtRequest;
-  console.log(mrtResponse.data);
+  // console.log(mrtResponse.data);
   const lrtResponse = await lrtRequest;
-  console.log(lrtResponse.data);
+  // console.log(lrtResponse.data);
 
   // Part 2: Go through the JSON data and create layer groups has based them
 

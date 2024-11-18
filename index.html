@@ -97,7 +97,8 @@ who are finding the places around the visiting country Singapore.">
   <!-- <script type="text/javascript"> -->
   <script>
     // SG-finder
-    window.onload = function () { // can also use window.addEventListener('load', (event) => {
+    // window.onload = function () { // can also use window.addEventListener('load', (event) => {
+    window.addEventListener('load', (event) => { // can also use window.addEventListener('load', (event) => {
       // the document was fully read and all resources (like images) are loaded too.
       userPreferredLanguage = localStorage.getItem('language') || 'en';
       lang = userPreferredLanguage;
@@ -123,7 +124,8 @@ who are finding the places around the visiting country Singapore.">
   	    alert(message[lang]);
       },500);
 
-    };
+    // };
+  });
   </script>
 
 </body>

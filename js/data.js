@@ -35,7 +35,7 @@ function testFourSqAPI_APIKeys() {
     },
   })
   .then(function(response){
-      console.log(response);
+      // console.log(response);
       console.log("Test Response A: "+response.data.results[0].name);
       console.log("Test response B: "+response.data.results[0].categories[0].name);
   });
@@ -64,7 +64,7 @@ for (let entry of loadedData){
 // entry = {"postal_code": 0, "street_name": "", "lat": 1.2761, "lon": 103.8458};
 // entry = {"postal_code": 0, "street_name": "", "lat": 1.3586, "lon": 103.9899};
 entry = {"postal_code": 0, "street_name": "", "lat": 1.3521, "lon": 103.8198};
-console.log(entry);
+// console.log(entry);
 return entry;
 
 }
