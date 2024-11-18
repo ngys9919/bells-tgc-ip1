@@ -306,12 +306,27 @@ let targetLat = singaporeLat;
 let targetLng = singaporeLng;
 let targetLocation = "Singapore";
 
+let map = L.map("chatgpt-map");  // create the map in inside the element with id `chatgpt-map`
+let mapMarkers = [];
+let placesMarkers = [];
+
+let myCircle, geoLocationCircle;
+let myMarker, geoLocationMarker;
+let myLocationMarker;
+let layer;
+
 function locateUser(map){
     map.locate({setView: true, watch: true}) /* This will return map so you can do chaining */
           .on('locationfound', function(e){
             for(let i = 0; i < mapMarkers.length; i++){
                 map.removeLayer(mapMarkers[i]);
             }
+
+            // remove last marker instance
+            // myMarker.removeFrom(map);
+            // myCircle.removeFrom(map);
+            // geoLocationMarker.removeFrom(map);
+            // geoLocationCircle.removeFrom(map);
 
             currentLat = e.latitude;
             currentLng = e.longitude;
@@ -322,7 +337,8 @@ function locateUser(map){
             myMarker = L.marker([e.latitude, e.longitude]).bindPopup('This is your current location.');
             // Add marker to mapMarker for future reference
             mapMarkers.push(myMarker);
-            let layer = myMarker.bindTooltip('You are here!').addTo(map);
+            layer = myMarker.bindTooltip('You are here!').addTo(map);
+            // map.flyTo([e.latitude, e.longitude], 16);
             layer.openTooltip();
             // layer.closeTooltip();
  
@@ -332,14 +348,18 @@ function locateUser(map){
                 fillColor: '#cacaca',
                 fillOpacity: 0.2
             });
+
+            mapMarkers.push(myCircle);
             
             map.addLayer(myMarker);
             map.addLayer(myCircle);
+            map.stopLocate();
           })
-         .on('locationerror', function(e){
-              console.log(e);
-              alert("Location access denied.");
-          });
+        //  .on('locationerror', function(e){
+            //   console.log(e);
+            //   map.stopLocate();
+            //   alert("Location access denied.");
+        //   });
 }
 
 // How do I calculate the distance between two points specified by latitude and longitude?
@@ -427,11 +447,7 @@ function geoDistance(lat1, lng1, lat2, lng2){
     return sqr(sq(x1-x2)+sq(y1-y2)+sq(z1-z2));
 }
 
-let map = L.map("chatgpt-map");  // create the map in inside the element with id `chatgpt-map`
-let mapMarkers = [];
 
-let myCircle;
-let myMarker;
 
 document.addEventListener("DOMContentLoaded", async function () {
 
@@ -459,21 +475,25 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     tileLayer.addTo(map);
 
+    locateUser(map);
+
+    // if returnToPrevBounds: true, then high-accuracy zoom-in for map.locate wont work
+    // if drawCircle: false, then circle marker for L.circle wont draw
+    // if flyTo: true, then zooming effect for map will be felt  
     let options1 = {
-        flyTo: true,
-        initialZoomLevel: 16,
-        drawCircle: false,
-        returnToPrevBounds: true,
+        // flyTo: true,
+        // initialZoomLevel: 16,
+        // drawCircle: false,
+        // returnToPrevBounds: true,
         position: 'bottomleft',
         strings: {
             title: "Show me where I am, yo!"
+            // title: "I am here, yo!"
         }
     };
      
     let locateControl = L.control.locate(options1)
     locateControl.addTo(map);
-
-    locateUser(map);
 
     document
     .querySelector("#distanceCalBtn")
@@ -496,32 +516,150 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 
     let geoLocation = document.querySelector('.leaflet-bar-part.leaflet-bar-part-single')
+    let geoLocationClickCount = 0;
+    
+    // let myLocationMarker = L.marker([1.29, 103.85]);
+    // let myLocationMarker = L.marker([1.2761, 103.8458]);
+    // let myLocationMarker = L.marker([1.3586, 103.9899]);
+    // let myLocationMarker = L.marker([1.3521, 103.8198]);
+    // let myLocationMarker = L.marker([singaporeLat, singaporeLng]);
+    // let layer = myLocationMarker.bindTooltip('Hi! Welcome to SG-finder.').addTo(map);
+    // layer.openTooltip();
+    // layer.closeTooltip();
 
     geoLocation.addEventListener("click", function() {
         // alert("You have clicked geolocation control Button!");
-        // locateUser(map);
+        geoLocationClickCount++
+        
+
+        if (geoLocationClickCount % 2 !== 0) {
+            // 1st time pressed, odd count
+            // alert("You have a geolocation odd count!");
+            // locateUser(map);
+            // for(let i = 0; i < mapMarkers.length; i++){
+                // map.removeLayer(mapMarkers[i]);
+            // }
+
+            // remove last marker instance
+            // myMarker.removeFrom(map);
+            // myCircle.removeFrom(map);
+
+            // locateControl.start()
+            map.locate({setView: true, watch: true})
+            .on('locationfound', function(e){
+
+                currentLat = e.latitude;
+                currentLng = e.longitude;
+                targetLat = currentLat;
+                targetLng = currentLng;
+                targetLocation = "";
+    
+                geoLocationMarker = L.marker([e.latitude, e.longitude]).bindPopup('This is your current location.');
+                // Add marker to mapMarker for future reference
+                mapMarkers.push(geoLocationMarker);
+                layer = geoLocationMarker.bindTooltip('You are here!').addTo(map);
+                // map.flyTo([e.latitude, e.longitude], 16);
+                layer.openTooltip();
+                // layer.closeTooltip();
+     
+                geoLocationCircle = L.circle([e.latitude, e.longitude], e.accuracy/2, {
+                    weight: 1,
+                    color: 'red',
+                    fillColor: '#cacaca',
+                    fillOpacity: 0.2
+                });
+                
+                mapMarkers.push(geoLocationCircle);
+
+                map.addLayer(geoLocationMarker);
+                map.addLayer(geoLocationCircle);
+                map.stopLocate();
+                // locateControl.stop();
+              })
+            //  .on('locationerror', function(e){
+                //   console.log(e);
+                //   map.stopLocate();
+                //   locateControl.stop();
+                //   alert("Location access denied.");
+            //   });
+            
+              let optionsFound = {
+                // flyTo: true,
+                // initialZoomLevel: 16,
+                // drawCircle: false,
+                // returnToPrevBounds: true,
+                // position: 'bottomleft',
+                strings: {
+                    title: "I am here, yo!"
+                }
+            };
+             
+            // locateControl = L.control.locate(optionsFound)
+            // locateControl.addTo(map);
+
+        } else if (geoLocationClickCount % 2 == 0) {
+            // even count
+            // alert("You have a geolocation even count!");
+            geoLocationClickCount = 0;
+
+            map.stopLocate();
+            // locateControl.stop();
+            // map.locate({setView: true, watch: false})
+
+            let optionsNotFound = {
+                // flyTo: true,
+                // initialZoomLevel: 16,
+                // drawCircle: false,
+                // returnToPrevBounds: true,
+                // position: 'bottomleft',
+                strings: {
+                    title: "Show me where I am, yo!"
+                }
+            };
+             
+            // locateControl = L.control.locate(optionsNotFound)
+            // locateControl.addTo(map);
+
+            // map.setView(singaporeLatlng, 12);
+            map.setView(singaporeLatlng, singaporeZoomLevel);
+            // map.setView(singapore, singaporeZoomLevel); 
+            myLocationMarker = L.marker(singaporeLatlng);
+            // myLocationMarker = L.marker(singapore);
+            // Add marker to mapMarker for future reference
+            mapMarkers.push(myLocationMarker);
+            layer = myLocationMarker.bindTooltip('Hi! Welcome to SG-finder.').addTo(map);
+            layer.openTooltip();
+
+            // geoLocationClickCount = 0
+          }
+
     });
 
     document
     .querySelector("#resetMapBtn")
     .addEventListener("click", function () {
         // alert("You have clicked Reset Map Button!");
-        // remove all markers instances via mapMarkers array
-        // for(let i = 0; i < mapMarkers.length; i++){
-            // map.removeLayer(mapMarkers[i]);
-        // }
+        geoLocationClickCount = 0;
+        // map.stopLocate();
+        // locateControl.stop();
+        // map.locate({setView: true, watch: false});
+        // remove all places markers/circles instances via placesMarkers array
+        for(let i = 0; i < placesMarkers.length; i++){
+            map.removeLayer(placesMarkers[i]);
+        }
     
         // remove all markers instances (no extra measures)
-        map.eachLayer((layer) => {
-            if (layer instanceof L.Marker) {
-               layer.remove();
-            }
-        });
+        // map.eachLayer((layer) => {
+            // if (layer instanceof L.Marker) {
+            //    layer.remove();
+            // }
+        // });
 
         // remove last marker instance
-        myMarker.removeFrom(map);
-        myCircle.removeFrom(map);
-       
+        
+        // myMarker.removeFrom(map);
+        // myCircle.removeFrom(map);
+
         // Here you remove the layer
         // if (markerCluster) {
             // map.removeLayer(markerCluster);
@@ -531,23 +669,25 @@ document.addEventListener("DOMContentLoaded", async function () {
         // circle.removeFrom(map);  
         
         // remove all circles instances
-        map.eachLayer((layer) => {
-            if (layer instanceof L.Circle) {
-               layer.remove();
-            }
-        });
+        // map.eachLayer((layer) => {
+            // if (layer instanceof L.Circle) {
+            //    layer.remove();
+            // }
+        // });
 
         // map.setView(singaporeLatlng, 12);
-        // map.setView(singaporeLatlng, singaporeZoomLevel);
-        map.setView(singapore, singaporeZoomLevel);
-        // myLocationMarker = L.marker(singaporeLatlng);
-        myLocationMarker = L.marker(singapore);
+        map.setView(singaporeLatlng, singaporeZoomLevel);
+        // map.setView(singapore, singaporeZoomLevel);
+        myLocationMarker = L.marker(singaporeLatlng);
+        // myLocationMarker = L.marker(singapore);
         // Add marker to mapMarker for future reference
         mapMarkers.push(myLocationMarker);
         layer = myLocationMarker.bindTooltip('Hi! Welcome to SG-finder.').addTo(map);
         layer.openTooltip();
 
         // locateUser(map);
+        // map.stopLocate();
+        // map.locate({setView: true, watch: false})
     });
 
     document
@@ -855,10 +995,13 @@ document.addEventListener("DOMContentLoaded", async function () {
             // alert("You have selected Check Location Button!");
 
             // only remove last marker created from L.marker
-            myLocationMarker.removeFrom(map);  
+            // myLocationMarker.removeFrom(map);  
 
-            myMarker.removeFrom(map);
-            myCircle.removeFrom(map);
+            // myMarker.removeFrom(map);
+            // myCircle.removeFrom(map);
+
+            // geoLocationMarker.removeFrom(map);
+            // geoLocationCircle.removeFrom(map);
 
             targetLocation = f.name;
             targetLat = f.lat;
@@ -867,7 +1010,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             // add a marker
             let placeSelected = L.marker([f.lat, f.lon]);
             // Add marker to mapMarker for future reference
-            mapMarkers.push(placeSelected);
+            placesMarkers.push(placeSelected);
             map.addLayer(placeSelected); // any objects that you can draw on top of a map is known a layer
             placeSelected.bindPopup(`<h6>${f.name}</h6>`); // show some HTML when the marker is clicked
             map.flyTo([f.lat, f.lon], 16);
@@ -893,12 +1036,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             // first parameter: array that stores the lat lng
             // second paramater: an object that set the properties of the circle
-            circle = L.circle([f.lat, f.lon], {
+            let circle = L.circle([f.lat, f.lon], {
                 color: 'red',
                 fillColor: 'orange',
                 fillOpacity: 0.5,
                 radius: 200
             });
+            placesMarkers.push(circle);
             // circle.addTo(map);
             map.addLayer(circle);
 
